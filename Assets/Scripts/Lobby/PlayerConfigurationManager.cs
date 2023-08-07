@@ -10,6 +10,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     private List<PlayerConfiguration> playerConfigs;
     [SerializeField] private int minPlayers=2, maxPlayers = 4;
     [SerializeField] private PlayerInputManager pim;
+    [SerializeField] private List<GameObject> playerJoinTexts;
 
     public static PlayerConfigurationManager Instance { get; private set; }
 
@@ -37,6 +38,8 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             playerConfigs.Add(new PlayerConfiguration(pi));
         }
+
+        playerJoinTexts[pi.playerIndex].SetActive(false);
     }
 
     private int nSpawnedPlayers = 0;

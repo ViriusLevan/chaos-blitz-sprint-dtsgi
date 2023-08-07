@@ -127,8 +127,7 @@ MonoBehaviour:
         m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 3f688f965f939b74a9b0cdd00d72831c,
-            type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: 3f688f965f939b74a9b0cdd00d72831c, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -923,8 +922,7 @@ MonoBehaviour:
         m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 8d2c707a52fe08c48a4af52c6472d1e5,
-            type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: 8d2c707a52fe08c48a4af52c6472d1e5, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1193,8 +1191,7 @@ MonoBehaviour:
         m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 873aa386a0819d04a92db33bca0ac4cd,
-            type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: 873aa386a0819d04a92db33bca0ac4cd, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1328,8 +1325,7 @@ MonoBehaviour:
         m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 40173aedadd4d6441a681dad601b728e,
-            type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: 40173aedadd4d6441a681dad601b728e, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2077,20 +2073,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 8ac1a04abea744c429935ae2302d2540,
-    type: 3}
-  m_PointAction: {fileID: 0}
-  m_MoveAction: {fileID: 3152558263144298743, guid: 8ac1a04abea744c429935ae2302d2540,
-    type: 3}
-  m_SubmitAction: {fileID: -1093724534992195775, guid: 8ac1a04abea744c429935ae2302d2540,
-    type: 3}
-  m_CancelAction: {fileID: 0}
-  m_LeftClickAction: {fileID: 0}
-  m_MiddleClickAction: {fileID: 0}
-  m_RightClickAction: {fileID: 0}
-  m_ScrollWheelAction: {fileID: 0}
-  m_TrackedDevicePositionAction: {fileID: 0}
-  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_PointAction: {fileID: -6733232974513035910, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_MoveAction: {fileID: 7552904075992742324, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_SubmitAction: {fileID: -4943695127420343580, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_CancelAction: {fileID: 1788622315905728884, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_LeftClickAction: {fileID: -6087016380997579882, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_MiddleClickAction: {fileID: 2011776043919466483, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_RightClickAction: {fileID: -7924850057713035035, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_ScrollWheelAction: {fileID: 5936199222811760174, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_TrackedDevicePositionAction: {fileID: -5514704244170898324, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: -2642323144734726281, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0

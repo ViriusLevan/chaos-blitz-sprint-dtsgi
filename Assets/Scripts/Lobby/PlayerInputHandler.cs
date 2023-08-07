@@ -13,12 +13,12 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField]
     private MeshRenderer playerMesh;
 
-    private TESTMulti controls;
+    private PlayerInputActionsAsset controls;
 
     private void Awake()
     {
         controller = GetComponent<PlayerController>();
-        controls = new TESTMulti();
+        controls = new PlayerInputActionsAsset();
     }
 
     public void InitializePlayer(PlayerConfiguration config)
@@ -30,7 +30,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Input_onActionTriggered(CallbackContext obj)
     {
-        if (obj.action.name == controls.Character.Movement.name)
+        if (obj.action.name == controls.Player.Move.name)
         {
             controller?.OnMove(obj);
         }
