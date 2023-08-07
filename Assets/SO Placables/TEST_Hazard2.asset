@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695ff6480ce82d145b6a073482263ca6, type: 3}
+  m_Name: TEST_Hazard2
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4042188148071957732, guid: c366321194e29c34186405276b497d3c, type: 3}
+  type: 2
