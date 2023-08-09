@@ -25,31 +25,23 @@ public class PlayerController : MonoBehaviour {
 	private float pushForce;
 
     private bool canMove = true; //If player is not hitted
-	private bool isStuned = false;
-	private bool wasStuned = false; //If player was stunned before get stunned another time
+	private bool isStunned = false;
+	private bool wasStunned = false; //If player was stunned before get stunned another time
 	private bool slide = false;
     private bool jumped;
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-    }
+    public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
+    public void OnLook(InputAction.CallbackContext context) => lookInput = context.ReadValue<Vector2>();
+    public void OnJump(InputAction.CallbackContext context) => jumped = context.action.triggered;
+	public void OnBuildToggle(PlayerConfiguration playerConfig)=>ToggleBuildingMode(playerConfig);
 
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        lookInput = context.ReadValue<Vector2>();
-    }
-
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        jumped = context.action.triggered;
-    }
 
 
 	private void Start ()
 	{
 		// get the distance to ground
 		distToGround = GetComponent<Collider>().bounds.extents.y;
+		GetComponent<PlacementManager>().SetReferenceTransform(buildCameraFollow.transform);
 	}
 	
 	private bool IsGrounded ()
@@ -67,6 +59,10 @@ public class PlayerController : MonoBehaviour {
 	
 	private void FixedUpdate ()
 	{
+		//TODO may want to put this elsewhere
+		if(building){
+			return;
+		}
 		if (canMove)
 		{
 			if (moveDir.x != 0 || moveDir.z != 0)
@@ -147,6 +143,10 @@ public class PlayerController : MonoBehaviour {
 		rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0));
 	}
 
+	//
+	//May want a separate class for buildmode camera controls
+	//
+
 	private void Update()
 	{
 		float h = moveInput.x;
@@ -155,6 +155,12 @@ public class PlayerController : MonoBehaviour {
 		Vector3 v2 = v * cam.transform.forward; //Vertical axis to which I want to move with respect to the camera
 		Vector3 h2 = h * cam.transform.right; //Horizontal axis to which I want to move with respect to the camera
 		moveDir = (v2 + h2).normalized; //Global position to which I want to move in magnitude 1
+
+		//TODO may want to put this elsewhere
+		if(building){
+			buildCameraFollow.transform.position += moveDir * 10f * Time.deltaTime;
+			return;
+		}
 
 		RaycastHit hit;
 		if (Physics.Raycast(transform.position, -Vector3.up, out hit, distToGround + 0.1f))
@@ -187,9 +193,9 @@ public class PlayerController : MonoBehaviour {
 
 	private IEnumerator Decrease(float value, float duration)
 	{
-		if (isStuned)
-			wasStuned = true;
-		isStuned = true;
+		if (isStunned)
+			wasStunned = true;
+		isStunned = true;
 		canMove = false;
 
 		float delta = 0;
@@ -206,19 +212,37 @@ public class PlayerController : MonoBehaviour {
 			}
 			rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0)); //Add gravity
 		}
-		if (wasStuned)
+		if (wasStunned)
 		{
-			wasStuned = false;
+			wasStunned = false;
 		}
 		else
 		{
-			isStuned = false;
+			isStunned = false;
 			canMove = true;
 		}
 	}
 
-    public void BuildingMode()
+    [SerializeField]private CinemachineFreeLook freeLook;
+	public void SetFreeLookCam(CinemachineFreeLook fl){freeLook=fl;}
+
+	[SerializeField]private GameObject buildCameraFollow;
+	public void SetBuildCameraFollow(GameObject followTarget){buildCameraFollow = followTarget;}
+	
+	private bool building = false;
+    public void ToggleBuildingMode(PlayerConfiguration playerConfig)
     {
-        CameraController.Instance.EnableBuilding();
+		if(building){
+        	freeLook.Follow = transform;
+        	freeLook.LookAt = transform;
+			building=false;
+			playerConfig.Input.SwitchCurrentActionMap("Player");
+		}else{
+        	freeLook.Follow = buildCameraFollow.transform;
+        	freeLook.LookAt = buildCameraFollow.transform;
+			building=true;
+			GetComponent<PlacementManager>().SetCameraTransform(freeLook.transform);
+			playerConfig.Input.SwitchCurrentActionMap("BuildMode");
+		}
     }
 }

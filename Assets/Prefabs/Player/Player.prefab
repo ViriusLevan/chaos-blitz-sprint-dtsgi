@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8102334106031341236}
   - component: {fileID: 2616644028935604166}
   - component: {fileID: 6576660683052921608}
+  - component: {fileID: 6599120782886484389}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -152,6 +153,8 @@ MonoBehaviour:
   maxFallSpeed: 20
   rotateSpeed: 25
   cam: {fileID: 0}
+  freeLook: {fileID: 0}
+  buildCameraFollow: {fileID: 0}
 --- !u!114 &6576660683052921608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,3 +168,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMesh: {fileID: 2616644028935604185}
+--- !u!114 &6599120782886484389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2616644028935604187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfb012640b0e89409965a7a6b1eac34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placables:
+  - {fileID: 11400000, guid: bea2ad9b68a289c4e9f4d68ffad155f9, type: 2}
+  - {fileID: 11400000, guid: cdc08b93f4983104c801193474670e20, type: 2}
+  - {fileID: 11400000, guid: 4a255eccf0ebc6641baa841b207b9604, type: 2}
+  materials:
+  - {fileID: 2100000, guid: b579ac563a2aa7d418c803dc0de4c44a, type: 2}
+  - {fileID: 2100000, guid: 1b6d514b2739691409f1d6f6e5412f03, type: 2}
+  - {fileID: 2100000, guid: 3f688f965f939b74a9b0cdd00d72831c, type: 2}
+  - {fileID: 2100000, guid: 8d2c707a52fe08c48a4af52c6472d1e5, type: 2}
+  - {fileID: 2100000, guid: 1638f034be2337f4f944c736e72ecd99, type: 2}
+  canPlace: 0
+  referenceTransform: {fileID: 0}
+  playerInput: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  placableNameText: {fileID: 0}
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 32768

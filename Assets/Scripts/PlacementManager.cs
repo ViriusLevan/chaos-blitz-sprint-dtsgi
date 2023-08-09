@@ -13,59 +13,36 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private Material[] materials;
     
 
-    public bool canPlace = true;
+    public bool canPlace = false;
     private GameObject pendingObj;
     [SerializeField]private Transform referenceTransform;
     [SerializeField]private PlayerInput playerInput;
     [SerializeField]private Transform cameraTransform;
     [SerializeField]private TextMeshProUGUI placableNameText;
 
+    public void SetPlayerInput(PlayerInput pi) => playerInput=pi;
+    public void SetReferenceTransform(Transform t)=> referenceTransform = t;
+    public void SetCameraTransform(Transform t)=> cameraTransform=t;
+
     void Start()
     {
     }    
 
-    private void OnEnable() {
-        playerInput.actions["Build"].performed+= SelectObject;
-        playerInput.actions["Place"].performed+= PlaceObject;
-        playerInput.actions["CycleSelectionForward"].performed+= CycleIndexForward;
-        playerInput.actions["CycleSelectionBackward"].performed+= CycleIndexBackward;
-        playerInput.actions["ShiftPlayer"].performed+= ShiftToPlayer;
-        PlacementChecker.invalidPlacement +=InvalidPlacement;
-        PlacementChecker.validPlacement +=ValidPlacement;
-    }
 
-    private void OnDisable() {
-        // playerInput.actions["Build"].performed-= SelectObject;
-        // playerInput.actions["Place"].performed-= PlaceObject;
-        // playerInput.actions["CycleForward"].performed-= CycleIndexForward;
-        // playerInput.actions["CycleBackward"].performed-= CycleIndexBackward;
-        PlacementChecker.invalidPlacement -= InvalidPlacement;
-        PlacementChecker.validPlacement -= ValidPlacement;
+    [SerializeField]private PointSlicer targetPlatform;
+    public void InvalidPlacement(){canPlace=false;}
+    public void ValidPlacement(PointSlicer pSlicer = null){
+        canPlace=true;
+        targetPlatform = pSlicer;
     }
-
-    public GameObject playerObject;
-    private void ShiftToPlayer(InputAction.CallbackContext context)
-    {
-        pendingObj = null;
-        playerInput.actions["Build"].performed-= SelectObject;
-        playerInput.actions["Place"].performed-= PlaceObject;
-        playerInput.actions["CycleSelectionForward"].performed-= CycleIndexForward;
-        playerInput.actions["CycleSelectionBackward"].performed-= CycleIndexBackward;
-        playerInput.actions["ShiftPlayer"].performed -= ShiftToPlayer;
-        CameraController.Instance.ShiftToPlayer();
-        playerObject.SetActive(true);
-    }
-
-    private void InvalidPlacement(){canPlace=false;}
-    private void ValidPlacement(){canPlace=true;}
 
     void Update()
     {
         //if(_GameManager.Instance.GetPaused()){return;}
         if(pendingObj!=null)
         {
-            VerticalMotion();
-            RotatePlacable();
+            //VerticalMotion();
+            //RotatePlacable();
             pendingObj.transform.position = pos;
             UpdateMaterials();
         }
@@ -118,9 +95,9 @@ public class PlacementManager : MonoBehaviour
     }
     
     private int placableIndex;
-
-    private void CycleIndexForward(InputAction.CallbackContext context){
+    public void CycleIndexForward(InputAction.CallbackContext context){
         placableIndex+=1;
+        //Debug.Log("Cycled Forward "+placableIndex);
         if(placableIndex>=placables.Length){
             placableIndex=0;
         }
@@ -129,8 +106,9 @@ public class PlacementManager : MonoBehaviour
         }
         InstantiateNewObject();
     }
-    private void CycleIndexBackward(InputAction.CallbackContext context){
+    public void CycleIndexBackward(InputAction.CallbackContext context){
         placableIndex-=1;
+        //Debug.Log("Cycled Backward "+placableIndex);
         if(placableIndex<0){
             placableIndex=placables.Length-1;
         }
@@ -141,13 +119,6 @@ public class PlacementManager : MonoBehaviour
     }
 
     private Placable.PlacableType currentType;
-    private void SelectObject(InputAction.CallbackContext context)
-    {
-        if(pendingObj!=null){
-            Destroy(pendingObj);
-        }
-        InstantiateNewObject();
-    }
 
     private void InstantiateNewObject()
     {
@@ -159,13 +130,17 @@ public class PlacementManager : MonoBehaviour
             item.enabled=false;
         }
         PlacementChecker pChecker = pendingObj.AddComponent<PlacementChecker>();
+        pChecker.SetPlacementManager(this);
+        
         currentType = placables[placableIndex].GetPlacableType();
-        canPlace = (currentType==Placable.PlacableType.Hazard) ? false : true;
+        canPlace = currentType!=Placable.PlacableType.Hazard;
         pChecker.SetPlacableType(currentType);
-        placableNameText.text = placables[placableIndex].name;
-        if(placables[placableIndex].name.Contains("Log")){
-            pendingObj.transform.eulerAngles += new Vector3(0,0,90);
-        }
+        //placableNameText.text = placables[placableIndex].name;
+
+        // //TODO fix this prefab
+        // if(placables[placableIndex].name.Contains("Log")){
+        //     pendingObj.transform.eulerAngles += new Vector3(0,0,90);
+        // }
     }
 
     public void PlaceObject(InputAction.CallbackContext context)
@@ -178,7 +153,7 @@ public class PlacementManager : MonoBehaviour
             case Placable.PlacableType.Platform:materialIndex=2;break;
             case Placable.PlacableType.Obstacle:materialIndex=3;break;
             case Placable.PlacableType.Hazard:materialIndex=4;break;
-            }
+        }
 
         MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
         foreach (var item in mrs)
@@ -199,6 +174,14 @@ public class PlacementManager : MonoBehaviour
         foreach (Collider coll in colls)
         {
             coll.isTrigger = false;
+        }
+
+        //TODO set cross section material to something else
+        if(targetPlatform!=null){
+            targetPlatform.SetCrossSectionMaterial(materials[materialIndex]);
+            targetPlatform.SetSliceTarget(pendingObj);
+            targetPlatform.Slice();
+            targetPlatform=null;
         }
 
         pendingObj = null;

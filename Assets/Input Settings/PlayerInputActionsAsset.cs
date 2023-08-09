@@ -62,6 +62,15 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BuildToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""c172f8ca-deeb-4270-bf01-4aefea6a3b82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -238,6 +247,28 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc9ba715-95a1-4654-8a88-aecf69904f5c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BuildToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44160f99-ee88-4eb4-b721-41a032de7bcf"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BuildToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -582,6 +613,288 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BuildMode"",
+            ""id"": ""e82ad928-0927-40c2-98a3-13992d040a26"",
+            ""actions"": [
+                {
+                    ""name"": ""BuildToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""25779846-bf6e-4fe5-803c-41c3a0b7ba7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""1c22b736-f6e2-4c5b-a2fc-ddbdca7d9e0f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""3c1f7244-e03b-4a15-92d9-b509b9c20f80"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Place"",
+                    ""type"": ""Button"",
+                    ""id"": ""98b9df62-078f-4e02-a237-72b85600f700"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CycleSelectionForward"",
+                    ""type"": ""Button"",
+                    ""id"": ""2294ba27-cac0-4654-9399-64f3d1853beb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CycleSelectionBackward"",
+                    ""type"": ""Button"",
+                    ""id"": ""51c8b7bc-1480-4d4b-8c34-54f60c705788"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8976be51-9fe8-4c3b-b2ec-9aeb9bce478e"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BuildToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cad98827-1a01-44cb-ace7-a98049640bef"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BuildToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""e3358a33-7457-46bf-b3c1-6245e6427130"",
+                    ""path"": ""2DVector(mode=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""b49b191f-3697-454e-ab89-f8d39224ad83"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9b6ed71f-6939-4967-a9da-1788bef8e715"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""e6c05e42-8ef8-433b-a5b0-7a775cef907c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""6d672365-edad-44ca-921e-17529b0e6984"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9ad200f3-66e6-4e19-b438-6701a41a6e8c"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""3817b8a1-5e7f-4cd4-9c0d-a872227a31a0"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""deafaff4-be4e-435b-85de-a1fcc93ed187"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""98bdd940-07fa-496d-a445-cdef71404dd8"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b0f61c7-b26f-45f6-87b8-7ab711be19d0"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cfcccea4-0440-40dc-adda-e61f3972891c"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1248cf14-2b0c-46aa-9956-d9c232312a1e"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""199f9d91-bcec-45b5-91f7-7859d3ea7bfd"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5ecc491-cb9d-4c10-a82f-11539c4a9f05"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c1d10a68-5dd2-4dd2-a314-d9d0e2d8b013"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleSelectionForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74d98d03-a7e4-4d54-bc3d-bf17d7682747"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleSelectionForward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9cc76b5-372a-44a0-8687-083e942d45f7"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleSelectionBackward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5686652b-6f03-43a9-9c8d-83cb40579ade"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleSelectionBackward"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -640,6 +953,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_BuildToggle = m_Player.FindAction("BuildToggle", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -652,6 +966,14 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // BuildMode
+        m_BuildMode = asset.FindActionMap("BuildMode", throwIfNotFound: true);
+        m_BuildMode_BuildToggle = m_BuildMode.FindAction("BuildToggle", throwIfNotFound: true);
+        m_BuildMode_Look = m_BuildMode.FindAction("Look", throwIfNotFound: true);
+        m_BuildMode_Move = m_BuildMode.FindAction("Move", throwIfNotFound: true);
+        m_BuildMode_Place = m_BuildMode.FindAction("Place", throwIfNotFound: true);
+        m_BuildMode_CycleSelectionForward = m_BuildMode.FindAction("CycleSelectionForward", throwIfNotFound: true);
+        m_BuildMode_CycleSelectionBackward = m_BuildMode.FindAction("CycleSelectionBackward", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -715,6 +1037,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_BuildToggle;
     public struct PlayerActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -723,6 +1046,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @BuildToggle => m_Wrapper.m_Player_BuildToggle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -744,6 +1068,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @BuildToggle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuildToggle;
+                @BuildToggle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuildToggle;
+                @BuildToggle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuildToggle;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -760,6 +1087,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @BuildToggle.started += instance.OnBuildToggle;
+                @BuildToggle.performed += instance.OnBuildToggle;
+                @BuildToggle.canceled += instance.OnBuildToggle;
             }
         }
     }
@@ -869,6 +1199,79 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // BuildMode
+    private readonly InputActionMap m_BuildMode;
+    private IBuildModeActions m_BuildModeActionsCallbackInterface;
+    private readonly InputAction m_BuildMode_BuildToggle;
+    private readonly InputAction m_BuildMode_Look;
+    private readonly InputAction m_BuildMode_Move;
+    private readonly InputAction m_BuildMode_Place;
+    private readonly InputAction m_BuildMode_CycleSelectionForward;
+    private readonly InputAction m_BuildMode_CycleSelectionBackward;
+    public struct BuildModeActions
+    {
+        private @PlayerInputActionsAsset m_Wrapper;
+        public BuildModeActions(@PlayerInputActionsAsset wrapper) { m_Wrapper = wrapper; }
+        public InputAction @BuildToggle => m_Wrapper.m_BuildMode_BuildToggle;
+        public InputAction @Look => m_Wrapper.m_BuildMode_Look;
+        public InputAction @Move => m_Wrapper.m_BuildMode_Move;
+        public InputAction @Place => m_Wrapper.m_BuildMode_Place;
+        public InputAction @CycleSelectionForward => m_Wrapper.m_BuildMode_CycleSelectionForward;
+        public InputAction @CycleSelectionBackward => m_Wrapper.m_BuildMode_CycleSelectionBackward;
+        public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BuildModeActions set) { return set.Get(); }
+        public void SetCallbacks(IBuildModeActions instance)
+        {
+            if (m_Wrapper.m_BuildModeActionsCallbackInterface != null)
+            {
+                @BuildToggle.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBuildToggle;
+                @BuildToggle.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBuildToggle;
+                @BuildToggle.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBuildToggle;
+                @Look.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
+                @Move.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnMove;
+                @Place.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPlace;
+                @Place.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPlace;
+                @Place.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPlace;
+                @CycleSelectionForward.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionForward;
+                @CycleSelectionForward.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionForward;
+                @CycleSelectionForward.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionForward;
+                @CycleSelectionBackward.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionBackward;
+                @CycleSelectionBackward.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionBackward;
+                @CycleSelectionBackward.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionBackward;
+            }
+            m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @BuildToggle.started += instance.OnBuildToggle;
+                @BuildToggle.performed += instance.OnBuildToggle;
+                @BuildToggle.canceled += instance.OnBuildToggle;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Place.started += instance.OnPlace;
+                @Place.performed += instance.OnPlace;
+                @Place.canceled += instance.OnPlace;
+                @CycleSelectionForward.started += instance.OnCycleSelectionForward;
+                @CycleSelectionForward.performed += instance.OnCycleSelectionForward;
+                @CycleSelectionForward.canceled += instance.OnCycleSelectionForward;
+                @CycleSelectionBackward.started += instance.OnCycleSelectionBackward;
+                @CycleSelectionBackward.performed += instance.OnCycleSelectionBackward;
+                @CycleSelectionBackward.canceled += instance.OnCycleSelectionBackward;
+            }
+        }
+    }
+    public BuildModeActions @BuildMode => new BuildModeActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -911,6 +1314,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnLook(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnBuildToggle(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -924,5 +1328,14 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IBuildModeActions
+    {
+        void OnBuildToggle(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnPlace(InputAction.CallbackContext context);
+        void OnCycleSelectionForward(InputAction.CallbackContext context);
+        void OnCycleSelectionBackward(InputAction.CallbackContext context);
     }
 }

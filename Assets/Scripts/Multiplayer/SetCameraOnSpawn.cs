@@ -39,6 +39,9 @@ public class SetCameraOnSpawn : MonoBehaviour
                                         | (1 << LayerMask.NameToLayer("P3Cam")));
                 break;
         }
+        GetComponent<PlayerController>().SetFreeLookCam(freeLookCam);
+        //TODO replace with pre-placed gameobject
+        GetComponent<PlayerController>().SetBuildCameraFollow(Instantiate(new GameObject()));
         PlayerConfigurationManager.Instance.SetNSpawnedPlayers(currentNPlayers+1);
     }
 }
