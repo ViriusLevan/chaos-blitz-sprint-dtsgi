@@ -48,7 +48,6 @@ MonoBehaviour:
   minPlayers: 2
   maxPlayers: 4
   pim: {fileID: 0}
-  playerJoinTexts: []
 --- !u!114 &3604301613997555120
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,12 +7,9 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    [SerializeField] private MeshRenderer playerMesh;
     private PlayerConfiguration playerConfig;
     private PlayerController controller;
-
-    [SerializeField]
-    private MeshRenderer playerMesh;
-
     private PlayerInputActionsAsset controls;
 
     private void Awake()
@@ -33,6 +30,10 @@ public class PlayerInputHandler : MonoBehaviour
         if (obj.action.name == controls.Player.Move.name)
         {
             controller?.OnMove(obj);
+        }
+        if (obj.action.name == controls.Player.Jump.name)
+        {
+            controller?.OnJump(obj);
         }
     }
 

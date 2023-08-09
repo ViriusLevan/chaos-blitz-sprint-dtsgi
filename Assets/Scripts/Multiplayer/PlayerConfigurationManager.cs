@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
-    private List<PlayerConfiguration> playerConfigs;
-    [SerializeField] private int minPlayers=2, maxPlayers = 4;
+    [SerializeField] private int minPlayers=1, maxPlayers = 4;
     [SerializeField] private PlayerInputManager pim;
+    [SerializeField] private List<PlayerConfiguration> playerConfigs;
     [SerializeField] private List<GameObject> playerJoinTexts;
+    private int nSpawnedPlayers = 0;
 
     public static PlayerConfigurationManager Instance { get; private set; }
 
@@ -41,12 +42,19 @@ public class PlayerConfigurationManager : MonoBehaviour
 
         playerJoinTexts[pi.playerIndex].SetActive(false);
     }
+    
+    public void SetNSpawnedPlayers(int newVal)
+    {
+        nSpawnedPlayers=newVal;
+    }
 
-    private int nSpawnedPlayers = 0;
-    public void SetNSpawnedPlayers(int newVal){nSpawnedPlayers=newVal;}
-    public int GetNSpawnedPlayers(){return nSpawnedPlayers;}
+    public int GetNSpawnedPlayers()
+    {
+        return nSpawnedPlayers;
+    }
 
-    public void EnableSplitScreen(){
+    public void EnableSplitScreen()
+    {
         pim.splitScreen=true;
     }
 
@@ -65,7 +73,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs[index].isReady = true;
         if (minPlayers <= playerConfigs.Count && playerConfigs.Count <= maxPlayers && playerConfigs.All(p => p.isReady == true))
         {
-            SceneManager.LoadScene("TESTBED_MultiController 1");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }

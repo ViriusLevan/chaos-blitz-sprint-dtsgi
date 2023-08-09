@@ -6,19 +6,15 @@ using UnityEngine.UI;
 
 public class PlayerSetupMenuController : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private GameObject readyPanel;
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private Button readyButton;
+
     private int playerIndex;
-
-    [SerializeField]
-    private TextMeshProUGUI titleText;
-    [SerializeField]
-    private GameObject readyPanel;
-    [SerializeField]
-    private GameObject menuPanel;
-    [SerializeField]
-    private Button readyButton;
-
     private float ignoreInputTime = 1.5f;
     private bool inputEnabled;
+    
     public void setPlayerIndex(int pi)
     {
         playerIndex = pi;
@@ -26,16 +22,9 @@ public class PlayerSetupMenuController : MonoBehaviour
         ignoreInputTime = Time.time + ignoreInputTime;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if(Time.time > ignoreInputTime)
+        if (Time.time > ignoreInputTime)
         {
             inputEnabled = true;
         }
@@ -43,7 +32,7 @@ public class PlayerSetupMenuController : MonoBehaviour
 
     public void SelectColor(Material mat)
     {
-        if(!inputEnabled) { return; }
+        if (!inputEnabled) { return; }
 
         PlayerConfigurationManager.Instance.SetPlayerColor(playerIndex, mat);
         readyPanel.SetActive(true);

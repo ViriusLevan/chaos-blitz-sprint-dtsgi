@@ -6,9 +6,8 @@ using UnityEngine.InputSystem.UI;
 
 public class SpawnPlayerSetupMenu : MonoBehaviour
 {
-    public GameObject playerSetupMenuPrefab;
-
     private GameObject rootMenu;
+    public GameObject playerSetupMenuPrefab;
     public PlayerInput input;
 
     private void Awake()
