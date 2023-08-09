@@ -22,8 +22,8 @@ public class LevelInitializer : MonoBehaviour
             playerConfigs[i].Input.uiInputModule = inputModule;
             Debug.Log(playerConfigs[i].Input.uiInputModule);
             player.GetComponentInChildren<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
-            //player.GetComponentInChildren<InputHandler>().horizontal = playerConfigs[i].Input.actions.FindAction("Look");
-            //Debug.Log(player.GetComponentInChildren<InputHandler>().horizontal);
+            player.GetComponentInChildren<CinemachineInputHandler>().horizontal = playerConfigs[i].Input.actions.FindAction("Look");
+            Debug.Log(player.GetComponentInChildren<CinemachineInputHandler>().horizontal);
         }
         PlayerConfigurationManager.Instance.EnableSplitScreen();
     }
