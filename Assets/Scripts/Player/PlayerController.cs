@@ -30,6 +30,12 @@ public class PlayerController : MonoBehaviour {
 	private bool slide = false;
     private bool jumped;
 
+	// Double Jump PowerUp
+	private bool doubleJumpAvailable = false; // Whether the double jump power-up is available
+	private int jumpsLeft = 0; // Number of jumps left, including double jumps
+	public int maxJumps = 2; // Maximum number of jumps allowed, including double jumps
+
+
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -42,7 +48,11 @@ public class PlayerController : MonoBehaviour {
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        jumped = context.action.triggered;
+		if (context.started)
+		{
+			Debug.Log("Jump input started");
+			jumped = true;
+		}
     }
 
 
@@ -50,6 +60,9 @@ public class PlayerController : MonoBehaviour {
 	{
 		// get the distance to ground
 		distToGround = GetComponent<Collider>().bounds.extents.y;
+
+		doubleJumpAvailable = false;
+    	jumpsLeft = maxJumps;
 	}
 	
 	private bool IsGrounded ()
@@ -69,6 +82,10 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (canMove)
 		{
+			// Double jump debug logs
+        	Debug.Log("jumpsLeft: " + jumpsLeft);
+        	Debug.Log("doubleJumpAvailable: " + doubleJumpAvailable);
+
 			if (moveDir.x != 0 || moveDir.z != 0)
 			{
 				Vector3 targetDir = moveDir; //Direction of the character
@@ -86,6 +103,8 @@ public class PlayerController : MonoBehaviour {
 
 			if (IsGrounded())
 			{
+				jumpsLeft = maxJumps;
+
 			 	// Calculate how fast we should be moving
 				Vector3 targetVelocity = moveDir;
 				targetVelocity *= speed;
@@ -118,13 +137,15 @@ public class PlayerController : MonoBehaviour {
 				if (IsGrounded() && jumped)
 				{
                     rb.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
+					jumpsLeft -= 1;
+					jumped = false;
 				}
 			}
 			else
 			{
 				if (!slide)
 				{
-					Vector3 targetVelocity = new Vector3(moveDir.x * airVelocity * 0.25f, rb.velocity.y, moveDir.z * airVelocity * 0.25f);
+					Vector3 targetVelocity = new Vector3(moveDir.x * airVelocity, rb.velocity.y, moveDir.z * airVelocity);
 					Vector3 velocity = rb.velocity;
 					Vector3 velocityChange = (targetVelocity - velocity);
 					velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
@@ -137,6 +158,32 @@ public class PlayerController : MonoBehaviour {
 				{
 					rb.AddForce(moveDir * 0.15f, ForceMode.VelocityChange);
 				}
+				// Double jump
+				if (jumpsLeft > 0 && jumped)
+				{
+					if (!IsGrounded())
+					{
+						if (doubleJumpAvailable)
+						{
+							rb.velocity = new Vector3(rb.velocity.x, CalculateJumpVerticalSpeed(), rb.velocity.z);
+							jumpsLeft -= 1;
+							doubleJumpAvailable = false; // Disable double jump after using it
+						}
+						else if (jumpsLeft > 1) // Check if regular jumps are still available
+						{
+							rb.velocity = new Vector3(rb.velocity.x, CalculateJumpVerticalSpeed(), rb.velocity.z);
+							jumpsLeft -= 1;
+						}
+						jumped = false;
+					}
+					else // Player is on the ground
+					{
+						jumpsLeft = maxJumps;
+						jumped = false;
+						doubleJumpAvailable = true; // Reset double jump availability on landing
+					}
+				}
+
 			}
 		}
 		else
@@ -168,6 +215,12 @@ public class PlayerController : MonoBehaviour {
 				slide = false;
 			}
 		}
+	}
+
+	public void ActivateDoubleJump()
+	{
+		Debug.Log("has double jump");
+		doubleJumpAvailable = true;
 	}
 
 	float CalculateJumpVerticalSpeed () {
@@ -216,9 +269,4 @@ public class PlayerController : MonoBehaviour {
 			canMove = true;
 		}
 	}
-
-    public void BuildingMode()
-    {
-        CameraController.Instance.EnableBuilding();
-    }
 }
