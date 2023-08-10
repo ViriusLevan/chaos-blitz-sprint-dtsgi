@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour {
 	private int jumpsLeft = 0; // Number of jumps left, including double jumps
 	public int maxJumps = 2; // Maximum number of jumps allowed, including double jumps
 
+	public bool hasExtraLife;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -50,11 +51,9 @@ public class PlayerController : MonoBehaviour {
     {
 		if (context.started)
 		{
-			Debug.Log("Jump input started");
 			jumped = true;
 		}
     }
-
 
 	private void Start ()
 	{
@@ -82,10 +81,6 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (canMove)
 		{
-			// Double jump debug logs
-        	Debug.Log("jumpsLeft: " + jumpsLeft);
-        	Debug.Log("doubleJumpAvailable: " + doubleJumpAvailable);
-
 			if (moveDir.x != 0 || moveDir.z != 0)
 			{
 				Vector3 targetDir = moveDir; //Direction of the character
@@ -219,8 +214,12 @@ public class PlayerController : MonoBehaviour {
 
 	public void ActivateDoubleJump()
 	{
-		Debug.Log("has double jump");
 		doubleJumpAvailable = true;
+	}
+
+	public void ActivateExtraLife()
+	{
+		hasExtraLife = true;
 	}
 
 	float CalculateJumpVerticalSpeed () {
