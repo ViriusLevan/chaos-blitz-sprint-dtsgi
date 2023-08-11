@@ -31,11 +31,12 @@ public class PlayerController : MonoBehaviour {
     private bool jumped;
 
 	// Double Jump PowerUp
-	private bool doubleJumpAvailable = false; // Whether the double jump power-up is available
 	private int jumpsLeft = 0; // Number of jumps left, including double jumps
-	public int maxJumps = 2; // Maximum number of jumps allowed, including double jumps
+	private int maxJumps = 2; // Maximum number of jumps allowed, including double jumps
+	private bool doubleJumpAvailable = false; // Whether the double jump power-up is available
 
-	public bool hasExtraLife;
+	public bool hasExtraLife { get; private set; }
+	public bool hasShield { get; private set; }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -153,6 +154,7 @@ public class PlayerController : MonoBehaviour {
 				{
 					rb.AddForce(moveDir * 0.15f, ForceMode.VelocityChange);
 				}
+
 				// Double jump
 				if (jumpsLeft > 0 && jumped)
 				{
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			rb.velocity = pushDir * pushForce;
 		}
-		// We apply gravity manually for more tuning control
+		// Apply gravity manually for more tuning control
 		rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0));
 	}
 
@@ -220,6 +222,23 @@ public class PlayerController : MonoBehaviour {
 	public void ActivateExtraLife()
 	{
 		hasExtraLife = true;
+	}
+
+	public void DectivateExtraLife()
+	{
+		hasExtraLife = false;
+	}
+
+	public void ActivateShield()
+	{
+		hasShield = true;
+		this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+	}
+
+	public void DeactivateShield()
+	{
+		hasShield = false;
+		this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 	}
 
 	float CalculateJumpVerticalSpeed () {
@@ -267,5 +286,11 @@ public class PlayerController : MonoBehaviour {
 			isStuned = false;
 			canMove = true;
 		}
+	}
+
+	public void PlayerDied()
+	{
+		//TODO - add more stuff, e.g. play animation or sfx
+		this.gameObject.SetActive(false);
 	}
 }

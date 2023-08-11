@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadZone : MonoBehaviour
+public class HurtPlayer : MonoBehaviour
 {
     public Transform checkPoint;
 
@@ -16,6 +16,10 @@ public class DeadZone : MonoBehaviour
                 playerController.transform.position = checkPoint.position;
                 playerController.DectivateExtraLife();
             }
+            else if (playerController.hasShield == true)
+            {
+                playerController.DeactivateShield();
+            }
             else
             {
                 playerController.PlayerDied();
@@ -23,3 +27,4 @@ public class DeadZone : MonoBehaviour
         }    
     }
 }
+
