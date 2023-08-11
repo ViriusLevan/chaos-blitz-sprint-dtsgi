@@ -38,11 +38,12 @@ public class PlacementManager : MonoBehaviour
 
     void Update()
     {
+        if(!playerInput.currentActionMap.name.Equals("BuildMode"))return;
         //if(_GameManager.Instance.GetPaused()){return;}
         if(pendingObj!=null)
         {
-            //VerticalMotion();
-            //RotatePlacable();
+            VerticalMotion();
+            RotatePlacable();
             pendingObj.transform.position = pos;
             UpdateMaterials();
         }
@@ -51,6 +52,7 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private LayerMask platformLayer;
     private void FixedUpdate() 
     {
+        if(!playerInput.currentActionMap.name.Equals("BuildMode"))return;
         if(pendingObj!=null){
             if(currentType == Placable.PlacableType.Hazard){
                 RaycastHit hit;
@@ -75,7 +77,7 @@ public class PlacementManager : MonoBehaviour
     }
 
     private void VerticalMotion(){
-        float verticalInput = playerInput.actions["MoveVertically"].ReadValue<float>();
+        float verticalInput = playerInput.actions["VerticalMotion"].ReadValue<float>();
         if(verticalInput<0 & referenceTransform.position.y>0){
             referenceTransform.position -= new Vector3(0,3f*Time.deltaTime,0);
         }
@@ -83,9 +85,12 @@ public class PlacementManager : MonoBehaviour
             referenceTransform.position += new Vector3(0,3f*Time.deltaTime,0);
         }
     }
+//TODO replace these two with the one below
+	public void BuildShiftClockwise()=> pendingObj?.transform.Rotate(0f, 10f, 0f);
+	public void BuildShiftCCW()=> pendingObj?.transform.Rotate(0f, -10f, 0f);
 
     private void RotatePlacable(){
-        float rotateInput = playerInput.actions["RotatePlacable"].ReadValue<float>();
+        float rotateInput = playerInput.actions["Rotate"].ReadValue<float>();
         if(rotateInput<0){
             pendingObj.transform.Rotate(0f, -50.0f*Time.deltaTime, 0.0f, Space.World);
         }
@@ -122,6 +127,7 @@ public class PlacementManager : MonoBehaviour
 
     private void InstantiateNewObject()
     {
+        targetPlatform=null;
         pendingObj = Instantiate(placables[placableIndex].GetPrefab(), pos
                         , referenceTransform.rotation);
         MonoBehaviour[] mbs = pendingObj.GetComponentsInChildren<MonoBehaviour>();

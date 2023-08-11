@@ -35,6 +35,10 @@ public class PlayerController : MonoBehaviour {
     public void OnJump(InputAction.CallbackContext context) => jumped = context.action.triggered;
 	public void OnBuildToggle(PlayerConfiguration playerConfig)=>ToggleBuildingMode(playerConfig);
 
+	//TODO put these elsewhere
+	public void BuildShiftUpward()=> buildCameraFollow.transform.position += new Vector3(0,0.5f,0);
+	public void BuildShiftDownward()=> buildCameraFollow.transform.position += new Vector3(0,-0.5f,0);
+	
 
 
 	private void Start ()
@@ -158,6 +162,7 @@ public class PlayerController : MonoBehaviour {
 
 		//TODO may want to put this elsewhere
 		if(building){
+			moveDir.y=0;
 			buildCameraFollow.transform.position += moveDir * 10f * Time.deltaTime;
 			return;
 		}
@@ -237,12 +242,16 @@ public class PlayerController : MonoBehaviour {
         	freeLook.LookAt = transform;
 			building=false;
 			playerConfig.Input.SwitchCurrentActionMap("Player");
+			freeLook.GetComponent<CinemachineInputHandler>().horizontal = playerConfig.Input.actions.FindAction("Look");
 		}else{
         	freeLook.Follow = buildCameraFollow.transform;
         	freeLook.LookAt = buildCameraFollow.transform;
 			building=true;
 			GetComponent<PlacementManager>().SetCameraTransform(freeLook.transform);
 			playerConfig.Input.SwitchCurrentActionMap("BuildMode");
+			freeLook.GetComponent<CinemachineInputHandler>().horizontal = playerConfig.Input.actions.FindAction("Look");
 		}
     }
+
+	
 }

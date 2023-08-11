@@ -89,10 +89,9 @@ public class PointSlicer : MonoBehaviour
     [SerializeField]private float yLineGizmoHeight=5f;
     void OnDrawGizmos()
     {
-        
-        if(boundaryPoints.Length<2 || boundaryPoints.Length<1){
-            return;
-        }
+        if(boundaryPoints==null) return;
+        if(boundaryPoints.Length<=1) return;
+
         for (int i = 0; i < boundaryPoints.Length; i++)
         {
             if(boundaryPoints[i]==null)return;
@@ -130,6 +129,8 @@ class PointSlicer1Editor : Editor{
         PointSlicer pointSlicer = (PointSlicer) target;
         if (pointSlicer==null) return;
 
+        GUILayout.Label("NOTE \n The slicing planes have infinite length on two axis.");
+        GUILayout.Label("The y gizmo height is only to help boundary visualization.");
         if(GUILayout.Button("Test Slice")){
             pointSlicer.Slice();
         }

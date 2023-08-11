@@ -59,6 +59,22 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 pManager?.CycleIndexBackward(obj);
             }
+            // if(obj.action.name == controls.BuildMode.ShiftUp.name)
+            // {
+            //     controller?.BuildShiftUpward();
+            // }
+            // if(obj.action.name == controls.BuildMode.ShiftDown.name)
+            // {
+            //     controller?.BuildShiftDownward();
+            // }
+            // if(obj.action.name == controls.BuildMode.ShiftClockwise.name)
+            // {
+            //     pManager?.BuildShiftClockwise();
+            // }
+            // if(obj.action.name == controls.BuildMode.ShiftCCW.name)
+            // {
+            //     pManager?.BuildShiftCCW();
+            // }
         }
     }
 

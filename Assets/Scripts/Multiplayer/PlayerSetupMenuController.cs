@@ -15,7 +15,7 @@ public class PlayerSetupMenuController : MonoBehaviour
     private float ignoreInputTime = 1.5f;
     private bool inputEnabled;
     
-    public void setPlayerIndex(int pi)
+    public void SetPlayerIndex(int pi)
     {
         playerIndex = pi;
         titleText.SetText("Player " + (pi + 1).ToString());

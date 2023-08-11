@@ -671,6 +671,60 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShiftUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfcb6082-3dad-4a8a-8c85-0a280e381105"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShiftDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""30037390-bdd6-4131-bb0b-f49d91c0d439"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShiftClockwise"",
+                    ""type"": ""Button"",
+                    ""id"": ""428479e3-b7f0-4269-b62e-3603b5ca1aac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShiftCCW"",
+                    ""type"": ""Button"",
+                    ""id"": ""77b10de6-c847-47f6-8bfe-19d568448f04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""d330f678-b5fe-4fe1-91c1-4c7c8dedb7ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""VerticalMotion"",
+                    ""type"": ""Value"",
+                    ""id"": ""68b1563b-f052-422b-9056-e3d003772058"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -893,6 +947,226 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""action"": ""CycleSelectionBackward"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa3126f8-5ad7-4741-a5cb-2563858aedb5"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0c90ff6-80c1-417a-b4b3-500c2da4de79"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5adb9252-bdee-41da-8ad3-204dec816578"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc870f36-c0a9-4e1a-9277-d1236120e6a3"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1f2222d-7e81-4c13-9c7f-dc61260d2008"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftClockwise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3103f76d-5040-4e3b-84b9-4ff9de15c18a"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftClockwise"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3d8177d-ddc6-4590-afa4-bd2fc46f8697"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftCCW"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61955b3c-3bf3-4ce2-8d79-2aade0a1e509"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftCCW"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""KB"",
+                    ""id"": ""861beb81-47ce-4c05-9a13-c059abbdd247"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""e4fc419b-9d8a-4196-b274-0d2e7f05050a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""92bdf413-62dc-4af3-861a-7584ff0af833"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""e2f79475-6efb-40c5-8151-f58743e2ff05"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""0e74ef6f-6213-4264-bfbd-7f688eb7655d"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""7c2908f7-dce9-4ba4-8a37-00eb9f13730e"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""KB"",
+                    ""id"": ""c535458a-47c2-4c05-98bd-86bcd5add714"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMotion"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""6682ba76-6c2c-42f1-8b49-136a94b0b609"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""53edf814-cd0c-43c5-9fd0-3f728302d3a1"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""bcca123b-d2f8-450e-814f-d955bbcde698"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMotion"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""061a3b81-94f8-4152-8747-1ddf133217bc"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""d757e832-c8ed-4bbb-8a99-c44f1cf58715"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VerticalMotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -974,6 +1248,12 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_BuildMode_Place = m_BuildMode.FindAction("Place", throwIfNotFound: true);
         m_BuildMode_CycleSelectionForward = m_BuildMode.FindAction("CycleSelectionForward", throwIfNotFound: true);
         m_BuildMode_CycleSelectionBackward = m_BuildMode.FindAction("CycleSelectionBackward", throwIfNotFound: true);
+        m_BuildMode_ShiftUp = m_BuildMode.FindAction("ShiftUp", throwIfNotFound: true);
+        m_BuildMode_ShiftDown = m_BuildMode.FindAction("ShiftDown", throwIfNotFound: true);
+        m_BuildMode_ShiftClockwise = m_BuildMode.FindAction("ShiftClockwise", throwIfNotFound: true);
+        m_BuildMode_ShiftCCW = m_BuildMode.FindAction("ShiftCCW", throwIfNotFound: true);
+        m_BuildMode_Rotate = m_BuildMode.FindAction("Rotate", throwIfNotFound: true);
+        m_BuildMode_VerticalMotion = m_BuildMode.FindAction("VerticalMotion", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1209,6 +1489,12 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_BuildMode_Place;
     private readonly InputAction m_BuildMode_CycleSelectionForward;
     private readonly InputAction m_BuildMode_CycleSelectionBackward;
+    private readonly InputAction m_BuildMode_ShiftUp;
+    private readonly InputAction m_BuildMode_ShiftDown;
+    private readonly InputAction m_BuildMode_ShiftClockwise;
+    private readonly InputAction m_BuildMode_ShiftCCW;
+    private readonly InputAction m_BuildMode_Rotate;
+    private readonly InputAction m_BuildMode_VerticalMotion;
     public struct BuildModeActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -1219,6 +1505,12 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @Place => m_Wrapper.m_BuildMode_Place;
         public InputAction @CycleSelectionForward => m_Wrapper.m_BuildMode_CycleSelectionForward;
         public InputAction @CycleSelectionBackward => m_Wrapper.m_BuildMode_CycleSelectionBackward;
+        public InputAction @ShiftUp => m_Wrapper.m_BuildMode_ShiftUp;
+        public InputAction @ShiftDown => m_Wrapper.m_BuildMode_ShiftDown;
+        public InputAction @ShiftClockwise => m_Wrapper.m_BuildMode_ShiftClockwise;
+        public InputAction @ShiftCCW => m_Wrapper.m_BuildMode_ShiftCCW;
+        public InputAction @Rotate => m_Wrapper.m_BuildMode_Rotate;
+        public InputAction @VerticalMotion => m_Wrapper.m_BuildMode_VerticalMotion;
         public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1246,6 +1538,24 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @CycleSelectionBackward.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionBackward;
                 @CycleSelectionBackward.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionBackward;
                 @CycleSelectionBackward.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionBackward;
+                @ShiftUp.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftUp;
+                @ShiftUp.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftUp;
+                @ShiftUp.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftUp;
+                @ShiftDown.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftDown;
+                @ShiftDown.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftDown;
+                @ShiftDown.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftDown;
+                @ShiftClockwise.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftClockwise;
+                @ShiftClockwise.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftClockwise;
+                @ShiftClockwise.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftClockwise;
+                @ShiftCCW.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftCCW;
+                @ShiftCCW.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftCCW;
+                @ShiftCCW.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftCCW;
+                @Rotate.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotate;
+                @VerticalMotion.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnVerticalMotion;
+                @VerticalMotion.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnVerticalMotion;
+                @VerticalMotion.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnVerticalMotion;
             }
             m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
             if (instance != null)
@@ -1268,6 +1578,24 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @CycleSelectionBackward.started += instance.OnCycleSelectionBackward;
                 @CycleSelectionBackward.performed += instance.OnCycleSelectionBackward;
                 @CycleSelectionBackward.canceled += instance.OnCycleSelectionBackward;
+                @ShiftUp.started += instance.OnShiftUp;
+                @ShiftUp.performed += instance.OnShiftUp;
+                @ShiftUp.canceled += instance.OnShiftUp;
+                @ShiftDown.started += instance.OnShiftDown;
+                @ShiftDown.performed += instance.OnShiftDown;
+                @ShiftDown.canceled += instance.OnShiftDown;
+                @ShiftClockwise.started += instance.OnShiftClockwise;
+                @ShiftClockwise.performed += instance.OnShiftClockwise;
+                @ShiftClockwise.canceled += instance.OnShiftClockwise;
+                @ShiftCCW.started += instance.OnShiftCCW;
+                @ShiftCCW.performed += instance.OnShiftCCW;
+                @ShiftCCW.canceled += instance.OnShiftCCW;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
+                @VerticalMotion.started += instance.OnVerticalMotion;
+                @VerticalMotion.performed += instance.OnVerticalMotion;
+                @VerticalMotion.canceled += instance.OnVerticalMotion;
             }
         }
     }
@@ -1337,5 +1665,11 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnPlace(InputAction.CallbackContext context);
         void OnCycleSelectionForward(InputAction.CallbackContext context);
         void OnCycleSelectionBackward(InputAction.CallbackContext context);
+        void OnShiftUp(InputAction.CallbackContext context);
+        void OnShiftDown(InputAction.CallbackContext context);
+        void OnShiftClockwise(InputAction.CallbackContext context);
+        void OnShiftCCW(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
+        void OnVerticalMotion(InputAction.CallbackContext context);
     }
 }
