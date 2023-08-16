@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 public class VirtualCursor : MonoBehaviour
@@ -23,7 +24,7 @@ public class VirtualCursor : MonoBehaviour
     private Camera mainCamera;
 
     public RectTransform GetCursorTranform(){return cursorTransform;} 
-
+    
     private void OnEnable() {
         GameObject mark = GameObject.FindGameObjectWithTag("UIHelper");
         Debug.Log(SceneManager.GetActiveScene().name);
@@ -33,6 +34,7 @@ public class VirtualCursor : MonoBehaviour
         
         if (cursorTransform==null) 
             cursorTransform = cursorInit.GetCursorTransforms()[playerInputHandler.playerConfig.playerIndex];
+
         if(centerCanvas == null)  
             centerCanvas= cursorInit.GetCanvas();
         if(canvasRectTransform == null) 
@@ -55,8 +57,9 @@ public class VirtualCursor : MonoBehaviour
 
     void OnDisable()
     {
-        if(virtualMouse != null & virtualMouse.added)
+        if(virtualMouse != null & virtualMouse.added){
             InputSystem.RemoveDevice(virtualMouse);
+        }
     }
 
     [SerializeField]private Vector2 deltaValue;
@@ -110,5 +113,15 @@ public class VirtualCursor : MonoBehaviour
             == RenderMode.ScreenSpaceOverlay ? null : mainCamera, out anchoredPosition);
 
         cursorTransform.anchoredPosition = anchoredPosition;
+    }
+
+    public void SetCursorColor(Color newColor){
+        cursorTransform.GetComponent<Image>().color = newColor;
+    }
+
+    public void SetCursorTransparency(float transparency){
+        Color thisColor = cursorTransform.GetComponent<Image>().color;
+        thisColor.a = transparency;
+        cursorTransform.GetComponent<Image>().color = thisColor;
     }
 }

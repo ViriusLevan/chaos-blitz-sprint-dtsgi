@@ -168,6 +168,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	private void OnCollisionEnter(Collision other) {
+		if(other.gameObject.CompareTag("Goal")){
+			GameManager.Instance.PlayerFinished(playerInputHandler.playerConfig.playerIndex);
+		}
+	}
+
 	float CalculateJumpVerticalSpeed () {
 		// From the jump height and gravity we deduce the upwards speed 
 		// for the character to reach at the apex.

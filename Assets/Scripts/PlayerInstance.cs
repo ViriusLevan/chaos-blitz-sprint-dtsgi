@@ -18,47 +18,77 @@ public class PlayerInstance : MonoBehaviour
     
 	private PlacementManager placementManager;
     private PlayerController playerController;
-    private PlayerInputHandler playerInputHandler;
+    public PlayerInputHandler playerInputHandler{get;private set;}
 	public CinemachineInputHandler cinemachineInputHanlder{get; private set;}
 
 	private void Awake() {
 		cinemachineInputHanlder = GetComponentInChildren<CinemachineInputHandler>();
+		placementManager = GetComponentInChildren<PlacementManager>();
+        playerController = GetComponentInChildren<PlayerController>();
+        playerInputHandler = GetComponentInChildren<PlayerInputHandler>();
+		playerCamera = GetComponentInChildren<Camera>().gameObject;
 	}
 
     void Start()
     {
-		placementManager = GetComponentInChildren<PlacementManager>();
-        playerController = GetComponentInChildren<PlayerController>();
-        playerInputHandler = GetComponentInChildren<PlayerInputHandler>();
 		placementManager?.SetReferenceTransform(buildCameraFollow.transform);
-		playerStatus = PlayerStatus.Picking;
     }
+
+	private void OnDestroy() 
+	{
+		
+	}
 
     private void Update() {
 		
     }
+
 	public void SetBuildCameraFollow(GameObject followTarget){buildCameraFollow = followTarget;}   
-    public void SetPlayerStatus(PlayerStatus ps){playerStatus = ps;}
+    public void SetPlayerStatus(PlayerStatus ps){
+		playerStatus = ps;
+		switch (ps){
+			case PlayerStatus.Picking:
+				PickingMode();
+				break;
+			case PlayerStatus.FinishedPicking:
+				playerInputHandler.virtualCursor.SetCursorTransparency(0);
+				break;
+			case PlayerStatus.Building:
+				BuildingMode();
+				if(placementManager.placable==null){
+					playerStatus = PlayerStatus.FinishedBuilding;
+				}
+				break;
+			case PlayerStatus.Platforming:
+				PlatformingMode();
+				break;
+		}
+	}
     public void SetPlayerScore(int ps){playerScore=ps;}
     public void AddPlayerScore(int addition) => playerScore+=addition;
 	
+	public void SetPlacable(Placable pl) => placementManager.SetPlacable(pl);
 
-    public void BuildingMode(Placable placable)
+	public void PickingMode()
+	{
+		playerInputHandler.virtualCursor.SetCursorTransparency(255);
+	    playerInputHandler.playerConfig.input.SwitchCurrentActionMap("UI"); 
+	}
+
+    public void BuildingMode()
     {
-		playerStatus = PlayerStatus.Building;
 		freeLookCamera.Follow = buildCameraFollow.transform;
 		freeLookCamera.LookAt = buildCameraFollow.transform;
 		placementManager.SetCameraTransform(freeLookCamera.transform);
-		placementManager.InstantiateNewPlacable(placable);
+		placementManager.InstantiateNewPlacable();
 		playerInputHandler.playerConfig.input.SwitchCurrentActionMap("BuildMode");
 		cinemachineInputHanlder.horizontal 
 			= playerInputHandler.playerConfig.input.actions.FindAction("Look");
     }
 
 	public void PlatformingMode(){
-		playerStatus = PlayerStatus.Platforming;
-		freeLookCamera.Follow = transform;
-		freeLookCamera.LookAt = transform;
+		freeLookCamera.Follow = playerController.gameObject.transform;
+		freeLookCamera.LookAt = playerController.gameObject.transform;
 		playerInputHandler.playerConfig.input.SwitchCurrentActionMap("Player");
 		cinemachineInputHanlder.horizontal 
 			= playerInputHandler.playerConfig.input.actions.FindAction("Look");

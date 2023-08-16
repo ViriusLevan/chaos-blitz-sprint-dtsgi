@@ -13,6 +13,7 @@ public class PlacableButton : MonoBehaviour, IPointerClickHandler
     [SerializeField]private TextMeshProUGUI text;
 
     private void Start() {
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -23,6 +24,8 @@ public class PlacableButton : MonoBehaviour, IPointerClickHandler
                     .GetPlayerConfigurationReference();
         Debug.Log(
             $"Player {config.playerIndex} has clicked button {placable.name}");
+        GameManager.Instance.PlayerPicked(config.playerIndex, placable);
+        Destroy(this.gameObject);
     }
 
     public void SetPlacable(Placable p){

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
 
@@ -22,8 +23,12 @@ public class LevelInitializer : MonoBehaviour
             playerConfigs[i].input.uiInputModule = inputModule;
             Debug.Log(playerConfigs[i].input.uiInputModule);
             
-            player.GetComponentInChildren<PlayerInputHandler>()
-                .InitializePlayer(playerConfigs[i], player.GetComponent<PlayerInstance>());
+            PlayerInstance instance = player.GetComponent<PlayerInstance>();
+            Debug.Log("Initializer instance"+(instance == null));
+            Debug.Log("Initializer ins pih"+(instance.playerInputHandler == null));
+            instance.playerInputHandler.InitializePlayer(playerConfigs[i], instance);
+
+            GameManager.Instance.AddPlayerInstance(instance);
         }
         PlayerConfigurationManager.Instance.EnableSplitScreen();
     }

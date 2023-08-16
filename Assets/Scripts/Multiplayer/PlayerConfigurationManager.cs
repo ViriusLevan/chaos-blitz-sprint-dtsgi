@@ -27,7 +27,6 @@ public class PlayerConfigurationManager : MonoBehaviour
             DontDestroyOnLoad(Instance);
             playerConfigs = new List<PlayerConfiguration>();
         }
-        
     }
 
     public void HandlePlayerJoin(PlayerInput pi)

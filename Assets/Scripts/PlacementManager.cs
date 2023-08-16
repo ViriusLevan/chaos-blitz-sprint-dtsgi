@@ -36,7 +36,9 @@ public class PlacementManager : MonoBehaviour
 
     void Update()
     {
-        if(playerInputHandler.playerInstance.playerStatus != PlayerInstance.PlayerStatus.Building)
+
+        if(playerInputHandler.playerInstance.playerStatus != PlayerInstance.PlayerStatus.Building
+            && playerInputHandler.playerInstance.playerStatus != PlayerInstance.PlayerStatus.FinishedBuilding)
             return;
 
         CameraMovement();
@@ -106,7 +108,7 @@ public class PlacementManager : MonoBehaviour
     private void RotatePlacable(){
         float rotateInput 
             = playerInputHandler.playerConfig.input
-                .actions["Move"].ReadValue<float>();
+                .actions["Rotate"].ReadValue<float>();
         if(rotateInput<0){
             pendingObj.transform.Rotate(0f, -50.0f*Time.deltaTime, 0.0f, Space.World);
         }
@@ -116,8 +118,15 @@ public class PlacementManager : MonoBehaviour
     }
 
     private Placable.PlacableType currentType;
-    public void InstantiateNewPlacable(Placable placable)
+    [SerializeField]public Placable placable{get;private set;}
+    public void SetPlacable(Placable pl){placable=pl;}
+    public void InstantiateNewPlacable()
     {
+        if(placable==null){
+            Debug.Log("NULL PLACABLE");
+            return;
+        }
+
         targetPlatform=null;
         pendingObj = Instantiate(placable.GetPrefab(), pos
                         , referenceTransform.rotation);
@@ -177,6 +186,8 @@ public class PlacementManager : MonoBehaviour
         }
 
         pendingObj = null;
+        GameManager.Instance.PlayerBuilt(playerInputHandler.playerConfig.playerIndex);
+        Debug.Log($"Player {playerInputHandler.playerConfig.playerIndex} finished placing");
     }
 
     private void UpdateMaterials()

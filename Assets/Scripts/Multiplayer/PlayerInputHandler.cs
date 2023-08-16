@@ -13,7 +13,7 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerController controller;
     private PlacementManager pManager;
     private PlayerInputActionsAsset controls;
-    private VirtualCursor virtualCursor;
+    public VirtualCursor virtualCursor{get; private set;}
     [SerializeField]public PlayerInstance playerInstance{get;private set;}
 
     private void Awake()
@@ -28,6 +28,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void InitializePlayer(PlayerConfiguration config, PlayerInstance instance)
     {
         playerInstance = instance;
+        Debug.Log("InputHandlerInstance"+(playerInstance==null));
         playerConfig = config;
         playerMesh.material = config.playerMaterial;
         config.input.onActionTriggered += Input_onActionTriggered;
@@ -38,8 +39,8 @@ public class PlayerInputHandler : MonoBehaviour
         uiInputModule 
             = virtualCursor.GetCursorTranform().gameObject.GetComponent<InputSystemUIInputModule>();
 
-	    playerConfig.input.SwitchCurrentActionMap("UI"); 
         uiInputModule.gameObject.SetActive(true);
+        
         uiInputModule.actionsAsset = config.input.actions;
         //uiInputModule.gameObject.name = config.Input.playerIndex.ToString();
         uiInputModule.gameObject.GetComponent<PlayerConfigurationReferenceHelper>()?

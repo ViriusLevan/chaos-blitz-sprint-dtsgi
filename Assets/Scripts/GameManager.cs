@@ -19,25 +19,24 @@ public class GameManager : MonoBehaviour
         if(Instance != null)
         {
             Debug.Log("[Singleton] Trying to instantiate a seccond instance of a singleton class.");
+            return;
         }
         else
         {
             Instance = this;
-            playerInstances = new Dictionary<int, PlayerInstance>();
         }
-        
+        playerInstances = new Dictionary<int, PlayerInstance>();
     }
 
     void Start()
     {
-        currentGameStatus = GameStatus.Animation;
         List<PlayerConfiguration> pConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs();
-        placableSelectionPanel.PopulatePickPanel();
+        PhaseSwitch(GameStatus.PickPhase);
     }
 
     public void AddPlayerInstance(PlayerInstance pi)
     {   
-        
+        playerInstances.Add(pi.playerInputHandler.playerConfig.playerIndex, pi);
     }
 
     private void OnDestroy() 
@@ -54,8 +53,9 @@ public class GameManager : MonoBehaviour
         , pickPhaseBegin, buildPhaseBegin, platformingPhaseBegin;
     
 
-    public void PlayerPicked(int pIndex)
+    public void PlayerPicked(int pIndex, Placable placable = null)
     {
+        playerInstances[pIndex].SetPlacable(placable);
         playerInstances[pIndex].SetPlayerStatus(PlayerInstance.PlayerStatus.FinishedPicking);
         foreach(KeyValuePair<int, PlayerInstance> entry in playerInstances)
         {
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
-        pickPhaseFinished.Invoke();
+        pickPhaseFinished?.Invoke();
         PhaseSwitch(GameStatus.BuildPhase);
     }
 
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
-        buildPhaseFinished.Invoke();
+        buildPhaseFinished?.Invoke();
         PhaseSwitch(GameStatus.PlatformingPhase);
     }
 
@@ -86,17 +86,18 @@ public class GameManager : MonoBehaviour
         foreach(KeyValuePair<int, PlayerInstance> entry in playerInstances)
         {
             if(entry.Value.playerStatus != PlayerInstance.PlayerStatus.Dead 
-                || entry.Value.playerStatus != PlayerInstance.PlayerStatus.FinishedPlatforming){
+                && entry.Value.playerStatus != PlayerInstance.PlayerStatus.FinishedPlatforming){
                 return;
             }
         }
-        platformingPhaseFinished.Invoke();
+        platformingPhaseFinished?.Invoke();
         PhaseSwitch(GameStatus.PickPhase);
     }
 
     private int lapWinnerIndex;
     public void PlayerFinished(int pIndex)
     {
+        Debug.Log($"Player {pIndex} has Finished");
         playerInstances[pIndex].SetPlayerStatus(PlayerInstance.PlayerStatus.FinishedPlatforming);
         if(lapWinnerIndex == -1) 
             lapWinnerIndex = pIndex;
@@ -106,19 +107,21 @@ public class GameManager : MonoBehaviour
         foreach(KeyValuePair<int, PlayerInstance> entry in playerInstances)
         {
             if(entry.Value.playerStatus != PlayerInstance.PlayerStatus.Dead 
-                || entry.Value.playerStatus != PlayerInstance.PlayerStatus.FinishedPlatforming){
+                && entry.Value.playerStatus != PlayerInstance.PlayerStatus.FinishedPlatforming){
                 return;
             }
         }
-        platformingPhaseFinished.Invoke();
+        platformingPhaseFinished?.Invoke();
         PhaseSwitch(GameStatus.PickPhase);
     }
 
     private void PhaseSwitch(GameStatus targetPhase)
     {
-        if(lapWinnerIndex!=-1){
-            playerInstances[lapWinnerIndex].AddPlayerScore(1);
-            lapWinnerIndex=-1;
+        if(currentGameStatus==GameStatus.PlatformingPhase){
+            if(lapWinnerIndex!=-1){
+                playerInstances[lapWinnerIndex].AddPlayerScore(1);
+                lapWinnerIndex=-1;
+            }
         }
 
         currentGameStatus = targetPhase;
@@ -127,20 +130,31 @@ public class GameManager : MonoBehaviour
             switch(targetPhase){
                 case GameStatus.PickPhase:
                     playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Picking);
-                    pickPhaseBegin.Invoke();
                     break;
                 case GameStatus.BuildPhase:
                     playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Building);
-                    buildPhaseBegin.Invoke();
                     break;
                 case GameStatus.PlatformingPhase:
                     playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Platforming);
-                    platformingPhaseBegin.Invoke();
                     break;
                 case GameStatus.Animation:
                     playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Awaiting);
                     break;
             }
+        }
+
+        switch(targetPhase){
+            case GameStatus.PickPhase:
+                pickPhaseBegin?.Invoke();
+                break;
+            case GameStatus.BuildPhase:
+                buildPhaseBegin?.Invoke();
+                break;
+            case GameStatus.PlatformingPhase:
+                platformingPhaseBegin?.Invoke();
+                break;
+            case GameStatus.Animation:
+                break;
         }
     }
 
