@@ -3,78 +3,71 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
 {
     [SerializeField] private MeshRenderer playerMesh;
-    private PlayerConfiguration playerConfig;
+    public PlayerConfiguration playerConfig{get;private set;}
     private PlayerController controller;
     private PlacementManager pManager;
     private PlayerInputActionsAsset controls;
+    private VirtualCursor virtualCursor;
+    [SerializeField]public PlayerInstance playerInstance{get;private set;}
 
     private void Awake()
     {
         controller = GetComponent<PlayerController>();
         pManager = GetComponent<PlacementManager>();
         controls = new PlayerInputActionsAsset();
+        virtualCursor = GetComponent<VirtualCursor>();
     }
-
-    public void InitializePlayer(PlayerConfiguration config)
+    [SerializeField]
+    private InputSystemUIInputModule uiInputModule;
+    public void InitializePlayer(PlayerConfiguration config, PlayerInstance instance)
     {
+        playerInstance = instance;
         playerConfig = config;
         playerMesh.material = config.playerMaterial;
-        config.Input.onActionTriggered += Input_onActionTriggered;
+        config.input.onActionTriggered += Input_onActionTriggered;
+        
+        virtualCursor?.SetPlayerInputHandler(this);
+        
+        virtualCursor.enabled=true;
+        uiInputModule 
+            = virtualCursor.GetCursorTranform().gameObject.GetComponent<InputSystemUIInputModule>();
 
-        GetComponent<PlacementManager>()?.SetPlayerInput(config.Input);
+	    playerConfig.input.SwitchCurrentActionMap("UI"); 
+        uiInputModule.gameObject.SetActive(true);
+        uiInputModule.actionsAsset = config.input.actions;
+        //uiInputModule.gameObject.name = config.Input.playerIndex.ToString();
+        uiInputModule.gameObject.GetComponent<PlayerConfigurationReferenceHelper>()?
+            .SetPlayerConfigurationReference(config);
+
+		playerInstance.cinemachineInputHanlder.horizontal = config.input.actions.FindAction("Look");
+		Debug.Log(playerInstance.cinemachineInputHanlder.horizontal);
     }   
 
     private void Input_onActionTriggered(CallbackContext obj)
     {
-
-        //Is there a better way of assigning these?
-        
-        if (obj.action.name == controls.Player.Move.name)
-        {
-            controller?.OnMove(obj);
-        }
         if (obj.action.name == controls.Player.Jump.name)
         {
             controller?.OnJump(obj);
         }
         if(obj.performed){
-            if (obj.action.name == controls.Player.BuildToggle.name
-                || obj.action.name == controls.BuildMode.BuildToggle.name){
-                controller?.OnBuildToggle(playerConfig);
-            }
             if(obj.action.name == controls.BuildMode.Place.name)
             {
                 pManager?.PlaceObject(obj);
             }
-            if(obj.action.name == controls.BuildMode.CycleSelectionForward.name)
-            {
-                pManager?.CycleIndexForward(obj);
-            }
-            if(obj.action.name == controls.BuildMode.CycleSelectionBackward.name)
-            {
-                pManager?.CycleIndexBackward(obj);
-            }
-            // if(obj.action.name == controls.BuildMode.ShiftUp.name)
-            // {
-            //     controller?.BuildShiftUpward();
-            // }
-            // if(obj.action.name == controls.BuildMode.ShiftDown.name)
-            // {
-            //     controller?.BuildShiftDownward();
-            // }
-            // if(obj.action.name == controls.BuildMode.ShiftClockwise.name)
-            // {
-            //     pManager?.BuildShiftClockwise();
-            // }
-            // if(obj.action.name == controls.BuildMode.ShiftCCW.name)
-            // {
-            //     pManager?.BuildShiftCCW();
-            // }
+        }
+        if (obj.action.name == controls.UI.Navigate.name)
+        {
+            virtualCursor?.OnNavigate(obj);
+        }
+        if (obj.action.name == controls.UI.Click.name)
+        {
+            virtualCursor?.OnClick(obj);
         }
     }
 

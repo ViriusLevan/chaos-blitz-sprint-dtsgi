@@ -6,28 +6,26 @@ using TMPro;
 
 public class PlacementManager : MonoBehaviour
 {
-    public Placable[] placables;
     private Vector3 pos;
     private RaycastHit hit;
     //can place, cannot place, Platform,Obstacle,Hazard
     [SerializeField] private Material[] materials;
-    
 
     public bool canPlace = false;
     private GameObject pendingObj;
     [SerializeField]private Transform referenceTransform;
-    [SerializeField]private PlayerInput playerInput;
     [SerializeField]private Transform cameraTransform;
     [SerializeField]private TextMeshProUGUI placableNameText;
 
-    public void SetPlayerInput(PlayerInput pi) => playerInput=pi;
+    [SerializeField]private PlayerInputHandler playerInputHandler;
+
     public void SetReferenceTransform(Transform t)=> referenceTransform = t;
     public void SetCameraTransform(Transform t)=> cameraTransform=t;
 
     void Start()
     {
+        playerInputHandler = GetComponent<PlayerInputHandler>();
     }    
-
 
     [SerializeField]private PointSlicer targetPlatform;
     public void InvalidPlacement(){canPlace=false;}
@@ -38,8 +36,11 @@ public class PlacementManager : MonoBehaviour
 
     void Update()
     {
-        if(!playerInput.currentActionMap.name.Equals("BuildMode"))return;
-        //if(_GameManager.Instance.GetPaused()){return;}
+        if(playerInputHandler.playerInstance.playerStatus != PlayerInstance.PlayerStatus.Building)
+            return;
+
+        CameraMovement();
+
         if(pendingObj!=null)
         {
             VerticalMotion();
@@ -52,7 +53,8 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private LayerMask platformLayer;
     private void FixedUpdate() 
     {
-        if(!playerInput.currentActionMap.name.Equals("BuildMode"))return;
+        if(playerInputHandler.playerInstance.playerStatus 
+			!= PlayerInstance.PlayerStatus.Building)return;
         if(pendingObj!=null){
             if(currentType == Placable.PlacableType.Hazard){
                 RaycastHit hit;
@@ -76,8 +78,23 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
+	private Vector3 moveDir;
+    private Vector2 moveInput;
+    private void CameraMovement(){
+        moveInput = playerInputHandler.playerConfig.input.actions["Move"].ReadValue<Vector2>();
+		float h = moveInput.x;
+		float v = moveInput.y;
+		Vector3 v2 = v * playerInputHandler.playerInstance.playerCamera.transform.forward; //Vertical axis to which I want to move with respect to the camera
+		Vector3 h2 = h * playerInputHandler.playerInstance.playerCamera.transform.right; //Horizontal axis to which I want to move with respect to the camera
+		moveDir = (v2 + h2).normalized; //Global position to which I want to move in magnitude 1
+        moveDir.y=0;
+		playerInputHandler.playerInstance.buildCameraFollow.transform.position += moveDir * 10f * Time.deltaTime;
+    }
+
     private void VerticalMotion(){
-        float verticalInput = playerInput.actions["VerticalMotion"].ReadValue<float>();
+        float verticalInput 
+            = playerInputHandler.playerConfig.input
+                .actions["VerticalMotion"].ReadValue<float>();
         if(verticalInput<0 & referenceTransform.position.y>0){
             referenceTransform.position -= new Vector3(0,3f*Time.deltaTime,0);
         }
@@ -85,12 +102,11 @@ public class PlacementManager : MonoBehaviour
             referenceTransform.position += new Vector3(0,3f*Time.deltaTime,0);
         }
     }
-//TODO replace these two with the one below
-	public void BuildShiftClockwise()=> pendingObj?.transform.Rotate(0f, 10f, 0f);
-	public void BuildShiftCCW()=> pendingObj?.transform.Rotate(0f, -10f, 0f);
 
     private void RotatePlacable(){
-        float rotateInput = playerInput.actions["Rotate"].ReadValue<float>();
+        float rotateInput 
+            = playerInputHandler.playerConfig.input
+                .actions["Move"].ReadValue<float>();
         if(rotateInput<0){
             pendingObj.transform.Rotate(0f, -50.0f*Time.deltaTime, 0.0f, Space.World);
         }
@@ -98,37 +114,12 @@ public class PlacementManager : MonoBehaviour
             pendingObj.transform.Rotate(0f, 50.0f*Time.deltaTime, 0.0f, Space.World);
         }
     }
-    
-    private int placableIndex;
-    public void CycleIndexForward(InputAction.CallbackContext context){
-        placableIndex+=1;
-        //Debug.Log("Cycled Forward "+placableIndex);
-        if(placableIndex>=placables.Length){
-            placableIndex=0;
-        }
-        if(pendingObj!=null){
-            Destroy(pendingObj);
-        }
-        InstantiateNewObject();
-    }
-    public void CycleIndexBackward(InputAction.CallbackContext context){
-        placableIndex-=1;
-        //Debug.Log("Cycled Backward "+placableIndex);
-        if(placableIndex<0){
-            placableIndex=placables.Length-1;
-        }
-        if(pendingObj!=null){
-            Destroy(pendingObj);
-        }
-        InstantiateNewObject();
-    }
 
     private Placable.PlacableType currentType;
-
-    private void InstantiateNewObject()
+    public void InstantiateNewPlacable(Placable placable)
     {
         targetPlatform=null;
-        pendingObj = Instantiate(placables[placableIndex].GetPrefab(), pos
+        pendingObj = Instantiate(placable.GetPrefab(), pos
                         , referenceTransform.rotation);
         MonoBehaviour[] mbs = pendingObj.GetComponentsInChildren<MonoBehaviour>();
         foreach (var item in mbs)
@@ -138,15 +129,10 @@ public class PlacementManager : MonoBehaviour
         PlacementChecker pChecker = pendingObj.AddComponent<PlacementChecker>();
         pChecker.SetPlacementManager(this);
         
-        currentType = placables[placableIndex].GetPlacableType();
+        currentType = placable.GetPlacableType();
         canPlace = currentType!=Placable.PlacableType.Hazard;
         pChecker.SetPlacableType(currentType);
         //placableNameText.text = placables[placableIndex].name;
-
-        // //TODO fix this prefab
-        // if(placables[placableIndex].name.Contains("Log")){
-        //     pendingObj.transform.eulerAngles += new Vector3(0,0,90);
-        // }
     }
 
     public void PlaceObject(InputAction.CallbackContext context)

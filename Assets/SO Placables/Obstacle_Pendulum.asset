@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695ff6480ce82d145b6a073482263ca6, type: 3}
   m_Name: Obstacle_Pendulum
   m_EditorClassIdentifier: 
+  placableName: Pendulum
   prefab: {fileID: 4170791249458223976, guid: b638837bca185b848910c96a5725dc7c, type: 3}
   type: 1
+  sprite: {fileID: 21300000, guid: f82dfc5fc3c5a8f4080a3550427019c8, type: 3}

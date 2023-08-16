@@ -515,6 +515,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d67cd4b3-ae16-42ac-831c-d05b3faa2fa4",
+                    "path": "<VirtualMouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3c83f55f-d4b0-46fa-9c5e-543f5bc93015",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -537,11 +548,33 @@
                 },
                 {
                     "name": "",
+                    "id": "0a1c54ef-6911-4da3-8be7-b548982ee006",
+                    "path": "<VirtualMouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e46bd414-a1dd-4823-968a-30735e7ed898",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
+                    "action": "ScrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6edf948-d475-4c49-b71d-42ad92e48ca7",
+                    "path": "<VirtualMouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "ScrollWheel",
                     "isComposite": false,
                     "isPartOfComposite": false

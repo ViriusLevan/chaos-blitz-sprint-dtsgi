@@ -7,6 +7,7 @@ using Cinemachine;
 [RequireComponent (typeof (Rigidbody))]
 [RequireComponent (typeof (CapsuleCollider))]
 public class PlayerController : MonoBehaviour {
+	[SerializeField]private PlayerInputHandler playerInputHandler;
 	
 	[SerializeField] private float speed = 10.0f;
 	[SerializeField] private float airVelocity = 8f;
@@ -15,37 +16,25 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private float jumpHeight = 2.0f;
 	[SerializeField] private float maxFallSpeed = 20.0f;
 	[SerializeField] private float rotateSpeed = 25f; //Speed the player rotate
-    [SerializeField] private GameObject cam;
 
     private Rigidbody rb;
 	private Vector3 moveDir;
 	private Vector3 pushDir;
-    private Vector2 moveInput, lookInput;
+    private Vector2 moveInput;
     private float distToGround;
 	private float pushForce;
 
-    private bool canMove = true; //If player is not hitted
+    private bool canMove = true; //If player is not hit
 	private bool isStunned = false;
 	private bool wasStunned = false; //If player was stunned before get stunned another time
 	private bool slide = false;
     private bool jumped;
-
-    public void OnMove(InputAction.CallbackContext context) => moveInput = context.ReadValue<Vector2>();
-    public void OnLook(InputAction.CallbackContext context) => lookInput = context.ReadValue<Vector2>();
     public void OnJump(InputAction.CallbackContext context) => jumped = context.action.triggered;
-	public void OnBuildToggle(PlayerConfiguration playerConfig)=>ToggleBuildingMode(playerConfig);
-
-	//TODO put these elsewhere
-	public void BuildShiftUpward()=> buildCameraFollow.transform.position += new Vector3(0,0.5f,0);
-	public void BuildShiftDownward()=> buildCameraFollow.transform.position += new Vector3(0,-0.5f,0);
-	
-
 
 	private void Start ()
 	{
 		// get the distance to ground
 		distToGround = GetComponent<Collider>().bounds.extents.y;
-		GetComponent<PlacementManager>().SetReferenceTransform(buildCameraFollow.transform);
 	}
 	
 	private bool IsGrounded ()
@@ -55,6 +44,7 @@ public class PlayerController : MonoBehaviour {
 	
 	private void Awake ()
 	{
+		playerInputHandler = GetComponent<PlayerInputHandler>();
 		rb = GetComponent<Rigidbody>();
 		rb.freezeRotation = true;
 		rb.useGravity = false;
@@ -63,8 +53,8 @@ public class PlayerController : MonoBehaviour {
 	
 	private void FixedUpdate ()
 	{
-		//TODO may want to put this elsewhere
-		if(building){
+		if(playerInputHandler.playerInstance.playerStatus 
+			!= PlayerInstance.PlayerStatus.Platforming){
 			return;
 		}
 		if (canMove)
@@ -153,20 +143,17 @@ public class PlayerController : MonoBehaviour {
 
 	private void Update()
 	{
+		if(playerInputHandler.playerInstance.playerStatus!=PlayerInstance.PlayerStatus.Platforming)
+			return;
+		moveInput = playerInputHandler.playerConfig.input
+                .actions["Move"].ReadValue<Vector2>();
 		float h = moveInput.x;
 		float v = moveInput.y;
 
-		Vector3 v2 = v * cam.transform.forward; //Vertical axis to which I want to move with respect to the camera
-		Vector3 h2 = h * cam.transform.right; //Horizontal axis to which I want to move with respect to the camera
+		Vector3 v2 = v * playerInputHandler.playerInstance.playerCamera.transform.forward; //Vertical axis to which I want to move with respect to the camera
+		Vector3 h2 = h * playerInputHandler.playerInstance.playerCamera.transform.right; //Horizontal axis to which I want to move with respect to the camera
 		moveDir = (v2 + h2).normalized; //Global position to which I want to move in magnitude 1
-
-		//TODO may want to put this elsewhere
-		if(building){
-			moveDir.y=0;
-			buildCameraFollow.transform.position += moveDir * 10f * Time.deltaTime;
-			return;
-		}
-
+		
 		RaycastHit hit;
 		if (Physics.Raycast(transform.position, -Vector3.up, out hit, distToGround + 0.1f))
 		{
@@ -227,31 +214,4 @@ public class PlayerController : MonoBehaviour {
 			canMove = true;
 		}
 	}
-
-    [SerializeField]private CinemachineFreeLook freeLook;
-	public void SetFreeLookCam(CinemachineFreeLook fl){freeLook=fl;}
-
-	[SerializeField]private GameObject buildCameraFollow;
-	public void SetBuildCameraFollow(GameObject followTarget){buildCameraFollow = followTarget;}
-	
-	private bool building = false;
-    public void ToggleBuildingMode(PlayerConfiguration playerConfig)
-    {
-		if(building){
-        	freeLook.Follow = transform;
-        	freeLook.LookAt = transform;
-			building=false;
-			playerConfig.Input.SwitchCurrentActionMap("Player");
-			freeLook.GetComponent<CinemachineInputHandler>().horizontal = playerConfig.Input.actions.FindAction("Look");
-		}else{
-        	freeLook.Follow = buildCameraFollow.transform;
-        	freeLook.LookAt = buildCameraFollow.transform;
-			building=true;
-			GetComponent<PlacementManager>().SetCameraTransform(freeLook.transform);
-			playerConfig.Input.SwitchCurrentActionMap("BuildMode");
-			freeLook.GetComponent<CinemachineInputHandler>().horizontal = playerConfig.Input.actions.FindAction("Look");
-		}
-    }
-
-	
 }
