@@ -1212,6 +1212,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2616644028935604187, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8102334106031341236, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
       propertyPath: selfCamera
       value: 
