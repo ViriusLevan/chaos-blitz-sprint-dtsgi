@@ -52,21 +52,24 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Input_onActionTriggered(CallbackContext obj)
     {
+
         if (obj.action.name == controls.Player.Jump.name)
         {
             controller?.OnJump(obj);
         }
+
         if(obj.performed){
             if(obj.action.name == controls.BuildMode.Place.name)
             {
                 pManager?.PlaceObject(obj);
             }
         }
+
         if (obj.action.name == controls.UI.Navigate.name)
         {
             virtualCursor?.OnNavigate(obj);
         }
-        if (obj.action.name == controls.UI.Click.name)
+        if (obj.action.name == controls.UI.Click.name )
         {
             virtualCursor?.OnClick(obj);
         }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: '[RoundType]TEST Lap'
   m_EditorClassIdentifier: 
   roundName: Lap Test
-  nOfLaps: 1
+  nOfLaps: 2
   pointsRequired: 100

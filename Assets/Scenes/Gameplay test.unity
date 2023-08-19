@@ -2013,7 +2013,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 240afb2f2b293404cbac69eb4df007a9, type: 2}
   currentGameStatus: 0
   lapCounter: 0
-  roundType: {fileID: 11400000, guid: 19a52dc0cf2cd1c4cad476333644fde3, type: 2}
+  roundType: {fileID: 11400000, guid: 0060a197f4c699c4f95b8ac9d98a9ddb, type: 2}
   roundFinished: 0
 --- !u!1 &1516004793
 GameObject:

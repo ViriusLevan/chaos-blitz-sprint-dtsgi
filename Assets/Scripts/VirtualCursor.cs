@@ -71,6 +71,7 @@ public class VirtualCursor : MonoBehaviour
         if(playerInputHandler.playerInstance.playerStatus!=PlayerInstance.PlayerStatus.Picking)
             return;
 
+
         if(playerInputHandler.playerConfig.input==null){
             Debug.LogError("ERROR : playerInput null reference");
             return;
@@ -82,8 +83,7 @@ public class VirtualCursor : MonoBehaviour
     private readonly float referenceHeight = 720;
 
     public void UpdateMotion(){
-        if(virtualMouse == null){
-            Debug.Log("ERROR : virtualMouse null reference");
+        if(virtualMouse == null || virtualMouse.enabled==false){
             return;
         }
 //Scaling cursor speed according to current screen width and height
@@ -115,6 +115,12 @@ public class VirtualCursor : MonoBehaviour
             previousMouseState = aButtonIsPressed;
         }
 
+        AnchorCursor(newPosition);
+    }
+
+    public void ResetMousePosition(){
+        Vector2 newPosition = new Vector2(0,0);
+        InputState.Change(virtualMouse.position, newPosition);
         AnchorCursor(newPosition);
     }
 

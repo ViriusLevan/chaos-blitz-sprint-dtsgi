@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]private RoundType roundType;
     [SerializeField]private bool roundFinished=false;
 
+    public int GetLapCounter(){return lapCounter;}
+
     private void Awake()
     {
         if(Instance != null)

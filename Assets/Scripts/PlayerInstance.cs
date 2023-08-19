@@ -50,6 +50,7 @@ public class PlayerInstance : MonoBehaviour
 				PickingMode();
 				break;
 			case PlayerStatus.FinishedPicking:
+				playerInputHandler.virtualCursor.ResetMousePosition();
 				playerInputHandler.virtualCursor.SetCursorTransparency(0);
 				break;
 			case PlayerStatus.Building:
