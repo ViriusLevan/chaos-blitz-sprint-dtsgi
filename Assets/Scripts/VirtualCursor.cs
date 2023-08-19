@@ -17,7 +17,7 @@ public class VirtualCursor : MonoBehaviour
     [SerializeField]
     private RectTransform canvasRectTransform;
     [SerializeField]
-    private float cursorSpeed = 10f;
+    private float cursorSpeed = 1000f;
 
     private bool previousMouseState;
     private Mouse virtualMouse;
@@ -78,13 +78,24 @@ public class VirtualCursor : MonoBehaviour
         UpdateMotion();
     }
 
+    private readonly float referenceWidth = 1280;
+    private readonly float referenceHeight = 720;
+
     public void UpdateMotion(){
         if(virtualMouse == null){
             Debug.Log("ERROR : virtualMouse null reference");
             return;
         }
+//Scaling cursor speed according to current screen width and height
+        float scaleX = Screen.width / referenceWidth;
+        float scaleY = Screen.height / referenceHeight;
+        //Debug.Log($"Scale X {scaleX} Y {scaleY} cspeed {cursorSpeed}");
+        float scaledSpeed = scaleX * scaleY * cursorSpeed;
+        //averaging value to reduce speed difference
+        scaledSpeed = (scaledSpeed + cursorSpeed) / 2;
+        //Debug.Log(scaledSpeed);
 
-        deltaValue *= cursorSpeed * Time.deltaTime;
+        deltaValue *= scaledSpeed * Time.deltaTime;
         deltaValue = new Vector2(Mathf.Clamp(deltaValue.x,-1f,1f)
             ,Mathf.Clamp(deltaValue.y,-1f,1f));
 

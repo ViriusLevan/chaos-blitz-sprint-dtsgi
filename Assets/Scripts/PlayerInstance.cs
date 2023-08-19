@@ -15,7 +15,6 @@ public class PlayerInstance : MonoBehaviour
     [SerializeField]public PlayerStatus playerStatus {get; private set;}
     [SerializeField]public int playerScore {get; private set;}
     [SerializeField]public GameObject playerCamera {get; private set;}
-    
 	private PlacementManager placementManager;
     private PlayerController playerController;
     public PlayerInputHandler playerInputHandler{get;private set;}

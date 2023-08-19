@@ -29,6 +29,8 @@ public class PlacableSelectionPanel : MonoBehaviour
         
         RectTransform selectionPanelRT = selectionPanel.gameObject.GetComponent<RectTransform>();
 
+        //TODO objects spawned = nOfPlayers (+0-+2)
+
         for (int i = 0; i < nOfPlayers; i++)
         {   
             //TODO Improve PlacableButton Position Randomization
@@ -37,9 +39,15 @@ public class PlacableSelectionPanel : MonoBehaviour
             //         - new Vector3(Random.Range(0, selectionPanelRT.rect.x)
             //             , Random.Range(0, selectionPanelRT.rect.y), 0);
 
+            //TODO adjust this
+            int index=0;
+            do{
+                index=Random.Range(0,placables.Length);
+            }while(placables[index].GetPlacableType()==Placable.PlacableType.Hazard);
+
             GameObject prefabInstance = Instantiate(placableButtonPrefab, selectionPanel);
             prefabInstance.GetComponent<PlacableButton>()?.SetPlacable(
-                placables[Random.Range(0,placables.Length)]
+                placables[index]
             );                        
                        
         }

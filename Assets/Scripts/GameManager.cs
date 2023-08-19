@@ -12,8 +12,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameStatus currentGameStatus;
     private Dictionary<int, PlayerInstance> playerInstances;
 
-    
     public static GameManager Instance { get; private set; }
+
+    [SerializeField]private int lapCounter;
+    [SerializeField]private RoundType roundType;
+    [SerializeField]private bool roundFinished=false;
+
     private void Awake()
     {
         if(Instance != null)
@@ -25,6 +29,8 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        lapCounter=0;
+        lapWinnerIndex=-1;
         playerInstances = new Dictionary<int, PlayerInstance>();
     }
 
@@ -82,46 +88,78 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDied(int pIndex)
     {
+        List<int> finishedPlayers = new List<int>();
+
+        Debug.Log($"Player {pIndex} has Died");
         playerInstances[pIndex].SetPlayerStatus(PlayerInstance.PlayerStatus.Dead);
         foreach(KeyValuePair<int, PlayerInstance> entry in playerInstances)
         {
+            if(entry.Value.playerStatus == PlayerInstance.PlayerStatus.FinishedPlatforming)
+                finishedPlayers.Add(entry.Key);
             if(entry.Value.playerStatus != PlayerInstance.PlayerStatus.Dead 
                 && entry.Value.playerStatus != PlayerInstance.PlayerStatus.FinishedPlatforming){
                 return;
             }
         }
         platformingPhaseFinished?.Invoke();
+        HandleScoring(finishedPlayers);
         PhaseSwitch(GameStatus.PickPhase);
     }
 
     private int lapWinnerIndex;
     public void PlayerFinished(int pIndex)
     {
+        List<int> finishedPlayers = new List<int>();
+
         Debug.Log($"Player {pIndex} has Finished");
         playerInstances[pIndex].SetPlayerStatus(PlayerInstance.PlayerStatus.FinishedPlatforming);
         if(lapWinnerIndex == -1) 
             lapWinnerIndex = pIndex;
-        else 
-            lapWinnerIndex = -1;
-
         foreach(KeyValuePair<int, PlayerInstance> entry in playerInstances)
         {
+            if(entry.Value.playerStatus == PlayerInstance.PlayerStatus.FinishedPlatforming)
+                finishedPlayers.Add(entry.Key);
             if(entry.Value.playerStatus != PlayerInstance.PlayerStatus.Dead 
                 && entry.Value.playerStatus != PlayerInstance.PlayerStatus.FinishedPlatforming){
                 return;
             }
         }
         platformingPhaseFinished?.Invoke();
+        HandleScoring(finishedPlayers);
         PhaseSwitch(GameStatus.PickPhase);
     }
 
+
+    private void HandleScoring(List<int> indexOfFinishedPlayers)
+    {
+        for (int i = 0; i < indexOfFinishedPlayers.Count; i++)
+        {
+            playerInstances[i].AddPlayerScore(5);
+            if(indexOfFinishedPlayers[i]==lapWinnerIndex)
+                playerInstances[i].AddPlayerScore(2);
+            if(playerInstances[i].playerScore>=roundType.GetPointRequirement()){
+                roundFinished=true;
+            }
+        }
+        lapCounter+=1;
+
+        if(lapCounter>=roundType.GetLapAmount()){
+            roundFinished=true;
+        }
+    }
+
+
     private void PhaseSwitch(GameStatus targetPhase)
     {
-        if(currentGameStatus==GameStatus.PlatformingPhase){
-            if(lapWinnerIndex!=-1){
-                playerInstances[lapWinnerIndex].AddPlayerScore(1);
-                lapWinnerIndex=-1;
+        if(roundFinished){
+            //Move score data to their respective PlayerConfiguration in P..C..Manager
+            List<PlayerConfiguration> playerConfigs 
+                    = PlayerConfigurationManager.Instance.GetPlayerConfigs();
+            foreach (var item in playerConfigs)
+            {
+                item.scoreTotal = playerInstances[item.playerIndex].playerScore;
             }
+            SceneLoader.Instance.LoadScene(SceneLoader.SceneIndex.Winning);
         }
 
         currentGameStatus = targetPhase;

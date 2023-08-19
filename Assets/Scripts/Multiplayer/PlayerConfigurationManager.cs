@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
@@ -14,6 +14,13 @@ public class PlayerConfigurationManager : MonoBehaviour
     private int nSpawnedPlayers = 0;
 
     public static PlayerConfigurationManager Instance { get; private set; }
+
+    public void Reset(SceneLoader.SceneIndex sceneIndex)
+    {
+        if(sceneIndex!= SceneLoader.SceneIndex.MainMenu)return;
+        playerConfigs = new List<PlayerConfiguration>();
+        nSpawnedPlayers = 0;
+    }
 
     private void Awake()
     {
@@ -29,6 +36,15 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
     }
 
+    private void Start() 
+    {
+        SceneLoader.SceneLoad+=Reset;
+    }
+    void OnDestroy()
+    {
+        SceneLoader.SceneLoad-=Reset;
+    }
+
     public void HandlePlayerJoin(PlayerInput pi)
     {
         Debug.Log("player joined " + pi.playerIndex);
@@ -41,7 +57,6 @@ public class PlayerConfigurationManager : MonoBehaviour
 
         playerJoinTexts[pi.playerIndex].SetActive(false);
     }
-
     
     public void SetNSpawnedPlayers(int newVal)
     {
@@ -80,7 +95,7 @@ public class PlayerConfigurationManager : MonoBehaviour
             && playerConfigs.Count <= maxPlayers 
             && playerConfigs.All(p => p.isReady == true))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneLoader.Instance.LoadScene(SceneLoader.SceneIndex.Gameplay);
         }
     }
 }
@@ -91,10 +106,12 @@ public class PlayerConfiguration
     {
         playerIndex = pi.playerIndex;
         input = pi;
+        scoreTotal=0;
     }
 
     public PlayerInput input { get; private set; }
     public int playerIndex { get; private set; }
     public bool isReady { get; set; }
     public Material playerMaterial {get; set;}
+    public int scoreTotal;
 }
