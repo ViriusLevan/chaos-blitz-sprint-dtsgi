@@ -6,62 +6,43 @@ using TMPro;
 
 public class PlacementManager : MonoBehaviour
 {
-    public Placable[] placables;
     private Vector3 pos;
     private RaycastHit hit;
     //can place, cannot place, Platform,Obstacle,Hazard
     [SerializeField] private Material[] materials;
-    
 
-    public bool canPlace = true;
+    public bool canPlace = false;
     private GameObject pendingObj;
     [SerializeField]private Transform referenceTransform;
-    [SerializeField]private PlayerInput playerInput;
     [SerializeField]private Transform cameraTransform;
     [SerializeField]private TextMeshProUGUI placableNameText;
 
+    [SerializeField]private PlayerInputHandler playerInputHandler;
+
+    public void SetReferenceTransform(Transform t)=> referenceTransform = t;
+    public void SetCameraTransform(Transform t)=> cameraTransform=t;
+
     void Start()
     {
+        playerInputHandler = GetComponent<PlayerInputHandler>();
     }    
 
-    private void OnEnable() {
-        playerInput.actions["Build"].performed+= SelectObject;
-        playerInput.actions["Place"].performed+= PlaceObject;
-        playerInput.actions["CycleSelectionForward"].performed+= CycleIndexForward;
-        playerInput.actions["CycleSelectionBackward"].performed+= CycleIndexBackward;
-        playerInput.actions["ShiftPlayer"].performed+= ShiftToPlayer;
-        PlacementChecker.invalidPlacement +=InvalidPlacement;
-        PlacementChecker.validPlacement +=ValidPlacement;
+    [SerializeField]private PointSlicer targetPlatform;
+    public void InvalidPlacement(){canPlace=false;}
+    public void ValidPlacement(PointSlicer pSlicer = null){
+        canPlace=true;
+        targetPlatform = pSlicer;
     }
-
-    private void OnDisable() {
-        // playerInput.actions["Build"].performed-= SelectObject;
-        // playerInput.actions["Place"].performed-= PlaceObject;
-        // playerInput.actions["CycleForward"].performed-= CycleIndexForward;
-        // playerInput.actions["CycleBackward"].performed-= CycleIndexBackward;
-        PlacementChecker.invalidPlacement -= InvalidPlacement;
-        PlacementChecker.validPlacement -= ValidPlacement;
-    }
-
-    public GameObject playerObject;
-    private void ShiftToPlayer(InputAction.CallbackContext context)
-    {
-        pendingObj = null;
-        playerInput.actions["Build"].performed-= SelectObject;
-        playerInput.actions["Place"].performed-= PlaceObject;
-        playerInput.actions["CycleSelectionForward"].performed-= CycleIndexForward;
-        playerInput.actions["CycleSelectionBackward"].performed-= CycleIndexBackward;
-        playerInput.actions["ShiftPlayer"].performed -= ShiftToPlayer;
-        CameraController.Instance.ShiftToPlayer();
-        playerObject.SetActive(true);
-    }
-
-    private void InvalidPlacement(){canPlace=false;}
-    private void ValidPlacement(){canPlace=true;}
 
     void Update()
     {
-        //if(_GameManager.Instance.GetPaused()){return;}
+
+        if(playerInputHandler.playerInstance.playerStatus != PlayerInstance.PlayerStatus.Building
+            && playerInputHandler.playerInstance.playerStatus != PlayerInstance.PlayerStatus.FinishedBuilding)
+            return;
+
+        CameraMovement();
+
         if(pendingObj!=null)
         {
             VerticalMotion();
@@ -74,6 +55,8 @@ public class PlacementManager : MonoBehaviour
     [SerializeField] private LayerMask platformLayer;
     private void FixedUpdate() 
     {
+        if(playerInputHandler.playerInstance.playerStatus 
+			!= PlayerInstance.PlayerStatus.Building)return;
         if(pendingObj!=null){
             if(currentType == Placable.PlacableType.Hazard){
                 RaycastHit hit;
@@ -97,8 +80,23 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
+	private Vector3 moveDir;
+    private Vector2 moveInput;
+    private void CameraMovement(){
+        moveInput = playerInputHandler.playerConfig.input.actions["Move"].ReadValue<Vector2>();
+		float h = moveInput.x;
+		float v = moveInput.y;
+		Vector3 v2 = v * playerInputHandler.playerInstance.playerCamera.transform.forward; //Vertical axis to which I want to move with respect to the camera
+		Vector3 h2 = h * playerInputHandler.playerInstance.playerCamera.transform.right; //Horizontal axis to which I want to move with respect to the camera
+		moveDir = (v2 + h2).normalized; //Global position to which I want to move in magnitude 1
+        moveDir.y=0;
+		playerInputHandler.playerInstance.buildCameraFollow.transform.position += moveDir * 10f * Time.deltaTime;
+    }
+
     private void VerticalMotion(){
-        float verticalInput = playerInput.actions["MoveVertically"].ReadValue<float>();
+        float verticalInput 
+            = playerInputHandler.playerConfig.input
+                .actions["VerticalMotion"].ReadValue<float>();
         if(verticalInput<0 & referenceTransform.position.y>0){
             referenceTransform.position -= new Vector3(0,3f*Time.deltaTime,0);
         }
@@ -108,7 +106,9 @@ public class PlacementManager : MonoBehaviour
     }
 
     private void RotatePlacable(){
-        float rotateInput = playerInput.actions["RotatePlacable"].ReadValue<float>();
+        float rotateInput 
+            = playerInputHandler.playerConfig.input
+                .actions["Rotate"].ReadValue<float>();
         if(rotateInput<0){
             pendingObj.transform.Rotate(0f, -50.0f*Time.deltaTime, 0.0f, Space.World);
         }
@@ -116,42 +116,19 @@ public class PlacementManager : MonoBehaviour
             pendingObj.transform.Rotate(0f, 50.0f*Time.deltaTime, 0.0f, Space.World);
         }
     }
-    
-    private int placableIndex;
-
-    private void CycleIndexForward(InputAction.CallbackContext context){
-        placableIndex+=1;
-        if(placableIndex>=placables.Length){
-            placableIndex=0;
-        }
-        if(pendingObj!=null){
-            Destroy(pendingObj);
-        }
-        InstantiateNewObject();
-    }
-    private void CycleIndexBackward(InputAction.CallbackContext context){
-        placableIndex-=1;
-        if(placableIndex<0){
-            placableIndex=placables.Length-1;
-        }
-        if(pendingObj!=null){
-            Destroy(pendingObj);
-        }
-        InstantiateNewObject();
-    }
 
     private Placable.PlacableType currentType;
-    private void SelectObject(InputAction.CallbackContext context)
+    [SerializeField]public Placable placable{get;private set;}
+    public void SetPlacable(Placable pl){placable=pl;}
+    public void InstantiateNewPlacable()
     {
-        if(pendingObj!=null){
-            Destroy(pendingObj);
+        if(placable==null){
+            Debug.Log("NULL PLACABLE");
+            return;
         }
-        InstantiateNewObject();
-    }
 
-    private void InstantiateNewObject()
-    {
-        pendingObj = Instantiate(placables[placableIndex].GetPrefab(), pos
+        targetPlatform=null;
+        pendingObj = Instantiate(placable.GetPrefab(), pos
                         , referenceTransform.rotation);
         MonoBehaviour[] mbs = pendingObj.GetComponentsInChildren<MonoBehaviour>();
         foreach (var item in mbs)
@@ -159,13 +136,12 @@ public class PlacementManager : MonoBehaviour
             item.enabled=false;
         }
         PlacementChecker pChecker = pendingObj.AddComponent<PlacementChecker>();
-        currentType = placables[placableIndex].GetPlacableType();
-        canPlace = (currentType==Placable.PlacableType.Hazard) ? false : true;
+        pChecker.SetPlacementManager(this);
+        
+        currentType = placable.GetPlacableType();
+        canPlace = currentType!=Placable.PlacableType.Hazard;
         pChecker.SetPlacableType(currentType);
-        placableNameText.text = placables[placableIndex].name;
-        if(placables[placableIndex].name.Contains("Log")){
-            pendingObj.transform.eulerAngles += new Vector3(0,0,90);
-        }
+        //placableNameText.text = placables[placableIndex].name;
     }
 
     public void PlaceObject(InputAction.CallbackContext context)
@@ -178,7 +154,7 @@ public class PlacementManager : MonoBehaviour
             case Placable.PlacableType.Platform:materialIndex=2;break;
             case Placable.PlacableType.Obstacle:materialIndex=3;break;
             case Placable.PlacableType.Hazard:materialIndex=4;break;
-            }
+        }
 
         MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
         foreach (var item in mrs)
@@ -201,7 +177,17 @@ public class PlacementManager : MonoBehaviour
             coll.isTrigger = false;
         }
 
+        //TODO set cross section material to something else
+        if(targetPlatform!=null){
+            targetPlatform.SetCrossSectionMaterial(materials[materialIndex]);
+            targetPlatform.SetSliceTarget(pendingObj);
+            targetPlatform.Slice();
+            targetPlatform=null;
+        }
+
         pendingObj = null;
+        GameManager.Instance.PlayerBuilt(playerInputHandler.playerConfig.playerIndex);
+        Debug.Log($"Player {playerInputHandler.playerConfig.playerIndex} finished placing");
     }
 
     private void UpdateMaterials()

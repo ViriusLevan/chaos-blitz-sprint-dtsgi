@@ -7,6 +7,7 @@ using Cinemachine;
 [RequireComponent (typeof (Rigidbody))]
 [RequireComponent (typeof (CapsuleCollider))]
 public class PlayerController : MonoBehaviour {
+	[SerializeField]private PlayerInputHandler playerInputHandler;
 	
 	[SerializeField] private float speed = 10.0f;
 	[SerializeField] private float airVelocity = 8f;
@@ -15,20 +16,21 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] private float jumpHeight = 2.0f;
 	[SerializeField] private float maxFallSpeed = 20.0f;
 	[SerializeField] private float rotateSpeed = 25f; //Speed the player rotate
-    [SerializeField] private GameObject cam;
 
-    private Rigidbody rb;
+  private Rigidbody rb;
 	private Vector3 moveDir;
 	private Vector3 pushDir;
-    private Vector2 moveInput, lookInput;
-    private float distToGround;
+  private Vector2 moveInput;
+  private float distToGround;
 	private float pushForce;
 
-    private bool canMove = true; //If player is not hitted
-	private bool isStuned = false;
-	private bool wasStuned = false; //If player was stunned before get stunned another time
+  private bool canMove = true; //If player is not hit
+	private bool isStunned = false;
+	private bool wasStunned = false; //If player was stunned before get stunned another time
 	private bool slide = false;
-    private bool jumped;
+  private bool jumped;
+
+  public void OnJump(InputAction.CallbackContext context) => jumped = context.action.triggered;
 
 	// Double Jump PowerUp
 	private int jumpsLeft = 0; // Number of jumps left, including double jumps
@@ -38,23 +40,6 @@ public class PlayerController : MonoBehaviour {
 	public bool hasExtraLife { get; private set; }
 	public bool hasShield { get; private set; }
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        lookInput = context.ReadValue<Vector2>();
-    }
-
-    public void OnJump(InputAction.CallbackContext context)
-    {
-		if (context.started)
-		{
-			jumped = true;
-		}
-    }
 
 	private void Start ()
 	{
@@ -72,6 +57,7 @@ public class PlayerController : MonoBehaviour {
 	
 	private void Awake ()
 	{
+		playerInputHandler = GetComponent<PlayerInputHandler>();
 		rb = GetComponent<Rigidbody>();
 		rb.freezeRotation = true;
 		rb.useGravity = false;
@@ -80,6 +66,10 @@ public class PlayerController : MonoBehaviour {
 	
 	private void FixedUpdate ()
 	{
+		if(playerInputHandler.playerInstance.playerStatus 
+			!= PlayerInstance.PlayerStatus.Platforming){
+			return;
+		}
 		if (canMove)
 		{
 			if (moveDir.x != 0 || moveDir.z != 0)
@@ -191,15 +181,23 @@ public class PlayerController : MonoBehaviour {
 		rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0));
 	}
 
+	//
+	//May want a separate class for buildmode camera controls
+	//
+
 	private void Update()
 	{
+		if(playerInputHandler.playerInstance.playerStatus!=PlayerInstance.PlayerStatus.Platforming)
+			return;
+		moveInput = playerInputHandler.playerConfig.input
+                .actions["Move"].ReadValue<Vector2>();
 		float h = moveInput.x;
 		float v = moveInput.y;
 
-		Vector3 v2 = v * cam.transform.forward; //Vertical axis to which I want to move with respect to the camera
-		Vector3 h2 = h * cam.transform.right; //Horizontal axis to which I want to move with respect to the camera
+		Vector3 v2 = v * playerInputHandler.playerInstance.playerCamera.transform.forward; //Vertical axis to which I want to move with respect to the camera
+		Vector3 h2 = h * playerInputHandler.playerInstance.playerCamera.transform.right; //Horizontal axis to which I want to move with respect to the camera
 		moveDir = (v2 + h2).normalized; //Global position to which I want to move in magnitude 1
-
+		
 		RaycastHit hit;
 		if (Physics.Raycast(transform.position, -Vector3.up, out hit, distToGround + 0.1f))
 		{
@@ -214,6 +212,11 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	private void OnCollisionEnter(Collision other) {
+		if(other.gameObject.CompareTag("Goal")){
+			GameManager.Instance.PlayerFinished(playerInputHandler.playerConfig.playerIndex);
+		}
+  }
 	public void ActivateDoubleJump()
 	{
 		doubleJumpAvailable = true;
@@ -258,9 +261,9 @@ public class PlayerController : MonoBehaviour {
 
 	private IEnumerator Decrease(float value, float duration)
 	{
-		if (isStuned)
-			wasStuned = true;
-		isStuned = true;
+		if (isStunned)
+			wasStunned = true;
+		isStunned = true;
 		canMove = false;
 
 		float delta = 0;
@@ -277,13 +280,13 @@ public class PlayerController : MonoBehaviour {
 			}
 			rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0)); //Add gravity
 		}
-		if (wasStuned)
+		if (wasStunned)
 		{
-			wasStuned = false;
+			wasStunned = false;
 		}
 		else
 		{
-			isStuned = false;
+			isStunned = false;
 			canMove = true;
 		}
 	}

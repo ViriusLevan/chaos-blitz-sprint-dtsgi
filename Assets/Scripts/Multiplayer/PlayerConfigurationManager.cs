@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
@@ -14,6 +14,13 @@ public class PlayerConfigurationManager : MonoBehaviour
     private int nSpawnedPlayers = 0;
 
     public static PlayerConfigurationManager Instance { get; private set; }
+
+    public void Reset(SceneLoader.SceneIndex sceneIndex)
+    {
+        if(sceneIndex!= SceneLoader.SceneIndex.MainMenu)return;
+        playerConfigs = new List<PlayerConfiguration>();
+        nSpawnedPlayers = 0;
+    }
 
     private void Awake()
     {
@@ -27,7 +34,15 @@ public class PlayerConfigurationManager : MonoBehaviour
             DontDestroyOnLoad(Instance);
             playerConfigs = new List<PlayerConfiguration>();
         }
-        
+    }
+
+    private void Start() 
+    {
+        SceneLoader.SceneLoad+=Reset;
+    }
+    void OnDestroy()
+    {
+        SceneLoader.SceneLoad-=Reset;
     }
 
     public void HandlePlayerJoin(PlayerInput pi)
@@ -35,7 +50,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         Debug.Log("player joined " + pi.playerIndex);
         pi.transform.SetParent(transform);
 
-        if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
+        if(!playerConfigs.Any(p => p.playerIndex == pi.playerIndex))
         {
             playerConfigs.Add(new PlayerConfiguration(pi));
         }
@@ -58,6 +73,11 @@ public class PlayerConfigurationManager : MonoBehaviour
         pim.splitScreen=true;
     }
 
+    public void DisableSplitScreen()
+    {
+        pim.splitScreen=false;
+    }
+
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
         return playerConfigs;
@@ -71,9 +91,11 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void ReadyPlayer(int index)
     {
         playerConfigs[index].isReady = true;
-        if (minPlayers <= playerConfigs.Count && playerConfigs.Count <= maxPlayers && playerConfigs.All(p => p.isReady == true))
+        if (minPlayers <= playerConfigs.Count 
+            && playerConfigs.Count <= maxPlayers 
+            && playerConfigs.All(p => p.isReady == true))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneLoader.Instance.LoadScene(SceneLoader.SceneIndex.Gameplay);
         }
     }
 }
@@ -82,12 +104,14 @@ public class PlayerConfiguration
 {
     public PlayerConfiguration(PlayerInput pi)
     {
-        PlayerIndex = pi.playerIndex;
-        Input = pi;
+        playerIndex = pi.playerIndex;
+        input = pi;
+        scoreTotal=0;
     }
 
-    public PlayerInput Input { get; private set; }
-    public int PlayerIndex { get; private set; }
+    public PlayerInput input { get; private set; }
+    public int playerIndex { get; private set; }
     public bool isReady { get; set; }
     public Material playerMaterial {get; set;}
+    public int scoreTotal;
 }
