@@ -8,6 +8,7 @@ using Cinemachine;
 [RequireComponent (typeof (CapsuleCollider))]
 public class PlayerController : MonoBehaviour {
 	
+	[SerializeField] private PlayerInputHandler playerInputHandler;
 	[SerializeField] private float speed = 10.0f;
 	[SerializeField] private float airVelocity = 8f;
 	[SerializeField] private float gravity = 10.0f;
@@ -20,36 +21,30 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
 	private Vector3 moveDir;
 	private Vector3 pushDir;
-    private Vector2 moveInput, lookInput;
+    private Vector2 moveInput;
     private float distToGround;
 	private float pushForce;
 
-    private bool canMove = true; //If player is not hitted
-	private bool isStuned = false;
-	private bool wasStuned = false; //If player was stunned before get stunned another time
+    private bool canMove = true; //If player is not hit
+	private bool isStunned = false;
+	private bool wasStunned = false; //If player was stunned before get stunned another time
 	private bool slide = false;
     private bool jumped;
+    public void OnJump(InputAction.CallbackContext context) => jumped = context.action.triggered;
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        lookInput = context.ReadValue<Vector2>();
-    }
-
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        jumped = context.action.triggered;
-    }
-
+	// Double Jump PowerUp
+	private int jumpsLeft = 0; // Number of jumps left, including double jumps
+	private int maxJumps = 2; // Maximum number of jumps allowed, including double jumps
+	private bool doubleJumpAvailable = false; // Whether the double jump power-up is available
+	public bool hasExtraLife { get; private set; }
+	public bool hasShield { get; private set; }
 
 	private void Start ()
 	{
 		// get the distance to ground
 		distToGround = GetComponent<Collider>().bounds.extents.y;
+		doubleJumpAvailable = false;
+    	jumpsLeft = maxJumps;
 	}
 	
 	private bool IsGrounded ()
@@ -86,6 +81,7 @@ public class PlayerController : MonoBehaviour {
 
 			if (IsGrounded())
 			{
+				jumpsLeft = maxJumps;
 			 	// Calculate how fast we should be moving
 				Vector3 targetVelocity = moveDir;
 				targetVelocity *= speed;
@@ -137,6 +133,32 @@ public class PlayerController : MonoBehaviour {
 				{
 					rb.AddForce(moveDir * 0.15f, ForceMode.VelocityChange);
 				}
+
+				// Double jump
+				if (jumpsLeft > 0 && jumped)
+				{
+					if (!IsGrounded())
+					{
+						if (doubleJumpAvailable)
+						{
+							rb.velocity = new Vector3(rb.velocity.x, CalculateJumpVerticalSpeed(), rb.velocity.z);
+							jumpsLeft -= 1;
+							doubleJumpAvailable = false; // Disable double jump after using it
+						}
+						else if (jumpsLeft > 1) // Check if regular jumps are still available
+						{
+							rb.velocity = new Vector3(rb.velocity.x, CalculateJumpVerticalSpeed(), rb.velocity.z);
+							jumpsLeft -= 1;
+						}
+						jumped = false;
+					}
+					else // Player is on the ground
+					{
+						jumpsLeft = maxJumps;
+						jumped = false;
+						doubleJumpAvailable = true; // Reset double jump availability on landing
+					}
+				}
 			}
 		}
 		else
@@ -170,10 +192,49 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void ActivateDoubleJump()
+	{
+		doubleJumpAvailable = true;
+	}
+
+	public void ActivateExtraLife()
+	{
+		hasExtraLife = true;
+	}
+
+	public void DectivateExtraLife()
+	{
+		hasExtraLife = false;
+	}
+
+	public void ActivateShield()
+	{
+		hasShield = true;
+		this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+	}
+
+	public void DeactivateShield()
+	{
+		hasShield = false;
+		this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+	}
+
+	private void OnCollisionEnter(Collision other) {
+		if(other.gameObject.CompareTag("Goal")){
+			GameManager.Instance.PlayerFinished(playerInputHandler.playerConfig.playerIndex);
+		}
+	}
+
 	float CalculateJumpVerticalSpeed () {
 		// From the jump height and gravity we deduce the upwards speed 
 		// for the character to reach at the apex.
 		return Mathf.Sqrt(2 * jumpHeight * gravity);
+	}
+
+	public void PlayerDied()
+	{
+		//TODO - add more stuff, e.g. play animation or sfx
+		this.gameObject.SetActive(false);
 	}
 
 	public void HitPlayer(Vector3 velocityF, float time)
@@ -187,9 +248,9 @@ public class PlayerController : MonoBehaviour {
 
 	private IEnumerator Decrease(float value, float duration)
 	{
-		if (isStuned)
-			wasStuned = true;
-		isStuned = true;
+		if (isStunned)
+			wasStunned = true;
+		isStunned = true;
 		canMove = false;
 
 		float delta = 0;
@@ -206,19 +267,15 @@ public class PlayerController : MonoBehaviour {
 			}
 			rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0)); //Add gravity
 		}
-		if (wasStuned)
+		if (wasStunned)
 		{
-			wasStuned = false;
+			wasStunned = false;
 		}
 		else
 		{
-			isStuned = false;
+			isStunned = false;
 			canMove = true;
 		}
-	}
 
-    public void BuildingMode()
-    {
-        CameraController.Instance.EnableBuilding();
-    }
+	}
 }
