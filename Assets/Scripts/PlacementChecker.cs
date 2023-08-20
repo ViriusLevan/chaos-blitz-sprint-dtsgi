@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlacementChecker : MonoBehaviour
 {
     private Placable.PlacableType placableType;
-    [SerializeField] private PlacementManager manager;
-    public void SetPlacementManager(PlacementManager pm) => manager = pm;
+    public delegate void OnPlacementCheckerEvent();
+    public static event OnPlacementCheckerEvent invalidPlacement,validPlacement;
 
     public void SetPlacableType(Placable.PlacableType pType){
         placableType = pType;
@@ -15,16 +15,14 @@ public class PlacementChecker : MonoBehaviour
     private void OnTriggerEnter(Collider other) 
     {
         if(placableType!=Placable.PlacableType.Hazard){
-            manager.InvalidPlacement();
+            invalidPlacement.Invoke();
         }else{
             if(other.gameObject.layer == LayerMask.NameToLayer("Platform")){
-                PointSlicer pSlicer = other.gameObject.GetComponentInParent<PointSlicer>() 
-                    ?? other.gameObject.GetComponentInChildren<PointSlicer>();
-                manager.ValidPlacement(pSlicer);
+                validPlacement.Invoke();
             }
             else
             {
-                manager.InvalidPlacement();
+                invalidPlacement.Invoke();
             }
         }
     }
@@ -32,16 +30,14 @@ public class PlacementChecker : MonoBehaviour
     private void OnTriggerStay(Collider other) 
     {
         if(placableType!=Placable.PlacableType.Hazard){
-            manager.InvalidPlacement();
+            invalidPlacement.Invoke();
         }else{
             if(other.gameObject.layer == LayerMask.NameToLayer("Platform")){
-                PointSlicer pSlicer = other.gameObject.GetComponentInParent<PointSlicer>() 
-                    ?? other.gameObject.GetComponentInChildren<PointSlicer>();
-                manager.ValidPlacement(pSlicer);
+                validPlacement.Invoke();
             }
             else
             {
-                manager.InvalidPlacement();
+                invalidPlacement.Invoke();
             }
         }
     }
@@ -49,11 +45,11 @@ public class PlacementChecker : MonoBehaviour
     private void OnTriggerExit(Collider other) 
     {
         if(placableType!=Placable.PlacableType.Hazard){
-            manager.ValidPlacement();
+            validPlacement.Invoke();
         }
         else
         {
-            manager.InvalidPlacement();
+            invalidPlacement.Invoke();
         }
     }
 }

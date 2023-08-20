@@ -12,8 +12,7 @@ public class CameraController : MonoBehaviour
     private const float MAX_FOLLOW_Z_OFFSET = -4F;
 
 
-    //[SerializeField]private CinemachineVirtualCamera virtCam;
-    [SerializeField]private CinemachineFreeLook freeLook;
+    [SerializeField]private CinemachineVirtualCamera virtCam;
     [SerializeField]private float moveSpeed = 10f;
     [SerializeField]private float rotationSpeed = 100f;
     [SerializeField]private float zoomAmount =1f;
@@ -32,21 +31,21 @@ public class CameraController : MonoBehaviour
     private bool buildingMode=true;
     [SerializeField]private GameObject cameraController, playerObject;
 
-    public void DisableBuilding(){
+    public void ShiftToPlayer(){
         buildingMode=false;
-        freeLook.Follow = cameraController.transform;
+        virtCam.Follow = cameraController.transform;
     }
 
     public void EnableBuilding(){
         buildingMode=true;
-        freeLook.Follow = playerObject.transform;
+        virtCam.Follow = playerObject.transform;
     }
     
     private void Start() 
     {
         playerInput = GetComponent<PlayerInput>();
-        //cineTransposer = virtCam.GetCinemachineComponent<CinemachineTransposer>();
-        //targetFollowOffset = cineTransposer.m_FollowOffset;
+        cineTransposer = virtCam.GetCinemachineComponent<CinemachineTransposer>();
+        targetFollowOffset = cineTransposer.m_FollowOffset;
     }
 
     private void Update() 

@@ -39,8 +39,6 @@ public class SetCameraOnSpawn : MonoBehaviour
                                         | (1 << LayerMask.NameToLayer("P3Cam")));
                 break;
         }
-        GetComponentInParent<PlayerInstance>().SetBuildCameraFollow(buildCameraFollowTarget);
         PlayerConfigurationManager.Instance.SetNSpawnedPlayers(currentNPlayers+1);
     }
-    [SerializeField]private GameObject buildCameraFollowTarget;
 }

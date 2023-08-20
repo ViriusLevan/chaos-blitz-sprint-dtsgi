@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
 
@@ -19,19 +18,13 @@ public class LevelInitializer : MonoBehaviour
         {
             playerCanvas[i].SetActive(true);
             GameObject player = Instantiate(playerPrefab, PlayerSpawns[i].position, PlayerSpawns[i].rotation);
-            playerConfigs[i].input.camera = player.GetComponentInChildren<Camera>();
-            playerConfigs[i].input.uiInputModule = inputModule;
-            Debug.Log(playerConfigs[i].input.uiInputModule);
-            
-            PlayerInstance instance = player.GetComponent<PlayerInstance>();
-            Debug.Log("Initializer instance"+(instance == null));
-            Debug.Log("Initializer ins pih"+(instance.playerInputHandler == null));
-            instance.playerInputHandler.InitializePlayer(playerConfigs[i], instance);
-
-            GameManager.Instance.AddPlayerInstance(instance);
+            playerConfigs[i].Input.camera = player.GetComponentInChildren<Camera>();
+            playerConfigs[i].Input.uiInputModule = inputModule;
+            Debug.Log(playerConfigs[i].Input.uiInputModule);
+            player.GetComponentInChildren<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
+            player.GetComponentInChildren<CinemachineInputHandler>().horizontal = playerConfigs[i].Input.actions.FindAction("Look");
+            Debug.Log(player.GetComponentInChildren<CinemachineInputHandler>().horizontal);
         }
         PlayerConfigurationManager.Instance.EnableSplitScreen();
     }
-
-    
 }
