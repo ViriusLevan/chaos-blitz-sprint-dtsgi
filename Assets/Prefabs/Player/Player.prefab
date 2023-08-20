@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 6477370333489673284}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,8 +36,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7463963998146420815}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -156,9 +155,6 @@ MonoBehaviour:
   jumpHeight: 2
   maxFallSpeed: 20
   rotateSpeed: 25
-  cam: {fileID: 0}
-  maxJumps: 2
-  hasExtraLife: 0
 --- !u!114 &6576660683052921608
 MonoBehaviour:
   m_ObjectHideFlags: 0
