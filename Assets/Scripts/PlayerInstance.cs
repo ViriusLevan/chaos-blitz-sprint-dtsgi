@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInstance : MonoBehaviour
@@ -20,6 +21,9 @@ public class PlayerInstance : MonoBehaviour
     public PlayerInputHandler playerInputHandler{get;private set;}
 	public CinemachineInputHandler cinemachineInputHanlder{get; private set;}
 
+	[SerializeField] RectTransform playerPanel;
+	[SerializeField] TextMeshProUGUI playerText, scoreText;
+
 	private void Awake() {
 		cinemachineInputHanlder = GetComponentInChildren<CinemachineInputHandler>();
 		placementManager = GetComponentInChildren<PlacementManager>();
@@ -31,6 +35,18 @@ public class PlayerInstance : MonoBehaviour
     void Start()
     {
 		placementManager?.SetReferenceTransform(buildCameraFollow.transform);
+		int playerIndex = playerInputHandler.playerConfig.playerIndex;
+		playerText.text = "Player "+playerIndex;
+		
+		if(playerIndex==1 || playerIndex==3)
+		{
+			Debug.Log("PlayerIndex="+playerIndex);
+			playerPanel.anchorMin = new Vector2(1, 1);
+			playerPanel.anchorMax = new Vector2(1, 1);
+			Vector2 shiftDirection 
+				= new Vector2(0.5f - playerPanel.anchorMax.x, 0.5f - playerPanel.anchorMax.y);
+        	playerPanel.anchoredPosition = shiftDirection * playerPanel.rect.size;    
+		}
     }
 
 	private void OnDestroy() 
@@ -65,7 +81,10 @@ public class PlayerInstance : MonoBehaviour
 		}
 	}
     public void SetPlayerScore(int ps){playerScore=ps;}
-    public void AddPlayerScore(int addition) => playerScore+=addition;
+    public void AddPlayerScore(int addition) {
+		playerScore+=addition;
+		scoreText.text = "Score "+playerScore;
+	}
 	
 	public void SetPlacable(Placable pl) => placementManager.SetPlacable(pl);
 

@@ -16,7 +16,7 @@ public class LevelInitializer : MonoBehaviour
         var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
         for (int i = 0; i < playerConfigs.Length; i++)
         {
-            playerCanvas[i].SetActive(true);
+            //playerCanvas[i].SetActive(true);
             GameObject player = Instantiate(playerPrefab
                 , GameManager.Instance.GetPlayerSpawnPoints()[i].position
                 , GameManager.Instance.GetPlayerSpawnPoints()[i].rotation);
