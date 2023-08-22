@@ -77,6 +77,11 @@ public class PlayerInstance : MonoBehaviour
 
     public void BuildingMode()
     {
+		playerController.EnableMeshRenderer();
+		playerController.transform.position 
+			= GameManager.Instance.GetPlayerSpawnPoints()[
+				playerInputHandler.playerConfig.playerIndex
+				].position;
 		freeLookCamera.Follow = buildCameraFollow.transform;
 		freeLookCamera.LookAt = buildCameraFollow.transform;
 		placementManager.SetCameraTransform(freeLookCamera.transform);

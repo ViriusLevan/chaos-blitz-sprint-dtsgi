@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]private int lapCounter;
     [SerializeField]private RoundType roundType;
     [SerializeField]private bool roundFinished=false;
-
+    [SerializeField]private Transform[] playerSpawnPoints;
+    public Transform[] GetPlayerSpawnPoints(){return playerSpawnPoints;}
     public int GetLapCounter(){return lapCounter;}
 
     private void Awake()

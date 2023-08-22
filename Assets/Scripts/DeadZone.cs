@@ -6,11 +6,14 @@ public class DeadZone : MonoBehaviour
 {
     public Transform checkPoint;
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnCollisionEnter(Collision other) 
     {
-        if (other.CompareTag("Player"))
+            Debug.Log("OnColEnter ="+other.gameObject.tag +" || "+ other.gameObject.name);
+
+        if (other.gameObject.CompareTag("Player"))
         {
-            PlayerController playerController = other.GetComponent<PlayerController>();
+            Debug.Log("AAaaa");
+            PlayerController playerController = other.gameObject.GetComponent<PlayerController>();
             if (playerController.hasExtraLife == true)
             {
                 playerController.transform.position = checkPoint.position;
@@ -18,7 +21,8 @@ public class DeadZone : MonoBehaviour
             }
             else
             {
-                playerController.PlayerDied();
+                playerController.DisableMeshRenderer();
+                GameManager.Instance.PlayerDied(playerController.GetPlayerInputHandler().playerConfig.playerIndex);
             }
         }    
     }

@@ -8,7 +8,6 @@ using UnityEngine.InputSystem.UI;
 public class LevelInitializer : MonoBehaviour
 {
     [SerializeField] private InputSystemUIInputModule inputModule;
-    [SerializeField] private Transform[] PlayerSpawns;
     [SerializeField] private GameObject[] playerCanvas;
     [SerializeField] private GameObject playerPrefab;
 
@@ -18,7 +17,9 @@ public class LevelInitializer : MonoBehaviour
         for (int i = 0; i < playerConfigs.Length; i++)
         {
             playerCanvas[i].SetActive(true);
-            GameObject player = Instantiate(playerPrefab, PlayerSpawns[i].position, PlayerSpawns[i].rotation);
+            GameObject player = Instantiate(playerPrefab
+                , GameManager.Instance.GetPlayerSpawnPoints()[i].position
+                , GameManager.Instance.GetPlayerSpawnPoints()[i].rotation);
             playerConfigs[i].input.camera = player.GetComponentInChildren<Camera>();
             playerConfigs[i].input.uiInputModule = inputModule;
             Debug.Log(playerConfigs[i].input.uiInputModule);

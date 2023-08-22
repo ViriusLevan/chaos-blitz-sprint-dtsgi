@@ -22,7 +22,7 @@ public class HurtPlayer : MonoBehaviour
             }
             else
             {
-                playerController.PlayerDied();
+                playerController.DisableMeshRenderer();
             }
         }    
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using Unity.VisualScripting;
 
 [RequireComponent (typeof (Rigidbody))]
 [RequireComponent (typeof (CapsuleCollider))]
@@ -229,6 +230,11 @@ public class PlayerController : MonoBehaviour {
 		this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
 	}
 
+	public PlayerInputHandler GetPlayerInputHandler()
+	{
+		return playerInputHandler;
+	}
+
 	private void OnCollisionEnter(Collision other) {
 		if(other.gameObject.CompareTag("Goal")){
 			GameManager.Instance.PlayerFinished(playerInputHandler.playerConfig.playerIndex);
@@ -241,10 +247,16 @@ public class PlayerController : MonoBehaviour {
 		return Mathf.Sqrt(2 * jumpHeight * gravity);
 	}
 
-	public void PlayerDied()
+	public void EnableMeshRenderer()
+	{
+		GetComponent<MeshRenderer>().enabled=true;
+	}
+
+	public void DisableMeshRenderer()
 	{
 		//TODO - add more stuff, e.g. play animation or sfx
-		this.gameObject.SetActive(false);
+		//this.gameObject.SetActive(false);
+		GetComponent<MeshRenderer>().enabled=false;
 	}
 
 	public void HitPlayer(Vector3 velocityF, float time)
@@ -286,8 +298,5 @@ public class PlayerController : MonoBehaviour {
 			isStunned = false;
 			canMove = true;
 		}
-
-		
-		
 	}
 }
