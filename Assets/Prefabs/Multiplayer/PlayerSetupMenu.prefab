@@ -1191,7 +1191,7 @@ MonoBehaviour:
         m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 873aa386a0819d04a92db33bca0ac4cd, type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: 1638f034be2337f4f944c736e72ecd99, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

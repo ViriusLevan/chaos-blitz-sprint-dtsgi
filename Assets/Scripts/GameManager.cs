@@ -17,7 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]private int lapCounter;
     [SerializeField]private RoundType roundType;
     [SerializeField]private bool roundFinished=false;
+    //TODO put these into another class?
     [SerializeField]private Transform[] playerSpawnPoints;
+    [SerializeField]private Sprite[] cursors;
+    public enum CursorColors{Red=0,Blue=1, Yellow=2, Green=3};
+    public Sprite[] GetCursors(){return cursors;}
     public Transform[] GetPlayerSpawnPoints(){return playerSpawnPoints;}
     public int GetLapCounter(){return lapCounter;}
 

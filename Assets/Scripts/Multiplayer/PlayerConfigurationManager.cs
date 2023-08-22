@@ -83,9 +83,10 @@ public class PlayerConfigurationManager : MonoBehaviour
         return playerConfigs;
     }
 
-    public void SetPlayerColor(int index, Material color)
+    public void SetPlayerColor(int index, Material color, int cIndex)
     {
         playerConfigs[index].playerMaterial = color;
+        playerConfigs[index].cursorIndex = cIndex;
     }
 
     public void ReadyPlayer(int index)
@@ -113,5 +114,6 @@ public class PlayerConfiguration
     public int playerIndex { get; private set; }
     public bool isReady { get; set; }
     public Material playerMaterial {get; set;}
+    public int cursorIndex;
     public int scoreTotal;
 }

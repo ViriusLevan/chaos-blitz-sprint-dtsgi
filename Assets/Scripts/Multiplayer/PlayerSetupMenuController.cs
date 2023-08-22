@@ -34,7 +34,20 @@ public class PlayerSetupMenuController : MonoBehaviour
     {
         if (!inputEnabled) { return; }
 
-        PlayerConfigurationManager.Instance.SetPlayerColor(playerIndex, mat);
+        //TODO maybe use an SO to store material along with cursor index
+        int cursorIndex=0;
+        if(mat.name.Contains("Red", System.StringComparison.OrdinalIgnoreCase)){
+            cursorIndex=0;
+        } else if(mat.name.Contains("Blue", System.StringComparison.OrdinalIgnoreCase)){
+            cursorIndex=1;
+        } else if(mat.name.Contains("Yellow", System.StringComparison.OrdinalIgnoreCase)){
+            cursorIndex=2;
+        }else if(mat.name.Contains("Green", System.StringComparison.OrdinalIgnoreCase)){
+            cursorIndex=3;
+        }
+
+
+        PlayerConfigurationManager.Instance.SetPlayerColor(playerIndex, mat, cursorIndex);
         readyPanel.SetActive(true);
         readyButton.interactable = true;
         menuPanel.SetActive(false);

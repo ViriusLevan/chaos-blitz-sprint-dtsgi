@@ -52,8 +52,13 @@ public class VirtualCursor : MonoBehaviour
         if(cursorTransform !=null){
             Vector2 position = cursorTransform.anchoredPosition;
             InputState.Change(virtualMouse.position,position);
+            cursorTransform.GetComponent<Image>().sprite 
+                = GameManager.Instance.GetCursors()[
+                       playerInputHandler.playerConfig.cursorIndex
+                    ];
         }
     }
+
 
     void OnDisable()
     {

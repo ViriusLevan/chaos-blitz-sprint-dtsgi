@@ -2218,6 +2218,11 @@ MonoBehaviour:
   - {fileID: 1217536332}
   - {fileID: 294762134}
   - {fileID: 1166718905}
+  cursors:
+  - {fileID: 21300000, guid: d486effca154cdc46b50f1e6ee0c6c62, type: 3}
+  - {fileID: 21300000, guid: 4f8090b3da5ae5d46988ef8d48845e0c, type: 3}
+  - {fileID: 21300000, guid: 0e2afbf5f79865e4e9463480d8bced3c, type: 3}
+  - {fileID: 21300000, guid: 1afcc8bb7a67e23469b068978a6e87b0, type: 3}
 --- !u!1 &1516004793
 GameObject:
   m_ObjectHideFlags: 0
