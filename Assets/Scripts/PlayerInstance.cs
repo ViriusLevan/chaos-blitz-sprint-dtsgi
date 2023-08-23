@@ -22,7 +22,7 @@ public class PlayerInstance : MonoBehaviour
 	public CinemachineInputHandler cinemachineInputHanlder{get; private set;}
 
 	[SerializeField] RectTransform playerPanel;
-	[SerializeField] TextMeshProUGUI playerText, scoreText;
+	[SerializeField] TextMeshProUGUI playerText, scoreText, controlHelpText;
 
 	private void Awake() {
 		cinemachineInputHanlder = GetComponentInChildren<CinemachineInputHandler>();
@@ -88,10 +88,37 @@ public class PlayerInstance : MonoBehaviour
 	
 	public void SetPlacable(Placable pl) => placementManager.SetPlacable(pl);
 
+//TODO maybe put this another class
+	public void SetControlHelpText(PlayerStatus status)
+	{
+		controlHelpText.text = "";
+		switch (status){
+			case PlayerStatus.Picking:
+				break;
+			case PlayerStatus.Building:
+				controlHelpText.text+= " [Rotate] "+
+					playerInputHandler.GetActionControlName
+						(playerInputHandler.controls.BuildMode.Rotate);
+				controlHelpText.text+= " [VerticalMotion] "+
+					playerInputHandler.GetActionControlName
+						(playerInputHandler.controls.BuildMode.VerticalMotion);
+				controlHelpText.text+= " [Place] "+
+					playerInputHandler.GetActionControlName
+						(playerInputHandler.controls.BuildMode.Place);
+				break;
+			case PlayerStatus.Platforming:
+				controlHelpText.text+= " [Jump] "+
+					playerInputHandler.GetActionControlName
+						(playerInputHandler.controls.Player.Jump);
+				break;
+		}
+	}
+
 	public void PickingMode()
 	{
 		playerInputHandler.virtualCursor.SetCursorTransparency(255);
 	    playerInputHandler.playerConfig.input.SwitchCurrentActionMap("UI"); 
+		SetControlHelpText(PlayerStatus.Picking);
 	}
 
     public void BuildingMode()
@@ -107,6 +134,7 @@ public class PlayerInstance : MonoBehaviour
 		placementManager.SetCameraTransform(freeLookCamera.transform);
 		placementManager.InstantiateNewPlacable();
 		playerInputHandler.playerConfig.input.SwitchCurrentActionMap("BuildMode");
+		SetControlHelpText(PlayerStatus.Building);
 		cinemachineInputHanlder.horizontal 
 			= playerInputHandler.playerConfig.input.actions.FindAction("Look");
     }
@@ -115,6 +143,7 @@ public class PlayerInstance : MonoBehaviour
 		freeLookCamera.Follow = playerController.gameObject.transform;
 		freeLookCamera.LookAt = playerController.gameObject.transform;
 		playerInputHandler.playerConfig.input.SwitchCurrentActionMap("Player");
+		SetControlHelpText(PlayerStatus.Platforming);
 		cinemachineInputHanlder.horizontal 
 			= playerInputHandler.playerConfig.input.actions.FindAction("Look");
 	}

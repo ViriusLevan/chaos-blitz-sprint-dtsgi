@@ -921,7 +921,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Place"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -932,7 +932,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Place"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1086,7 +1086,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1094,10 +1094,10 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": ""positive"",
                     ""id"": ""92bdf413-62dc-4af3-861a-7584ff0af833"",
-                    ""path"": ""<Keyboard>/g"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1119,7 +1119,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1130,7 +1130,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1149,10 +1149,10 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": ""negative"",
                     ""id"": ""6682ba76-6c2c-42f1-8b49-136a94b0b609"",
-                    ""path"": ""<Keyboard>/h"",
+                    ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""VerticalMotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1163,7 +1163,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""VerticalMotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1185,7 +1185,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""VerticalMotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -1196,7 +1196,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""VerticalMotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true

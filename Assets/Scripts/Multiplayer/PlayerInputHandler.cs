@@ -12,7 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
     public PlayerConfiguration playerConfig{get;private set;}
     private PlayerController controller;
     private PlacementManager pManager;
-    private PlayerInputActionsAsset controls;
+    public PlayerInputActionsAsset controls{get;private set;}
     public VirtualCursor virtualCursor{get; private set;}
     [SerializeField]public PlayerInstance playerInstance{get;private set;}
 
@@ -75,5 +75,26 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-
+    public string GetActionControlName(InputAction inputAction)
+    {
+		var action = playerConfig.input.actions.FindAction(inputAction.name);
+        //Debug.Log(inputAction.name+" => "+playerConfig.input.currentControlScheme);    
+		int bindingIndex = inputAction.GetBindingIndex(group: playerConfig.input.currentControlScheme);
+        //var bindingIndex = inputAction.bindings.IndexOf(x => x.name.ToString() == playerConfig.input.currentControlScheme);  
+        // foreach (var item in inputAction.bindings)
+        // {
+        //     Debug.Log(item.id+"-"+item.action+"-"+item.name);
+        // }
+        // for (int i = 0; i < inputAction.bindings.Count; i++)
+        // {
+        //     Debug.Log(i+"||"+inputAction.bindings[i].name);
+        // }
+        //Debug.Log(bindingIndex+" ic "+inputAction.bindings[bindingIndex].isPartOfComposite.ToString());         
+		var displayString = inputAction.GetBindingDisplayString(bindingIndex, out string deviceLayoutName, out string controlPath);
+        if(inputAction.bindings[bindingIndex].isPartOfComposite && inputAction.bindings.Count>bindingIndex+1)
+        {
+            displayString += " "+inputAction.GetBindingDisplayString(bindingIndex+1);
+        }
+        return displayString;
+    }
 }
