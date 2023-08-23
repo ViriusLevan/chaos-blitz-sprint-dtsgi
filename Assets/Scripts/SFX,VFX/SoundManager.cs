@@ -39,6 +39,7 @@ public class SoundManager : MonoBehaviour
         if(Instance != null)
         {
             Debug.Log("[Singleton] Trying to instantiate a seccond instance of a singleton class.");
+            Destroy(this.gameObject);
         }
         else
         {

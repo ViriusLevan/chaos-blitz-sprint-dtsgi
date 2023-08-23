@@ -30,6 +30,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         if(Instance != null)
         {
             Debug.Log("[Singleton] Trying to instantiate a seccond instance of a singleton class.");
+            Destroy(this.gameObject);
         }
         else
         {
@@ -41,11 +42,11 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     private void Start() 
     {
-        SceneLoader.SceneLoad+=Reset;
+        SceneLoader.sceneLoaded+=Reset;
     }
     void OnDestroy()
     {
-        SceneLoader.SceneLoad-=Reset;
+        SceneLoader.sceneLoaded-=Reset;
     }
 
     public void HandlePlayerJoin(PlayerInput pi)
@@ -149,6 +150,7 @@ public class PlayerConfigurationManager : MonoBehaviour
             Debug.Log("Not all players are ready");
         }
     }
+
 }
 
 public class PlayerConfiguration

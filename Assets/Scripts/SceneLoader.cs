@@ -21,11 +21,11 @@ public class SceneLoader : MonoBehaviour
     }
 
     public delegate void OnSceneLoad(SceneIndex sceneIndex);
-    public static event OnSceneLoad SceneLoad;
+    public static event OnSceneLoad sceneLoaded;
 
     public void LoadScene(SceneIndex sceneIndex)
     {
-        SceneLoad?.Invoke(sceneIndex);
+        sceneLoaded?.Invoke(sceneIndex);
         SceneManager.LoadScene((int)sceneIndex);
     }
 }

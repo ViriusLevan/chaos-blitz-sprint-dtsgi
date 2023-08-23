@@ -16,7 +16,7 @@ public class PlacementChecker : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
-        Debug.Log("enter "+other.gameObject.name);
+        //Debug.Log("enter "+other.gameObject.name);
         if(other.gameObject.CompareTag("Arena")){
             withinBounds=true;
             if(placableType!=Placable.PlacableType.Hazard){
@@ -39,7 +39,7 @@ public class PlacementChecker : MonoBehaviour
 
     private void OnTriggerStay(Collider other) 
     {
-        Debug.Log("stay "+other.gameObject.name);
+        //Debug.Log("stay "+other.gameObject.name);
         if(other.gameObject.CompareTag("Arena")){
             withinBounds=true;
         }else if(placableType!=Placable.PlacableType.Hazard){
@@ -61,7 +61,7 @@ public class PlacementChecker : MonoBehaviour
 
     private void OnTriggerExit(Collider other) 
     {
-        Debug.Log("exit "+other.gameObject.name);
+        //Debug.Log("exit "+other.gameObject.name);
         if(other.gameObject.CompareTag("Arena")){
             withinBounds=false;
             manager.InvalidPlacement();
