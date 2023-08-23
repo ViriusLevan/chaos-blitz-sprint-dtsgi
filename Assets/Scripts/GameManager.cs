@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     //TODO put these into another class?
     [SerializeField]private Transform[] playerSpawnPoints;
     [SerializeField]private Sprite[] cursors;
+    public Transform buildCamSetPoint;
+
     public enum CursorColors{Red=0,Blue=1, Yellow=2, Green=3};
     public Sprite[] GetCursors(){return cursors;}
     public Transform[] GetPlayerSpawnPoints(){return playerSpawnPoints;}
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDied(int pIndex)
     {
+		SoundManager.Instance?.PlaySound(SoundEnum.PlayerDeath);
         List<int> finishedPlayers = new List<int>();
 
         Debug.Log($"Player {pIndex} has Died");
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
     private int lapWinnerIndex;
     public void PlayerFinished(int pIndex)
     {
+		SoundManager.Instance?.PlaySound(SoundEnum.PlayerFinish);
         List<int> finishedPlayers = new List<int>();
 
         Debug.Log($"Player {pIndex} has Finished");

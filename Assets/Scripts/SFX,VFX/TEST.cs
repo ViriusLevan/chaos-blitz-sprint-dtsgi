@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TEST : MonoBehaviour
 {
-    public SoundController soundController;
-    public VisualFX_Controller vfxController;
+    public SoundManager soundController;
+    public VFXManager vfxController;
 
     public void playPaper() //Sound Effect Paper Change Scene
     {
@@ -29,7 +29,7 @@ public class TEST : MonoBehaviour
     }
     public void playJump() //Sound Effect Hit by Obstacle
     {
-        soundController.PlaySound(SoundEnum.JumpSound);
+        soundController.PlaySound(SoundEnum.PlayerJump);
     }
     public void playPoof() //Sound Effect Hit by Obstacle
     {

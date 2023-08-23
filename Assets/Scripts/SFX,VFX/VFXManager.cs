@@ -8,8 +8,10 @@ public enum EffectEnum
     WaterEffect,
     JumpEffect
 }
-public class VisualFX_Controller : MonoBehaviour
+public class VFXManager : MonoBehaviour
 {
+    public static VFXManager Instance {get; private set;}
+
     public GameObject posSpawnEffect;
     public GameObject VFX_Blood;
     public GameObject VFX_Water;
@@ -17,6 +19,20 @@ public class VisualFX_Controller : MonoBehaviour
 
     public Dictionary<EffectEnum, GameObject> effectLibrary = new Dictionary<EffectEnum, GameObject>();
     private Quaternion initialRotation;
+
+
+    private void Awake()
+    {
+        if(Instance != null)
+        {
+            Debug.Log("[Singleton] Trying to instantiate a seccond instance of a singleton class.");
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(Instance);
+        }
+    }
 
     private void Start()
     {
