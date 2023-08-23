@@ -10,8 +10,11 @@ public class PlayerConfigurationManager : MonoBehaviour
     [SerializeField] private int minPlayers=1, maxPlayers = 4;
     [SerializeField] private PlayerInputManager pim;
     [SerializeField] private List<PlayerConfiguration> playerConfigs;
-    [SerializeField] private List<GameObject> playerJoinTexts;
+    //[SerializeField] private List<GameObject> playerJoinTexts;
     private int nSpawnedPlayers = 0;
+
+    //TODO maybe make another static class for this?
+    public RoundType roundType;
 
     public static PlayerConfigurationManager Instance { get; private set; }
 
@@ -55,7 +58,7 @@ public class PlayerConfigurationManager : MonoBehaviour
             playerConfigs.Add(new PlayerConfiguration(pi));
         }
 
-        playerJoinTexts[pi.playerIndex].SetActive(false);
+        //playerJoinTexts[pi.playerIndex].SetActive(false);
     }
     
     public void SetNSpawnedPlayers(int newVal)
@@ -78,6 +81,39 @@ public class PlayerConfigurationManager : MonoBehaviour
         pim.splitScreen=false;
     }
 
+    public void EnableJoining()
+    {
+        pim.EnableJoining();
+    }
+
+    public void DisableJoining()
+    {
+        pim.DisableJoining();
+    }
+
+    public void ClearPlayers()
+    {
+        playerConfigs.Clear();
+
+//Deletes the children of this transform, which are the PlayerConfiguration prefabs
+        int i = 0;
+        //Array to hold all child obj
+        GameObject[] allChildren = new GameObject[transform.childCount];
+
+        //Find all child obj and store to that array
+        foreach (Transform child in transform)
+        {
+            allChildren[i] = child.gameObject;
+            i += 1;
+        }
+
+        //Now destroy them
+        foreach (GameObject child in allChildren)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
         return playerConfigs;
@@ -92,11 +128,25 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void ReadyPlayer(int index)
     {
         playerConfigs[index].isReady = true;
+        BeginGame();
+    }
+
+    public void BeginGame()
+    {
+        if(roundType==null)
+        {
+            Debug.Log("Round type not selected");
+            return;
+        }
         if (minPlayers <= playerConfigs.Count 
             && playerConfigs.Count <= maxPlayers 
             && playerConfigs.All(p => p.isReady == true))
         {
             SceneLoader.Instance.LoadScene(SceneLoader.SceneIndex.Gameplay);
+        }
+        else
+        {
+            Debug.Log("Not all players are ready");
         }
     }
 }

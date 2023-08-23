@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        roundType = PlayerConfigurationManager.Instance.roundType;
         List<PlayerConfiguration> pConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs();
         PhaseSwitch(GameStatus.PickPhase);
     }
