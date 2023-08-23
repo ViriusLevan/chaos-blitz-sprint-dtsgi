@@ -181,7 +181,7 @@ public class PlacementManager : MonoBehaviour
         if(targetPlatform!=null){
             targetPlatform.SetCrossSectionMaterial(materials[materialIndex]);
             targetPlatform.SetSliceTarget(pendingObj);
-            targetPlatform.Slice();
+            targetPlatform.Slice(targetPlatform.gameObject);
             targetPlatform=null;
         }
 

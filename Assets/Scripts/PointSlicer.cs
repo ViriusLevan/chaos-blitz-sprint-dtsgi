@@ -19,7 +19,7 @@ public class PointSlicer : MonoBehaviour
         //Slice();
     }
 
-    public void Slice(){
+    public void Slice(GameObject targetPlatform = null){
         for (int i = 0; i < boundaryPoints.Length; i++)
         {
             Vector3 pointA = new Vector3(); 
@@ -60,7 +60,7 @@ public class PointSlicer : MonoBehaviour
                 //TODO check for bugs again
                 toBeSliced.SetActive(false);
                 upperHull.SetActive(false);
-                //Destroy(upperHull);
+                Destroy(upperHull);
                 //Destroy(sliceable);
 
                 toBeSliced = lowerHull;
@@ -68,6 +68,10 @@ public class PointSlicer : MonoBehaviour
                 mc.convex = true;
             }
             Debug.DrawLine(midPoint, transform.position, Color.red, 100f,false);
+        }
+        if(targetPlatform!=null)
+        {
+            toBeSliced.transform.SetParent(targetPlatform.transform);
         }
         toBeSliced=null;
     }
