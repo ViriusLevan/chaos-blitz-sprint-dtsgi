@@ -64,9 +64,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""BuildToggle"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
-                    ""id"": ""c172f8ca-deeb-4270-bf01-4aefea6a3b82"",
+                    ""id"": ""272d63c8-63d5-4101-9d71-c8fa2245edab"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -252,23 +252,23 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 },
                 {
                     ""name"": """",
-                    ""id"": ""dc9ba715-95a1-4654-8a88-aecf69904f5c"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""id"": ""8347e9bf-ea25-49cc-90ec-7a7309c57fc2"",
+                    ""path"": ""<Keyboard>/backspace"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""BuildToggle"",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""44160f99-ee88-4eb4-b721-41a032de7bcf"",
-                    ""path"": ""<Keyboard>/b"",
+                    ""id"": ""abe3875a-ba05-4360-a6b9-85dc527ae946"",
+                    ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""BuildToggle"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -652,15 +652,6 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
             ""id"": ""e82ad928-0927-40c2-98a3-13992d040a26"",
             ""actions"": [
                 {
-                    ""name"": ""BuildToggle"",
-                    ""type"": ""Button"",
-                    ""id"": ""25779846-bf6e-4fe5-803c-41c3a0b7ba7c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Look"",
                     ""type"": ""Value"",
                     ""id"": ""1c22b736-f6e2-4c5b-a2fc-ddbdca7d9e0f"",
@@ -688,60 +679,6 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""CycleSelectionForward"",
-                    ""type"": ""Button"",
-                    ""id"": ""2294ba27-cac0-4654-9399-64f3d1853beb"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CycleSelectionBackward"",
-                    ""type"": ""Button"",
-                    ""id"": ""51c8b7bc-1480-4d4b-8c34-54f60c705788"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ShiftUp"",
-                    ""type"": ""Button"",
-                    ""id"": ""cfcb6082-3dad-4a8a-8c85-0a280e381105"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ShiftDown"",
-                    ""type"": ""Button"",
-                    ""id"": ""30037390-bdd6-4131-bb0b-f49d91c0d439"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ShiftClockwise"",
-                    ""type"": ""Button"",
-                    ""id"": ""428479e3-b7f0-4269-b62e-3603b5ca1aac"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ShiftCCW"",
-                    ""type"": ""Button"",
-                    ""id"": ""77b10de6-c847-47f6-8bfe-19d568448f04"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Rotate"",
                     ""type"": ""Value"",
                     ""id"": ""d330f678-b5fe-4fe1-91c1-4c7c8dedb7ea"",
@@ -758,31 +695,18 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""15035665-72f0-4366-81d4-aa6fd4c404b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""8976be51-9fe8-4c3b-b2ec-9aeb9bce478e"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""BuildToggle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cad98827-1a01-44cb-ace7-a98049640bef"",
-                    ""path"": ""<Keyboard>/b"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""BuildToggle"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""WASD"",
                     ""id"": ""e3358a33-7457-46bf-b3c1-6245e6427130"",
@@ -938,138 +862,6 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""c1d10a68-5dd2-4dd2-a314-d9d0e2d8b013"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CycleSelectionForward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""74d98d03-a7e4-4d54-bc3d-bf17d7682747"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CycleSelectionForward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e9cc76b5-372a-44a0-8687-083e942d45f7"",
-                    ""path"": ""<Keyboard>/t"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CycleSelectionBackward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5686652b-6f03-43a9-9c8d-83cb40579ade"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CycleSelectionBackward"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fa3126f8-5ad7-4741-a5cb-2563858aedb5"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShiftUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c0c90ff6-80c1-417a-b4b3-500c2da4de79"",
-                    ""path"": ""<Keyboard>/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShiftUp"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5adb9252-bdee-41da-8ad3-204dec816578"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShiftDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cc870f36-c0a9-4e1a-9277-d1236120e6a3"",
-                    ""path"": ""<Keyboard>/h"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShiftDown"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b1f2222d-7e81-4c13-9c7f-dc61260d2008"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShiftClockwise"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3103f76d-5040-4e3b-84b9-4ff9de15c18a"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShiftClockwise"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c3d8177d-ddc6-4590-afa4-bd2fc46f8697"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShiftCCW"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""61955b3c-3bf3-4ce2-8d79-2aade0a1e509"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ShiftCCW"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""KB"",
                     ""id"": ""861beb81-47ce-4c05-9a13-c059abbdd247"",
                     ""path"": ""1DAxis"",
@@ -1200,6 +992,28 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""action"": ""VerticalMotion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc644481-4f01-4400-8aac-92fe22cc243a"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""929664a1-f17b-4644-b771-ff8ac6b1949d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1241,16 +1055,6 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""isOR"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Xbox Controller"",
-            ""bindingGroup"": ""Xbox Controller"",
-            ""devices"": []
-        },
-        {
-            ""name"": ""PS4 Controller"",
-            ""bindingGroup"": ""PS4 Controller"",
-            ""devices"": []
         }
     ]
 }");
@@ -1260,7 +1064,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_BuildToggle = m_Player.FindAction("BuildToggle", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1275,18 +1079,12 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         // BuildMode
         m_BuildMode = asset.FindActionMap("BuildMode", throwIfNotFound: true);
-        m_BuildMode_BuildToggle = m_BuildMode.FindAction("BuildToggle", throwIfNotFound: true);
         m_BuildMode_Look = m_BuildMode.FindAction("Look", throwIfNotFound: true);
         m_BuildMode_Move = m_BuildMode.FindAction("Move", throwIfNotFound: true);
         m_BuildMode_Place = m_BuildMode.FindAction("Place", throwIfNotFound: true);
-        m_BuildMode_CycleSelectionForward = m_BuildMode.FindAction("CycleSelectionForward", throwIfNotFound: true);
-        m_BuildMode_CycleSelectionBackward = m_BuildMode.FindAction("CycleSelectionBackward", throwIfNotFound: true);
-        m_BuildMode_ShiftUp = m_BuildMode.FindAction("ShiftUp", throwIfNotFound: true);
-        m_BuildMode_ShiftDown = m_BuildMode.FindAction("ShiftDown", throwIfNotFound: true);
-        m_BuildMode_ShiftClockwise = m_BuildMode.FindAction("ShiftClockwise", throwIfNotFound: true);
-        m_BuildMode_ShiftCCW = m_BuildMode.FindAction("ShiftCCW", throwIfNotFound: true);
         m_BuildMode_Rotate = m_BuildMode.FindAction("Rotate", throwIfNotFound: true);
         m_BuildMode_VerticalMotion = m_BuildMode.FindAction("VerticalMotion", throwIfNotFound: true);
+        m_BuildMode_Pause = m_BuildMode.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1350,7 +1148,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_BuildToggle;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -1359,7 +1157,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @BuildToggle => m_Wrapper.m_Player_BuildToggle;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1381,9 +1179,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @BuildToggle.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuildToggle;
-                @BuildToggle.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuildToggle;
-                @BuildToggle.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBuildToggle;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1400,9 +1198,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @BuildToggle.started += instance.OnBuildToggle;
-                @BuildToggle.performed += instance.OnBuildToggle;
-                @BuildToggle.canceled += instance.OnBuildToggle;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -1516,34 +1314,22 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     // BuildMode
     private readonly InputActionMap m_BuildMode;
     private IBuildModeActions m_BuildModeActionsCallbackInterface;
-    private readonly InputAction m_BuildMode_BuildToggle;
     private readonly InputAction m_BuildMode_Look;
     private readonly InputAction m_BuildMode_Move;
     private readonly InputAction m_BuildMode_Place;
-    private readonly InputAction m_BuildMode_CycleSelectionForward;
-    private readonly InputAction m_BuildMode_CycleSelectionBackward;
-    private readonly InputAction m_BuildMode_ShiftUp;
-    private readonly InputAction m_BuildMode_ShiftDown;
-    private readonly InputAction m_BuildMode_ShiftClockwise;
-    private readonly InputAction m_BuildMode_ShiftCCW;
     private readonly InputAction m_BuildMode_Rotate;
     private readonly InputAction m_BuildMode_VerticalMotion;
+    private readonly InputAction m_BuildMode_Pause;
     public struct BuildModeActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
         public BuildModeActions(@PlayerInputActionsAsset wrapper) { m_Wrapper = wrapper; }
-        public InputAction @BuildToggle => m_Wrapper.m_BuildMode_BuildToggle;
         public InputAction @Look => m_Wrapper.m_BuildMode_Look;
         public InputAction @Move => m_Wrapper.m_BuildMode_Move;
         public InputAction @Place => m_Wrapper.m_BuildMode_Place;
-        public InputAction @CycleSelectionForward => m_Wrapper.m_BuildMode_CycleSelectionForward;
-        public InputAction @CycleSelectionBackward => m_Wrapper.m_BuildMode_CycleSelectionBackward;
-        public InputAction @ShiftUp => m_Wrapper.m_BuildMode_ShiftUp;
-        public InputAction @ShiftDown => m_Wrapper.m_BuildMode_ShiftDown;
-        public InputAction @ShiftClockwise => m_Wrapper.m_BuildMode_ShiftClockwise;
-        public InputAction @ShiftCCW => m_Wrapper.m_BuildMode_ShiftCCW;
         public InputAction @Rotate => m_Wrapper.m_BuildMode_Rotate;
         public InputAction @VerticalMotion => m_Wrapper.m_BuildMode_VerticalMotion;
+        public InputAction @Pause => m_Wrapper.m_BuildMode_Pause;
         public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1553,9 +1339,6 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         {
             if (m_Wrapper.m_BuildModeActionsCallbackInterface != null)
             {
-                @BuildToggle.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBuildToggle;
-                @BuildToggle.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBuildToggle;
-                @BuildToggle.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnBuildToggle;
                 @Look.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
@@ -1565,37 +1348,19 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Place.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPlace;
                 @Place.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPlace;
                 @Place.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPlace;
-                @CycleSelectionForward.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionForward;
-                @CycleSelectionForward.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionForward;
-                @CycleSelectionForward.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionForward;
-                @CycleSelectionBackward.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionBackward;
-                @CycleSelectionBackward.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionBackward;
-                @CycleSelectionBackward.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnCycleSelectionBackward;
-                @ShiftUp.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftUp;
-                @ShiftUp.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftUp;
-                @ShiftUp.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftUp;
-                @ShiftDown.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftDown;
-                @ShiftDown.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftDown;
-                @ShiftDown.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftDown;
-                @ShiftClockwise.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftClockwise;
-                @ShiftClockwise.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftClockwise;
-                @ShiftClockwise.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftClockwise;
-                @ShiftCCW.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftCCW;
-                @ShiftCCW.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftCCW;
-                @ShiftCCW.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnShiftCCW;
                 @Rotate.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnRotate;
                 @VerticalMotion.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnVerticalMotion;
                 @VerticalMotion.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnVerticalMotion;
                 @VerticalMotion.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnVerticalMotion;
+                @Pause.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @BuildToggle.started += instance.OnBuildToggle;
-                @BuildToggle.performed += instance.OnBuildToggle;
-                @BuildToggle.canceled += instance.OnBuildToggle;
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
@@ -1605,30 +1370,15 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Place.started += instance.OnPlace;
                 @Place.performed += instance.OnPlace;
                 @Place.canceled += instance.OnPlace;
-                @CycleSelectionForward.started += instance.OnCycleSelectionForward;
-                @CycleSelectionForward.performed += instance.OnCycleSelectionForward;
-                @CycleSelectionForward.canceled += instance.OnCycleSelectionForward;
-                @CycleSelectionBackward.started += instance.OnCycleSelectionBackward;
-                @CycleSelectionBackward.performed += instance.OnCycleSelectionBackward;
-                @CycleSelectionBackward.canceled += instance.OnCycleSelectionBackward;
-                @ShiftUp.started += instance.OnShiftUp;
-                @ShiftUp.performed += instance.OnShiftUp;
-                @ShiftUp.canceled += instance.OnShiftUp;
-                @ShiftDown.started += instance.OnShiftDown;
-                @ShiftDown.performed += instance.OnShiftDown;
-                @ShiftDown.canceled += instance.OnShiftDown;
-                @ShiftClockwise.started += instance.OnShiftClockwise;
-                @ShiftClockwise.performed += instance.OnShiftClockwise;
-                @ShiftClockwise.canceled += instance.OnShiftClockwise;
-                @ShiftCCW.started += instance.OnShiftCCW;
-                @ShiftCCW.performed += instance.OnShiftCCW;
-                @ShiftCCW.canceled += instance.OnShiftCCW;
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
                 @VerticalMotion.started += instance.OnVerticalMotion;
                 @VerticalMotion.performed += instance.OnVerticalMotion;
                 @VerticalMotion.canceled += instance.OnVerticalMotion;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -1651,31 +1401,13 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
-    private int m_XboxControllerSchemeIndex = -1;
-    public InputControlScheme XboxControllerScheme
-    {
-        get
-        {
-            if (m_XboxControllerSchemeIndex == -1) m_XboxControllerSchemeIndex = asset.FindControlSchemeIndex("Xbox Controller");
-            return asset.controlSchemes[m_XboxControllerSchemeIndex];
-        }
-    }
-    private int m_PS4ControllerSchemeIndex = -1;
-    public InputControlScheme PS4ControllerScheme
-    {
-        get
-        {
-            if (m_PS4ControllerSchemeIndex == -1) m_PS4ControllerSchemeIndex = asset.FindControlSchemeIndex("PS4 Controller");
-            return asset.controlSchemes[m_PS4ControllerSchemeIndex];
-        }
-    }
     public interface IPlayerActions
     {
         void OnJoin(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnBuildToggle(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1692,17 +1424,11 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     }
     public interface IBuildModeActions
     {
-        void OnBuildToggle(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnPlace(InputAction.CallbackContext context);
-        void OnCycleSelectionForward(InputAction.CallbackContext context);
-        void OnCycleSelectionBackward(InputAction.CallbackContext context);
-        void OnShiftUp(InputAction.CallbackContext context);
-        void OnShiftDown(InputAction.CallbackContext context);
-        void OnShiftClockwise(InputAction.CallbackContext context);
-        void OnShiftCCW(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnVerticalMotion(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

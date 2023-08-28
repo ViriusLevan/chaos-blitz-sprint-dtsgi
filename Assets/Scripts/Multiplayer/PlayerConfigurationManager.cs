@@ -47,6 +47,10 @@ public class PlayerConfigurationManager : MonoBehaviour
     void OnDestroy()
     {
         SceneLoader.sceneLoaded-=Reset;
+        if(this==Instance)
+        {
+            DisableSplitScreen();
+        }
     }
 
     public void HandlePlayerJoin(PlayerInput pi)
