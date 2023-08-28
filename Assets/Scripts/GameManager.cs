@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 
     public enum GameStatus {Animation, PickPhase, BuildPhase, PlatformingPhase};
 
-    [SerializeField] private RoundType[] availableRoundTypes;
     [SerializeField] private GameStatus currentGameStatus;
     private Dictionary<int, PlayerInstance> playerInstances;
 
@@ -16,14 +15,23 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]private int lapCounter;
     [SerializeField]private RoundType roundType;
+    public RoundType GetRoundType(){return roundType;}
+
     [SerializeField]private bool roundFinished=false;
     //TODO put these into another class?
     [SerializeField]private Transform[] playerSpawnPoints;
+    //
     [SerializeField]private Sprite[] cursors;
+    [SerializeField] private Sprite[] panels;
+    //
     public Transform buildCamSetPoint;
 
+
+    //TODO split to another class
     public enum CursorColors{Red=0,Blue=1, Yellow=2, Green=3};
     public Sprite[] GetCursors(){return cursors;}
+    public Sprite[] GetPanels(){return panels;}
+    //
     public Transform[] GetPlayerSpawnPoints(){return playerSpawnPoints;}
     public int GetLapCounter(){return lapCounter;}
 
@@ -41,12 +49,12 @@ public class GameManager : MonoBehaviour
         lapCounter=0;
         lapWinnerIndex=-1;
         playerInstances = new Dictionary<int, PlayerInstance>();
+        roundType = PlayerConfigurationManager.Instance.roundType;
+        List<PlayerConfiguration> pConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs();
     }
 
     void Start()
     {
-        roundType = PlayerConfigurationManager.Instance.roundType;
-        List<PlayerConfiguration> pConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs();
         PhaseSwitch(GameStatus.PickPhase);
     }
 

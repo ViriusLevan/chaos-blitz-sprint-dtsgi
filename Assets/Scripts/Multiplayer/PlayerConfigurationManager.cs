@@ -166,6 +166,9 @@ public class PlayerConfiguration
     public int playerIndex { get; private set; }
     public bool isReady { get; set; }
     public Material playerMaterial {get; set;}
+    //TODO rename to materialIndex after splitting 
+    //the corresponding property in GameManager to another class
+    //AND maybe use enum instead of int
     public int cursorIndex;
     public int scoreTotal;
 }

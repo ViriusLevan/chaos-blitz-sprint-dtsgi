@@ -16,7 +16,7 @@ public class WinMenuManager : MonoBehaviour
                 .OrderByDescending(o=>o.scoreTotal).ToList();
         foreach (var item in sortedPlayerConfigs)
         {
-            scoreboardText.text += $"PlayerIndex {item.playerIndex} Score {item.scoreTotal}\n";
+            scoreboardText.text += $"PlayerIndex {item.playerIndex+1} Score {item.scoreTotal}\n";
         }
     }
 

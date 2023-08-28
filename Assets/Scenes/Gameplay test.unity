@@ -174,6 +174,7 @@ MonoBehaviour:
   - {fileID: 366288431}
   - {fileID: 196848504}
   playerPrefab: {fileID: 1924593882052897566, guid: 481cff3d5875af8449365edfe3410562, type: 3}
+  roundPointDisplay: {fileID: 1397886931410232217}
 --- !u!1 &196848504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2130,10 +2131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placableSelectionPanel: {fileID: 1220107611}
-  availableRoundTypes:
-  - {fileID: 11400000, guid: cb88c70655f4695409846bf28b43fac4, type: 2}
-  - {fileID: 11400000, guid: 921ea2587a754784eafa4cd852f2866d, type: 2}
-  - {fileID: 11400000, guid: 240afb2f2b293404cbac69eb4df007a9, type: 2}
   currentGameStatus: 0
   lapCounter: 0
   roundType: {fileID: 11400000, guid: 0060a197f4c699c4f95b8ac9d98a9ddb, type: 2}
@@ -2148,6 +2145,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a0c8dd4d352b5034bb11c905cd18738e, type: 3}
   - {fileID: 21300000, guid: 43fcd76bb3e0c964b80bb0aea53efc49, type: 3}
   - {fileID: 21300000, guid: 1f5a3ac92b829624cb96a408dc7a85b7, type: 3}
+  panels:
+  - {fileID: 21300000, guid: bc2564800b4a16840a48f1c63b2d8d4d, type: 3}
+  - {fileID: 21300000, guid: fde7a6d3f35a69446bd64a46c48f38d3, type: 3}
+  - {fileID: 21300000, guid: 025ad69697fa1bf4c9a9714a7f381768, type: 3}
+  - {fileID: 21300000, guid: 41ea94901d0952b45a6f52c8eee64c36, type: 3}
   buildCamSetPoint: {fileID: 1670773449}
 --- !u!1 &1516004793
 GameObject:
@@ -3238,6 +3240,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa5b57f4547bdc644941955a6989a6f8, type: 3}
+--- !u!114 &1397886931410232217 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1576602845411305357, guid: aa5b57f4547bdc644941955a6989a6f8, type: 3}
+  m_PrefabInstance: {fileID: 1397886931410232216}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6907001028557463798
 PrefabInstance:
   m_ObjectHideFlags: 0

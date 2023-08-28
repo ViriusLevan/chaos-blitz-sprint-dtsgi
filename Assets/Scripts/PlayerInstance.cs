@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInstance : MonoBehaviour
 {
@@ -36,17 +37,25 @@ public class PlayerInstance : MonoBehaviour
     {
 		placementManager?.SetReferenceTransform(buildCameraFollow.transform);
 		int playerIndex = playerInputHandler.playerConfig.playerIndex;
-		playerText.text = "Player "+playerIndex;
+		playerText.text = "Player "+(playerIndex+1);
 		
 		if(playerIndex==1 || playerIndex==3)
 		{
 			Debug.Log("PlayerIndex="+playerIndex);
+			Vector2 currentPos = playerPanel.anchoredPosition;
 			playerPanel.anchorMin = new Vector2(1, 1);
 			playerPanel.anchorMax = new Vector2(1, 1);
-			Vector2 shiftDirection 
-				= new Vector2(0.5f - playerPanel.anchorMax.x, 0.5f - playerPanel.anchorMax.y);
-        	playerPanel.anchoredPosition = shiftDirection * playerPanel.rect.size;    
+			// Vector2 shiftDirection 
+			// 	= new Vector2(0.5f - playerPanel.anchorMax.x, 0.5f - playerPanel.anchorMax.y);
+        	// playerPanel.anchoredPosition = shiftDirection * playerPanel.rect.size;    
+			currentPos.x *= -1;
+			playerPanel.anchoredPosition=currentPos;
 		}
+
+		playerPanel.GetComponent<Image>().sprite = 
+			GameManager.Instance.GetPanels()[
+				playerInputHandler.playerConfig.cursorIndex
+			];
     }
 
 	private void OnDestroy() 

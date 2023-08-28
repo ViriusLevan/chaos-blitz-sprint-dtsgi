@@ -1,15 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem.UI;
+using TMPro;
 
 public class LevelInitializer : MonoBehaviour
 {
     [SerializeField] private InputSystemUIInputModule inputModule;
     [SerializeField] private GameObject[] playerCanvas;
     [SerializeField] private GameObject playerPrefab;
+    
+    //TODO maybe move this to another class?
+    [SerializeField] private TextMeshProUGUI roundPointDisplay;
 
     private void Start()
     {
@@ -31,8 +31,11 @@ public class LevelInitializer : MonoBehaviour
 
             GameManager.Instance.AddPlayerInstance(instance);
         }
+        int pointReq = GameManager.Instance.GetRoundType().GetPointRequirement();
+        roundPointDisplay.text = $"First to {pointReq} points";
         PlayerConfigurationManager.Instance.EnableSplitScreen();
     }
+    
 
     
 }
