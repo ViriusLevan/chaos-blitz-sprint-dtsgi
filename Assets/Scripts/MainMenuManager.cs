@@ -38,11 +38,11 @@ public class MainMenuManager : MonoBehaviour
         PlayerConfigurationManager.Instance.EnableJoining();
         roundSelectPanel.SetActive(false);
         lobbyPanel.SetActive(true);
-        lobbyFirst.Select();
-        EventSystem.current.SetSelectedGameObject
-            (null, null);  
-        EventSystem.current.SetSelectedGameObject
-            (lobbyFirst.gameObject, null);     
+        // lobbyFirst.Select();
+        // EventSystem.current.SetSelectedGameObject
+        //     (null, null);  
+        // EventSystem.current.SetSelectedGameObject
+        //     (lobbyFirst.gameObject, null);     
     }
 
     public void ExitLobby()
