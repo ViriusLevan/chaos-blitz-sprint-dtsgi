@@ -38,7 +38,7 @@ public class PlayerSetupMenuController : MonoBehaviour
         int cursorIndex=0;
         if(mat.name.Contains("Red", System.StringComparison.OrdinalIgnoreCase)){
             cursorIndex=0;
-        } else if(mat.name.Contains("Blue", System.StringComparison.OrdinalIgnoreCase)){
+        } else if(mat.name.Contains("Purple", System.StringComparison.OrdinalIgnoreCase)){
             cursorIndex=1;
         } else if(mat.name.Contains("Yellow", System.StringComparison.OrdinalIgnoreCase)){
             cursorIndex=2;

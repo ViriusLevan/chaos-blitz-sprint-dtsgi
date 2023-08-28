@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
 
     //TODO split to another class
-    public enum CursorColors{Red=0,Blue=1, Yellow=2, Green=3};
+    public enum CursorColors{Red=0,Purple=1, Yellow=2, Green=3};
     public Sprite[] GetCursors(){return cursors;}
     public Sprite[] GetPanels(){return panels;}
     //
