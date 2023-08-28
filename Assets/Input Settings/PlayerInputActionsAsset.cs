@@ -526,6 +526,17 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 },
                 {
                     ""name"": """",
+                    ""id"": ""865a137b-c546-48f0-90cd-78d5b0b82137"",
+                    ""path"": ""<Keyboard>/backslash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""68aa7501-500b-4e43-ab2a-162df12dcba9"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",

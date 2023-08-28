@@ -387,6 +387,7 @@ MonoBehaviour:
   menuPanel: {fileID: 1366458221}
   roundSelectPanel: {fileID: 1227210907}
   lobbyPanel: {fileID: 1561530972}
+  playerReadyMenu: {fileID: 1733583261}
   menuFirst: {fileID: 1477449577}
   roundSelectFirst: {fileID: 1969319510}
   lobbyFirst: {fileID: 0}
@@ -429,6 +430,11 @@ MonoBehaviour:
 --- !u!1 &1561530972 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5688885521264619753, guid: e31f7efe27e0a894eb13695ecb0c54d3, type: 3}
+  m_PrefabInstance: {fileID: 5688885522152563381}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1733583261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5688885522351683749, guid: e31f7efe27e0a894eb13695ecb0c54d3, type: 3}
   m_PrefabInstance: {fileID: 5688885522152563381}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1969319510 stripped

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -117,6 +116,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        Debug.Log("Players cleared");
     }
 
     public List<PlayerConfiguration> GetPlayerConfigs()
@@ -132,8 +132,20 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void ReadyPlayer(int index)
     {
+        Debug.Log($"Player {index} ready");
         playerConfigs[index].isReady = true;
         BeginGame();
+    }
+
+    public void CancelReady(int index)
+    {
+        Debug.Log($"Player {index} cancelled");
+        playerConfigs[index].isReady = false;
+    }
+
+    public bool IsPlayerReady(int index)
+    {
+        return playerConfigs[index].isReady;
     }
 
     public void BeginGame()
@@ -151,7 +163,14 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not all players are ready");
+            if(minPlayers > playerConfigs.Count)
+            {
+                Debug.Log("Not enough players to start");
+            }
+            else
+            {
+                Debug.Log("Not all players are ready");
+            }
         }
     }
 
