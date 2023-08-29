@@ -21,7 +21,6 @@ public class MainMenuManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(Instance);
         }
     }
 

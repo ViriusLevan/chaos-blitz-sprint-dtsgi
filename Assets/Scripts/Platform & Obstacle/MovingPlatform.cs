@@ -13,27 +13,56 @@ public class MovingPlatform : MonoBehaviour
     }
 
     public Direction dir;
-    [SerializeField] private Vector3 originalPos;
+    [SerializeField] private Vector3 originalPosition;
     [SerializeField] private float distance;
     [SerializeField] private float duration;
 
     private void Start()
     {
-        originalPos = transform.position;
+        originalPosition = transform.position;
+    }
+
+    
+    private void OnEnable() 
+    {
+        GameManager.platformingPhaseBegin+=Activate;
+        GameManager.platformingPhaseFinished+=Reset;
+    }
+
+    private void OnDestroy() 
+    {
+        GameManager.platformingPhaseBegin-=Activate;
+        GameManager.platformingPhaseFinished-=Reset;
+    }
+
+    private void Activate()
+    {
         MovePos();
+    }
+
+    private void Deactivate()
+    {
+        DOTween.Pause(transform);
+    }
+
+    private void Reset()
+    {
+        DOTween.Rewind(transform);
+        DOTween.Kill(transform, true);
+        //transform.position = originalPosition;
     }
 
     private void MovePos()
     {
         switch (dir) {
             case Direction.x :
-                transform.DOMoveX(originalPos.x + distance, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                transform.DOMoveX(originalPosition.x + distance, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                 break;
             case Direction.y :
-                transform.DOMoveY(originalPos.y + distance, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                transform.DOMoveY(originalPosition.y + distance, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                 break;
             case Direction.z :
-                transform.DOMoveZ(originalPos.z + distance, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                transform.DOMoveZ(originalPosition.z + distance, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                 break;
         }
     }
