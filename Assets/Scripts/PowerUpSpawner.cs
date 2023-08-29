@@ -31,7 +31,7 @@ public class PowerUpSpawner : MonoBehaviour
 
     private void OnDisable() 
     {
-        GameManager.platformingPhaseBegin += SpawnPowerUps;
+        GameManager.platformingPhaseBegin -= SpawnPowerUps;
     }
 
     [SerializeField]private int nOfPowerUpsToSpawn=2;
