@@ -70,7 +70,9 @@ public class PlacableSelectionPanel : MonoBehaviour
             if(yDivisor==-1 || xDivisor==-1){
                 xDivisor = FindTightestDivisor(xPanelSize, xButtonSize);
                 yDivisor = FindTightestDivisor(yPanelSize, yButtonSize);
+                //Debug.Log($"Divisor {xDivisor}-{yDivisor}");
                 Debug.Log($"Panel Size {xPanelSize}-{yPanelSize}");
+                //Debug.Log($"Button Size {xButtonSize}-{yButtonSize}");
                 for (int i1 = 0; i1 < xDivisor; i1++)
                 {
                     for (int i2 = 0; i2 < yDivisor; i2++)
@@ -92,9 +94,15 @@ public class PlacableSelectionPanel : MonoBehaviour
                 int yRangeIndex = Random.Range(0,yDivisor);
                 rangeKey = new Vector2(xRangeIndex,yRangeIndex);
             }while(isPartitionOccupied[rangeKey]);
+            //Debug.Log($"Range Key {rangeKey}");
 
-            float xPos = Random.Range(xRanges[(int)rangeKey.x].minVal, xRanges[(int)rangeKey.x].maxVal);
-            float yPos = Random.Range(yRanges[(int)rangeKey.y].minVal, yRanges[(int)rangeKey.y].maxVal);
+            //Isn't this just the centerpoint since the padding is so opressive? lol
+            float xPos = Random.Range(
+                xRanges[(int)rangeKey.x].minVal + (xButtonSize/2)
+                , xRanges[(int)rangeKey.x].maxVal - (xButtonSize/2));
+            float yPos = Random.Range(
+                yRanges[(int)rangeKey.y].minVal + (yButtonSize/2)
+                , yRanges[(int)rangeKey.y].maxVal - (yButtonSize/2));
             
             xPos = (xPos>xPanelSize/2) ? xPos/2 : xPos*-1;
             yPos = (yPos>yPanelSize/2) ? yPos/2 : yPos*-1;
@@ -112,8 +120,16 @@ public class PlacableSelectionPanel : MonoBehaviour
     public int FindTightestDivisor(float toBeDivided, float minimumSize)
     {
         int divisor = 1;
-        for (;;)
+        int safety=0;
+        while (true)
         {
+            safety+=1;
+            if(safety>=100)
+            {
+                Debug.Log("Safety Breached, Divisor"+divisor);
+                return divisor;
+            }
+
             if(toBeDivided/(divisor+1)<minimumSize)
             {
                 return divisor;
