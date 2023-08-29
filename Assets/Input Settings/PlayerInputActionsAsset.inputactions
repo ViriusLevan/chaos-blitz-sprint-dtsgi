@@ -570,6 +570,17 @@
                 },
                 {
                     "name": "",
+                    "id": "20f8d2c7-f9b1-42ee-8690-27c981bdeff5",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e46bd414-a1dd-4823-968a-30735e7ed898",
                     "path": "<Mouse>/scroll",
                     "interactions": "",

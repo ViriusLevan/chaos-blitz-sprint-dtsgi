@@ -81,19 +81,27 @@ public class PlayerInputHandler : MonoBehaviour
         //Debug.Log(inputAction.name+" => "+playerConfig.input.currentControlScheme);    
 		int bindingIndex = inputAction.GetBindingIndex(group: playerConfig.input.currentControlScheme);
         //var bindingIndex = inputAction.bindings.IndexOf(x => x.name.ToString() == playerConfig.input.currentControlScheme);  
-        // foreach (var item in inputAction.bindings)
-        // {
-        //     Debug.Log(item.id+"-"+item.action+"-"+item.name);
-        // }
+
         // for (int i = 0; i < inputAction.bindings.Count; i++)
         // {
-        //     Debug.Log(i+"||"+inputAction.bindings[i].name);
+        //     Debug.Log(i+"||"+inputAction.bindings[i].groups+"-"+inputAction.bindings[i].action+
+        //         "-"+inputAction.bindings[i].name);
         // }
         //Debug.Log(bindingIndex+" ic "+inputAction.bindings[bindingIndex].isPartOfComposite.ToString());         
 		var displayString = inputAction.GetBindingDisplayString(bindingIndex, out string deviceLayoutName, out string controlPath);
-        if(inputAction.bindings[bindingIndex].isPartOfComposite && inputAction.bindings.Count>bindingIndex+1)
+        if(inputAction.bindings[bindingIndex].isPartOfComposite)
         {
-            displayString += " "+inputAction.GetBindingDisplayString(bindingIndex+1);
+            bindingIndex+=1;
+            while(inputAction.bindings.Count>bindingIndex)
+            {
+                //Debug.Log(bindingIndex+"-"+inputAction.bindings[bindingIndex].ToString());
+                //If binding is NOT part of our group
+                if(!inputAction.bindings[bindingIndex].ToString()
+                    .Contains("<"))
+                    break;
+                displayString += " "+inputAction.GetBindingDisplayString(bindingIndex);
+                bindingIndex+=1;
+            }
         }
         return displayString;
     }
