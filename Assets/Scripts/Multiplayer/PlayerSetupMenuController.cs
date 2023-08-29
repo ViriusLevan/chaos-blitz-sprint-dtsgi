@@ -37,6 +37,14 @@ public class PlayerSetupMenuController : MonoBehaviour
     {
         pi.onActionTriggered += Input_onActionTriggered;
     }
+    void OnDisable()
+    {
+        pi.onActionTriggered -= Input_onActionTriggered;
+    }
+    void OnDestroy()
+    {
+        pi.onActionTriggered -= Input_onActionTriggered;
+    }
 
     private void Input_onActionTriggered(CallbackContext obj)
     {

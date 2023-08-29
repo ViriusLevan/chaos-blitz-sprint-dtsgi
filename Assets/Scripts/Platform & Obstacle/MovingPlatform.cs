@@ -29,10 +29,18 @@ public class MovingPlatform : MonoBehaviour
         GameManager.platformingPhaseFinished+=Reset;
     }
 
+    private void OnDisable() 
+    {
+        GameManager.platformingPhaseBegin-=Activate;
+        GameManager.platformingPhaseFinished-=Reset;
+        DOTween.Kill(transform, false);
+    }
+
     private void OnDestroy() 
     {
         GameManager.platformingPhaseBegin-=Activate;
         GameManager.platformingPhaseFinished-=Reset;
+        DOTween.Kill(transform, false);
     }
 
     private void Activate()
