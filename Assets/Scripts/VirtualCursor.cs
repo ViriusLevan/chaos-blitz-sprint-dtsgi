@@ -16,8 +16,7 @@ public class VirtualCursor : MonoBehaviour
     private Canvas centerCanvas;
     [SerializeField]
     private RectTransform canvasRectTransform;
-    [SerializeField]
-    private float cursorSpeed = 1000f;
+    [SerializeField]private float cursorSpeed = 500;
 
     private bool previousMouseState;
     private Mouse virtualMouse;
@@ -86,6 +85,7 @@ public class VirtualCursor : MonoBehaviour
 
     private readonly float referenceWidth = 1280;
     private readonly float referenceHeight = 720;
+    [SerializeField]private float speedClamp =10f;
 
     public void UpdateMotion(){
         if(virtualMouse == null || virtualMouse.enabled==false){
@@ -101,8 +101,8 @@ public class VirtualCursor : MonoBehaviour
         //Debug.Log(scaledSpeed);
 
         deltaValue *= scaledSpeed * Time.deltaTime;
-        deltaValue = new Vector2(Mathf.Clamp(deltaValue.x,-1f,1f)
-            ,Mathf.Clamp(deltaValue.y,-1f,1f));
+        deltaValue = new Vector2(Mathf.Clamp(deltaValue.x,-speedClamp,speedClamp)
+            ,Mathf.Clamp(deltaValue.y,-speedClamp,speedClamp));
 
         Vector2 currentPosition = virtualMouse.position.ReadValue();
         Vector2 newPosition = currentPosition + deltaValue;

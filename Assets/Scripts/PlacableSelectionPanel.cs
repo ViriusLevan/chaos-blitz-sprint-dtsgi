@@ -9,11 +9,10 @@ public class PlacableSelectionPanel : MonoBehaviour
     [SerializeField] private GameObject placableButtonPrefab;
     [SerializeField] private Transform selectionPanel;
     [SerializeField] private Placable[] placables;
-    private Image image;
+    [SerializeField]private Image bgImage;
     private Color initialColor;
     private void Start() {
-        image = GetComponent<Image>();
-        initialColor =  image.color;
+        initialColor =  bgImage.color;
         GameManager.pickPhaseBegin+=PopulatePickPanel;
         GameManager.pickPhaseFinished+=HidePickPanel;
     }
@@ -28,8 +27,12 @@ public class PlacableSelectionPanel : MonoBehaviour
         int nOfPlayers = PlayerConfigurationManager.Instance.GetNSpawnedPlayers();
         
         RectTransform selectionPanelRT = selectionPanel.gameObject.GetComponent<RectTransform>();
-
-        //TODO objects spawned = nOfPlayers (+0-+2)
+        
+        int xDivisor=-1,yDivisor=-1;
+        List<FloatRange> xRanges, yRanges;
+        xRanges = new List<FloatRange>();
+        yRanges = new List<FloatRange>();
+        Dictionary<Vector2,bool> isPartitionOccupied = new Dictionary<Vector2, bool>();
         
         List<Button> spawnedButtons = new List<Button>();
         for (int i = 0; i < nOfPlayers+2; i++)
@@ -60,10 +63,51 @@ public class PlacableSelectionPanel : MonoBehaviour
             Button newButton = prefabInstance.GetComponent<Button>();
             RectTransform panelRect = selectionPanel.GetComponent<RectTransform>();
 
-            float xPos = Random.Range(panelRect.rect.xMin, panelRect.rect.xMax);
-            float yPos = Random.Range(panelRect.rect.yMin, panelRect.rect.yMax);
+            float yPanelSize = panelRect.rect.yMax-panelRect.rect.yMin;
+            float xPanelSize = panelRect.rect.xMax-panelRect.rect.xMin;
+            float xButtonSize = newButton.GetComponent<RectTransform>().rect.xMax 
+                - newButton.GetComponent<RectTransform>().rect.xMin;
+            float yButtonSize = newButton.GetComponent<RectTransform>().rect.yMax 
+                - newButton.GetComponent<RectTransform>().rect.yMin;
+
+            if(yDivisor==-1 || xDivisor==-1){
+                xDivisor = FindTightestDivisor(xPanelSize, xButtonSize);
+                yDivisor = FindTightestDivisor(yPanelSize, yButtonSize);
+                Debug.Log($"Panel Size {xPanelSize}-{yPanelSize}");
+                for (int i1 = 0; i1 < xDivisor; i1++)
+                {
+                    for (int i2 = 0; i2 < yDivisor; i2++)
+                    {
+                        isPartitionOccupied.Add(
+                            new Vector2(i1,i2),false
+                        );
+                    }
+                }
+            }
+            
+            if(xRanges.Count<1 || yRanges.Count<1){
+                xRanges = GetRangeList(xPanelSize,xDivisor);
+                yRanges = GetRangeList(yPanelSize,yDivisor);
+            }
+            Vector2 rangeKey;
+            do{
+                int xRangeIndex = Random.Range(0,xDivisor);
+                int yRangeIndex = Random.Range(0,yDivisor);
+                rangeKey = new Vector2(xRangeIndex,yRangeIndex);
+            }while(isPartitionOccupied[rangeKey]);
+
+            float xPos = Random.Range(xRanges[(int)rangeKey.x].minVal, xRanges[(int)rangeKey.x].maxVal);
+            float yPos = Random.Range(yRanges[(int)rangeKey.y].minVal, yRanges[(int)rangeKey.y].maxVal);
+            
+            xPos = (xPos>xPanelSize/2) ? xPos/2 : xPos*-1;
+            yPos = (yPos>yPanelSize/2) ? yPos/2 : yPos*-1;
+
+            //Debug.Log($"Generated Position {xPos}-{yPos}");
             Vector3 spawnPosition = panelRect.TransformDirection(new Vector3(xPos, yPos, 0f));
             newButton.transform.localPosition = spawnPosition;
+            
+            Debug.Log($"Button Position {newButton.transform.localPosition}");
+            isPartitionOccupied[rangeKey]=true;
 
             // if(spawnedButtons.Count>0)
             // {
@@ -94,8 +138,38 @@ public class PlacableSelectionPanel : MonoBehaviour
         }
     }
 
+    public int FindTightestDivisor(float toBeDivided, float minimumSize)
+    {
+        int divisor = 1;
+        for (;;)
+        {
+            if(toBeDivided/(divisor+1)<minimumSize)
+            {
+                return divisor;
+            }
+            divisor+=1;
+        }
+    }
+
+    public List<FloatRange> GetRangeList(float toBeDivided, int divisor)
+    {
+        float interval = toBeDivided/divisor;
+        float counter = 0;
+        List<FloatRange> rangeList = new List<FloatRange>();
+        for (int i = 0; i < divisor; i++)
+        {
+            FloatRange floatRange = new FloatRange(counter, counter+interval);
+            if(floatRange.maxVal>toBeDivided)
+                floatRange.maxVal = toBeDivided;
+
+            rangeList.Add(floatRange);
+            counter+=interval;
+        }
+        return rangeList;
+    }
+
     public void HidePickPanel(){
-        image.color = new Color(0,0,0,0);
+        bgImage.color = new Color(0,0,0,0);
         for(int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(false);
@@ -125,7 +199,7 @@ public class PlacableSelectionPanel : MonoBehaviour
     }
 
     public void ShowPickPanel(){
-        image.color = initialColor;
+        bgImage.color = initialColor;
         for(int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
@@ -189,6 +263,15 @@ public class PlacableSelectionPanel : MonoBehaviour
 
         return rect1.Overlaps(rect2);
     }
+}
 
-
+public struct FloatRange
+{
+    public FloatRange(float minim, float maxim)
+    {
+        minVal = minim;
+        maxVal = maxim;
+    }
+    public float minVal;
+    public float maxVal;
 }
