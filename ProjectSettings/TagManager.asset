@@ -8,6 +8,9 @@ TagManager:
   - UIHelper
   - Goal
   - Arena
+  - HurtPlayer
+  - DeadZone
+  - PowerUp
   layers:
   - Default
   - TransparentFX

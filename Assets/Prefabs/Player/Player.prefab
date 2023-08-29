@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6576660683052921608}
   - component: {fileID: 6599120782886484389}
   - component: {fileID: 6477370333489673284}
+  - component: {fileID: 5425673759445880586}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -155,6 +156,9 @@ MonoBehaviour:
   jumpHeight: 2
   maxFallSpeed: 20
   rotateSpeed: 25
+  doubleJumpAvailable: 0
+  hasExtraLife: 0
+  hasShield: 0
 --- !u!114 &6576660683052921608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,3 +218,17 @@ MonoBehaviour:
   canvasRectTransform: {fileID: 0}
   cursorSpeed: 1000
   deltaValue: {x: 0, y: 0}
+  speedClamp: 10
+--- !u!114 &5425673759445880586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2616644028935604187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d141dbdec29d64193ddc607aa20a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 2616644028935604166}

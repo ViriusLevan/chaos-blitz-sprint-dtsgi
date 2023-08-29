@@ -74,4 +74,22 @@ public class MovingPlatform : MonoBehaviour
                 break;
         }
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.transform.parent.SetParent(transform);
+            other.rigidbody.interpolation = RigidbodyInterpolation.None;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.transform.parent.SetParent(null);
+            other.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        }
+    }
 }

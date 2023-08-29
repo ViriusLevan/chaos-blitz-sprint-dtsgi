@@ -2,18 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleJumpPowerUp: MonoBehaviour
+public class DoubleJumpPowerUp: MonoBehaviour, IPowerUp
 {
-    private void OnTriggerEnter(Collider other)
+    void IPowerUp.PowerUp(PlayerInteractor powerUp)
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerController playerController = other.GetComponent<PlayerController>();
-            if (playerController != null)
-            {
-                playerController.ActivateDoubleJump();
-                Destroy(gameObject); // Remove the power-up prefab after collecting
-            }
-        }
+        powerUp.ActivateDoubleJump();
+        Destroy(gameObject);
     }
 }

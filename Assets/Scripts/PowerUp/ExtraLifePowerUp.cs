@@ -2,18 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExtraLifePowerUp : MonoBehaviour
+public class ExtraLifePowerUp : MonoBehaviour, IPowerUp
 {
-    private void OnTriggerEnter(Collider other) 
+    void IPowerUp.PowerUp(PlayerInteractor powerUp)
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerController playerController = other.GetComponent<PlayerController>();
-            if (playerController != null)
-            {
-                playerController.ActivateExtraLife();
-                Destroy(gameObject); // Remove the power-up prefab after collecting
-            }
-        }    
+        powerUp.ActivateExtraLife();
+        Destroy(gameObject);
     }
 }

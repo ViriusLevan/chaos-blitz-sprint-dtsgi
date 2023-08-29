@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 [RequireComponent (typeof (Rigidbody))]
 [RequireComponent (typeof (CapsuleCollider))]
 public class PlayerController : MonoBehaviour {
-	[SerializeField]private PlayerInputHandler playerInputHandler;
+	[SerializeField] public PlayerInputHandler playerInputHandler;
 	
 	[SerializeField] private float speed = 10.0f;
 	[SerializeField] private float airVelocity = 8f;
@@ -35,9 +35,10 @@ public class PlayerController : MonoBehaviour {
 	// Double Jump PowerUp
 	private int jumpsLeft = 0; // Number of jumps left, including double jumps
 	private int maxJumps = 2; // Maximum number of jumps allowed, including double jumps
-	private bool doubleJumpAvailable = false; // Whether the double jump power-up is available
-	public bool hasExtraLife { get; private set; }
-	public bool hasShield { get; private set; }
+
+	public bool doubleJumpAvailable = false; // Whether the double jump power-up is available
+	public bool hasExtraLife;
+	public bool hasShield;
 
 	private void Start ()
 	{
@@ -204,42 +205,12 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public void ActivateDoubleJump()
+	public void SendBackToSpawn()
 	{
-		doubleJumpAvailable = true;
-	}
-
-	public void ActivateExtraLife()
-	{
-		hasExtraLife = true;
-	}
-
-	public void DectivateExtraLife()
-	{
-		hasExtraLife = false;
-	}
-
-	public void ActivateShield()
-	{
-		hasShield = true;
-		this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-	}
-
-	public void DeactivateShield()
-	{
-		hasShield = false;
-		this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-	}
-
-	public PlayerInputHandler GetPlayerInputHandler()
-	{
-		return playerInputHandler;
-	}
-
-	private void OnCollisionEnter(Collision other) {
-		if(other.gameObject.CompareTag("Goal")){
-			GameManager.Instance.PlayerFinished(playerInputHandler.playerConfig.playerIndex);
-		}
+		transform.position 
+			= GameManager.Instance.GetPlayerSpawnPoints()[
+				playerInputHandler.playerConfig.playerIndex
+				].position;
 	}
 
 	float CalculateJumpVerticalSpeed () {
@@ -248,16 +219,19 @@ public class PlayerController : MonoBehaviour {
 		return Mathf.Sqrt(2 * jumpHeight * gravity);
 	}
 
-	public void EnableMeshRenderer()
+	public void EnableMeshAndCollider()
 	{
 		GetComponent<MeshRenderer>().enabled=true;
+		//TODO check again : maybe final build uses another collider
+		GetComponent<CapsuleCollider>().enabled=true;
 	}
 
-	public void DisableMeshRenderer()
+	public void DisableMeshAndCollider()
 	{
 		//TODO - add more stuff, e.g. play animation or sfx
 		//this.gameObject.SetActive(false);
 		GetComponent<MeshRenderer>().enabled=false;
+		GetComponent<CapsuleCollider>().enabled=false;
 	}
 
 	public void HitPlayer(Vector3 velocityF, float time)
