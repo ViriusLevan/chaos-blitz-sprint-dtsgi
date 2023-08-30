@@ -137,7 +137,7 @@ public class PlayerInstance : MonoBehaviour
 		playerController.SendBackToSpawn();
 		freeLookCamera.Follow = buildCameraFollow.transform;
 		freeLookCamera.LookAt = buildCameraFollow.transform;
-		placementManager.SetCameraTransform(freeLookCamera.transform);
+		placementManager.SetCameraTransform(playerCamera.transform);
 		placementManager.InstantiateNewPlacable();
 		playerInputHandler.playerConfig.input.SwitchCurrentActionMap("BuildMode");
 		SetControlHelpText(PlayerStatus.Building);

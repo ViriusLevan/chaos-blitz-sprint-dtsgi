@@ -22,8 +22,10 @@ public class PlacementManager : MonoBehaviour
     public void SetReferenceTransform(Transform t)=> referenceTransform = t;
     public void SetCameraTransform(Transform t)=> cameraTransform=t;
 
+
     void Start()
     {
+        pendingObjMaterials =  new List<Material>();
         playerInputHandler = GetComponent<PlayerInputHandler>();
     }    
 
@@ -60,15 +62,14 @@ public class PlacementManager : MonoBehaviour
         if(pendingObj!=null){
             if(currentType == Placable.PlacableType.Hazard){
                 RaycastHit hit;
+                // Debug.DrawLine(cameraTransform.position
+                //         , cameraTransform.forward*20 + cameraTransform.position
+                //         , Color.red, 5.0f);
                 if(Physics.Raycast(cameraTransform.position
                     , cameraTransform.forward, out hit, 20f, platformLayer))
                 {
                     pos = hit.point;
                     //Debug.Log(hit.transform.name+" :"+hit.point);
-                    
-                    // Debug.DrawLine(cameraTransform.position
-                    //     , hit.point
-                    //     , Color.red, 5.0f);
                 }
                 else{
                     pos = referenceTransform.position;
@@ -142,25 +143,30 @@ public class PlacementManager : MonoBehaviour
         canPlace = currentType!=Placable.PlacableType.Hazard;
         pChecker.SetPlacableType(currentType);
         //placableNameText.text = placables[placableIndex].name;
+
+        MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
+        foreach (var item in mrs)
+        {
+            pendingObjMaterials.Add(item.material);
+        }
+
+        if(currentType==Placable.PlacableType.Hazard){
+            pendingObj.transform.eulerAngles += new Vector3(-90,0,0);
+        }
     }
+    private List<Material> pendingObjMaterials;
 
     public void PlaceObject(InputAction.CallbackContext context)
     {
         if(!canPlace) return;
         if(pendingObj==null) return;
 
-        int materialIndex=2;
-        switch(currentType){
-            case Placable.PlacableType.Platform:materialIndex=2;break;
-            case Placable.PlacableType.Obstacle:materialIndex=3;break;
-            case Placable.PlacableType.Hazard:materialIndex=4;break;
-        }
-
         MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
-        foreach (var item in mrs)
+        for (int i = 0; i < mrs.Length; i++)
         {
-            item.material = materials[materialIndex];
+            mrs[i].material = pendingObjMaterials[i];
         }
+        pendingObjMaterials.Clear();
         
         PlacementChecker toDestroy = pendingObj.GetComponent<PlacementChecker>();
         Destroy(toDestroy);
@@ -179,7 +185,8 @@ public class PlacementManager : MonoBehaviour
 
         //TODO set cross section material to something else
         if(targetPlatform!=null){
-            targetPlatform.SetCrossSectionMaterial(materials[materialIndex]);
+            if(placable.GetPlacableType()==Placable.PlacableType.Hazard)
+                targetPlatform.SetCrossSectionMaterial(placable.GetCrossSectionMaterial());
             targetPlatform.SetSliceTarget(pendingObj);
             targetPlatform.Slice(targetPlatform.gameObject);
             targetPlatform=null;
@@ -197,7 +204,6 @@ public class PlacementManager : MonoBehaviour
 
     private void UpdateMaterials()
     {
-        if(pendingObj==null) return;
         if(canPlace)
         {
             MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();

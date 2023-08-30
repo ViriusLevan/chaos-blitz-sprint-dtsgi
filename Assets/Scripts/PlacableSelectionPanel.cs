@@ -46,7 +46,7 @@ public class PlacableSelectionPanel : MonoBehaviour
             {
                 do{
                     index=Random.Range(0,placables.Length);
-                }while(placables[index].GetPlacableType()==Placable.PlacableType.Hazard);
+                }while(placables[index].GetPlacableType()!=Placable.PlacableType.Platform);
             }
             else
             {

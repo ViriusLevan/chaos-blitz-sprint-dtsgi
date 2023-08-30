@@ -1537,9 +1537,9 @@ MonoBehaviour:
   placableButtonPrefab: {fileID: 724137411727955676, guid: 8c7a8ab68e5d0b04d82640e9db579695, type: 3}
   selectionPanel: {fileID: 547570500}
   placables:
-  - {fileID: 11400000, guid: bea2ad9b68a289c4e9f4d68ffad155f9, type: 2}
+  - {fileID: 11400000, guid: a6b5afddd583fe9448b0e8f2583f9c24, type: 2}
+  - {fileID: 11400000, guid: 1fb09137a0ae89f4e96234e70b3fe8ed, type: 2}
   - {fileID: 11400000, guid: 941eb36eb78f6a54faaae997c509987e, type: 2}
-  - {fileID: 11400000, guid: cdc08b93f4983104c801193474670e20, type: 2}
   bgImage: {fileID: 737174249}
   controlHelpPanel: {fileID: 388650857}
 --- !u!1 &1240808842

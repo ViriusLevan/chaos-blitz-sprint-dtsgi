@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695ff6480ce82d145b6a073482263ca6, type: 3}
+  m_Name: '[Placable-Hazard]Sticky'
+  m_EditorClassIdentifier: 
+  placableName: Sticky
+  prefab: {fileID: 6132208711907284193, guid: e3dcbb5276b9ffd41a4ea17f07a7b319, type: 3}
+  crossSectionMaterial: {fileID: 2100000, guid: ff5e4d3a4c1271040b86519cafd1f86b, type: 2}
+  type: 2
+  sprite: {fileID: 21300074, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}

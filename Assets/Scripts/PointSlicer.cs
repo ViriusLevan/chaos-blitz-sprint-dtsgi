@@ -20,6 +20,7 @@ public class PointSlicer : MonoBehaviour
     }
 
     public void Slice(GameObject targetPlatform = null){
+        string originalName = toBeSliced.name;
         for (int i = 0; i < boundaryPoints.Length; i++)
         {
             Vector3 pointA = new Vector3(); 
@@ -73,6 +74,7 @@ public class PointSlicer : MonoBehaviour
         {
             toBeSliced.transform.SetParent(targetPlatform.transform);
         }
+        toBeSliced.name = originalName;
         toBeSliced=null;
     }
 
