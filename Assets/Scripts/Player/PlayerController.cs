@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 	
 	private bool IsGrounded ()
 	{
-		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.2f);
 	}
 	
 	private void Awake ()
@@ -227,9 +227,13 @@ public class PlayerController : MonoBehaviour {
 		return Mathf.Sqrt(2 * jumpHeight * gravity);
 	}
 
+	[SerializeField]private MeshRenderer[]playerMeshes;
 	public void EnableMeshAndCollider()
 	{
-		GetComponent<MeshRenderer>().enabled=true;
+		foreach (MeshRenderer mr in playerMeshes)
+		{
+			mr.enabled=true;
+		}
 		//TODO check again : maybe final build uses another collider
 		GetComponent<CapsuleCollider>().enabled=true;
 	}
@@ -238,7 +242,10 @@ public class PlayerController : MonoBehaviour {
 	{
 		//TODO - add more stuff, e.g. play animation or sfx
 		//this.gameObject.SetActive(false);
-		GetComponent<MeshRenderer>().enabled=false;
+		foreach (MeshRenderer mr in playerMeshes)
+		{
+			mr.enabled=false;
+		}
 		GetComponent<CapsuleCollider>().enabled=false;
 	}
 

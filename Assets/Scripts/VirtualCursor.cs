@@ -16,7 +16,7 @@ public class VirtualCursor : MonoBehaviour
     private Canvas centerCanvas;
     [SerializeField]
     private RectTransform canvasRectTransform;
-    [SerializeField]private float cursorSpeed = 500;
+    [SerializeField]private float cursorSpeed = 1000;
 
     private bool previousMouseState;
     private Mouse virtualMouse;

@@ -613,7 +613,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3133561229939455309}
-  m_LocalRotation: {x: 0.2566679, y: -0.000000029001464, z: 0.000000007701757, w: 0.9664997}
+  m_LocalRotation: {x: 0.25666794, y: 0.0000000033791123, z: -8.973711e-10, w: 0.9664997}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1774,6 +1774,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2616644028935604186, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
+      propertyPath: m_Center.y
+      value: -0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2616644028935604187, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1794,7 +1798,9 @@ PrefabInstance:
       propertyPath: buildCameraFollowTarget
       value: 
       objectReference: {fileID: 5420310802439046530}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2616644028935604185, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
+    - {fileID: 2616644028935604184, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
 --- !u!4 &3710170968726190236 stripped
 Transform:

@@ -98,10 +98,10 @@ public class PlacementManager : MonoBehaviour
         float verticalInput 
             = playerInputHandler.playerConfig.input
                 .actions["VerticalMotion"].ReadValue<float>();
-        if(verticalInput<0 & referenceTransform.position.y>0){
+        if(verticalInput<0){
             referenceTransform.position -= new Vector3(0,3f*Time.deltaTime,0);
         }
-        if(verticalInput>0 & referenceTransform.position.y<10){
+        if(verticalInput>0){
             referenceTransform.position += new Vector3(0,3f*Time.deltaTime,0);
         }
     }
