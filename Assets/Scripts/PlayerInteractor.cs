@@ -57,7 +57,10 @@ public class PlayerInteractor : MonoBehaviour
 				}
 				else
 				{
+					PlayDeathFX();
 					playerController.DisableMeshAndCollider();
+					GameManager.Instance.PlayerDied(playerController
+						.playerInputHandler.playerConfig.playerIndex);
 				}
 				break;
 			case "DeadZone":
@@ -69,6 +72,7 @@ public class PlayerInteractor : MonoBehaviour
 				}
 				else
 				{
+					PlayDeathFX();
 					playerController.DisableMeshAndCollider();
 					GameManager.Instance.PlayerDied(playerController
 						.playerInputHandler.playerConfig.playerIndex);
@@ -79,5 +83,13 @@ public class PlayerInteractor : MonoBehaviour
            		other.gameObject.GetComponent<IPowerUp>()?.PowerUp(this);
 				break; 
 		}
+	}
+
+	private void PlayDeathFX()
+	{
+		SoundManager.Instance?.PlaySound(SoundEnum.HitSound);
+		VFXManager.Instance?.PlayEffect(VFXEnum.BloodEffect
+			, transform.position
+			, new Vector3());
 	}
 }

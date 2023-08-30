@@ -432,6 +432,59 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5688885521264619753, guid: e31f7efe27e0a894eb13695ecb0c54d3, type: 3}
   m_PrefabInstance: {fileID: 5688885522152563381}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1654262791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1654262793}
+  - component: {fileID: 1654262792}
+  m_Layer: 0
+  m_Name: VFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1654262792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654262791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d390d5ede8234964e9ac7c0ebb05035e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VFX_Blood: {fileID: 194062, guid: 8c27aeead6d968e4ba986702d6b84335, type: 3}
+  VFX_Water: {fileID: 1687118924408352, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
+  VFX_Jump: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
+  VFX_Win: {fileID: 3199805549887574557, guid: cdeab0f9f1c79f748926b3a8684028af, type: 3}
+  VFX_Run: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+  VFX_Canon: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
+  VFX_Arrow: {fileID: 5880797563127281583, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
+  VFX_Place: {fileID: 5137123306192418792, guid: 5a8d99fb95262ea458a7b580f2a1611c, type: 3}
+  SpawnEffect: {fileID: 0}
+--- !u!4 &1654262793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654262791}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1733583261 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5688885522351683749, guid: e31f7efe27e0a894eb13695ecb0c54d3, type: 3}
@@ -575,10 +628,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f7531ca5c593ae4d930f123cd79fad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aSourceBGM: {fileID: 2018517059}
-  playerJump: {fileID: 8300000, guid: 0a69baa4b6dc7394e9ef91e1b520c949, type: 3}
-  playerFinish: {fileID: 8300000, guid: dc2828a72e47e6541b2036986bd8e287, type: 3}
-  playerDeath: {fileID: 8300000, guid: ffd04775cd959cd43a7b96c2eaf329ef, type: 3}
+  aSourceBGM: {fileID: 0}
+  waterSplashSFX: {fileID: 8300000, guid: 22f60a6325eb42b459a14a239c8b0e72, type: 3}
+  hitSFX: {fileID: 8300000, guid: b08c867b272bf5544899d94756df6717, type: 3}
+  arrowSFX: {fileID: 8300000, guid: fae6e454c896a614892de2fa5061f213, type: 3}
+  canonSFX: {fileID: 8300000, guid: 415967dee66f424428f88529c766c1a3, type: 3}
+  paperSFX: {fileID: 8300000, guid: 29f81183f1f1f4d4bbe7cb5a205d34f8, type: 3}
+  playerJump: {fileID: 8300000, guid: 101edf454c43e1042baaeaef8ec9266a, type: 3}
+  poofSFX: {fileID: 8300000, guid: b790e09e2ea3fb2438260df6b192e001, type: 3}
+  playerFinish: {fileID: 8300000, guid: 38630689a53401d4db2323e3f590a24c, type: 3}
+  playerDeath: {fileID: 8300000, guid: 6868a1bf18116ae4689bd2ec5d460e2c, type: 3}
+  laughSFX: {fileID: 8300000, guid: 38630689a53401d4db2323e3f590a24c, type: 3}
+  FireworkSFX: {fileID: 8300000, guid: 6868a1bf18116ae4689bd2ec5d460e2c, type: 3}
 --- !u!4 &2018517061
 Transform:
   m_ObjectHideFlags: 0

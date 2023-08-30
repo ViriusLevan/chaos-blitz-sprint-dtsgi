@@ -185,6 +185,11 @@ public class PlacementManager : MonoBehaviour
             targetPlatform=null;
         }
 
+        SoundManager.Instance?.PlaySound(SoundEnum.PoofSound);
+        VFXManager.Instance?.PlayEffect(VFXEnum.PlaceEffect
+            , pendingObj.transform.position
+            , new Vector3());
+
         pendingObj = null;
         GameManager.Instance.PlayerBuilt(playerInputHandler.playerConfig.playerIndex);
         Debug.Log($"Player {playerInputHandler.playerConfig.playerIndex} finished placing");

@@ -213,7 +213,16 @@ public class PlayerController : MonoBehaviour {
 				].position;
 	}
 
+	private void PlayJumpFX()
+	{
+		VFXManager.Instance?.PlayEffect(VFXEnum.JumpEffect
+			, transform.position
+			, new Vector3());
+		SoundManager.Instance?.PlaySound(SoundEnum.PlayerJump);
+	}
+
 	float CalculateJumpVerticalSpeed () {
+		PlayJumpFX();
 		// From the jump height and gravity we deduce the upwards speed 
 		// for the character to reach at the apex.
 		return Mathf.Sqrt(2 * jumpHeight * gravity);
