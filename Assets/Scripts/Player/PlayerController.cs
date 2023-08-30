@@ -119,7 +119,6 @@ public class PlayerController : MonoBehaviour {
 				// Jump
 				if (IsGrounded() && jumped)
 				{
-					SoundManager.Instance?.PlaySound(SoundEnum.PlayerJump);
                     rb.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
 					jumpsLeft -= 1;
 					jumped = false;

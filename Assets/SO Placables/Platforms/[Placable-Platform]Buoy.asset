@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695ff6480ce82d145b6a073482263ca6, type: 3}
+  m_Name: '[Placable-Platform]Buoy'
+  m_EditorClassIdentifier: 
+  placableName: Buoy
+  prefab: {fileID: 5351239486521681333, guid: dfdb3d75b29c3cf41a1fd3a7b4683c7d, type: 3}
+  crossSectionMaterial: {fileID: 2100000, guid: 873aa386a0819d04a92db33bca0ac4cd, type: 2}
+  type: 0
+  sprite: {fileID: 21300090, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}

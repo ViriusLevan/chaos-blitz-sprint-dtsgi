@@ -1539,7 +1539,11 @@ MonoBehaviour:
   placables:
   - {fileID: 11400000, guid: a6b5afddd583fe9448b0e8f2583f9c24, type: 2}
   - {fileID: 11400000, guid: 1fb09137a0ae89f4e96234e70b3fe8ed, type: 2}
-  - {fileID: 11400000, guid: 941eb36eb78f6a54faaae997c509987e, type: 2}
+  - {fileID: 11400000, guid: 50a65fefe83579845b643b5f1cc99763, type: 2}
+  - {fileID: 11400000, guid: de8d365334c94c644a208435b734302a, type: 2}
+  - {fileID: 11400000, guid: c62a6ff2f46794a42bae9c277bb672cd, type: 2}
+  - {fileID: 11400000, guid: a3c6bd75021e0ba4b9b42ab26078ad2d, type: 2}
+  - {fileID: 11400000, guid: 5bd2902b9f2b83b4582c0f4b98bb363e, type: 2}
   bgImage: {fileID: 737174249}
   controlHelpPanel: {fileID: 388650857}
 --- !u!1 &1240808842

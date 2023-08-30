@@ -14,11 +14,15 @@ public class MovingPlatform : MonoBehaviour
 
     public Direction dir;
     [SerializeField] private Vector3 originalPosition;
+    private Vector3 originalForward, originalUpward, originalRight;
     [SerializeField] private float distance;
     [SerializeField] private float duration;
 
     private void Start()
     {
+        originalForward=transform.forward;
+        originalUpward =transform.up;
+        originalRight = transform.right;
         originalPosition = transform.position;
     }
 
@@ -62,15 +66,19 @@ public class MovingPlatform : MonoBehaviour
 
     private void MovePos()
     {
+        float destination=originalPosition.x;
         switch (dir) {
             case Direction.x :
-                transform.DOMoveX(originalPosition.x + distance, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                destination = (originalForward*distance + originalPosition).x;
+                transform.DOMoveX(destination, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                 break;
             case Direction.y :
-                transform.DOMoveY(originalPosition.y + distance, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                destination = (originalUpward*distance + originalPosition).y;
+                transform.DOMoveY(destination, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                 break;
             case Direction.z :
-                transform.DOMoveZ(originalPosition.z + distance, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                destination = (originalRight*distance + originalPosition).y;
+                transform.DOMoveZ(destination, 2f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                 break;
         }
     }
