@@ -469,7 +469,6 @@ MonoBehaviour:
   VFX_Canon: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
   VFX_Arrow: {fileID: 5880797563127281583, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
   VFX_Place: {fileID: 5137123306192418792, guid: 5a8d99fb95262ea458a7b580f2a1611c, type: 3}
-  SpawnEffect: {fileID: 0}
 --- !u!4 &1654262793
 Transform:
   m_ObjectHideFlags: 0
@@ -637,7 +636,7 @@ MonoBehaviour:
   playerJump: {fileID: 8300000, guid: 101edf454c43e1042baaeaef8ec9266a, type: 3}
   poofSFX: {fileID: 8300000, guid: b790e09e2ea3fb2438260df6b192e001, type: 3}
   playerFinish: {fileID: 8300000, guid: 38630689a53401d4db2323e3f590a24c, type: 3}
-  playerDeath: {fileID: 8300000, guid: 6868a1bf18116ae4689bd2ec5d460e2c, type: 3}
+  playerDeath: {fileID: 8300000, guid: ffd04775cd959cd43a7b96c2eaf329ef, type: 3}
   laughSFX: {fileID: 8300000, guid: 38630689a53401d4db2323e3f590a24c, type: 3}
   FireworkSFX: {fileID: 8300000, guid: 6868a1bf18116ae4689bd2ec5d460e2c, type: 3}
 --- !u!4 &2018517061

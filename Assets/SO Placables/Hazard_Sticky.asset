@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 695ff6480ce82d145b6a073482263ca6, type: 3}
   m_Name: Hazard_Sticky
   m_EditorClassIdentifier: 
-  placableName: Stickt
+  placableName: Sticky
   prefab: {fileID: 9108084652896362057, guid: 97b6d8d15303cd349927243e2c46b95a, type: 3}
+  crossSectionMaterial: {fileID: 0}
   type: 2
   sprite: {fileID: 21300000, guid: f95f697d66d238446b1ab717def09945, type: 3}
