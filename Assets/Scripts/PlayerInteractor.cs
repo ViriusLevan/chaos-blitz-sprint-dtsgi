@@ -72,7 +72,10 @@ public class PlayerInteractor : MonoBehaviour
 				}
 				else
 				{
-					PlayDeathFX();
+					if(other.gameObject.name.Contains("Water"))
+						PlaySplashFX();
+					else
+						PlayDeathFX();
 					playerController.DisableMeshAndCollider();
 					GameManager.Instance.PlayerDied(playerController
 						.playerInputHandler.playerConfig.playerIndex);
@@ -90,6 +93,14 @@ public class PlayerInteractor : MonoBehaviour
 		SoundManager.Instance?.PlaySound(SoundEnum.HitSound);
 		VFXManager.Instance?.PlayEffect(VFXEnum.BloodEffect
 			, transform.position
+			, new Vector3());
+	}
+
+	private void PlaySplashFX()
+	{
+		SoundManager.Instance?.PlaySound(SoundEnum.WaterSound);
+		VFXManager.Instance?.PlayEffect(VFXEnum.WaterEffect
+			, transform.position + new Vector3(0,2,0)
 			, new Vector3());
 	}
 }
