@@ -5,8 +5,8 @@ using DG.Tweening;
 
 public class RotatePlatform : MonoBehaviour
 {
-    [SerializeField] private float duration;
-    [SerializeField] private Vector3 finalRot;
+    [SerializeField] private GameObject rotatingObject;
+    [SerializeField] private float rotationSpeed;
 
     private void Start()
     {
@@ -14,7 +14,17 @@ public class RotatePlatform : MonoBehaviour
 
     private void Rotate()
     {
-        transform.DORotate(new Vector3(finalRot.x, finalRot.y, finalRot.z), duration, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
+        StartCoroutine(RotateForever());
+    }
+
+    private IEnumerator RotateForever()
+    {
+        while (true)
+        {
+            float rotationAmount = rotationSpeed * Time.deltaTime;
+            rotatingObject.transform.Rotate(Vector3.up, rotationAmount);
+            yield return null;
+        }
     }
 
     void OnEnable()

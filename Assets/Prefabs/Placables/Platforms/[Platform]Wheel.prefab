@@ -102,10 +102,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 565301427698431329}
-  - component: {fileID: 5675827784581240466}
   - component: {fileID: 565301427438876848}
   - component: {fileID: 1912784186723820120}
   - component: {fileID: 889180397769233479}
+  - component: {fileID: 6150219140406978954}
   m_Layer: 15
   m_Name: '[Platform]Wheel'
   m_TagString: Untagged
@@ -135,20 +135,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &5675827784581240466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 565301427698431328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7504b7ab21e50d14fa13055925af2ffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 5
-  finalRot: {x: 0, y: 180, z: 0}
 --- !u!54 &565301427438876848
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -200,6 +186,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.8204117, y: 0.34606528, z: 3}
   m_Center: {x: 0.049942017, y: 0.3287471, z: 0.0050759315}
+--- !u!114 &6150219140406978954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 565301427698431328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7504b7ab21e50d14fa13055925af2ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotatingObject: {fileID: 565301427698431328}
+  rotationSpeed: 30
 --- !u!1 &565301428416946715
 GameObject:
   m_ObjectHideFlags: 0

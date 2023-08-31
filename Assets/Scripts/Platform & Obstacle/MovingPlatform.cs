@@ -5,21 +5,20 @@ using DG.Tweening;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public enum Direction
+    public enum MovementDirection
     {
-        x,
-        y,
-        z
+        Horizontal,
+        Vertical
     }
 
-    public Direction dir;
-    [SerializeField] private Vector3 originalPosition;
+    public MovementDirection dir;
+    private Vector3 initialPosition;
     [SerializeField] private float distance;
-    [SerializeField] private float duration;
+    [SerializeField] private float speed;
 
     private void Start()
     {
-        originalPosition = transform.position;
+        initialPosition = transform.localPosition;
     }
 
     
@@ -62,21 +61,22 @@ public class MovingPlatform : MonoBehaviour
 
     private void MovePos()
     {
-        float destination=originalPosition.x;
-        switch (dir) {
-            case Direction.x :
-                destination =  originalPosition.x+distance;
-                transform.DOMoveX(destination, duration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
-                break;
-            case Direction.y :
-                destination = originalPosition.y+distance;
-                transform.DOMoveY(destination, duration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
-                break;
-            case Direction.z :
-                destination = originalPosition.z+distance;
-                transform.DOMoveZ(destination, duration).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
-                break;
-        }
+        // Calculate the movement direction based on the local rotation
+        Vector3 movementDirection = dir == MovementDirection.Horizontal ? transform.TransformDirection(Vector3.right) : transform.TransformDirection(Vector3.up);
+
+        // Calculate the normalized time using the custom easing function
+        float easedTime = CustomEaseInOutSine(Mathf.PingPong(Time.time * speed / distance, 1f));
+
+        // Calculate the target position based on the initial position and the movement direction
+        Vector3 targetPosition = initialPosition + movementDirection * easedTime * distance;
+
+        // Move the platform to the target position
+        transform.localPosition = targetPosition;
+    }
+
+    private float CustomEaseInOutSine(float t)
+    {
+        return -0.5f * (Mathf.Cos(Mathf.PI * t) - 1f);
     }
 
     private void OnCollisionEnter(Collision other)

@@ -20,6 +20,6 @@ public class FallingPlatform : MonoBehaviour
 	IEnumerator Fall(float time)
 	{
 		yield return new WaitForSeconds(time);
-		Destroy(gameObject);
+		gameObject.SetActive(false);
 	}
 }

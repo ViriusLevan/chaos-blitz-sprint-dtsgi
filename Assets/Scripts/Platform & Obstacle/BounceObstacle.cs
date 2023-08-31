@@ -11,7 +11,8 @@ public class BounceObstacle : MonoBehaviour
         if (other.collider.CompareTag("Player"))
         {
             Rigidbody otherRb = other.rigidbody;
-            otherRb.AddForce(Vector3.up * bounceForce, ForceMode.Impulse);
+            Vector3 bounceDirection = transform.TransformDirection(Vector3.up); // Get local up direction of trampoline
+            otherRb.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
         }
     }
 }

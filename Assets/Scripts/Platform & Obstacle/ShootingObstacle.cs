@@ -28,7 +28,7 @@ public class ShootingObstacle : MonoBehaviour
     private void Shoot()
     {
         Vector3 spawnPosition = transform.position;
-        Vector3 shootDirection = transform.right;
+        Vector3 shootDirection = transform.forward;
 
         GameObject shooty = objectPooler.GetPooled();
 

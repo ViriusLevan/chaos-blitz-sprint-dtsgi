@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6605942835568364148}
   - component: {fileID: 7873217500940954288}
   - component: {fileID: 6605942834259130942}
+  - component: {fileID: 6605942834259130943}
   m_Layer: 0
   m_Name: '[Obstacle]BrokenPole'
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivotPoint: {fileID: 3242249576271139226}
-  duration: 2
+  swingingSpeed: 60
   swingAngle: 30
 --- !u!54 &6605942834259130942
 Rigidbody:
@@ -65,6 +66,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6605942834259130943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6605942835568364155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7504b7ab21e50d14fa13055925af2ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotatingObject: {fileID: 3242249576271139226}
+  rotationSpeed: 40
 --- !u!1001 &4492090459269106973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83,6 +98,10 @@ PrefabInstance:
     - target: {fileID: 1865057713383605821, guid: 8449265dcb91a6642908b822bd38ebaf, type: 3}
       propertyPath: m_LocalScale.z
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1865057713383605821, guid: 8449265dcb91a6642908b822bd38ebaf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.94
       objectReference: {fileID: 0}
     - target: {fileID: 3254792386592433150, guid: 8449265dcb91a6642908b822bd38ebaf, type: 3}
       propertyPath: m_LocalScale.x
