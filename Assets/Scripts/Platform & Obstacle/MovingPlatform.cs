@@ -21,6 +21,13 @@ public class MovingPlatform : MonoBehaviour
         initialPosition = transform.localPosition;
     }
 
+    private bool active=false;
+
+    private void Update() 
+    {
+        if(active)
+            MovePos();
+    }
     
     private void OnEnable() 
     {
@@ -44,11 +51,12 @@ public class MovingPlatform : MonoBehaviour
 
     private void Activate()
     {
-        MovePos();
+        active=true;
     }
 
     private void Deactivate()
     {
+        active=false;
         DOTween.Pause(transform);
     }
 

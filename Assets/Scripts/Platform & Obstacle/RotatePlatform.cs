@@ -12,18 +12,24 @@ public class RotatePlatform : MonoBehaviour
     {
     }
 
+    private bool active=false;
+    private void Update() 
+    {
+        if(active)
+            Rotate();
+    }
+
     private void Rotate()
     {
-        StartCoroutine(RotateForever());
+        float rotationAmount = rotationSpeed * Time.deltaTime;
+        rotatingObject.transform.Rotate(Vector3.up, rotationAmount);
     }
 
     private IEnumerator RotateForever()
     {
         while (true)
         {
-            float rotationAmount = rotationSpeed * Time.deltaTime;
-            rotatingObject.transform.Rotate(Vector3.up, rotationAmount);
-            yield return null;
+            
         }
     }
 
@@ -33,27 +39,28 @@ public class RotatePlatform : MonoBehaviour
         GameManager.platformingPhaseFinished+=Reset;
     }
 
-    void OnDestroy()
+    void OnDisable()
     {
         GameManager.platformingPhaseBegin-=Activate;
         GameManager.platformingPhaseFinished-=Reset;
-        DOTween.Kill(transform, false);
+        // DOTween.Kill(transform, false);
     }
 
     private void Activate()
     {
-        Rotate();
+        active=true;
     }
 
     private void Deactivate()
     {
-        DOTween.Pause(transform);
+        active=false;
+        // DOTween.Pause(transform);
     }
 
     private void Reset()
     {
-        DOTween.Rewind(transform);
-        DOTween.Kill(transform, true);
+        // DOTween.Rewind(transform);
+        // DOTween.Kill(transform, true);
         //transform.position = originalPosition;
     }
     private void OnCollisionEnter(Collision other)
