@@ -887,8 +887,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.7265352, z: 1}
+  m_Center: {x: 0, y: 0.13673238, z: 0}
 --- !u!23 &544105010
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1101,6 +1101,10 @@ PrefabInstance:
     - target: {fileID: 7530303292363286313, guid: 87d914f06ccc9b947a7c60b10e59f993, type: 3}
       propertyPath: m_Name
       value: P_ocean
+      objectReference: {fileID: 0}
+    - target: {fileID: 7530303292363286313, guid: 87d914f06ccc9b947a7c60b10e59f993, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7530303292363286317, guid: 87d914f06ccc9b947a7c60b10e59f993, type: 3}
       propertyPath: m_RootOrder
@@ -2452,7 +2456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9def87947034e6d419defb881c635840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placableSelectionPanel: {fileID: 1220107611}
   currentGameStatus: 0
   lapCounter: 0
   roundType: {fileID: 11400000, guid: 0060a197f4c699c4f95b8ac9d98a9ddb, type: 2}
@@ -2857,8 +2860,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643248637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -6.7, z: 0}
-  m_LocalScale: {x: 30, y: 1, z: 30}
+  m_LocalPosition: {x: 0, y: -4.5, z: 0}
+  m_LocalScale: {x: 150, y: 1, z: 150}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1577923684}
@@ -2875,7 +2878,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 1, z: 5}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1643248640
 MeshRenderer:

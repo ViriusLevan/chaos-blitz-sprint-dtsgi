@@ -75,7 +75,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
 
         public delegate void OnPhase();
         public static event OnPhase pickPhaseFinished, buildPhaseFinished, platformingPhaseFinished
-            , pickPhaseBegin, buildPhaseBegin, platformingPhaseBegin;
+            , pickPhaseBegin, buildPhaseBegin, platformingPhaseBegin, gamePaused, gameUnpaused;
         
 
         public void PlayerPicked(int pIndex, Placement.Placable placable = null)
@@ -197,9 +197,17 @@ namespace LevelUpStudio.ChaosBlitzSprint
                         playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Platforming);
                         break;
                     case GameStatus.Animation:
+                    case GameStatus.Paused:
                         playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Awaiting);
                         break;
                 }
+            }
+            
+            if(currentGameStatus == GameStatus.Paused)
+            {
+                gameUnpaused.Invoke();
+                currentGameStatus = targetPhase;
+                return;
             }
 
             switch(targetPhase){
@@ -213,6 +221,9 @@ namespace LevelUpStudio.ChaosBlitzSprint
                     platformingPhaseBegin?.Invoke();
                     break;
                 case GameStatus.Animation:
+                    break;
+                case GameStatus.Paused:
+                    gamePaused.Invoke();
                     break;
             }
         }

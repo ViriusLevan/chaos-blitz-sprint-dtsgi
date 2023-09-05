@@ -32,12 +32,16 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         private void OnEnable() 
         {
             GameManager.platformingPhaseBegin+=Activate;
+			GameManager.gamePaused+=Deactivate;
+			GameManager.gameUnpaused+=Reactivate;
             GameManager.platformingPhaseFinished+=Reset;
         }
 
         private void OnDisable() 
         {
             GameManager.platformingPhaseBegin-=Activate;
+			GameManager.gamePaused-=Deactivate;
+			GameManager.gameUnpaused-=Reactivate;
             GameManager.platformingPhaseFinished-=Reset;
             DOTween.Kill(transform, false);
         }
@@ -59,7 +63,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             active=false;
             DOTween.Pause(transform);
         }
-
+		private void Reactivate()
+		{
+			active=true;
+		}
+        
         private void Reset()
         {
             DOTween.Rewind(transform);

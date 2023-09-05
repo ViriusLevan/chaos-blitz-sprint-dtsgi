@@ -25,23 +25,20 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             rotatingObject.transform.Rotate(Vector3.up, rotationAmount);
         }
 
-        private IEnumerator RotateForever()
-        {
-            while (true)
-            {
-                
-            }
-        }
 
         void OnEnable()
         {
             GameManager.platformingPhaseBegin+=Activate;
+			GameManager.gamePaused+=Deactivate;
+			GameManager.gamePaused+=Reactivate;
             GameManager.platformingPhaseFinished+=Reset;
         }
 
         void OnDisable()
         {
             GameManager.platformingPhaseBegin-=Activate;
+			GameManager.gamePaused-=Deactivate;
+			GameManager.gamePaused-=Reactivate;
             GameManager.platformingPhaseFinished-=Reset;
             // DOTween.Kill(transform, false);
         }
@@ -56,6 +53,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             active=false;
             // DOTween.Pause(transform);
         }
+		private void Reactivate()
+		{
+			active=true;
+		}
 
         private void Reset()
         {
