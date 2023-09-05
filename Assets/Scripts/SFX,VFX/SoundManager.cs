@@ -21,7 +21,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
 
-    public AudioSource aSourceBGM;
+    [SerializeField]private AudioSource aSourceBGM;
 
     public Dictionary<SoundEnum, AudioClip> soundLibrary = new Dictionary<SoundEnum, AudioClip>();
     public AudioClip waterSplashSFX;
@@ -49,6 +49,16 @@ public class SoundManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(Instance);
         }
+        if (!PlayerPrefs.HasKey("musicVolume"))
+        {            
+            SoundManager.Instance?.SetMusicVolume( 0.3f);
+            SoundManager.Instance?.SetSFXVolume(0.10f);
+        }
+        else
+        {
+            musicVolume = PlayerPrefs.GetFloat("musicVolume");
+            sfxVolume = PlayerPrefs.GetFloat("sfxVolume");
+        }
     }
 
     void Start()
@@ -71,7 +81,7 @@ public class SoundManager : MonoBehaviour
         {
             AudioClip clip = soundLibrary[sound];
             //audioSource.PlayOneShot(clip);
-            AudioSource.PlayClipAtPoint(clip, transform.position,1f);
+            AudioSource.PlayClipAtPoint(clip, transform.position,sfxVolume);
             Debug.Log("SoundEnum="+sound.ToString());
         }
         else
@@ -83,5 +93,29 @@ public class SoundManager : MonoBehaviour
     public void SetBGM()
     {
         aSourceBGM.Play();
+    }
+
+    
+    public float musicVolume {get; private set;}
+    public float sfxVolume {get; private set;}
+
+    public delegate void OnVolumeChanged();
+    public static event OnVolumeChanged musicVolumeChange, sfxVolumeChange;
+
+    public void SetMusicVolume(float newVol)
+    {
+        musicVolume = newVol;
+        musicVolumeChange?.Invoke();
+        aSourceBGM.volume = newVol;
+        PlayerPrefs.SetFloat("musicVolume", musicVolume);
+        PlayerPrefs.Save();
+    }
+
+    public void SetSFXVolume(float newVol)
+    {
+        sfxVolume = newVol;
+        sfxVolumeChange?.Invoke();
+        PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
+        PlayerPrefs.Save();
     }
 }

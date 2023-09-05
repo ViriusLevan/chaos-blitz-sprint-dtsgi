@@ -95,14 +95,12 @@ public class PlacableSelectionPanel : MonoBehaviour
                 rangeKey = new Vector2(xRangeIndex,yRangeIndex);
             }while(isPartitionOccupied[rangeKey]);
             //Debug.Log($"Range Key {rangeKey}");
-
-            //Isn't this just the centerpoint since the padding is so opressive? lol
-            float xPos = Random.Range(
-                xRanges[(int)rangeKey.x].minVal + (xButtonSize/2)
-                , xRanges[(int)rangeKey.x].maxVal - (xButtonSize/2));
-            float yPos = Random.Range(
-                yRanges[(int)rangeKey.y].minVal + (yButtonSize/2)
-                , yRanges[(int)rangeKey.y].maxVal - (yButtonSize/2));
+            //Centerpoint instead of random
+            float xPos =  Mathf.Lerp(xRanges[(int)rangeKey.x].minVal,xRanges[(int)rangeKey.x].maxVal,0.5f);
+            float yPos =  Mathf.Lerp(yRanges[(int)rangeKey.y].minVal,yRanges[(int)rangeKey.y].maxVal,0.5f);
+            // Random.Range(
+            //     yRanges[(int)rangeKey.y].minVal + (yButtonSize/2)
+            //     , yRanges[(int)rangeKey.y].maxVal - (yButtonSize/2));
             
             xPos = (xPos>xPanelSize/2) ? xPos/2 : xPos*-1;
             yPos = (yPos>yPanelSize/2) ? yPos/2 : yPos*-1;

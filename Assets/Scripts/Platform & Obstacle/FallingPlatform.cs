@@ -53,9 +53,7 @@ public class FallingPlatform : MonoBehaviour
 				counter+=Time.deltaTime;
 				if(counter>=fallTime)
 				{
-					triggered=false;
-					counter=0;
-
+					FallDown();
 				}
 			}
 		}
@@ -70,7 +68,12 @@ public class FallingPlatform : MonoBehaviour
 				originalPosition+new Vector3(0,-10,0),
 				Time.deltaTime*speed
 			);
-	
+		if(Time.deltaTime*speed>1f)
+		{
+			triggered=false;
+			counter=0;
+			transform.position = originalPosition;
+		}
 	}
 
 	private void Activate()
