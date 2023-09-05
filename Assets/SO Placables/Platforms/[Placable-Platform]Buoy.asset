@@ -16,4 +16,4 @@ MonoBehaviour:
   prefab: {fileID: 5351239486521681333, guid: dfdb3d75b29c3cf41a1fd3a7b4683c7d, type: 3}
   crossSectionMaterial: {fileID: 2100000, guid: 873aa386a0819d04a92db33bca0ac4cd, type: 2}
   type: 0
-  sprite: {fileID: 21300090, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+  sprite: {fileID: 21300000, guid: f232e9917a33a2c459bc73a474a9da0b, type: 3}
