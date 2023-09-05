@@ -1,25 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
-public class SpawnPlayerSetupMenu : MonoBehaviour
+namespace LevelUpStudio.ChaosBlitzSprint.Player
 {
-    private GameObject rootMenu;
-    public GameObject playerSetupMenuPrefab;
-    public PlayerInput input;
-
-    private void Awake()
+    public class SpawnPlayerSetupMenu : MonoBehaviour
     {
-        rootMenu = GameObject.Find("PlayerReadyMenu");
-        if(rootMenu != null)
+        private GameObject rootMenu;
+        public GameObject playerSetupMenuPrefab;
+        public PlayerInput input;
+
+        private void Awake()
         {
-            GameObject menu = Instantiate(playerSetupMenuPrefab, rootMenu.transform);
-            input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
-            menu.GetComponent<PlayerSetupMenuController>().SetPlayerIndex(input.playerIndex);
-            menu.GetComponent<PlayerSetupMenuController>().pi = input;
+            rootMenu = GameObject.Find("PlayerReadyMenu");
+            if(rootMenu != null)
+            {
+                GameObject menu = Instantiate(playerSetupMenuPrefab, rootMenu.transform);
+                input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
+                menu.GetComponent<PlayerSetupMenuController>().SetPlayerIndex(input.playerIndex);
+                menu.GetComponent<PlayerSetupMenuController>().pi = input;
+            }
+            
         }
-        
     }
 }

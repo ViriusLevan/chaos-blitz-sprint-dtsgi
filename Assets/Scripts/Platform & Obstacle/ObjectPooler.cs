@@ -1,38 +1,40 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 {
-    [SerializeField] private GameObject shotyPrefab;
-    [SerializeField] private int poolSize = 10;
-    private List<GameObject> shotyPool = new List<GameObject>();
-
-    private void Start()
+    public class ObjectPooler : MonoBehaviour
     {
-        InitializePool();
-    }
+        [SerializeField] private GameObject shotyPrefab;
+        [SerializeField] private int poolSize = 10;
+        private List<GameObject> shotyPool = new List<GameObject>();
 
-    private void InitializePool()
-    {
-        for (int i = 0; i < poolSize; i++)
+        private void Start()
         {
-            GameObject shoty = Instantiate(shotyPrefab);
-            shoty.SetActive(false);
-            shotyPool.Add(shoty);
+            InitializePool();
         }
-    }
 
-    public GameObject GetPooled()
-    {
-        for (int i = 0; i < poolSize; i++)
+        private void InitializePool()
         {
-            if (!shotyPool[i].activeInHierarchy)
+            for (int i = 0; i < poolSize; i++)
             {
-                return shotyPool[i];
+                GameObject shoty = Instantiate(shotyPrefab);
+                shoty.SetActive(false);
+                shotyPool.Add(shoty);
             }
         }
 
-        return null;
+        public GameObject GetPooled()
+        {
+            for (int i = 0; i < poolSize; i++)
+            {
+                if (!shotyPool[i].activeInHierarchy)
+                {
+                    return shotyPool[i];
+                }
+            }
+
+            return null;
+        }
     }
 }

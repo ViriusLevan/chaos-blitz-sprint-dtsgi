@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public interface IPowerUp
+namespace LevelUpStudio.ChaosBlitzSprint.PowerUp
 {
-    public void PowerUp(PlayerInteractor powerUp);
+    public interface IPowerUp
+    {
+        public void PowerUp(Player.PlayerInteractor powerUp);
+    }
 }

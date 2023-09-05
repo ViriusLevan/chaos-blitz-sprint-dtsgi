@@ -1,36 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using LevelUpStudio.ChaosBlitzSprint.Player;
+using LevelUpStudio.ChaosBlitzSprint.Placement;
 
-public class PlacableButton : MonoBehaviour, IPointerClickHandler
+namespace LevelUpStudio.ChaosBlitzSprint.UI
 {
-    [SerializeField]private Placable placable;
-    [SerializeField]private Image image;
-    [SerializeField]private TextMeshProUGUI text;
-
-    private void Start() {
-
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
+    public class PlacableButton : MonoBehaviour, IPointerClickHandler
     {
-        PlayerConfiguration config 
-            = eventData.currentInputModule.gameObject
-                .GetComponent<PlayerConfigurationReferenceHelper>()
-                    .GetPlayerConfigurationReference();
-        Debug.Log(
-            $"Player {config.playerIndex} has clicked button {placable.name}");
-        GameManager.Instance.PlayerPicked(config.playerIndex, placable);
-        Destroy(this.gameObject);
-    }
+        [SerializeField]private Placable placable;
+        [SerializeField]private Image image;
+        [SerializeField]private TextMeshProUGUI text;
 
-    public void SetPlacable(Placable p){
-        placable = p;
-        image.sprite = placable.GetSprite();
-        text.text = placable.GetName();
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            PlayerConfiguration config 
+                = eventData.currentInputModule.gameObject
+                    .GetComponent<PlayerConfigurationReferenceHelper>()
+                        .GetPlayerConfigurationReference();
+            Debug.Log(
+                $"Player {config.playerIndex} has clicked button {placable.name}");
+            GameManager.Instance.PlayerPicked(config.playerIndex, placable);
+            Destroy(this.gameObject);
+        }
+
+        public void SetPlacable(Placable p){
+            placable = p;
+            image.sprite = placable.GetSprite();
+            text.text = placable.GetName();
+        }
     }
 }
+

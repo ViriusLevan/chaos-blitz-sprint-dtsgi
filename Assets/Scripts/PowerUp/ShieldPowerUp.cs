@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldPowerUp : MonoBehaviour, IPowerUp
+namespace LevelUpStudio.ChaosBlitzSprint.PowerUp
 {
-    void IPowerUp.PowerUp(PlayerInteractor powerUp)
+    public class ShieldPowerUp : MonoBehaviour, IPowerUp
     {
-        powerUp.ActivateShield();
-        Destroy(gameObject);
+        void IPowerUp.PowerUp(Player.PlayerInteractor powerUp)
+        {
+            powerUp.ActivateShield();
+            Destroy(gameObject);
+        }
     }
 }

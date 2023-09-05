@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ExtraLifePowerUp : MonoBehaviour, IPowerUp
+namespace LevelUpStudio.ChaosBlitzSprint.PowerUp
 {
-    void IPowerUp.PowerUp(PlayerInteractor powerUp)
+    public class ExtraLifePowerUp : MonoBehaviour, IPowerUp
     {
-        powerUp.ActivateExtraLife();
-        Destroy(gameObject);
+        void IPowerUp.PowerUp(Player.PlayerInteractor powerUp)
+        {
+            powerUp.ActivateExtraLife();
+            Destroy(gameObject);
+        }
     }
 }
