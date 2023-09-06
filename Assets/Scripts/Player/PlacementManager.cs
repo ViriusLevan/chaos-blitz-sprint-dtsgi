@@ -32,7 +32,12 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         }    
 
         [SerializeField]private PointSlicer targetPlatform;
-        public void InvalidPlacement(){canPlace=false;}
+        public void InvalidPlacement()
+        {
+            canPlace=false;
+            targetPlatform=null;
+            Debug.Log("Invalid");
+        }
         public void ValidPlacement(PointSlicer pSlicer = null){
             canPlace=true;
             targetPlatform = pSlicer;
@@ -57,6 +62,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         }
         
         [SerializeField] private LayerMask platformLayer;
+        [SerializeField] private GameObject arrowIndicator;
         private void FixedUpdate() 
         {
             if(playerInputHandler.playerInstance.playerStatus 
@@ -72,16 +78,37 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                     {
                         pos = hit.point;
                         //Debug.Log(hit.transform.name+" :"+hit.point);
+                        PointSlicer pSlicer = 
+                            hit.rigidbody.gameObject.GetComponentInParent<PointSlicer>() 
+                            ??  hit.rigidbody.gameObject.GetComponentInChildren<PointSlicer>();
+                        Debug.Log(pSlicer.ToString());
+                        targetPlatform=pSlicer;
+                        ValidPlacement(pSlicer);
+                        arrowIndicator.SetActive(true);
+                        arrowIndicator.transform.position 
+                            = pSlicer.gameObject.transform.position + new Vector3(0,2,0);
                     }
-                    else{
+                    else
+                    {
+                        InvalidPlacement();
                         pos = referenceTransform.position;
+                        arrowIndicator.SetActive(false);
                     }
                 }
                 else{
                     pos = referenceTransform.position;
+                    arrowIndicator.SetActive(false);
                 }
             }
         }
+
+        public Vector3 GetPos(){return pos;}
+        public void SetPos(Vector3 newPos)
+        {
+            pos=newPos;
+        }
+
+        public Transform GetReferenceTransform(){return referenceTransform;}
 
         private Vector3 moveDir;
         private Vector2 moveInput;
@@ -185,10 +212,14 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 coll.isTrigger = false;
             }
 
+            if(placable.GetPlacableType()==Placable.PlacableType.Platform)
+            {
+                SetLayerAllChildren(pendingObj.transform, LayerMask.NameToLayer("Platform") );
+            }
+
             //TODO set cross section material to something else
             if(targetPlatform!=null){
-                if(placable.GetPlacableType()==Placable.PlacableType.Hazard)
-                    targetPlatform.SetCrossSectionMaterial(placable.GetCrossSectionMaterial());
+                targetPlatform.SetCrossSectionMaterial(placable.GetCrossSectionMaterial());
                 targetPlatform.SetSliceTarget(pendingObj);
                 targetPlatform.Slice(targetPlatform.gameObject);
                 targetPlatform=null;
@@ -200,8 +231,19 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 , new Vector3());
 
             pendingObj = null;
+            arrowIndicator.SetActive(false);
             GameManager.Instance.PlayerBuilt(playerInputHandler.playerConfig.playerIndex);
             Debug.Log($"Player {playerInputHandler.playerConfig.playerIndex} finished placing");
+        }
+
+        private void SetLayerAllChildren(Transform root, int layer)
+        {
+            var children = root.GetComponentsInChildren<Transform>(includeInactive: true);
+            foreach (var child in children)
+            {
+    //            Debug.Log(child.name);
+                child.gameObject.layer = layer;
+            }
         }
 
         private void UpdateMaterials()

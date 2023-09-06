@@ -16,6 +16,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
 
         private void OnTriggerEnter(Collider other) 
         {
+            if(other.gameObject.CompareTag("PowerUp")){//do nothing
+                return;
+            }
             //Debug.Log("enter "+other.gameObject.name);
             if(other.gameObject.CompareTag("Arena")){
                 withinBounds=true;
@@ -26,9 +29,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
                 manager.InvalidPlacement();
             }else{
                 if(other.gameObject.layer == LayerMask.NameToLayer("Platform")){
-                    PointSlicer pSlicer = other.gameObject.GetComponentInParent<PointSlicer>() 
-                        ?? other.gameObject.GetComponentInChildren<PointSlicer>();
-                    manager.ValidPlacement(pSlicer);
+                    // PointSlicer pSlicer = other.gameObject.GetComponentInParent<PointSlicer>() 
+                    //     ?? other.gameObject.GetComponentInChildren<PointSlicer>();
+                                            
+                    //manager.ValidPlacement();
                 }
                 else
                 {
@@ -39,6 +43,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
 
         private void OnTriggerStay(Collider other) 
         {
+            if(other.gameObject.CompareTag("PowerUp")){//do nothing
+                return;
+            }
             //Debug.Log("stay "+other.gameObject.name);
             if(other.gameObject.CompareTag("Arena")){
                 withinBounds=true;
@@ -46,11 +53,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
                 manager.InvalidPlacement();
             }else{
                 if(other.gameObject.layer == LayerMask.NameToLayer("Platform")){
-                    PointSlicer pSlicer = other.gameObject.GetComponentInParent<PointSlicer>() 
-                        ?? other.gameObject.GetComponentInChildren<PointSlicer>();
+                    // PointSlicer pSlicer = other.gameObject.GetComponentInParent<PointSlicer>() 
+                    //     ?? other.gameObject.GetComponentInChildren<PointSlicer>();
                     
-                    if(withinBounds)
-                        manager.ValidPlacement(pSlicer);
+                    // if(withinBounds)
+                    //     manager.ValidPlacement();
                 }
                 else
                 {
@@ -61,6 +68,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
 
         private void OnTriggerExit(Collider other) 
         {
+            if(other.gameObject.CompareTag("PowerUp")){//do nothing
+                return;
+            }
             //Debug.Log("exit "+other.gameObject.name);
             if(other.gameObject.CompareTag("Arena")){
                 withinBounds=false;
@@ -71,8 +81,25 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
             }
             else
             {
-                manager.InvalidPlacement();
+                //manager.InvalidPlacement();
             }
+        }
+
+        private void SetPos(Vector3 newPos)
+        {
+            manager.SetPos(newPos);
+            manager.GetReferenceTransform().position=newPos;
+        }
+
+        Vector3 FindHighestVert(MeshFilter targetMesh)
+        {
+            var maxBounds = targetMesh.sharedMesh.bounds.max;
+
+            Matrix4x4 localToWorld = targetMesh.transform.localToWorldMatrix;
+
+            Vector3 hi = localToWorld.MultiplyPoint3x4(maxBounds);
+
+            return hi;
         }
     }
 }

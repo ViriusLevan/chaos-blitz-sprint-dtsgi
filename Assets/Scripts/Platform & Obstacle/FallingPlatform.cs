@@ -98,6 +98,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
 		private void Reset()
 		{
+			active=false;
 			// DOTween.Rewind(transform);
 			// DOTween.Kill(transform, true);
 			//transform.position = originalPosition;

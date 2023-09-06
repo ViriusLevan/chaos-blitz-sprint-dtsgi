@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6065916513418480680}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6065916513478541633}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6065916513606157494}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: GameObject (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6065916513949304857}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 5137936604836518122}
   - component: {fileID: 1665744295779684432}
   - component: {fileID: 4253456104566161982}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: '[Platform]Crate'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallTime: 0.5
+  speed: 10
 --- !u!1001 &8645135576788587790
 PrefabInstance:
   m_ObjectHideFlags: 0

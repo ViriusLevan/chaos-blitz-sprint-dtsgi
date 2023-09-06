@@ -136,6 +136,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 			playerController.SendBackToSpawn();
 			freeLookCamera.Follow = buildCameraFollow.transform;
 			freeLookCamera.LookAt = buildCameraFollow.transform;
+			freeLookCamera.m_Lens.FieldOfView = 60;
 			placementManager.SetCameraTransform(playerCamera.transform);
 			placementManager.InstantiateNewPlacable();
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("BuildMode");
@@ -147,6 +148,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 		public void PlatformingMode(){
 			freeLookCamera.Follow = playerController.gameObject.transform;
 			freeLookCamera.LookAt = playerController.gameObject.transform;
+			freeLookCamera.m_Lens.FieldOfView = 40;
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("Player");
 			SetControlHelpText(PlayerStatus.Platforming);
 			cinemachineInputHanlder.horizontal 
