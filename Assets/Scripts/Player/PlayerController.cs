@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using LevelUpStudio.ChaosBlitzSprint.PowerUp;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,15 +9,18 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 	public class PlayerController : MonoBehaviour {
 		[SerializeField] public PlayerInputHandler playerInputHandler;
 		
-		[SerializeField] private float speed = 10.0f;
+		[SerializeField] private float maxSpeed = 10.0f;
 		[SerializeField] private float airVelocity = 8f;
 		[SerializeField] private float gravity = 10.0f;
 		[SerializeField] private float maxVelocityChange = 10.0f;
-		[SerializeField] private float jumpHeight = 2.0f;
+		[SerializeField] private float jumpHeight = 4.2f;
 		[SerializeField] private float maxFallSpeed = 20.0f;
 		[SerializeField] private float rotateSpeed = 25f; //Speed the player rotate
 
 		[SerializeField] private Animator playerAnimator;
+		private CapsuleCollider capsuleCollider;
+		[SerializeField] private Vector3 colliderCenterCrouch, colliderCenterNormal;
+		[SerializeField] private float colliderHeightCrouch, colliderHeightNormal;
 
 		private Rigidbody rb;
 		private Vector3 moveDir;
@@ -31,9 +32,28 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		private bool canMove = true; //If player is not hit
 		private bool isStunned = false;
 		private bool wasStunned = false; //If player was stunned before get stunned another time
-		private bool slide = false;
+		[SerializeField]private bool slide = false;
+		[SerializeField]private bool sticky = false;
 		private bool jumped;
+		private bool isCrouching;
 		public void OnJump(InputAction.CallbackContext context) => jumped = context.action.triggered;
+		public void OnCrouch(InputAction.CallbackContext context)
+		{
+			isCrouching = !isCrouching;
+			playerAnimator.SetBool("isCrouching", isCrouching);
+			if(isCrouching)
+			{
+				capsuleCollider.center = colliderCenterCrouch;
+				capsuleCollider.height = colliderHeightCrouch;
+				maxSpeed = speedCrouched;
+			}
+			else
+			{
+				capsuleCollider.center = colliderCenterNormal;
+				capsuleCollider.height = colliderHeightNormal;
+				maxSpeed = speedNormal;
+			}
+		}
 
 		// Double Jump PowerUp
 		private int jumpsLeft = 0; // Number of jumps left, including double jumps
@@ -43,26 +63,35 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		public bool hasExtraLife;
 		public bool hasShield;
 
-		private void Start ()
-		{
-			// get the distance to ground
-			distToGround = GetComponent<Collider>().bounds.extents.y;
-			doubleJumpAvailable = false;
-			jumpsLeft = maxJumps;
-		}
 		
 		private bool IsGrounded ()
 		{
 			return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.2f);
 		}
 		
+		private float speedNormal, speedCrouched, jumpNormal, jumpSticky;
+		private PlayerInteractor playerInteractor;
 		private void Awake ()
 		{
+			speedNormal = maxSpeed;
+			speedCrouched = maxSpeed/2;
+			jumpNormal = jumpHeight;
+			jumpSticky = jumpHeight/2;
+			capsuleCollider = GetComponent<CapsuleCollider>();
 			playerInputHandler = GetComponent<PlayerInputHandler>();
 			rb = GetComponent<Rigidbody>();
+			playerInteractor = GetComponent<PlayerInteractor>();
 			rb.freezeRotation = true;
 			rb.useGravity = false;
 			Cursor.visible = false;
+		}
+
+		private void Start ()
+		{
+			// get the distance to ground
+			distToGround = GetComponent<Collider>().bounds.extents.y;
+			doubleJumpAvailable = false;
+			jumpsLeft = maxJumps;
 		}
 		
 		private void FixedUpdate ()
@@ -85,10 +114,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					}
 
 					//Rotation of the character to where it moves
-					Quaternion tr = Quaternion.LookRotation(targetDir); 
+					Quaternion destRotation = Quaternion.LookRotation(targetDir); 
 					//Rotate the character little by little
 					Quaternion targetRotation = Quaternion.Slerp
-						(transform.rotation, tr, Time.deltaTime * rotateSpeed); 
+						(transform.rotation, destRotation, Time.deltaTime * rotateSpeed); 
 					transform.rotation = targetRotation;
 				}
 				else
@@ -98,11 +127,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 				if (IsGrounded())
 				{
-					playerAnimator.SetTrigger("jumpEnded");
+					playerAnimator.SetBool("isGrounded",true);
 					jumpsLeft = maxJumps;
 					// Calculate how fast we should be moving
 					Vector3 targetVelocity = moveDir;
-					targetVelocity *= speed;
+					targetVelocity *= maxSpeed;
 
 					// Apply a force that attempts to reach our target velocity
 					Vector3 velocity = rb.velocity;
@@ -112,20 +141,28 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 						rb.velocity /= 1.1f;
 					}
 
-					Vector3 velocityChange = (targetVelocity - velocity);
+					Vector3 velocityChange = targetVelocity - velocity;
 					velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
 					velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
 					velocityChange.y = 0;
 
-					if (!slide)
+					
+					if (Mathf.Abs(rb.velocity.magnitude) < maxSpeed * 1.0f)
 					{
-						if (Mathf.Abs(rb.velocity.magnitude) < speed * 1.0f)
+						if (slide)
+						{
+							rb.AddForce(moveDir*maxSpeed*2, ForceMode.VelocityChange);
+						}
+						else if(sticky)
+						{	
+							rb.velocity /= 1.1f;
+							rb.AddForce(velocityChange/10f, ForceMode.VelocityChange);
+						}
+						else
+						{
 							rb.AddForce(velocityChange, ForceMode.VelocityChange);
-					}
-					else if (Mathf.Abs(rb.velocity.magnitude) < speed * 1.0f)
-					{
-						rb.AddForce(moveDir * 0.15f, ForceMode.VelocityChange);
-						//Debug.Log(rb.velocity.magnitude);
+							//Debug.Log(rb.velocity.magnitude);
+						}
 					}
 
 					// Jump
@@ -138,6 +175,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				}
 				else
 				{
+					playerAnimator.SetBool("isGrounded",false);
 					if (!slide)
 					{
 						Vector3 targetVelocity = new Vector3
@@ -152,19 +190,21 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 						if (velocity.y < -maxFallSpeed)
 							rb.velocity = new Vector3(velocity.x, -maxFallSpeed, velocity.z);
 					}
-					else if (Mathf.Abs(rb.velocity.magnitude) < speed * 1.0f)
-					{
-						rb.AddForce(moveDir * 0.15f, ForceMode.VelocityChange);
-					}
+				//MIDAIR SLIDE!?
+					// else if (Mathf.Abs(rb.velocity.magnitude) < speed * 1.0f)
+					// {
+					// 	rb.AddForce(moveDir * 0.15f, ForceMode.VelocityChange);
+					// }
 
 					// Double jump
 					if (jumpsLeft > 0 && jumped)
 					{
-						if (!IsGrounded())
-						{
+						//if (!IsGrounded())
+						//{
 							if (doubleJumpAvailable)
 							{
 								Debug.Log("Double jump triggered");
+								playerInteractor.DeactivatePowerUp();
 								rb.velocity = new Vector3
 									(rb.velocity.x, CalculateJumpVerticalSpeed(), rb.velocity.z);
 								jumpsLeft -= 1;
@@ -176,15 +216,16 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 									(rb.velocity.x, CalculateJumpVerticalSpeed(), rb.velocity.z);
 								jumpsLeft -= 1;
 							}
-							jumped = false;
-						}
-						else // Player is on the ground
-						{
-							playerAnimator.SetTrigger("jumpEnded");
-							jumpsLeft = maxJumps;
-							jumped = false;
-							//doubleJumpAvailable = true; // Reset double jump availability on landing
-						}
+						//	jumped = false;
+						// }
+						// else // Player is on the ground
+						// {
+						// 	Debug.Log("You're a dipshit");
+						// 	playerAnimator.SetBool("isGrounded",true);
+						// 	jumpsLeft = maxJumps;
+						// 	jumped = false;
+						// 	//doubleJumpAvailable = true; // Reset double jump availability on landing
+						// }
 					}
 				}
 			}
@@ -192,7 +233,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			{
 				rb.velocity = pushDir * pushForce;
 			}
-			// Apply gravity manually for more tuning control
+			// Apply gravity manually for more finetuned control
 			rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0));
 		}
 
@@ -214,16 +255,20 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			moveDir = (v2 + h2).normalized; //Global position to which I want to move in magnitude 1
 			
 			RaycastHit hit;
-			if (Physics.Raycast(transform.position, -Vector3.up, out hit, distToGround + 0.1f))
+			
+			// Debug.DrawRay(transform.position
+			// 		, -Vector3.up * (distToGround+0.2f)
+			// 		, Color.red, 3.0f);
+			if (Physics.Raycast(transform.position, -Vector3.up, out hit, distToGround + 0.2f))
 			{
-				if (hit.transform.tag == "Slide")
-				{
-					slide = true;
-				}
+				slide = hit.collider.transform.CompareTag("Slide");
+				sticky = hit.collider.transform.CompareTag("Sticky");
+				if(sticky)
+					jumpHeight = jumpSticky;
 				else
-				{
-					slide = false;
-				}
+					jumpHeight = jumpNormal;
+				// Debug.Log(hit.collider.transform.gameObject.name
+				// 	+" -> "+hit.collider.transform.tag+"||"+slide.ToString()+"|"+sticky.ToString());
 			}
 		}
 
@@ -267,6 +312,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		{	 
 			// Wait for the animation to end
 			playerAnimator.SetTrigger("die");
+			playerInteractor.DeactivatePowerUp();
 			yield return new WaitWhile(() => playerAnimator
 				.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
 			DisableMeshAndCollider();
@@ -277,7 +323,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			//TODO - add more stuff, e.g. play animation or sfx
 			//this.gameObject.SetActive(false);
 
-			playerAnimator.SetTrigger("die");
+			playerAnimator.SetTrigger("reset");
 			foreach (SkinnedMeshRenderer smr in playerMeshes)
 			{
 				smr.enabled=false;
@@ -307,6 +353,12 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			for (float t = 0; t < duration; t += Time.deltaTime)
 			{
 				yield return null;
+				
+				while(playerInputHandler.playerInstance.playerStatus 
+					!= PlayerInstance.PlayerStatus.Platforming){
+					yield return new WaitForSeconds(0.2f);
+				}
+
 				if (!slide) //Reduce the force if the ground isnt slide
 				{
 					pushForce = pushForce - Time.deltaTime * delta;

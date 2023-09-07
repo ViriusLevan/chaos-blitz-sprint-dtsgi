@@ -36,7 +36,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         {
             canPlace=false;
             targetPlatform=null;
-            Debug.Log("Invalid");
         }
         public void ValidPlacement(PointSlicer pSlicer = null){
             canPlace=true;
@@ -63,6 +62,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         
         [SerializeField] private LayerMask platformLayer;
         [SerializeField] private GameObject arrowIndicator;
+        public GameObject GetArrowIndicator(){return arrowIndicator;}
         private void FixedUpdate() 
         {
             if(playerInputHandler.playerInstance.playerStatus 
@@ -86,7 +86,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                         ValidPlacement(pSlicer);
                         arrowIndicator.SetActive(true);
                         arrowIndicator.transform.position 
-                            = pSlicer.gameObject.transform.position + new Vector3(0,2,0);
+                            = new Vector3(
+                                pSlicer.gameObject.transform.position.x
+                                ,hit.point.y + 2
+                                ,pSlicer.gameObject.transform.position.z
+                            );
                     }
                     else
                     {

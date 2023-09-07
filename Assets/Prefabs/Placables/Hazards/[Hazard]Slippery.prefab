@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Hazard]Slippery'
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5b2022e1088380a46bff039289663432, type: 3}
+      propertyPath: m_TagString
+      value: Slide
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b2022e1088380a46bff039289663432, type: 3}
 --- !u!1 &7931094665041278263 stripped
@@ -101,7 +105,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7931094665041278263}
-  m_Material: {fileID: 13400000, guid: e5a30b701b088aa4194b3dffb18115c4, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2

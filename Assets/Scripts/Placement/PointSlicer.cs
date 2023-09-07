@@ -21,6 +21,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
 
         public void Slice(GameObject targetPlatform = null){
             string originalName = toBeSliced.name;
+            string originalTag = toBeSliced.tag;
             for (int i = 0; i < boundaryPoints.Length; i++)
             {
                 Vector3 pointA = new Vector3(); 
@@ -61,8 +62,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
                     //TODO check for bugs again
                     toBeSliced.SetActive(false);
                     upperHull.SetActive(false);
+                    Destroy(toBeSliced);
                     Destroy(upperHull);
-                    //Destroy(sliceable);
 
                     toBeSliced = lowerHull;
                     MeshCollider mc = toBeSliced.AddComponent<MeshCollider>();
@@ -75,6 +76,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
                 toBeSliced.transform.SetParent(targetPlatform.transform);
             }
             toBeSliced.name = originalName;
+            toBeSliced.tag = originalTag;
             toBeSliced=null;
         }
 

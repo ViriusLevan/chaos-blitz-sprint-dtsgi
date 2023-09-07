@@ -11,6 +11,10 @@ TagManager:
   - HurtPlayer
   - DeadZone
   - PowerUp
+  - FxTemporaire
+  - Box
+  - BolaTest
+  - Sticky
   layers:
   - Default
   - TransparentFX

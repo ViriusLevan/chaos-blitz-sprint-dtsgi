@@ -6,7 +6,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
 {
     public class GameManager : MonoBehaviour
     {
-
+        
         public enum GameStatus {Animation, PickPhase, BuildPhase, PlatformingPhase,Paused};
 
         [SerializeField] private GameStatus currentGameStatus;
@@ -54,6 +54,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
             List<PlayerConfiguration> pConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs();
         }
 
+        [SerializeField] private GameObject ghostWalls;
         void Start()
         {
             PhaseSwitch(GameStatus.PickPhase);
@@ -170,6 +171,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
         }
 
 
+
         private void PhaseSwitch(GameStatus targetPhase)
         {
             if(roundFinished){
@@ -191,9 +193,11 @@ namespace LevelUpStudio.ChaosBlitzSprint
                         playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Picking);
                         break;
                     case GameStatus.BuildPhase:
+                        ghostWalls.SetActive(true);
                         playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Building);
                         break;
                     case GameStatus.PlatformingPhase:
+                        ghostWalls.SetActive(false);
                         playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Platforming);
                         break;
                     case GameStatus.Animation:

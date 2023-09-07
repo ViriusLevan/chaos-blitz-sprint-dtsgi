@@ -30,6 +30,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             Debug.Log("InputHandlerInstance"+(playerInstance==null));
             playerConfig = config;
             playerMesh.material = config.playerMaterial;
+            pManager.GetArrowIndicator().GetComponent<MeshRenderer>().material = config.playerMaterial;
             config.input.onActionTriggered += Input_onActionTriggered;
             
             virtualCursor?.SetPlayerInputHandler(this);
@@ -56,11 +57,15 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             {
                 controller?.OnJump(obj);
             }
-
+           
             if(obj.performed){
                 if(obj.action.name == controls.BuildMode.Place.name)
                 {
                     pManager?.PlaceObject(obj);
+                }
+                if (obj.action.name == controls.Player.Crouch.name)
+                {
+                    controller?.OnCrouch(obj);
                 }
             }
 

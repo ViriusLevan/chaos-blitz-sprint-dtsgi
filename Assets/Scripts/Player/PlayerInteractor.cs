@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 using LevelUpStudio.ChaosBlitzSprint.PowerUp;
 
 namespace LevelUpStudio.ChaosBlitzSprint.Player
@@ -8,12 +7,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 	public class PlayerInteractor : MonoBehaviour
 	{
 		[SerializeField] private PlayerController playerController;
-		private List<IPowerUp> powerUps;
-		private int maximumAllowedPowerUps=1;
+		private IPowerUp powerUp;
 
 		private void Start() 
 		{
-			powerUps = new List<IPowerUp>();	
 		}
 
 		public void ActivateDoubleJump()
@@ -32,12 +29,15 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		{
 			Debug.Log("Extra Life Deactivated");
 			playerController.hasExtraLife = false;
+			DeactivatePowerUp();
 		}
 
+		[SerializeField] private GameObject shield;
 		public void ActivateShield()
 		{
 			Debug.Log("Shield Activated");
 			playerController.hasShield = true;
+			shield.SetActive(true);
 			// this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
 		}
 
@@ -45,7 +45,22 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		{
 			Debug.Log("Shield Deactivated");
 			playerController.hasShield = false;
+			DeactivatePowerUp();
+			shield.SetActive(false);
 			// this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+		}
+
+		public void DeactivatePowerUp()
+		{
+			powerUp = null;
+			powerUpImage.sprite = null;
+			powerUpImage.color  = new Color(255,255,255,0);
+			//TODO yeah..
+			playerController.doubleJumpAvailable = false;
+			playerController.hasExtraLife = false;
+			playerController.hasShield = false;
+			shield.SetActive(false);
+			//
 		}
 
 		private void OnCollisionEnter(Collision other) {
@@ -93,21 +108,28 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 							.playerInputHandler.playerConfig.playerIndex);
 					}
 					break;
-				case "PowerUp":
-					Debug.Log("Player touched a PowerUp");
-					if(powerUps.Count<maximumAllowedPowerUps)
-					{
-						powerUps.Add(other.gameObject.GetComponent<IPowerUp>());
-						Destroy(other.gameObject);
-					}
-					if(powerUps.Count==1)
-					{
-						powerUps[0].PowerUp(this);
-						//powerUpImage.sprite = ; 
-					}
-					break; 
+				
 			}
 		}
+
+		private void OnTriggerEnter(Collider other) 
+		{
+			switch(other.gameObject.tag)
+			{
+				case "PowerUp":
+					Debug.Log("Player touched a PowerUp");
+					if(powerUp==null)
+					{
+						powerUp = other.gameObject.GetComponent<IPowerUp>();
+						powerUp.PowerUp(this);
+						powerUpImage.sprite = powerUp.GetSprite(); 
+						powerUpImage.color  = Color.white;
+						Destroy(other.gameObject);
+					}
+					break; 
+			}	
+		}
+
 		[SerializeField]private Image powerUpImage;
 
 		private void PlayDeathFX()
