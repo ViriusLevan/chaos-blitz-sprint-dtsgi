@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using LevelUpStudio.ChaosBlitzSprint.PowerUp;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +18,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		[SerializeField] private float jumpHeight = 2.0f;
 		[SerializeField] private float maxFallSpeed = 20.0f;
 		[SerializeField] private float rotateSpeed = 25f; //Speed the player rotate
+
+		[SerializeField] private Animator playerAnimator;
 
 		private Rigidbody rb;
 		private Vector3 moveDir;
@@ -71,6 +75,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			{
 				if (moveDir.x != 0 || moveDir.z != 0)
 				{
+					playerAnimator.SetBool("isMoving",true);
 					Vector3 targetDir = moveDir; //Direction of the character
 					targetDir.y = 0;
 
@@ -86,9 +91,14 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 						(transform.rotation, tr, Time.deltaTime * rotateSpeed); 
 					transform.rotation = targetRotation;
 				}
+				else
+				{
+					playerAnimator.SetBool("isMoving",false);
+				}
 
 				if (IsGrounded())
 				{
+					playerAnimator.SetTrigger("jumpEnded");
 					jumpsLeft = maxJumps;
 					// Calculate how fast we should be moving
 					Vector3 targetVelocity = moveDir;
@@ -154,6 +164,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 						{
 							if (doubleJumpAvailable)
 							{
+								Debug.Log("Double jump triggered");
 								rb.velocity = new Vector3
 									(rb.velocity.x, CalculateJumpVerticalSpeed(), rb.velocity.z);
 								jumpsLeft -= 1;
@@ -169,9 +180,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 						}
 						else // Player is on the ground
 						{
+							playerAnimator.SetTrigger("jumpEnded");
 							jumpsLeft = maxJumps;
 							jumped = false;
-							doubleJumpAvailable = true; // Reset double jump availability on landing
+							//doubleJumpAvailable = true; // Reset double jump availability on landing
 						}
 					}
 				}
@@ -232,30 +244,43 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		}
 
 		float CalculateJumpVerticalSpeed () {
+			playerAnimator.SetTrigger("jumpStarted");
 			PlayJumpFX();
 			// From the jump height and gravity we deduce the upwards speed 
 			// for the character to reach at the apex.
 			return Mathf.Sqrt(2 * jumpHeight * gravity);
 		}
 
-		[SerializeField]private MeshRenderer[]playerMeshes;
+		//[SerializeField]private MeshRenderer[]playerMeshes;
+		[SerializeField]private SkinnedMeshRenderer[]playerMeshes;
 		public void EnableMeshAndCollider()
 		{
-			foreach (MeshRenderer mr in playerMeshes)
+			foreach (SkinnedMeshRenderer smr in playerMeshes)
 			{
-				mr.enabled=true;
+				smr.enabled=true;
 			}
 			//TODO check again : maybe final build uses another collider
 			GetComponent<CapsuleCollider>().enabled=true;
+		}
+
+		public IEnumerator TriggerDeathThenWaitToDisable()
+		{	 
+			// Wait for the animation to end
+			playerAnimator.SetTrigger("die");
+			yield return new WaitWhile(() => playerAnimator
+				.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
+			DisableMeshAndCollider();
 		}
 
 		public void DisableMeshAndCollider()
 		{
 			//TODO - add more stuff, e.g. play animation or sfx
 			//this.gameObject.SetActive(false);
-			foreach (MeshRenderer mr in playerMeshes)
+
+			playerAnimator.SetTrigger("die");
+			foreach (SkinnedMeshRenderer smr in playerMeshes)
 			{
-				mr.enabled=false;
+				smr.enabled=false;
 			}
 			GetComponent<CapsuleCollider>().enabled=false;
 		}

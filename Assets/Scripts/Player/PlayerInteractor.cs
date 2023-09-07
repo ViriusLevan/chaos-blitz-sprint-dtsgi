@@ -1,10 +1,20 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
+using LevelUpStudio.ChaosBlitzSprint.PowerUp;
 
 namespace LevelUpStudio.ChaosBlitzSprint.Player
 {
 	public class PlayerInteractor : MonoBehaviour
 	{
 		[SerializeField] private PlayerController playerController;
+		private List<IPowerUp> powerUps;
+		private int maximumAllowedPowerUps=1;
+
+		private void Start() 
+		{
+			powerUps = new List<IPowerUp>();	
+		}
 
 		public void ActivateDoubleJump()
 		{
@@ -58,7 +68,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					else
 					{
 						PlayDeathFX();
-						playerController.DisableMeshAndCollider();
+						playerController.StartCoroutine(playerController.TriggerDeathThenWaitToDisable());
+						//playerController.DisableMeshAndCollider();
 						GameManager.Instance.PlayerDied(playerController
 							.playerInputHandler.playerConfig.playerIndex);
 					}
@@ -76,19 +87,28 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 							PlaySplashFX();
 						else
 							PlayDeathFX();
-						playerController.DisableMeshAndCollider();
+						playerController.StartCoroutine(playerController.TriggerDeathThenWaitToDisable());
+						//playerController.DisableMeshAndCollider();
 						GameManager.Instance.PlayerDied(playerController
 							.playerInputHandler.playerConfig.playerIndex);
 					}
 					break;
 				case "PowerUp":
 					Debug.Log("Player touched a PowerUp");
-					other.gameObject
-						.GetComponent<PowerUp.IPowerUp>()?
-							.PowerUp(this);
+					if(powerUps.Count<maximumAllowedPowerUps)
+					{
+						powerUps.Add(other.gameObject.GetComponent<IPowerUp>());
+						Destroy(other.gameObject);
+					}
+					if(powerUps.Count==1)
+					{
+						powerUps[0].PowerUp(this);
+						//powerUpImage.sprite = ; 
+					}
 					break; 
 			}
 		}
+		[SerializeField]private Image powerUpImage;
 
 		private void PlayDeathFX()
 		{

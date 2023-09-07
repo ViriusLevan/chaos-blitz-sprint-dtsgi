@@ -7,7 +7,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.PowerUp
         void IPowerUp.PowerUp(Player.PlayerInteractor powerUp)
         {
             powerUp.ActivateShield();
-            Destroy(gameObject);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 {
     public class PlayerInputHandler : MonoBehaviour
     {
-        [SerializeField] private MeshRenderer playerMesh;
+        [SerializeField] private SkinnedMeshRenderer playerMesh;
         public PlayerConfiguration playerConfig{get;private set;}
         private PlayerController controller;
         private PlacementManager pManager;
