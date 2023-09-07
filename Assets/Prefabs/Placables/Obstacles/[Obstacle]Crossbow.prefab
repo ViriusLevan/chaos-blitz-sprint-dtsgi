@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3622902291122962614}
   - component: {fileID: 3622902290286321744}
   - component: {fileID: 4904198044332041055}
+  - component: {fileID: 5058974983343857941}
   m_Layer: 0
   m_Name: '[Obstacle]Crossbow'
   m_TagString: Untagged
@@ -65,7 +66,21 @@ MonoBehaviour:
   shootingSpeed: 40
   shootyLifetime: 5
   shootInterval: 3
-  objectPooler: {fileID: 0}
+  objectPooler: {fileID: 5058974983343857941}
+--- !u!114 &5058974983343857941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3622902291122962617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894bd7136bb918d4d8357cca14c6bdd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotyPrefab: {fileID: 2270076105447373301, guid: ace8b0d2db9802f48b2be06b02036c29, type: 3}
+  poolSize: 10
 --- !u!1001 &1830635245863527683
 PrefabInstance:
   m_ObjectHideFlags: 0

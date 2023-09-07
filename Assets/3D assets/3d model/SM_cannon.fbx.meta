@@ -3,15 +3,10 @@ guid: e57699689f70438479e81f2096744707
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_ship_cannon
-    second: {fileID: 2100000, guid: 0b1c035647c274c4691ba70773e0a2f1, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
-    materialName: 1
+    materialName: 0
     materialSearch: 1
     materialLocation: 1
   animations:

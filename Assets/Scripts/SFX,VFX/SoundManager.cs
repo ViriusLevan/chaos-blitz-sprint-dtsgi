@@ -82,7 +82,7 @@ public class SoundManager : MonoBehaviour
             AudioClip clip = soundLibrary[sound];
             //audioSource.PlayOneShot(clip);
             AudioSource.PlayClipAtPoint(clip, transform.position,sfxVolume);
-            Debug.Log("SoundEnum="+sound.ToString());
+            //Debug.Log("SoundEnum="+sound.ToString());
         }
         else
         {

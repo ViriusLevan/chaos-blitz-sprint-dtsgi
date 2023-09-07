@@ -77,6 +77,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void Deactivate()
         {
+            //StopCoroutine(Swinging);
             DOTween.Pause(transform);
         }
 

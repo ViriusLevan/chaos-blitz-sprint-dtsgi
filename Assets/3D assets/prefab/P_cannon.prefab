@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 63048306173659199}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4848892081034593217}
@@ -83,10 +83,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7189077207953135134, guid: e57699689f70438479e81f2096744707, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d062f27d972f7c24db8eb9fde2aea4ee, type: 2}
     - target: {fileID: 919132149155446097, guid: e57699689f70438479e81f2096744707, type: 3}
       propertyPath: m_Name
       value: SM_cannon
       objectReference: {fileID: 0}
+    - target: {fileID: 2851294948668323177, guid: e57699689f70438479e81f2096744707, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d062f27d972f7c24db8eb9fde2aea4ee, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e57699689f70438479e81f2096744707, type: 3}
 --- !u!4 &4848892081034593217 stripped
