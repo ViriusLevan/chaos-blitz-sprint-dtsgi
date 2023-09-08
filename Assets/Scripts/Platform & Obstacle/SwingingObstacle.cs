@@ -19,7 +19,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             middleRotation = pivotPoint.transform.rotation;
             rightRotation = middleRotation * Quaternion.Euler(0f, 0f, swingAngle);
             leftRotation = middleRotation * Quaternion.Euler(0f, 0f, -swingAngle);
-            Swing();
         }
 
         public void Swing()
@@ -43,6 +42,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             float elapsedTime = 0f;
             while (elapsedTime < timeToReachTarget)
             {
+                if(GameManager.Instance?.GetCurrentGameStatus() != GameManager.GameStatus.PlatformingPhase)
+                {
+                    yield return new WaitForSeconds(0.2f);
+                }
                 float t = elapsedTime / timeToReachTarget;
                 float easedT = CustomEaseInOutSine(t); // Apply custom easing
                 pivotPoint.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, easedT);

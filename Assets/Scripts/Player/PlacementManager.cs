@@ -144,10 +144,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 = playerInputHandler.playerConfig.input
                     .actions["Rotate"].ReadValue<float>();
             if(rotateInput<0){
-                pendingObj.transform.Rotate(0f, -50.0f*Time.deltaTime, 0.0f, Space.World);
+                pendingObj.transform.Rotate(0f, -100.0f*Time.deltaTime, 0.0f, Space.World);
             }
             if(rotateInput>0){
-                pendingObj.transform.Rotate(0f, 50.0f*Time.deltaTime, 0.0f, Space.World);
+                pendingObj.transform.Rotate(0f, 100.0f*Time.deltaTime, 0.0f, Space.World);
             }
         }
 

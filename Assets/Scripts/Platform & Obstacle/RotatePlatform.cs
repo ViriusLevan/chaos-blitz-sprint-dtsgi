@@ -11,7 +11,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void Start()
         {
-            active=true;
         }
 
         private bool active=false;

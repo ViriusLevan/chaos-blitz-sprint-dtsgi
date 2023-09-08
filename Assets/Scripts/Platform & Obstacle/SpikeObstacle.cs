@@ -40,6 +40,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void Update()
         {
+            if(GameManager.Instance?.GetCurrentGameStatus() 
+                != GameManager.GameStatus.PlatformingPhase)
+            {
+                return;
+            }
             if (isPlayerOnPlatform)
             {
                 elapsedTime += Time.deltaTime;

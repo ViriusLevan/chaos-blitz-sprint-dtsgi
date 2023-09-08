@@ -9,7 +9,8 @@ namespace LevelUpStudio.ChaosBlitzSprint
         
         public enum GameStatus {Animation, PickPhase, BuildPhase, PlatformingPhase,Paused};
 
-        [SerializeField] private GameStatus currentGameStatus;
+        [SerializeField] public GameStatus currentGameStatus;
+        public GameStatus GetCurrentGameStatus(){return currentGameStatus;}
         private Dictionary<int, PlayerInstance> playerInstances;
 
         public static GameManager Instance { get; private set; }
