@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6423409700598202263}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 2636546593581357581}
   - component: {fileID: 6715927191113730148}
   - component: {fileID: 3673430334782432812}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: '[Platform]Log'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6423409700904327019}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6423409700934651552}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6423409701224502341}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,9 +264,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6423409700670030152}
     m_Modifications:
+    - target: {fileID: 855004723386682223, guid: 14ba34abfc1e91a439c93083143f6267, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7001412697024234069, guid: 14ba34abfc1e91a439c93083143f6267, type: 3}
       propertyPath: m_Name
       value: P_log
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001412697024234069, guid: 14ba34abfc1e91a439c93083143f6267, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8739677720228300100, guid: 14ba34abfc1e91a439c93083143f6267, type: 3}
       propertyPath: m_RootOrder
