@@ -2074,7 +2074,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: de8d365334c94c644a208435b734302a, type: 2}
   - {fileID: 11400000, guid: c62a6ff2f46794a42bae9c277bb672cd, type: 2}
   - {fileID: 11400000, guid: a3c6bd75021e0ba4b9b42ab26078ad2d, type: 2}
+  - {fileID: 11400000, guid: 27bd6111bf492fa488b5c069a8dd0dd7, type: 2}
+  - {fileID: 11400000, guid: 95f61f48dfdf8b04c978f6a1b4d92047, type: 2}
   - {fileID: 11400000, guid: 5bd2902b9f2b83b4582c0f4b98bb363e, type: 2}
+  - {fileID: 11400000, guid: a60c9708d1588a343a046b71014ea559, type: 2}
+  - {fileID: 11400000, guid: 85b80eb91589ae647a9e38911e5354ac, type: 2}
+  - {fileID: 11400000, guid: 46bcf1fbdd332ca4195ea0a6a510f595, type: 2}
   bgImage: {fileID: 737174249}
   controlHelpPanel: {fileID: 388650857}
 --- !u!1 &1240808842

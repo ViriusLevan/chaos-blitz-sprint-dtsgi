@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 695ff6480ce82d145b6a073482263ca6, type: 3}
-  m_Name: Obstacle_Pendulum
+  m_Name: '[Placable-Obstacle]Swinging Net'
   m_EditorClassIdentifier: 
-  placableName: Pendulum
-  prefab: {fileID: 4170791249458223976, guid: b638837bca185b848910c96a5725dc7c, type: 3}
+  placableName: Swinging
+  prefab: {fileID: 685277277924804174, guid: de96d373fbe361f468cced45af1d3510, type: 3}
+  crossSectionMaterial: {fileID: 2100000, guid: 873aa386a0819d04a92db33bca0ac4cd, type: 2}
   type: 1
-  sprite: {fileID: 21300000, guid: f82dfc5fc3c5a8f4080a3550427019c8, type: 3}
+  sprite: {fileID: 21300000, guid: 99fa36ccb4223ca4fa1cf337b4429744, type: 3}

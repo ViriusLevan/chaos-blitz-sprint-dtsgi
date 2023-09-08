@@ -58,7 +58,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         private void MoveSpikesUp()
         {
             Vector3 newSpikesPosition = originalSpikesPosition + Vector3.up * spikeUpAmount;
-            transform.GetChild(0).localPosition = newSpikesPosition;
+            spike.transform.localPosition = newSpikesPosition;
             isSpikesUp = true;
             Debug.Log("Spikes triggered!");
             // You can add code here to kill the player, like calling a player's death function
@@ -66,7 +66,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void MoveSpikesDown()
         {
-            transform.GetChild(0).localPosition = originalSpikesPosition;
+            spike.transform.localPosition = originalSpikesPosition;
             isSpikesUp = false;
         }
     }

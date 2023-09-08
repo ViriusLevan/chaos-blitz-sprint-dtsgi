@@ -274,6 +274,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 		public void SendBackToSpawn()
 		{
+			transform.rotation = Quaternion.identity;
 			transform.position 
 				= GameManager.Instance.GetPlayerSpawnPoints()[
 					playerInputHandler.playerConfig.playerIndex

@@ -11,6 +11,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void Start()
         {
+            active=true;
         }
 
         private bool active=false;
@@ -20,10 +21,21 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
                 Rotate();
         }
 
+        public enum RotationAxis{x,y,z};
+        [SerializeField] private RotationAxis rotAxis=RotationAxis.y;
+
         private void Rotate()
         {
+            Vector3 rotation = new Vector3();
+            if(rotAxis==RotationAxis.x){
+                rotation = Vector3.forward;
+            }else if(rotAxis==RotationAxis.y){
+                rotation = Vector3.up;
+            }else if(rotAxis==RotationAxis.z){
+                rotation = Vector3.right;
+            }
             float rotationAmount = rotationSpeed * Time.deltaTime;
-            rotatingObject.transform.Rotate(Vector3.up, rotationAmount);
+            rotatingObject.transform.Rotate(rotation, rotationAmount);
         }
 
 

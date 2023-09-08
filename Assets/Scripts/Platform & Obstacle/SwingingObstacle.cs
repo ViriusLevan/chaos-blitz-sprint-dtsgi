@@ -19,6 +19,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             middleRotation = pivotPoint.transform.rotation;
             rightRotation = middleRotation * Quaternion.Euler(0f, 0f, swingAngle);
             leftRotation = middleRotation * Quaternion.Euler(0f, 0f, -swingAngle);
+            Swing();
         }
 
         public void Swing()
@@ -78,13 +79,13 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         private void Deactivate()
         {
             //StopCoroutine(Swinging);
-            DOTween.Pause(transform);
+            //DOTween.Pause(transform);
         }
 
         private void Reset()
         {
-            DOTween.Rewind(transform);
-            DOTween.Kill(transform, true);
+            //DOTween.Rewind(transform);
+            //DOTween.Kill(transform, true);
             //transform.position = originalPosition;
         }
     }

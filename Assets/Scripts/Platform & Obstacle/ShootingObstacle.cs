@@ -26,16 +26,17 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             }
         }
 
+        [SerializeField]private Transform spawnPoint;
         private void Shoot()
         {
-            Vector3 spawnPosition = transform.position;
             Vector3 shootDirection = transform.forward;
 
             GameObject shooty = objectPooler.GetPooled();
 
             if (shooty != null)
             {
-                shooty.transform.position = spawnPosition;
+                shooty.transform.position = spawnPoint.position;
+                shooty.transform.rotation = spawnPoint.rotation;
                 shooty.SetActive(true);
                 Rigidbody rb = shooty.GetComponent<Rigidbody>();
                 rb.velocity = Vector3.zero;

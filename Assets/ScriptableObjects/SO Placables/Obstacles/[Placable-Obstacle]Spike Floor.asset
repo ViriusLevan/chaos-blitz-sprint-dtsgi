@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 695ff6480ce82d145b6a073482263ca6, type: 3}
-  m_Name: TEST_Hazard2
+  m_Name: '[Placable-Obstacle]Spike Floor'
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4042188148071957732, guid: c366321194e29c34186405276b497d3c, type: 3}
-  type: 2
+  placableName: Spike Floor
+  prefab: {fileID: 700673722203637076, guid: 12237b70cb3e0f246b022d9b8c1d422e, type: 3}
+  crossSectionMaterial: {fileID: 2100000, guid: 873aa386a0819d04a92db33bca0ac4cd, type: 2}
+  type: 1
+  sprite: {fileID: 21300000, guid: 049ed06e5bc39d146ace8f2e5a0139b3, type: 3}

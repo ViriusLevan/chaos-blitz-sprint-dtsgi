@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 685277277924804175}
   - component: {fileID: 685277277298537064}
   - component: {fileID: 685277277298537065}
+  - component: {fileID: 1611697640784236372}
+  - component: {fileID: 5621070186679492567}
   m_Layer: 0
   m_Name: '[Obstacle]Swinging Net'
   m_TagString: Untagged
@@ -31,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 169623391215206424}
-  - {fileID: 5712883459192670006}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66,59 +67,26 @@ MonoBehaviour:
   pivotPoint: {fileID: 685277277924804174}
   swingingSpeed: 60
   swingAngle: 30
---- !u!1 &6769788220207405138
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5712883459192670006}
-  - component: {fileID: 7058921637154649939}
-  - component: {fileID: 2361833840307303109}
-  m_Layer: 0
-  m_Name: Bumpy
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5712883459192670006
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6769788220207405138}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.73, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 685277277924804175}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7058921637154649939
+--- !u!135 &1611697640784236372
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6769788220207405138}
+  m_GameObject: {fileID: 685277277924804174}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
-  m_Center: {x: -0.009264946, y: -4.5, z: 0}
---- !u!114 &2361833840307303109
+  m_Radius: 3
+  m_Center: {x: -0.009264946, y: -8.96, z: 0}
+--- !u!114 &5621070186679492567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6769788220207405138}
+  m_GameObject: {fileID: 685277277924804174}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1a7d7e8deaa22d43854d8c8006f81fd, type: 3}

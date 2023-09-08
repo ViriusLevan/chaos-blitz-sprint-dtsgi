@@ -163,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotatingObject: {fileID: 6423409700670030155}
   rotationSpeed: 50
+  rotAxis: 0
 --- !u!1 &6423409700904327018
 GameObject:
   m_ObjectHideFlags: 0

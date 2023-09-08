@@ -11,10 +11,12 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
 		void OnCollisionEnter(Collision collision)
 		{
+				Debug.Log(collision.gameObject.name+"0>"+collision.gameObject.tag);
 			foreach (ContactPoint contact in collision.contacts)
 			{
 				if (collision.gameObject.tag == "Player")
 				{
+					Debug.Log("Bumpy Triggered");
 					hitDir = contact.normal;
 					collision.gameObject.GetComponent<PlayerController>().HitPlayer(-hitDir * force, stunTime);
 					return;

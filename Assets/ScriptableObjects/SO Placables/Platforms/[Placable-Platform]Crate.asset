@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 695ff6480ce82d145b6a073482263ca6, type: 3}
-  m_Name: Platform_Log
+  m_Name: '[Placable-Platform]Crate'
   m_EditorClassIdentifier: 
-  placableName: Log
-  prefab: {fileID: 4053653661610996218, guid: 124c505f3c9410e48a672d704a90ccbe, type: 3}
+  placableName: Wheel
+  prefab: {fileID: 6065916514187161570, guid: a2c81b64c5b04344e8a32112acff1c96, type: 3}
+  crossSectionMaterial: {fileID: 2100000, guid: 873aa386a0819d04a92db33bca0ac4cd, type: 2}
   type: 0
-  sprite: {fileID: 21300000, guid: 3494dc956dfd7174abc07060940a2848, type: 3}
+  sprite: {fileID: 21300000, guid: e38a5eb21e4c3864384fbe1f789c7fe4, type: 3}
