@@ -28,6 +28,7 @@ public class VFXManager : MonoBehaviour
     public GameObject VFX_Place;
 
     public Dictionary<VFXEnum, GameObject> effectLibrary = new Dictionary<VFXEnum, GameObject>();
+    private Dictionary<VFXEnum, SoundEnum> vfxSoundKey = new Dictionary<VFXEnum, SoundEnum>();
     private Quaternion initialRotation;
 
 
@@ -45,6 +46,7 @@ public class VFXManager : MonoBehaviour
         }
     }
 
+
     private void Start()
     {
         
@@ -52,21 +54,46 @@ public class VFXManager : MonoBehaviour
         effectLibrary[VFXEnum.BloodEffect] = VFX_Blood;
         effectLibrary[VFXEnum.JumpEffect] = VFX_Jump;
         effectLibrary[VFXEnum.WinEffect] = VFX_Win;
-        effectLibrary[VFXEnum.RunEffect] = VFX_Run;
+        //effectLibrary[VFXEnum.RunEffect] = VFX_Run;
         effectLibrary[VFXEnum.CanonEffect] = VFX_Canon; 
         effectLibrary[VFXEnum.ArrowEffect] = VFX_Arrow;
         effectLibrary[VFXEnum.PlaceEffect] = VFX_Place;
-        effectLibrary[VFXEnum.WaterEffect] = VFX_Water;
         effectLibrary[VFXEnum.BloodEffect] = VFX_Blood;
         effectLibrary[VFXEnum.JumpEffect] = VFX_Jump;
+
+        
+        vfxSoundKey[VFXEnum.WaterEffect] = SoundEnum.WaterSound;
+        vfxSoundKey[VFXEnum.BloodEffect] = SoundEnum.HitSound;
+        vfxSoundKey[VFXEnum.JumpEffect] = SoundEnum.PlayerJump;
+        vfxSoundKey[VFXEnum.WinEffect] = SoundEnum.FireworkSound;
+        //vfxSoundKey[VFXEnum.RunEffect] = SoundEnum.WaterSound;
+        vfxSoundKey[VFXEnum.CanonEffect] = SoundEnum.CanonSound; 
+        vfxSoundKey[VFXEnum.ArrowEffect] = SoundEnum.ArrowSound;
+        vfxSoundKey[VFXEnum.PlaceEffect] = SoundEnum.PoofSound;
     }
-    public void PlayEffect(VFXEnum effect, Vector3 setPosEffect, Vector3 setRotEffect)
+    public void PlayEffect(VFXEnum effect, Vector3 position, Vector3 setRotEffect)
     {
         if (effectLibrary.ContainsKey(effect))
         {
             GameObject VFX = effectLibrary[effect];
             Quaternion rotation = Quaternion.Euler(VFX.transform.rotation.eulerAngles + setRotEffect);
-            GameObject SpawnEffect = Instantiate(VFX, setPosEffect, rotation);
+            Instantiate(VFX, position, rotation);
+            if(vfxSoundKey.ContainsKey(effect))
+                SoundManager.Instance?.PlaySound(vfxSoundKey[effect]);
+        }
+        else
+        {
+            Debug.LogError("Effect not found in the library.");
+        }
+    }
+
+    public void PlayEffectSilent(VFXEnum effect, Vector3 setPosEffect, Vector3 setRotEffect)
+    {
+        if (effectLibrary.ContainsKey(effect))
+        {
+            GameObject VFX = effectLibrary[effect];
+            Quaternion rotation = Quaternion.Euler(VFX.transform.rotation.eulerAngles + setRotEffect);
+            Instantiate(VFX, setPosEffect, rotation);
 
             //SpawnEffect.transform.SetParent();
         }
@@ -75,4 +102,6 @@ public class VFXManager : MonoBehaviour
             Debug.LogError("Effect not found in the library.");
         }
     }
+
+
 }

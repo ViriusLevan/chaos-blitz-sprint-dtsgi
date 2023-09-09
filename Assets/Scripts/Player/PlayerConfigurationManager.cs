@@ -42,6 +42,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
         private void Start() 
         {
+            colorPlayerIndex = new Dictionary<string, int>();
             SceneLoader.sceneLoaded+=Reset;
         }
         void OnDestroy()
@@ -125,8 +126,15 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             return playerConfigs;
         }
 
+        public delegate void OnColor(string colorName);
+        public static event OnColor colorTaken, colorReturned;
+        private Dictionary<string,int>colorPlayerIndex;
+        public bool IsColorTaken(string colorKey){return colorPlayerIndex.ContainsKey(colorKey);}
         public void SetPlayerColor(int index, Material color, int cIndex)
         {
+            colorPlayerIndex[color.name]=index;
+            colorTaken?.Invoke(color.name);
+
             playerConfigs[index].playerMaterial = color;
             playerConfigs[index].cursorIndex = cIndex;
         }
@@ -140,6 +148,17 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
         public void CancelReady(int index)
         {
+            string keyToRemove="";
+            foreach(KeyValuePair<string, int> entry in colorPlayerIndex)
+            {
+                if(entry.Value == index){
+                    keyToRemove =entry.Key;
+                    break;
+                }
+            }
+            colorPlayerIndex.Remove(keyToRemove);
+            colorReturned?.Invoke(keyToRemove);
+
             Debug.Log($"Player {index} cancelled");
             playerConfigs[index].isReady = false;
         }

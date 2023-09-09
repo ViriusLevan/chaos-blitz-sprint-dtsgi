@@ -109,7 +109,6 @@ namespace LevelUpStudio.ChaosBlitzSprint
 
         public void PlayerDied(int pIndex)
         {
-            SoundManager.Instance?.PlaySound(SoundEnum.PlayerDeath);
             List<int> finishedPlayers = new List<int>();
 
             Debug.Log($"Player {pIndex} has Died");

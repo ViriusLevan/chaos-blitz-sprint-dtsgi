@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 568438047999950564}
   - component: {fileID: 1187129370827479450}
+  - component: {fileID: 2318843038845713374}
   m_Layer: 0
   m_Name: '[Shoty] Arrow'
   m_TagString: HurtPlayer
@@ -49,6 +50,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &2318843038845713374
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270076105447373301}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.42515373, y: 0.23114264, z: 2.5520859}
+  m_Center: {x: 0, y: -0.017963946, z: 0.09341264}
 --- !u!1001 &7369584048446379477
 PrefabInstance:
   m_ObjectHideFlags: 0

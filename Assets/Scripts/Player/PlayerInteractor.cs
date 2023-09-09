@@ -86,8 +86,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 						playerController.StartCoroutine(playerController
 							.TriggerDeathThenWaitToDisable(false));
 						//playerController.DisableMeshAndCollider();
-						GameManager.Instance.PlayerDied(playerController
-							.playerInputHandler.playerConfig.playerIndex);
 					}
 					break;
 				case "DeadZone":
@@ -111,9 +109,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 							playerController.StartCoroutine(playerController
 								.TriggerDeathThenWaitToDisable(false));
 						}
-						//playerController.DisableMeshAndCollider();
-						GameManager.Instance.PlayerDied(playerController
-							.playerInputHandler.playerConfig.playerIndex);
 					}
 					break;
 				
@@ -142,7 +137,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 		private void PlayDeathFX()
 		{
-			SoundManager.Instance?.PlaySound(SoundEnum.HitSound);
 			VFXManager.Instance?.PlayEffect(VFXEnum.BloodEffect
 				, transform.position
 				, new Vector3());
@@ -150,7 +144,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 		private void PlaySplashFX()
 		{
-			SoundManager.Instance?.PlaySound(SoundEnum.WaterSound);
 			VFXManager.Instance?.PlayEffect(VFXEnum.WaterEffect
 				, transform.position + new Vector3(0,2,0)
 				, new Vector3());

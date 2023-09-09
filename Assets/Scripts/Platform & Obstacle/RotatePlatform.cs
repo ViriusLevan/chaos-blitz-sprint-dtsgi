@@ -73,7 +73,16 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         private void Reset()
         {
 			active=false;
-            rotatingObject.transform.rotation = Quaternion.identity;
+            if(rotAxis==RotationAxis.x){
+            rotatingObject.transform.rotation 
+                = Quaternion.Euler(0,transform.rotation.y, transform.rotation.z).normalized;
+            }else if(rotAxis==RotationAxis.y){
+                rotatingObject.transform.rotation 
+                = Quaternion.Euler(transform.rotation.x,0, transform.rotation.z).normalized;
+            }else if(rotAxis==RotationAxis.z){
+                rotatingObject.transform.rotation 
+                = Quaternion.Euler(transform.rotation.x,transform.rotation.y, 0).normalized;
+            }
             // DOTween.Rewind(transform);
             // DOTween.Kill(transform, true);
             //transform.position = originalPosition;

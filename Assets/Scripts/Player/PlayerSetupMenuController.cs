@@ -17,6 +17,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         [SerializeField] private GameObject readyPanel;
         [SerializeField] private GameObject menuPanel;
         [SerializeField] private Button readyButton;
+        [SerializeField] private Button[] colorButtons;
+    
+    //TODO I'm stupid i know, use Materials instead of magic
+        [SerializeField] private string[] matNames;
 
         private int playerIndex;
         private float ignoreInputTime = 0.5f;
@@ -36,13 +40,26 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         private void Start() 
         {
             pi.onActionTriggered += Input_onActionTriggered;
+            PlayerConfigurationManager.colorTaken += ColorTaken;
+            PlayerConfigurationManager.colorReturned += ColorReturned;
+            foreach (string name in matNames)
+            {
+                if(PlayerConfigurationManager.Instance.IsColorTaken(name))
+                {
+                   ColorTaken(name); 
+                }
+            }
         }
         void OnDisable()
         {
+            PlayerConfigurationManager.colorTaken -= ColorTaken;
+            PlayerConfigurationManager.colorReturned -= ColorReturned;
             pi.onActionTriggered -= Input_onActionTriggered;
         }
         void OnDestroy()
         {
+            PlayerConfigurationManager.colorTaken -= ColorTaken;
+            PlayerConfigurationManager.colorReturned -= ColorReturned;
             pi.onActionTriggered -= Input_onActionTriggered;
         }
 
@@ -98,14 +115,36 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             }else if(mat.name.Contains("Green", System.StringComparison.OrdinalIgnoreCase)){
                 cursorIndex=3;
             }
+            
+            if(PlayerConfigurationManager.Instance.IsColorTaken(mat.name))
+                return;
 
             PlayerConfigurationManager.Instance.SetPlayerColor(playerIndex, mat, cursorIndex);
+
             ReadyPlayer();
             menuPanel.SetActive(false);
             readyPanel.SetActive(true);
             // readyButton.interactable = true;
             // readyButton.Select();
             
+        }
+
+        public void ColorTaken(string colorName){ToggleColorButton(colorName, false);}
+        public void ColorReturned(string colorName){ToggleColorButton(colorName, true);}
+
+        public void ToggleColorButton(string colorName, bool toggle)
+        {
+            int buttonIndex=0;
+            if(colorName.Contains("Red", System.StringComparison.OrdinalIgnoreCase)){
+                buttonIndex=0;
+            } else if(colorName.Contains("Purple", System.StringComparison.OrdinalIgnoreCase)){
+                buttonIndex=1;
+            } else if(colorName.Contains("Yellow", System.StringComparison.OrdinalIgnoreCase)){
+                buttonIndex=2;
+            }else if(colorName.Contains("Green", System.StringComparison.OrdinalIgnoreCase)){
+                buttonIndex=3;
+            }
+            colorButtons[buttonIndex].interactable=toggle;
         }
 
         public void ReadyPlayer()

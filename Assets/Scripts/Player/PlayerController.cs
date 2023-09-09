@@ -52,7 +52,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				capsuleCollider.center = colliderCenterCrouch;
 				capsuleCollider.height = colliderHeightCrouch;
 				slipCapsule.center = colliderCenterCrouch;
-				slipCapsule.height = colliderHeightCrouch*0.8f;
+				slipCapsule.height = colliderHeightCrouch*0.9f;
 				maxSpeed = speedCrouched;
 			}
 			else
@@ -60,7 +60,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				capsuleCollider.center = colliderCenterNormal;
 				capsuleCollider.height = colliderHeightNormal;
 				slipCapsule.center = colliderCenterNormal;
-				slipCapsule.height = colliderHeightNormal*0.8f;
+				slipCapsule.height = colliderHeightNormal*0.9f;
 				maxSpeed = speedNormal;
 			}
 		}
@@ -73,6 +73,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		public bool hasExtraLife;
 		public bool hasShield;
 
+		[SerializeField] private ParticleSystem runSmokeEffect;
 		
 		private float speedNormal, speedCrouched, jumpNormal, jumpSticky;
 		private PlayerInteractor playerInteractor;
@@ -99,6 +100,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			jumpsLeft = maxJumps;
 		}
 		private float groundedCounter=0, groundContactTime=0.2f;
+
 		private void FixedUpdate ()
 		{
 			if(playerInputHandler.playerInstance.playerStatus 
@@ -124,14 +126,18 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					Quaternion targetRotation = Quaternion.Slerp
 						(transform.rotation, destRotation, Time.deltaTime * rotateSpeed); 
 					transform.rotation = targetRotation;
+					if(IsGrounded())
+						runSmokeEffect.Play();
 				}
 				else
 				{
+					runSmokeEffect.Stop();
 					playerAnimator.SetBool("isMoving",false);
 				}
 
 				if (IsGrounded())
 				{
+
 					//Debug.Log("IS GROUNDED");
 					playerAnimator.SetBool("isGrounded",true);
 					groundedCounter+=Time.fixedDeltaTime;
@@ -186,6 +192,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				}
 				else
 				{
+					runSmokeEffect.Stop();
 					groundedCounter=0;
 					//Debug.Log("NOT GROUNDED");
 					playerAnimator.SetBool("isGrounded",false);
@@ -290,9 +297,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			
 			RaycastHit hit;
 			
-			Debug.DrawRay(transform.position
-					, -transform.up * (distToGround+0.2f)
-					, Color.red, 3.0f);
+			// Debug.DrawRay(transform.position
+			// 		, -transform.up * (distToGround+0.2f)
+			// 		, Color.red, 3.0f);
 			//if (Physics.Raycast(transform.position, -Vector3.up, out hit, distToGround + 0.2f))
 			if(Physics.SphereCast(transform.position,0.5f,-transform.up
 					,out hit,distToGround+0.2f))
@@ -322,7 +329,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			VFXManager.Instance?.PlayEffect(VFXEnum.JumpEffect
 				, transform.position
 				, new Vector3());
-			SoundManager.Instance?.PlaySound(SoundEnum.PlayerJump);
 		}
 
 		float CalculateJumpVerticalSpeed () {
@@ -348,6 +354,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 		public IEnumerator TriggerDeathThenWaitToDisable(bool sink)
 		{	 
+			transform.SetParent(null);
+			GetComponent<CapsuleCollider>().enabled=false;
+			rb.useGravity=false;
 			if(sink)
 				playerAnimator.SetTrigger("sink");
 			else
@@ -356,10 +365,12 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			playerInteractor.DeactivatePowerUp();
 			yield return new WaitWhile(() => playerAnimator
 				.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
-			DisableMeshAndCollider();
+			
+			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
+			DisableMesh();
 		}
 
-		public void DisableMeshAndCollider()
+		public void DisableMesh()
 		{
 			//TODO - add more stuff, e.g. play animation or sfx
 			//this.gameObject.SetActive(false);
@@ -370,7 +381,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			{
 				smr.enabled=false;
 			}
-			GetComponent<CapsuleCollider>().enabled=false;
 		}
 
 		public void HitPlayer(Vector3 velocityF, float time)

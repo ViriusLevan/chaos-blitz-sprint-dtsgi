@@ -2011,7 +2011,7 @@ MonoBehaviour:
   playerJump: {fileID: 8300000, guid: 101edf454c43e1042baaeaef8ec9266a, type: 3}
   poofSFX: {fileID: 8300000, guid: b790e09e2ea3fb2438260df6b192e001, type: 3}
   playerFinish: {fileID: 8300000, guid: 38630689a53401d4db2323e3f590a24c, type: 3}
-  playerDeath: {fileID: 8300000, guid: ffd04775cd959cd43a7b96c2eaf329ef, type: 3}
+  playerDeath: {fileID: 8300000, guid: b08c867b272bf5544899d94756df6717, type: 3}
   laughSFX: {fileID: 8300000, guid: 38630689a53401d4db2323e3f590a24c, type: 3}
   FireworkSFX: {fileID: 8300000, guid: 6868a1bf18116ae4689bd2ec5d460e2c, type: 3}
 --- !u!4 &2018517061

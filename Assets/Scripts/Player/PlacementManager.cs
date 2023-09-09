@@ -84,7 +84,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                         PointSlicer pSlicer = 
                             hit.rigidbody.gameObject.GetComponentInParent<PointSlicer>() 
                             ??  hit.rigidbody.gameObject.GetComponentInChildren<PointSlicer>();
-                        Debug.Log(pSlicer.ToString());
+                        //Debug.Log(pSlicer.ToString());
                         targetPlatform=pSlicer;
                         ValidPlacement(pSlicer);
                         arrowIndicator.SetActive(true);
@@ -241,7 +241,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 targetPlatform=null;
             }
 
-            SoundManager.Instance?.PlaySound(SoundEnum.PoofSound);
             VFXManager.Instance?.PlayEffect(VFXEnum.PlaceEffect
                 , pendingObj.transform.position
                 , new Vector3());

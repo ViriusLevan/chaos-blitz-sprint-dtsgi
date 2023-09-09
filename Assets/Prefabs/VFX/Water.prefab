@@ -9308,7 +9308,6 @@ GameObject:
   - component: {fileID: 198039942544698878}
   - component: {fileID: 199188810652770198}
   - component: {fileID: 114913718520774464}
-  - component: {fileID: 555565550667245091}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -14025,20 +14024,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyDeactivate: 0
---- !u!114 &555565550667245091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687118924408352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 350124f897680c749bb25f1aef8b10d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SetPosEffect: {x: 0, y: -2.75, z: 0}
-  SetRotEffect: {x: 90, y: 0, z: 0}
 --- !u!1 &1947517658076526
 GameObject:
   m_ObjectHideFlags: 0

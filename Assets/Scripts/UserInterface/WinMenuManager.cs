@@ -21,7 +21,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
                 scoreboardText.text += $"PlayerIndex {item.playerIndex+1} Score {item.scoreTotal}\n";
             }
             SoundManager.Instance?.PlaySound(SoundEnum.LaughSound);
-            SoundManager.Instance?.PlaySound(SoundEnum.FireworkSound);
             VFXManager.Instance?.PlayEffect(VFXEnum.WinEffect
                 , Camera.main.transform.position + (Vector3.forward*5)
                 , new Vector3());
