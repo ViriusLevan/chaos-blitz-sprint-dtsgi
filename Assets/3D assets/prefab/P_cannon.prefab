@@ -47,11 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf1a94b3e88e1a4dab70e7586ce798c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingSpeed: 50
+  shootingSpeed: 35
   shootyLifetime: 3
   shootInterval: 5
   objectPooler: {fileID: 1237958913403165930}
   spawnPoint: {fileID: 5338384300322330059}
+  isCannon: 1
 --- !u!114 &1237958913403165930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotyPrefab: {fileID: 9065686413866407794, guid: ce42d2a3fb0db4140b0a29ed00e4dcbd, type: 3}
-  poolSize: 10
+  poolSize: 3
 --- !u!1 &6917885792029880311
 GameObject:
   m_ObjectHideFlags: 0

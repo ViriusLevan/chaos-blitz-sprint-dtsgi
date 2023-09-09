@@ -16,6 +16,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
 
         private void OnTriggerEnter(Collider other) 
         {
+            if(other.gameObject.layer == LayerMask.NameToLayer("IgnorePlacementCheck"))
+                return;
             if(other.gameObject.CompareTag("PowerUp")){//do nothing
                 return;
             }
@@ -43,6 +45,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
 
         private void OnTriggerStay(Collider other) 
         {
+            if(other.gameObject.layer == LayerMask.NameToLayer("IgnorePlacementCheck"))
+                return;
             if(other.gameObject.CompareTag("PowerUp")){//do nothing
                 return;
             }
@@ -68,6 +72,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
 
         private void OnTriggerExit(Collider other) 
         {
+            if(other.gameObject.layer == LayerMask.NameToLayer("IgnorePlacementCheck"))
+                return;
             if(other.gameObject.CompareTag("PowerUp")){//do nothing
                 return;
             }

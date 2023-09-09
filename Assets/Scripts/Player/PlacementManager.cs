@@ -62,7 +62,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         
         [SerializeField] private LayerMask platformLayer;
         [SerializeField] private GameObject arrowIndicator;
-        public GameObject GetArrowIndicator(){return arrowIndicator;}
+        public void SetArrowMaterial(Material mat)
+        {
+            arrowIndicator.GetComponentInChildren<MeshRenderer>().material = mat;
+        }
         private void FixedUpdate() 
         {
             if(playerInputHandler.playerInstance.playerStatus 
@@ -167,8 +170,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             MonoBehaviour[] mbs = pendingObj.GetComponentsInChildren<MonoBehaviour>();
             foreach (var item in mbs)
             {
+                if(item.gameObject.GetComponent<IndicatorMovement>())
+                    continue;
                 item.enabled=false;
             }
+
             PlacementChecker pChecker = pendingObj.AddComponent<PlacementChecker>();
             pChecker.SetPlacementManager(this);
             
@@ -190,8 +196,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 pendingObj.transform.eulerAngles += new Vector3(-90,0,0);
             }
         }
+        
         private List<Material> pendingObjMaterials;
-
         public void PlaceObject(InputAction.CallbackContext context)
         {
             if(!canPlace) return;
@@ -204,13 +210,16 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             }
             pendingObjMaterials.Clear();
             
-            PlacementChecker toDestroy = pendingObj.GetComponent<PlacementChecker>();
-            Destroy(toDestroy);
-
             MonoBehaviour[] mbs = pendingObj.GetComponentsInChildren<MonoBehaviour>();
             foreach (var item in mbs)
-            {
                 item.enabled=true;
+
+            PlacementChecker pChecker = pendingObj.GetComponent<PlacementChecker>();
+            Destroy(pChecker);
+            IndicatorMovement indicator = pendingObj.GetComponentInChildren<IndicatorMovement>();
+            if(indicator!=null){
+                Debug.Log(indicator.gameObject.name);
+                Destroy(indicator.gameObject);
             }
 
             Collider[] colls = pendingObj.GetComponentsInChildren<Collider>();
@@ -255,21 +264,15 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
         private void UpdateMaterials()
         {
-            if(canPlace)
+            MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer mr in mrs)
             {
-                MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
-                foreach (var item in mrs)
-                {
-                    item.material = materials[0];
-                }
-            }
-            else
-            {
-                MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
-                foreach (var item in mrs)
-                {
-                    item.material = materials[1];
-                }
+                if(mr.gameObject.GetComponent<IndicatorMovement>())
+                    continue;
+                if(canPlace)
+                    mr.material = materials[0];
+                else
+                    mr.material = materials[1];
             }
         }
     }

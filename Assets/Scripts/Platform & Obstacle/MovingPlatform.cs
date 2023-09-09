@@ -79,7 +79,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         private void MovePos()
         {
             // Calculate the movement direction based on the local rotation
-            Vector3 movementDirection = dir == MovementDirection.Horizontal ? transform.TransformDirection(Vector3.right) : transform.TransformDirection(Vector3.up);
+            Vector3 movementDirection = dir == MovementDirection.Horizontal 
+                ? transform.TransformDirection(Vector3.right) : transform.TransformDirection(Vector3.up);
 
             // Calculate the normalized time using the custom easing function
             float easedTime = CustomEaseInOutSine(Mathf.PingPong(Time.time * speed / distance, 1f));

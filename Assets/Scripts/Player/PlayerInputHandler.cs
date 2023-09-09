@@ -30,7 +30,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             Debug.Log("InputHandlerInstance"+(playerInstance==null));
             playerConfig = config;
             playerMesh.material = config.playerMaterial;
-            pManager.GetArrowIndicator().GetComponent<MeshRenderer>().material = config.playerMaterial;
+            pManager.SetArrowMaterial(config.playerMaterial);
             config.input.onActionTriggered += Input_onActionTriggered;
             
             virtualCursor?.SetPlayerInputHandler(this);

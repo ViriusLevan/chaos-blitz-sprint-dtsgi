@@ -71,6 +71,7 @@ MonoBehaviour:
   shootInterval: 3
   objectPooler: {fileID: 5058974983343857941}
   spawnPoint: {fileID: 737025824554269003}
+  isCannon: 0
 --- !u!114 &5058974983343857941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotyPrefab: {fileID: 2270076105447373301, guid: ace8b0d2db9802f48b2be06b02036c29, type: 3}
-  poolSize: 10
+  poolSize: 3
 --- !u!65 &944767447324238240
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -261,6 +262,14 @@ PrefabInstance:
     - target: {fileID: 2270076105447373301, guid: ace8b0d2db9802f48b2be06b02036c29, type: 3}
       propertyPath: m_Name
       value: '[Shoty] Arrow'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270076105447373301, guid: ace8b0d2db9802f48b2be06b02036c29, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7676223337798117508, guid: ace8b0d2db9802f48b2be06b02036c29, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ace8b0d2db9802f48b2be06b02036c29, type: 3}

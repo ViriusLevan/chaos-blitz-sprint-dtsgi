@@ -27,9 +27,12 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         }
 
         [SerializeField]private Transform spawnPoint;
+        [SerializeField]private bool isCannon=false;
         private void Shoot()
         {
-            Vector3 shootDirection = transform.forward;
+
+            Vector3 shootDirection = isCannon ? 
+                (transform.forward+(Vector3.up * 0.25f)) : transform.forward ;
 
             GameObject shooty = objectPooler.GetPooled();
 
