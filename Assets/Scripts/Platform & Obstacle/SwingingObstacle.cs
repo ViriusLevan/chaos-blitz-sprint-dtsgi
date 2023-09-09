@@ -42,10 +42,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             float elapsedTime = 0f;
             while (elapsedTime < timeToReachTarget)
             {
-                if(GameManager.Instance?.GetCurrentGameStatus() != GameManager.GameStatus.PlatformingPhase)
-                {
-                    yield return new WaitForSeconds(0.2f);
-                }
                 float t = elapsedTime / timeToReachTarget;
                 float easedT = CustomEaseInOutSine(t); // Apply custom easing
                 pivotPoint.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, easedT);
@@ -87,6 +83,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void Reset()
         {
+            StopCoroutine(Swinging());
+            transform.rotation = middleRotation;
             //DOTween.Rewind(transform);
             //DOTween.Kill(transform, true);
             //transform.position = originalPosition;

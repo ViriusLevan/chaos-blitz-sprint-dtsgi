@@ -536,7 +536,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": """",
                     ""id"": ""123a7576-4afd-4f82-b014-400a1a35f9e7"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
@@ -558,7 +558,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": """",
                     ""id"": ""865a137b-c546-48f0-90cd-78d5b0b82137"",
-                    ""path"": ""<Keyboard>/backslash"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -624,7 +624,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": """",
                     ""id"": ""20f8d2c7-f9b1-42ee-8690-27c981bdeff5"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",

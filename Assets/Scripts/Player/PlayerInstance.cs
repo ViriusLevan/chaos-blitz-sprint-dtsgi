@@ -132,11 +132,18 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 		public void BuildingMode()
 		{
 			buildCameraFollow.transform.position = GameManager.Instance.buildCamSetPoint.position;
-			playerController.EnableMeshAndCollider();
+			//playerController.EnableMeshAndCollider();
 			playerController.SendBackToSpawn();
 			freeLookCamera.Follow = buildCameraFollow.transform;
 			freeLookCamera.LookAt = buildCameraFollow.transform;
-			freeLookCamera.m_Lens.FieldOfView = 60;
+			freeLookCamera.m_Lens.FieldOfView = 80;
+			freeLookCamera.m_Orbits[0].m_Height = 15;
+			freeLookCamera.m_Orbits[0].m_Radius = 20;
+			freeLookCamera.m_Orbits[1].m_Height = 8;
+			freeLookCamera.m_Orbits[1].m_Radius = 12;
+			freeLookCamera.m_Orbits[2].m_Height = 4;
+			freeLookCamera.m_Orbits[2].m_Radius = 5;
+
 			placementManager.SetCameraTransform(playerCamera.transform);
 			placementManager.InstantiateNewPlacable();
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("BuildMode");
@@ -146,9 +153,18 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 		}
 
 		public void PlatformingMode(){
+			playerController.EnableMeshAndCollider();
+			playerController.SendBackToSpawn();
 			freeLookCamera.Follow = playerController.gameObject.transform;
 			freeLookCamera.LookAt = playerController.gameObject.transform;
-			freeLookCamera.m_Lens.FieldOfView = 40;
+			freeLookCamera.m_Lens.FieldOfView = 60;
+			freeLookCamera.m_Orbits[0].m_Height = 6;
+			freeLookCamera.m_Orbits[0].m_Radius = 10;
+			freeLookCamera.m_Orbits[1].m_Height = 4;
+			freeLookCamera.m_Orbits[1].m_Radius = 7;
+			freeLookCamera.m_Orbits[2].m_Height = 2;
+			freeLookCamera.m_Orbits[2].m_Radius = 5;
+
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("Player");
 			SetControlHelpText(PlayerStatus.Platforming);
 			cinemachineInputHanlder.horizontal 

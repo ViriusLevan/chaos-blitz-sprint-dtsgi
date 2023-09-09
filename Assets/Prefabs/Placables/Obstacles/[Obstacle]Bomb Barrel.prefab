@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 255280506626545053}
   - component: {fileID: 255280507073545106}
+  - component: {fileID: 2702909578396060901}
   m_Layer: 0
   m_Name: '[Obstacle]Bomb Barrel'
   m_TagString: Untagged
@@ -49,6 +50,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &2702909578396060901
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255280506626545052}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1939058, y: 2.8963566, z: 2.1109958}
+  m_Center: {x: -0.033164084, y: 1.4788032, z: 0.008291006}
 --- !u!1001 &2890071156980996147
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -95,7 +95,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                     else
                     {
                         InvalidPlacement();
-                        pos = referenceTransform.position;
+                        pos = cameraTransform.position + (cameraTransform.forward*20);
                         arrowIndicator.SetActive(false);
                     }
                 }

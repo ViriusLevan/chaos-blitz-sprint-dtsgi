@@ -83,7 +83,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					else
 					{
 						PlayDeathFX();
-						playerController.StartCoroutine(playerController.TriggerDeathThenWaitToDisable());
+						playerController.StartCoroutine(playerController
+							.TriggerDeathThenWaitToDisable(false));
 						//playerController.DisableMeshAndCollider();
 						GameManager.Instance.PlayerDied(playerController
 							.playerInputHandler.playerConfig.playerIndex);
@@ -99,10 +100,17 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					else
 					{
 						if(other.gameObject.name.Contains("Water"))
+						{
 							PlaySplashFX();
+							playerController.StartCoroutine(playerController
+								.TriggerDeathThenWaitToDisable(true));
+						}
 						else
+						{
 							PlayDeathFX();
-						playerController.StartCoroutine(playerController.TriggerDeathThenWaitToDisable());
+							playerController.StartCoroutine(playerController
+								.TriggerDeathThenWaitToDisable(false));
+						}
 						//playerController.DisableMeshAndCollider();
 						GameManager.Instance.PlayerDied(playerController
 							.playerInputHandler.playerConfig.playerIndex);
