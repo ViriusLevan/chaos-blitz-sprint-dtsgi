@@ -4,17 +4,15 @@ using UnityEngine;
 
 public enum SoundEnum
 {
-    WaterSound,
-    HitSound,
-    ArrowSound,
-    CanonSound,
-    PaperSound,
+    Splash,
+    Hurt,
+    Arrow,
+    Cannon,
     PoofSound,
     PlayerJump,
     PlayerFinish,
     PlayerDeath,
-    LaughSound,
-    FireworkSound
+    WooHooSound
 }
 public class SoundManager : MonoBehaviour
 {
@@ -24,17 +22,15 @@ public class SoundManager : MonoBehaviour
     [SerializeField]private AudioSource aSourceBGM;
 
     public Dictionary<SoundEnum, AudioClip> soundLibrary = new Dictionary<SoundEnum, AudioClip>();
-    public AudioClip waterSplashSFX;
-    public AudioClip hitSFX;
+    public AudioClip splashSFX;
+    public AudioClip hurtSFX;
     public AudioClip arrowSFX;
-    public AudioClip canonSFX;
-    public AudioClip paperSFX;
-    public AudioClip playerJump;
+    public AudioClip cannonSFX;
+    public AudioClip jumpSFX;
     public AudioClip poofSFX;
-    public AudioClip playerFinish;
-    public AudioClip playerDeath;
-    public AudioClip laughSFX; 
-    public AudioClip FireworkSFX;
+    public AudioClip finishJingle;
+    public AudioClip deathJingle;
+    public AudioClip woohooSFX; 
 
 
     private void Awake()
@@ -63,17 +59,15 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
-        soundLibrary[SoundEnum.WaterSound] = waterSplashSFX;
-        soundLibrary[SoundEnum.HitSound] = hitSFX;
-        soundLibrary[SoundEnum.ArrowSound] = arrowSFX;
-        soundLibrary[SoundEnum.CanonSound] = canonSFX;
-        soundLibrary[SoundEnum.PaperSound] = paperSFX;
+        soundLibrary[SoundEnum.Splash] = splashSFX;
+        soundLibrary[SoundEnum.Hurt] = hurtSFX;
+        soundLibrary[SoundEnum.Arrow] = arrowSFX;
+        soundLibrary[SoundEnum.Cannon] = cannonSFX;
         soundLibrary[SoundEnum.PoofSound] = poofSFX;
-        soundLibrary[SoundEnum.PlayerJump] = playerJump;
-        soundLibrary[SoundEnum.PlayerFinish] = playerFinish;
-        soundLibrary[SoundEnum.PlayerDeath] = playerDeath;
-        soundLibrary[SoundEnum.LaughSound] = laughSFX; 
-        soundLibrary[SoundEnum.FireworkSound] = FireworkSFX;
+        soundLibrary[SoundEnum.PlayerJump] = jumpSFX;
+        soundLibrary[SoundEnum.PlayerFinish] = finishJingle;
+        soundLibrary[SoundEnum.PlayerDeath] = deathJingle;
+        soundLibrary[SoundEnum.WooHooSound] = woohooSFX; 
     }
     public void PlaySound(SoundEnum sound)
     {

@@ -43,7 +43,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             if (shooty != null)
             {
                 if(isCannon)
-                    VFXManager.Instance?.PlayEffect(VFXEnum.CanonEffect
+                    VFXManager.Instance?.PlayEffect(VFXEnum.CannonEffect
                         , spawnPoint.transform.position
                         , new Vector3());
                 else

@@ -2006,17 +2006,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aSourceBGM: {fileID: 2018517059}
-  waterSplashSFX: {fileID: 8300000, guid: 22f60a6325eb42b459a14a239c8b0e72, type: 3}
-  hitSFX: {fileID: 8300000, guid: b08c867b272bf5544899d94756df6717, type: 3}
-  arrowSFX: {fileID: 8300000, guid: fae6e454c896a614892de2fa5061f213, type: 3}
-  canonSFX: {fileID: 8300000, guid: 415967dee66f424428f88529c766c1a3, type: 3}
-  paperSFX: {fileID: 8300000, guid: 29f81183f1f1f4d4bbe7cb5a205d34f8, type: 3}
-  playerJump: {fileID: 8300000, guid: 101edf454c43e1042baaeaef8ec9266a, type: 3}
-  poofSFX: {fileID: 8300000, guid: b790e09e2ea3fb2438260df6b192e001, type: 3}
-  playerFinish: {fileID: 8300000, guid: 38630689a53401d4db2323e3f590a24c, type: 3}
-  playerDeath: {fileID: 8300000, guid: b08c867b272bf5544899d94756df6717, type: 3}
-  laughSFX: {fileID: 8300000, guid: 38630689a53401d4db2323e3f590a24c, type: 3}
-  FireworkSFX: {fileID: 8300000, guid: 6868a1bf18116ae4689bd2ec5d460e2c, type: 3}
+  splashSFX: {fileID: 8300000, guid: 0b7405bf2fff1734eaa49084942b5931, type: 3}
+  hurtSFX: {fileID: 8300000, guid: 1e0440b78d3e1b9428ed210ebf45780d, type: 3}
+  arrowSFX: {fileID: 8300000, guid: 5ea61c367402b3b4598215ca7f0fd15f, type: 3}
+  cannonSFX: {fileID: 8300000, guid: 70d6a015e5438404296f35ec5924a0de, type: 3}
+  jumpSFX: {fileID: 8300000, guid: cfd6dea467f82a94ab35b1002006116d, type: 3}
+  poofSFX: {fileID: 8300000, guid: 85a6d244052a33349bed4946dd4a6c50, type: 3}
+  finishJingle: {fileID: 8300000, guid: e806d62c88bbdc249a59b0ccb1134aad, type: 3}
+  deathJingle: {fileID: 8300000, guid: 7058a92bf9062bb44ba6e0ec6b0b9d18, type: 3}
+  woohooSFX: {fileID: 8300000, guid: 897555956f6de0746907ac3c65616419, type: 3}
 --- !u!4 &2018517061
 Transform:
   m_ObjectHideFlags: 0

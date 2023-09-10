@@ -9,7 +9,7 @@ public enum VFXEnum
     JumpEffect,
     WinEffect,
     RunEffect,
-    CanonEffect, 
+    CannonEffect, 
     ArrowEffect,
     PlaceEffect
 }
@@ -29,8 +29,6 @@ public class VFXManager : MonoBehaviour
 
     public Dictionary<VFXEnum, GameObject> effectLibrary = new Dictionary<VFXEnum, GameObject>();
     private Dictionary<VFXEnum, SoundEnum> vfxSoundKey = new Dictionary<VFXEnum, SoundEnum>();
-    private Quaternion initialRotation;
-
 
     private void Awake()
     {
@@ -54,21 +52,19 @@ public class VFXManager : MonoBehaviour
         effectLibrary[VFXEnum.BloodEffect] = VFX_Blood;
         effectLibrary[VFXEnum.JumpEffect] = VFX_Jump;
         effectLibrary[VFXEnum.WinEffect] = VFX_Win;
-        //effectLibrary[VFXEnum.RunEffect] = VFX_Run;
-        effectLibrary[VFXEnum.CanonEffect] = VFX_Canon; 
+        effectLibrary[VFXEnum.CannonEffect] = VFX_Canon; 
         effectLibrary[VFXEnum.ArrowEffect] = VFX_Arrow;
         effectLibrary[VFXEnum.PlaceEffect] = VFX_Place;
         effectLibrary[VFXEnum.BloodEffect] = VFX_Blood;
         effectLibrary[VFXEnum.JumpEffect] = VFX_Jump;
 
         
-        vfxSoundKey[VFXEnum.WaterEffect] = SoundEnum.WaterSound;
-        vfxSoundKey[VFXEnum.BloodEffect] = SoundEnum.HitSound;
+        vfxSoundKey[VFXEnum.WaterEffect] = SoundEnum.Splash;
+        vfxSoundKey[VFXEnum.BloodEffect] = SoundEnum.Hurt;
         vfxSoundKey[VFXEnum.JumpEffect] = SoundEnum.PlayerJump;
-        vfxSoundKey[VFXEnum.WinEffect] = SoundEnum.FireworkSound;
-        //vfxSoundKey[VFXEnum.RunEffect] = SoundEnum.WaterSound;
-        vfxSoundKey[VFXEnum.CanonEffect] = SoundEnum.CanonSound; 
-        vfxSoundKey[VFXEnum.ArrowEffect] = SoundEnum.ArrowSound;
+        vfxSoundKey[VFXEnum.WinEffect] = SoundEnum.WooHooSound;
+        vfxSoundKey[VFXEnum.CannonEffect] = SoundEnum.Cannon; 
+        vfxSoundKey[VFXEnum.ArrowEffect] = SoundEnum.Arrow;
         vfxSoundKey[VFXEnum.PlaceEffect] = SoundEnum.PoofSound;
     }
     public void PlayEffect(VFXEnum effect, Vector3 position, Vector3 setRotEffect)
@@ -94,8 +90,6 @@ public class VFXManager : MonoBehaviour
             GameObject VFX = effectLibrary[effect];
             Quaternion rotation = Quaternion.Euler(VFX.transform.rotation.eulerAngles + setRotEffect);
             Instantiate(VFX, setPosEffect, rotation);
-
-            //SpawnEffect.transform.SetParent();
         }
         else
         {
