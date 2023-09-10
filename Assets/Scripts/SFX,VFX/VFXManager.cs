@@ -4,14 +4,7 @@ using UnityEngine;
 
 public enum VFXEnum
 {
-    BloodEffect,
-    WaterEffect,
-    JumpEffect,
-    WinEffect,
-    RunEffect,
-    CannonEffect, 
-    ArrowEffect,
-    PlaceEffect
+    Blood,Water,Jump,Win,Cannon,Arrow,Poof,Explosion
 }
 
 public class VFXManager : MonoBehaviour
@@ -22,10 +15,11 @@ public class VFXManager : MonoBehaviour
     public GameObject VFX_Water;
     public GameObject VFX_Jump;
     public GameObject VFX_Win;
-    public GameObject VFX_Run;
-    public GameObject VFX_Canon;
+    public GameObject VFX_Cannon;
     public GameObject VFX_Arrow;
-    public GameObject VFX_Place;
+    public GameObject VFX_Poof;
+    public GameObject VFX_Explosion;
+
 
     public Dictionary<VFXEnum, GameObject> effectLibrary = new Dictionary<VFXEnum, GameObject>();
     private Dictionary<VFXEnum, SoundEnum> vfxSoundKey = new Dictionary<VFXEnum, SoundEnum>();
@@ -48,31 +42,33 @@ public class VFXManager : MonoBehaviour
     private void Start()
     {
         
-        effectLibrary[VFXEnum.WaterEffect] = VFX_Water;
-        effectLibrary[VFXEnum.BloodEffect] = VFX_Blood;
-        effectLibrary[VFXEnum.JumpEffect] = VFX_Jump;
-        effectLibrary[VFXEnum.WinEffect] = VFX_Win;
-        effectLibrary[VFXEnum.CannonEffect] = VFX_Canon; 
-        effectLibrary[VFXEnum.ArrowEffect] = VFX_Arrow;
-        effectLibrary[VFXEnum.PlaceEffect] = VFX_Place;
-        effectLibrary[VFXEnum.BloodEffect] = VFX_Blood;
-        effectLibrary[VFXEnum.JumpEffect] = VFX_Jump;
+        effectLibrary[VFXEnum.Water] = VFX_Water;
+        effectLibrary[VFXEnum.Blood] = VFX_Blood;
+        effectLibrary[VFXEnum.Jump] = VFX_Jump;
+        effectLibrary[VFXEnum.Win] = VFX_Win;
+        effectLibrary[VFXEnum.Cannon] = VFX_Cannon; 
+        effectLibrary[VFXEnum.Arrow] = VFX_Arrow;
+        effectLibrary[VFXEnum.Poof] = VFX_Poof;
+        effectLibrary[VFXEnum.Blood] = VFX_Blood;
+        effectLibrary[VFXEnum.Jump] = VFX_Jump;
+        effectLibrary[VFXEnum.Explosion] = VFX_Explosion;
 
         
-        vfxSoundKey[VFXEnum.WaterEffect] = SoundEnum.Splash;
-        vfxSoundKey[VFXEnum.BloodEffect] = SoundEnum.Hurt;
-        vfxSoundKey[VFXEnum.JumpEffect] = SoundEnum.PlayerJump;
-        vfxSoundKey[VFXEnum.WinEffect] = SoundEnum.WooHooSound;
-        vfxSoundKey[VFXEnum.CannonEffect] = SoundEnum.Cannon; 
-        vfxSoundKey[VFXEnum.ArrowEffect] = SoundEnum.Arrow;
-        vfxSoundKey[VFXEnum.PlaceEffect] = SoundEnum.PoofSound;
+        vfxSoundKey[VFXEnum.Water] = SoundEnum.Splash;
+        vfxSoundKey[VFXEnum.Blood] = SoundEnum.Hurt;
+        vfxSoundKey[VFXEnum.Jump] = SoundEnum.PlayerJump;
+        vfxSoundKey[VFXEnum.Win] = SoundEnum.WooHoo;
+        vfxSoundKey[VFXEnum.Cannon] = SoundEnum.Cannon; 
+        vfxSoundKey[VFXEnum.Arrow] = SoundEnum.Arrow;
+        vfxSoundKey[VFXEnum.Poof] = SoundEnum.PoofSound;
+        vfxSoundKey[VFXEnum.Explosion] = SoundEnum.Explosion;
     }
-    public void PlayEffect(VFXEnum effect, Vector3 position, Vector3 setRotEffect)
+    public void PlayEffect(VFXEnum effect, Vector3 position, Vector3 eulerRotation)
     {
         if (effectLibrary.ContainsKey(effect))
         {
             GameObject VFX = effectLibrary[effect];
-            Quaternion rotation = Quaternion.Euler(VFX.transform.rotation.eulerAngles + setRotEffect);
+            Quaternion rotation = Quaternion.Euler(VFX.transform.rotation.eulerAngles + eulerRotation);
             Instantiate(VFX, position, rotation);
             if(vfxSoundKey.ContainsKey(effect))
                 SoundManager.Instance?.PlaySound(vfxSoundKey[effect]);

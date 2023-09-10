@@ -89,20 +89,20 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         }
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.collider.gameObject.CompareTag("Player"))
             {
-                Debug.Log($"Player Collision Enter {other.gameObject.name}");
-                other.transform.parent?.SetParent(rotatingObject.transform);
+                //Debug.Log($"Player Collision Enter {other.gameObject.name}");
+                other.collider.transform.parent.SetParent(rotatingObject.transform);
                 other.rigidbody.interpolation = RigidbodyInterpolation.None;
             }
         }
 
         private void OnCollisionExit(Collision other)
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.collider.gameObject.CompareTag("Player"))
             {
                 Debug.Log("Player Collision Exit");
-                other.transform.parent?.SetParent(null);
+                other.collider.transform.parent.SetParent(null);
                 other.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
             }
         }

@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingSpeed: 40
   shootyLifetime: 5
-  shotInterval: 0
+  shotInterval: 3
   objectPooler: {fileID: 5058974983343857941}
   crossbowAnimator: {fileID: 443294902026218730}
   spawnPoint: {fileID: 737025824554269003}

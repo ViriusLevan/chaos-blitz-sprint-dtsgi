@@ -240,7 +240,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 targetPlatform=null;
             }
 
-            VFXManager.Instance?.PlayEffect(VFXEnum.PlaceEffect
+            VFXManager.Instance?.PlayEffect(VFXEnum.Poof
                 , pendingObj.transform.position
                 , new Vector3());
 

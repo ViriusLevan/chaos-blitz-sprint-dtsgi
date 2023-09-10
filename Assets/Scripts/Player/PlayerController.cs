@@ -326,7 +326,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 		private void PlayJumpFX()
 		{
-			VFXManager.Instance?.PlayEffect(VFXEnum.JumpEffect
+			VFXManager.Instance?.PlayEffect(VFXEnum.Jump
 				, transform.position
 				, new Vector3());
 		}
@@ -343,7 +343,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		[SerializeField]private SkinnedMeshRenderer[]playerMeshes;
 		public void EnableMeshAndCollider()
 		{
-			rb.useGravity=true;
+			rb.constraints = RigidbodyConstraints.None;
 			foreach (SkinnedMeshRenderer smr in playerMeshes)
 			{
 				smr.enabled=true;
@@ -355,11 +355,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 		public IEnumerator TriggerDeathThenWaitToDisable(bool sink)
 		{	 
+			rb.constraints = RigidbodyConstraints.FreezePosition;
 			GetComponent<CapsuleCollider>().enabled=false;
 			slipCapsule.enabled=false;
 			transform.SetParent(null);
 			runSmokeEffect.Stop();
-			rb.useGravity=false;
 			if(sink)
 				playerAnimator.SetTrigger("sink");
 			else

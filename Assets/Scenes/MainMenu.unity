@@ -1715,10 +1715,10 @@ MonoBehaviour:
   VFX_Water: {fileID: 1687118924408352, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
   VFX_Jump: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e, type: 3}
   VFX_Win: {fileID: 3199805549887574557, guid: cdeab0f9f1c79f748926b3a8684028af, type: 3}
-  VFX_Run: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
-  VFX_Canon: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
+  VFX_Cannon: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
   VFX_Arrow: {fileID: 5880797563127281583, guid: 265d3a5ba69981a4698ceabcedf368b0, type: 3}
-  VFX_Place: {fileID: 5137123306192418792, guid: 5a8d99fb95262ea458a7b580f2a1611c, type: 3}
+  VFX_Poof: {fileID: 5137123306192418792, guid: 5a8d99fb95262ea458a7b580f2a1611c, type: 3}
+  VFX_Explosion: {fileID: 725748389856807714, guid: 5e8791bf85ab16046abd3a29e1630d87, type: 3}
 --- !u!4 &1654262793
 Transform:
   m_ObjectHideFlags: 0
@@ -2015,6 +2015,7 @@ MonoBehaviour:
   finishJingle: {fileID: 8300000, guid: e806d62c88bbdc249a59b0ccb1134aad, type: 3}
   deathJingle: {fileID: 8300000, guid: 7058a92bf9062bb44ba6e0ec6b0b9d18, type: 3}
   woohooSFX: {fileID: 8300000, guid: 897555956f6de0746907ac3c65616419, type: 3}
+  explosionSFX: {fileID: 8300000, guid: 42a87cfb57cb9ad46bd90a29788731b4, type: 3}
 --- !u!4 &2018517061
 Transform:
   m_ObjectHideFlags: 0

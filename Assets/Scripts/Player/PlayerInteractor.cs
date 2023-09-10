@@ -137,14 +137,14 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 		private void PlayDeathFX()
 		{
-			VFXManager.Instance?.PlayEffect(VFXEnum.BloodEffect
+			VFXManager.Instance?.PlayEffect(VFXEnum.Blood
 				, transform.position
 				, new Vector3());
 		}
 
 		private void PlaySplashFX()
 		{
-			VFXManager.Instance?.PlayEffect(VFXEnum.WaterEffect
+			VFXManager.Instance?.PlayEffect(VFXEnum.Water
 				, transform.position + new Vector3(0,2,0)
 				, new Vector3());
 		}

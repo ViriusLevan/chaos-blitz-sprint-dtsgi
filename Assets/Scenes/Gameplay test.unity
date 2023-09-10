@@ -2080,6 +2080,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a60c9708d1588a343a046b71014ea559, type: 2}
   - {fileID: 11400000, guid: 85b80eb91589ae647a9e38911e5354ac, type: 2}
   - {fileID: 11400000, guid: 46bcf1fbdd332ca4195ea0a6a510f595, type: 2}
+  - {fileID: 11400000, guid: e31a7fe69a0eb9b40a5e14f49d3254f2, type: 2}
   bgImage: {fileID: 737174249}
   controlHelpPanel: {fileID: 388650857}
 --- !u!1 &1240808842
@@ -3419,7 +3420,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643248637}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3432,7 +3433,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3604f011c76be314c89b70dd315dbe41, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

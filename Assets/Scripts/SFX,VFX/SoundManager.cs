@@ -12,7 +12,8 @@ public enum SoundEnum
     PlayerJump,
     PlayerFinish,
     PlayerDeath,
-    WooHooSound
+    WooHoo,
+    Explosion
 }
 public class SoundManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip finishJingle;
     public AudioClip deathJingle;
     public AudioClip woohooSFX; 
+    public AudioClip explosionSFX;
 
 
     private void Awake()
@@ -67,7 +69,8 @@ public class SoundManager : MonoBehaviour
         soundLibrary[SoundEnum.PlayerJump] = jumpSFX;
         soundLibrary[SoundEnum.PlayerFinish] = finishJingle;
         soundLibrary[SoundEnum.PlayerDeath] = deathJingle;
-        soundLibrary[SoundEnum.WooHooSound] = woohooSFX; 
+        soundLibrary[SoundEnum.WooHoo] = woohooSFX; 
+        soundLibrary[SoundEnum.Explosion] = explosionSFX; 
     }
     public void PlaySound(SoundEnum sound)
     {
