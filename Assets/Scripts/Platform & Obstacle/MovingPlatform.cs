@@ -101,7 +101,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         {
             if (other.collider.gameObject.CompareTag("Player"))
             {
-                other.collider.transform.parent.SetParent(transform);
+                other.gameObject.transform.parent.SetParent(transform);
                 other.rigidbody.interpolation = RigidbodyInterpolation.None;
             }
         }
@@ -110,7 +110,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         {
             if (other.collider.gameObject.CompareTag("Player"))
             {
-                other.collider.transform.parent.SetParent(null);
+                other.gameObject.transform.parent.SetParent(null);
                 other.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
             }
         }

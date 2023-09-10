@@ -343,7 +343,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		[SerializeField]private SkinnedMeshRenderer[]playerMeshes;
 		public void EnableMeshAndCollider()
 		{
-			rb.constraints = RigidbodyConstraints.None;
+			canMove=true;
+			rb.constraints = RigidbodyConstraints.FreezeRotation;
 			foreach (SkinnedMeshRenderer smr in playerMeshes)
 			{
 				smr.enabled=true;
@@ -355,10 +356,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 		public IEnumerator TriggerDeathThenWaitToDisable(bool sink)
 		{	 
-			rb.constraints = RigidbodyConstraints.FreezePosition;
+			canMove=false;
+			rb.constraints = RigidbodyConstraints.FreezeAll;
 			GetComponent<CapsuleCollider>().enabled=false;
 			slipCapsule.enabled=false;
-			transform.SetParent(null);
+			transform.parent.SetParent(null);
 			runSmokeEffect.Stop();
 			if(sink)
 				playerAnimator.SetTrigger("sink");

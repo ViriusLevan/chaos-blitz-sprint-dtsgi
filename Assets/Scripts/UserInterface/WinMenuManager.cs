@@ -9,18 +9,26 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
     public class WinMenuManager : MonoBehaviour
     {
         [SerializeField]private TextMeshProUGUI scoreboardText;
+        [SerializeField]private GameObject[]playerModels, modelDiffs;
+        [SerializeField]private Animator[] modelAnimators;
 
         // Start is called before the first frame update
         void Start()
         {
+            //if(PlayerConfigurationManager.Instance==null)return;
             List<PlayerConfiguration> sortedPlayerConfigs 
                 = PlayerConfigurationManager.Instance.GetPlayerConfigs()
                     .OrderByDescending(o=>o.scoreTotal).ToList();
-            foreach (var item in sortedPlayerConfigs)
+            for (int i = 0; i < sortedPlayerConfigs.Count; i++)
             {
-                scoreboardText.text += $"PlayerIndex {item.playerIndex+1} Score {item.scoreTotal}\n";
+                scoreboardText.text += $"PlayerIndex {sortedPlayerConfigs[i].playerIndex+1}"
+                    +$"Score {sortedPlayerConfigs[i].scoreTotal}\n";
+                playerModels[i].SetActive(true);
+                modelDiffs[i].GetComponent<MeshRenderer>().material 
+                    = sortedPlayerConfigs[i].playerMaterial;
+                if(i>0)
+                    modelAnimators[i].SetTrigger("sink");
             }
-            SoundManager.Instance?.PlaySound(SoundEnum.WooHoo);
             VFXManager.Instance?.PlayEffect(VFXEnum.Win
                 , Camera.main.transform.position + (Vector3.forward*5)
                 , new Vector3());

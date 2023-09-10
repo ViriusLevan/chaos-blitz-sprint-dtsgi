@@ -11,9 +11,12 @@ public class CinemachineInputHandler : MonoBehaviour, AxisState.IInputAxisProvid
     {
         switch (axis)
         {
-            case 0: return horizontal.ReadValue<Vector2>().x;
-            case 1: return horizontal.ReadValue<Vector2>().y;
-            case 2: return vertical.ReadValue<float>();
+            case 0: 
+                return Mathf.Clamp(horizontal.ReadValue<Vector2>().x,-1,1);
+            case 1: 
+                return Mathf.Clamp(horizontal.ReadValue<Vector2>().y,-1,1);
+            case 2: 
+                return Mathf.Clamp(vertical.ReadValue<float>(),-1,1);
         }
 
         return 0;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 255280506626545053}
   - component: {fileID: 255280507073545106}
   - component: {fileID: 2702909578396060901}
+  - component: {fileID: 186482527342478768}
   m_Layer: 0
   m_Name: '[Obstacle]Bomb Barrel'
   m_TagString: Untagged
@@ -63,6 +64,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.224175, y: 3.2551355, z: 2.1109958}
   m_Center: {x: -0.018029451, y: 0.10706258, z: 0.008291006}
+--- !u!114 &186482527342478768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255280506626545052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403735fada4e9d74ca6453745c629f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countdownTime: 3
+  triggered: 0
 --- !u!1001 &2890071156980996147
 PrefabInstance:
   m_ObjectHideFlags: 0

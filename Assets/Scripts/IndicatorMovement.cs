@@ -20,9 +20,12 @@ namespace LevelUpStudio.ChaosBlitzSprint
                 case MovementType.xRotation:
                     break;
                 case MovementType.yRotation:
-                    transform.DORotate(new Vector3(0,360,0)
+                    transform.DOLocalRotate(new Vector3(transform.rotation.x,360,transform.rotation.z)
                         ,5,RotateMode.LocalAxisAdd)
                         .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);;
+                    // transform.DORotate(new Vector3(0,360,0)
+                    //     ,5,RotateMode.LocalAxisAdd)
+                    //     .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);;
                     break;
                 case MovementType.zSwing:
                     transform.DORotate(new Vector3(0,0,originalRotation.eulerAngles.y+90)
