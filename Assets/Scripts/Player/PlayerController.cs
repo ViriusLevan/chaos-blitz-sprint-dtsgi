@@ -356,11 +356,14 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		{	 
 			transform.SetParent(null);
 			GetComponent<CapsuleCollider>().enabled=false;
+			runSmokeEffect.Stop();
 			rb.useGravity=false;
 			if(sink)
 				playerAnimator.SetTrigger("sink");
 			else
 				playerAnimator.SetTrigger("die");
+
+			//TODO use anim event instead
 			// Wait for the animation to end
 			playerInteractor.DeactivatePowerUp();
 			yield return new WaitWhile(() => playerAnimator

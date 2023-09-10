@@ -11,7 +11,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
 		void OnCollisionEnter(Collision collision)
 		{
-				Debug.Log(collision.gameObject.name+"0>"+collision.gameObject.tag);
+			//Debug.Log(collision.gameObject.name+"0>"+collision.gameObject.tag);
 			foreach (ContactPoint contact in collision.contacts)
 			{
 				if (collision.gameObject.tag == "Player")

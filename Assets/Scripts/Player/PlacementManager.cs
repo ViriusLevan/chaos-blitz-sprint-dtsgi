@@ -266,9 +266,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer mr in mrs)
             {
-                if(mr.gameObject.GetComponent<IndicatorMovement>())
+                if(mr.gameObject.GetComponentInParent<IndicatorMovement>())
                     continue;
-                if(canPlace)
+                else if(canPlace)
                     mr.material = materials[0];
                 else
                     mr.material = materials[1];
