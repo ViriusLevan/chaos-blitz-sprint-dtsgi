@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace LevelUpStudio.ChaosBlitzSprint
 {
@@ -16,44 +15,23 @@ namespace LevelUpStudio.ChaosBlitzSprint
             hitPosition = new Vector3();
         }
 
-        private bool loop;
-        void Update()
-        {
-            if(active)
-            {
-                if(transform.position == hitPosition+new Vector3(0,2,0))
-                {
-                    loop=true;
-                }else if(transform.position == hitPosition)
-                {
-                    loop=false;
-                }
-                if(!loop){
-                    transform.position = 	
-                        Vector3.Lerp(
-                            transform.position,
-                            hitPosition+new Vector3(0,2,0),
-                            Time.deltaTime*10
-                        );
-                }else{    
-                    transform.position = 	
-                        Vector3.Lerp(
-                            transform.position,
-                            hitPosition,
-                            Time.deltaTime*10
-                        );
-                }
-            }
-        }
-        private Vector3 hitPosition;
+        private Vector3 hitPosition,hitUp;
         private void OnCollisionEnter(Collision other) 
         {
             if(!active){
                 active=true;
                 rb.isKinematic=true;
                 hitPosition = transform.position;
+                hitUp  = transform.up;
                 extraCollider.enabled=false;
+                transform.DOLocalMove(hitPosition + (hitUp*2), 1)
+                    .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
             }
+        }
+
+        void OnDisable()
+        {
+            DOTween.Kill(transform, false);
         }
     }
 }

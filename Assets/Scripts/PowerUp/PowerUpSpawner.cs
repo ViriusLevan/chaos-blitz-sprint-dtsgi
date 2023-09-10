@@ -16,7 +16,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PowerUp
     //TODO I'm assuming a square arena here, also double check transform xz because this is sequence sensitive
             xSize = Mathf.Abs(arenaTopLeft.position.x-arenaBottomRight.position.x);
             zSize = Mathf.Abs(arenaTopLeft.position.z-arenaBottomRight.position.z);
-            Debug.Log($"Arena Size {xSize}-{zSize}");
+            //Debug.Log($"Arena Size {xSize}-{zSize}");
             //Margins
             xSize -=5f;
             zSize -=5f;

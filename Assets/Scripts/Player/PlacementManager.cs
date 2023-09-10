@@ -190,8 +190,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             }
             
 
-            pendingObj.transform.localRotation = UnityEngine.Quaternion.Euler(0, 0, 0);
-            //pendingObj.transform.eulerAngles = System.Numerics.Quaternion.Identity;
+            pendingObj.transform.localRotation = Quaternion.Euler(0, 0, 0);
             if(currentType==Placable.PlacableType.Hazard){
                 pendingObj.transform.eulerAngles += new Vector3(-90,0,0);
             }

@@ -111,7 +111,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
                 Vector3 spawnPosition = panelRect.TransformDirection(new Vector3(xPos, yPos, 0f));
                 newButton.transform.localPosition = spawnPosition;
                 
-                Debug.Log($"Button Position {newButton.transform.localPosition}");
+                //Debug.Log($"Button Position {newButton.transform.localPosition}");
                 isPartitionOccupied[rangeKey]=true;
                         
             }

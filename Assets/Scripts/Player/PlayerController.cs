@@ -350,12 +350,14 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			}
 			//TODO check again : maybe final build uses another collider
 			GetComponent<CapsuleCollider>().enabled=true;
+			slipCapsule.enabled=true;
 		}
 
 		public IEnumerator TriggerDeathThenWaitToDisable(bool sink)
 		{	 
-			transform.SetParent(null);
 			GetComponent<CapsuleCollider>().enabled=false;
+			slipCapsule.enabled=false;
+			transform.SetParent(null);
 			runSmokeEffect.Stop();
 			rb.useGravity=false;
 			if(sink)
@@ -369,8 +371,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			yield return new WaitWhile(() => playerAnimator
 				.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
 			
-			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
 			DisableMesh();
+			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
 		}
 
 		public void DisableMesh()

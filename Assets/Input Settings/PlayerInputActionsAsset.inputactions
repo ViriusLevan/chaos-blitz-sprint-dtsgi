@@ -893,6 +893,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "b9509e8f-f383-4171-9472-517d22b19528",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Place",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "KB",
                     "id": "861beb81-47ce-4c05-9a13-c059abbdd247",
                     "path": "1DAxis",

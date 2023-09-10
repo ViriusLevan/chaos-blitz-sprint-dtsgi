@@ -11,7 +11,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
         private Quaternion originalRotation;
         void Start()
         {
-            originalPosition = transform.position;
+            originalPosition = transform.localPosition;
             originalRotation = transform.localRotation;
             originalForward = transform.forward;
             originalUp = transform.up;
@@ -30,11 +30,14 @@ namespace LevelUpStudio.ChaosBlitzSprint
                         .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);;
                     break;
                 case MovementType.forwardBack:
-                     transform.DOMove(originalPosition + (originalForward*3), 3)
+                Debug.Log($"pos {originalPosition} + OrigForward {originalForward*3}");
+                Debug.Log($"Resultant {originalPosition + (originalForward*3)}");
+                    transform.DOLocalMove(originalPosition + (originalForward*3), 3)
                         .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                     break;
                 case MovementType.upDown:
-                     transform.DOMove(originalPosition+ (originalUp*3), 3)
+                //Debug.Log($"OrigUpward {originalUp}");
+                    transform.DOLocalMove(originalPosition + (originalUp*3), 3)
                         .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                     break;
             }
@@ -48,7 +51,6 @@ namespace LevelUpStudio.ChaosBlitzSprint
 
         void OnDisable()
         {
-            //TODO add DoTween.Kill here
             DOTween.Kill(transform, false);
         }
     }
