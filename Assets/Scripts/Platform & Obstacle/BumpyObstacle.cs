@@ -5,7 +5,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 {
 	public class BumpyObstacle : MonoBehaviour
 	{
-		[SerializeField] private float force = 10f; //Force 10000f
+		[SerializeField] private float force = 50f; //Force 10000f
 		[SerializeField] private float stunTime = 0.5f;
 		private Vector3 hitDir;
 
@@ -18,7 +18,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 				{
 					Debug.Log("Bumpy Triggered");
 					hitDir = contact.normal;
-					collision.gameObject.GetComponent<PlayerController>().HitPlayer(-hitDir * force, stunTime);
+					collision.gameObject.GetComponent<PlayerController>()
+						.HitPlayer(-hitDir * force, stunTime);
 					return;
 				}
 			}

@@ -7,30 +7,34 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
     {
         [SerializeField] private float shootingSpeed;
         [SerializeField] private float shootyLifetime;
-        [SerializeField] private float shootInterval;
+        [SerializeField] private float shotInterval;
         [SerializeField] private ObjectPooler objectPooler;
 
-        private float shootTimer = 0f;
-        private bool isShooting;
+        private float intervalCounter = 0f;
+        
+        [SerializeField] private Animator crossbowAnimator;
 
         private void Update()
         {
             // Update the shoot timer
-            shootTimer += Time.deltaTime;
+            intervalCounter += Time.deltaTime;
 
             // If the shoot interval has passed, shoot an object and reset the timer
-            if (shootTimer >= shootInterval)
+            if (intervalCounter >= shotInterval)
             {
-                Shoot();
-                shootTimer = 0f;
+                if(isCannon){
+                    Shoot();
+                }else{
+                    crossbowAnimator.SetTrigger("Firing");
+                }
             }
         }
 
         [SerializeField]private Transform spawnPoint;
         [SerializeField]private bool isCannon=false;
-        private void Shoot()
+        public void Shoot()
         {
-
+            intervalCounter = 0f;
             Vector3 shootDirection = isCannon ? 
                 (transform.forward+(Vector3.up * 0.25f)) : transform.forward ;
 
@@ -50,6 +54,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
                 shooty.transform.rotation = spawnPoint.rotation;
                 shooty.SetActive(true);
                 Rigidbody rb = shooty.GetComponent<Rigidbody>();
+                rb.constraints = RigidbodyConstraints.None;
+                rb.freezeRotation=false;
                 rb.velocity = Vector3.zero;
                 rb.AddForce(shootDirection.normalized * shootingSpeed, ForceMode.Impulse);
 
@@ -60,6 +66,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         private IEnumerator deactivateShooty(GameObject gameObject)
         {
             yield return new WaitForSeconds(shootyLifetime);
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
             gameObject.SetActive(false);
         }
     }
