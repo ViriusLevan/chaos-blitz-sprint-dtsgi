@@ -112,6 +112,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
             List<int> finishedPlayers = new List<int>();
 
             Debug.Log($"Player {pIndex} has Died");
+            SoundManager.Instance?.PlaySound(SoundEnum.PlayerDeath);
             playerInstances[pIndex].SetPlayerStatus(PlayerInstance.PlayerStatus.Dead);
             foreach(KeyValuePair<int, PlayerInstance> entry in playerInstances)
             {

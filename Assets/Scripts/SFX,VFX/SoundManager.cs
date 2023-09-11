@@ -1,7 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 public enum SoundEnum
 {
     Splash,Hurt,Arrow,Cannon,PoofSound,PlayerJump,PlayerFinish,PlayerDeath,WooHoo,Explosion
@@ -106,4 +107,22 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
         PlayerPrefs.Save();
     }
+	#if UNITY_EDITOR
+    [CustomEditor(typeof(SoundManager))]
+    class PlayerInstance1Editor : Editor{
+        private SoundEnum testSound;
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            SoundManager sMan = (SoundManager) target;
+            if (sMan==null) return;
+            
+            GUILayout.Label("NOTE : Does not work without playing\nWhy? sound dictionary is manually populated at start.");
+            testSound = (SoundEnum)EditorGUILayout.EnumPopup("Sound to Test:", testSound);
+            if(GUILayout.Button("Play Sound")){
+                sMan.PlaySound(testSound);
+            }
+        }
+    }
+    #endif
 }

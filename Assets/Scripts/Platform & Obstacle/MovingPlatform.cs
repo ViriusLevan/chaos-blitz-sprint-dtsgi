@@ -54,14 +54,14 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             switch(dir)
             {
                 case MovementAxis.Z:
-                    Debug.Log($"POS {originalPosition} + Z{originalRight*distance}");
-                    Debug.Log($"RESULTANT {originalPosition + (originalRight*distance)}");
+                    //Debug.Log($"POS {originalPosition} + Z{originalRight*distance}");
+                    //Debug.Log($"RESULTANT {originalPosition + (originalRight*distance)}");
                     transform.DOMove(originalPosition + (originalRight*distance), duration)
                         .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                     break;
                 case MovementAxis.Y:
-                Debug.Log($"POS {originalPosition} + Y{originalUp*distance}");
-                Debug.Log($"RESULTANT {originalPosition + (originalUp*distance)}");
+                //Debug.Log($"POS {originalPosition} + Y{originalUp*distance}");
+                ///Debug.Log($"RESULTANT {originalPosition + (originalUp*distance)}");
                     transform.DOMove(originalPosition + (originalUp*distance), duration)
                         .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                     break;
