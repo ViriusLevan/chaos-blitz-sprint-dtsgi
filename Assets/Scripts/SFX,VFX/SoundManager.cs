@@ -4,16 +4,7 @@ using UnityEngine;
 
 public enum SoundEnum
 {
-    Splash,
-    Hurt,
-    Arrow,
-    Cannon,
-    PoofSound,
-    PlayerJump,
-    PlayerFinish,
-    PlayerDeath,
-    WooHoo,
-    Explosion
+    Splash,Hurt,Arrow,Cannon,PoofSound,PlayerJump,PlayerFinish,PlayerDeath,WooHoo,Explosion
 }
 public class SoundManager : MonoBehaviour
 {

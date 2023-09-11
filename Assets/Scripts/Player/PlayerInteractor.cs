@@ -68,6 +68,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				case "Goal":
 					GameManager.Instance.PlayerFinished(playerController
 						.playerInputHandler.playerConfig.playerIndex);
+					playerController.DisableMovementAndColliders();
 					break;
 				case "HurtPlayer":
 					Debug.Log("Player Hurt");

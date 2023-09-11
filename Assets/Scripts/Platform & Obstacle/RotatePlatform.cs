@@ -1,5 +1,4 @@
-using System.Collections;
-using Unity.VisualScripting;
+using DG.Tweening;
 using UnityEngine;
 
 namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
@@ -9,37 +8,23 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         [SerializeField] private GameObject rotatingObject;
         [SerializeField] private float rotationSpeed;
 
-        private void Start()
+        private Vector3 rotForward, rotRight, rotUp;
+        private void Awake()
         {
         }
 
-        private bool active=false;
         private void Update() 
         {
-            if(active)
-                Rotate();
         }
 
         public enum RotationAxis{x,y,z};
         [SerializeField] private RotationAxis rotAxis=RotationAxis.y;
 
-        private void Rotate()
-        {
-            Vector3 rotation = new Vector3();
-            if(rotAxis==RotationAxis.x){
-                rotation = Vector3.forward;
-            }else if(rotAxis==RotationAxis.y){
-                rotation = Vector3.up;
-            }else if(rotAxis==RotationAxis.z){
-                rotation = Vector3.right;
-            }
-            float rotationAmount = rotationSpeed * Time.deltaTime;
-            rotatingObject.transform.Rotate(rotation, rotationAmount);
-        }
-
-
         void OnEnable()
         {
+            rotForward=rotatingObject.transform.forward;
+            rotRight=rotatingObject.transform.right;
+            rotUp=rotatingObject.transform.up;
             GameManager.platformingPhaseBegin+=Activate;
 			GameManager.gamePaused+=Deactivate;
 			GameManager.gamePaused+=Reactivate;
@@ -57,35 +42,45 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void Activate()
         {
-            active=true;
+            switch(rotAxis){
+                case RotationAxis.x:
+                    rotatingObject.transform
+                        .DOLocalRotate(new Vector3
+                            (360,rotatingObject.transform.rotation.y,rotatingObject.transform.rotation.z)
+                            ,5,RotateMode.LocalAxisAdd)
+                            .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+                    break;
+                
+                case RotationAxis.y:
+                    rotatingObject.transform
+                        .DOLocalRotate(new Vector3
+                            (rotatingObject.transform.rotation.x,360,rotatingObject.transform.rotation.z)
+                            ,5,RotateMode.LocalAxisAdd)
+                            .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+                    break;
+                
+                case RotationAxis.z:
+                    rotatingObject.transform
+                        .DOLocalRotate(new Vector3
+                            (rotatingObject.transform.rotation.x,rotatingObject.transform.rotation.y,360)
+                            ,5,RotateMode.LocalAxisAdd)
+                            .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+                    break;
+                }
         }
 
         private void Deactivate()
         {
-            active=false;
-            // DOTween.Pause(transform);
+            DOTween.Pause(rotatingObject.transform);
         }
 		private void Reactivate()
 		{
-			active=true;
+            DOTween.Restart(rotatingObject.transform);
 		}
 
         private void Reset()
         {
-			active=false;
-            if(rotAxis==RotationAxis.x){
-            rotatingObject.transform.rotation 
-                = Quaternion.Euler(0,transform.rotation.y, transform.rotation.z).normalized;
-            }else if(rotAxis==RotationAxis.y){
-                rotatingObject.transform.rotation 
-                = Quaternion.Euler(transform.rotation.x,0, transform.rotation.z).normalized;
-            }else if(rotAxis==RotationAxis.z){
-                rotatingObject.transform.rotation 
-                = Quaternion.Euler(transform.rotation.x,transform.rotation.y, 0).normalized;
-            }
-            // DOTween.Rewind(transform);
-            // DOTween.Kill(transform, true);
-            //transform.position = originalPosition;
+            DOTween.Rewind(rotatingObject.transform);
         }
         private void OnCollisionEnter(Collision other)
         {

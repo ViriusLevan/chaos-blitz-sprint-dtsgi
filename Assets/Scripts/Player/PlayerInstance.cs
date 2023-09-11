@@ -2,6 +2,9 @@ using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 
 namespace LevelUpStudio.ChaosBlitzSprint.Player{
 	public class PlayerInstance : MonoBehaviour
@@ -88,10 +91,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 					break;
 			}
 		}
-		public void SetPlayerScore(int ps){playerScore=ps;}
 		public void AddPlayerScore(int addition) {
 			playerScore+=addition;
-			scoreText.text = "Score "+playerScore;
+			scoreText.text = playerScore+" pts";
 		}
 		
 		public void SetPlacable(Placement.Placable pl) => placementManager.SetPlacable(pl);
@@ -172,4 +174,20 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 		}
 
 	}
+
+	#if UNITY_EDITOR
+    [CustomEditor(typeof(PlayerInstance))]
+    class PlayerInstance1Editor : Editor{
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            PlayerInstance pInstance = (PlayerInstance) target;
+            if (pInstance==null) return;
+
+            if(GUILayout.Button("Print player status")){
+                Debug.Log("Status = "+pInstance.playerStatus);
+            }
+        }
+    }
+    #endif
 }

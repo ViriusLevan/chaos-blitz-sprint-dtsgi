@@ -52,7 +52,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				capsuleCollider.center = colliderCenterCrouch;
 				capsuleCollider.height = colliderHeightCrouch;
 				slipCapsule.center = colliderCenterCrouch;
-				slipCapsule.height = colliderHeightCrouch*0.9f;
+				slipCapsule.height = colliderHeightCrouch*0.95f;
 				maxSpeed = speedCrouched;
 			}
 			else
@@ -60,7 +60,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				capsuleCollider.center = colliderCenterNormal;
 				capsuleCollider.height = colliderHeightNormal;
 				slipCapsule.center = colliderCenterNormal;
-				slipCapsule.height = colliderHeightNormal*0.9f;
+				slipCapsule.height = colliderHeightNormal*0.95f;
 				maxSpeed = speedNormal;
 			}
 		}
@@ -87,8 +87,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			playerInputHandler = GetComponent<PlayerInputHandler>();
 			rb = GetComponent<Rigidbody>();
 			playerInteractor = GetComponent<PlayerInteractor>();
-			rb.freezeRotation = true;
-			rb.useGravity = false;
 			Cursor.visible = false;
 		}
 
@@ -172,7 +170,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 						}
 						else if(sticky)
 						{	
-							rb.velocity /= 1.5f;
+							rb.velocity /= 1.2f;
 							rb.AddForce(velocityChange/10f, ForceMode.VelocityChange);
 						}
 						else
@@ -355,13 +353,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		}
 
 		public IEnumerator TriggerDeathThenWaitToDisable(bool sink)
-		{	 
-			canMove=false;
-			rb.constraints = RigidbodyConstraints.FreezeAll;
-			GetComponent<CapsuleCollider>().enabled=false;
-			slipCapsule.enabled=false;
-			transform.parent.SetParent(null);
-			runSmokeEffect.Stop();
+		{	
+			DisableMovementAndColliders();
 			if(sink)
 				playerAnimator.SetTrigger("sink");
 			else
@@ -369,20 +362,28 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 			//TODO use anim event instead
 			// Wait for the animation to end
+			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
 			playerInteractor.DeactivatePowerUp();
 			yield return new WaitWhile(() => playerAnimator
 				.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
 			
 			DisableMesh();
-			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
+		}
+
+		public void DisableMovementAndColliders()
+		{
+			canMove=false;
+			rb.constraints = RigidbodyConstraints.FreezeAll;
+			GetComponent<CapsuleCollider>().enabled=false;
+			slipCapsule.enabled=false;	
+			transform.parent.SetParent(null);
+			runSmokeEffect.Stop();
 		}
 
 		public void DisableMesh()
 		{
 			//TODO - add more stuff, e.g. play animation or sfx
 			//this.gameObject.SetActive(false);
-
-			rb.useGravity=false;
 			playerAnimator.SetTrigger("reset");
 			foreach (SkinnedMeshRenderer smr in playerMeshes)
 			{

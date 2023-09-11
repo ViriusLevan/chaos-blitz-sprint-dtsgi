@@ -16,6 +16,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
         void Start()
         {
             //if(PlayerConfigurationManager.Instance==null)return;
+            scoreboardText.text="Final Score\n";
             List<PlayerConfiguration> sortedPlayerConfigs 
                 = PlayerConfigurationManager.Instance.GetPlayerConfigs()
                     .OrderByDescending(o=>o.scoreTotal).ToList();
@@ -23,8 +24,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             {
                 scoreboardText.text += $"PlayerIndex {sortedPlayerConfigs[i].playerIndex+1}"
                     +$"Score {sortedPlayerConfigs[i].scoreTotal}\n";
+                Debug.Log("index "+i+" count"+sortedPlayerConfigs.Count);
                 playerModels[i].SetActive(true);
-                modelDiffs[i].GetComponent<MeshRenderer>().material 
+                modelDiffs[i].GetComponent<SkinnedMeshRenderer>().material 
                     = sortedPlayerConfigs[i].playerMaterial;
                 if(i>0)
                     modelAnimators[i].SetTrigger("sink");

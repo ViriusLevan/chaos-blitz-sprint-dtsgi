@@ -77,7 +77,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                     //         , cameraTransform.forward*20 + cameraTransform.position
                     //         , Color.red, 5.0f);
                     if(Physics.Raycast(cameraTransform.position
-                        , cameraTransform.forward, out hit, 20f, platformLayer))
+                        , cameraTransform.forward, out hit, 30f, platformLayer))
                     {
                         pos = hit.point;
                         //Debug.Log(hit.transform.name+" :"+hit.point);
@@ -135,10 +135,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 = playerInputHandler.playerConfig.input
                     .actions["VerticalMotion"].ReadValue<float>();
             if(verticalInput<0){
-                referenceTransform.position -= new Vector3(0,3f*Time.deltaTime,0);
+                referenceTransform.position -= new Vector3(0,9f*Time.deltaTime,0);
             }
             if(verticalInput>0){
-                referenceTransform.position += new Vector3(0,3f*Time.deltaTime,0);
+                referenceTransform.position += new Vector3(0,9f*Time.deltaTime,0);
             }
         }
 
@@ -183,10 +183,21 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             pChecker.SetPlacableType(currentType);
             //placableNameText.text = placables[placableIndex].name;
 
-            MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
-            foreach (var item in mrs)
+            
+            if(placable.name.Contains("bow")){
+                SkinnedMeshRenderer[] mrs = pendingObj.GetComponentsInChildren<SkinnedMeshRenderer>();
+                foreach (var item in mrs)
+                {
+                    pendingObjMaterials.Add(item.material);
+                }
+            }
+            else
             {
-                pendingObjMaterials.Add(item.material);
+                MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
+                foreach (var item in mrs)
+                {
+                    pendingObjMaterials.Add(item.material);
+                }
             }
             
 
@@ -202,10 +213,21 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             if(!canPlace) return;
             if(pendingObj==null) return;
 
-            MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
-            for (int i = 0; i < mrs.Length; i++)
+            if(placable.name.Contains("bow"))
             {
-                mrs[i].material = pendingObjMaterials[i];
+                SkinnedMeshRenderer[] mrs = pendingObj.GetComponentsInChildren<SkinnedMeshRenderer>();
+                for (int i = 0; i < mrs.Length; i++)
+                {
+                    mrs[i].material = pendingObjMaterials[i];
+                }
+            }
+            else
+            {
+                MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
+                for (int i = 0; i < mrs.Length; i++)
+                {
+                    mrs[i].material = pendingObjMaterials[i];
+                }
             }
             pendingObjMaterials.Clear();
             
@@ -262,6 +284,19 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
         private void UpdateMaterials()
         {
+            if(placable.name.Contains("bow")){
+                SkinnedMeshRenderer[] smrs = pendingObj.GetComponentsInChildren<SkinnedMeshRenderer>();
+                foreach ( SkinnedMeshRenderer smr in smrs)
+                {
+                    if(smr.gameObject.GetComponentInParent<IndicatorMovement>())
+                        continue;
+                    else if(canPlace)
+                        smr.material = materials[0];
+                    else
+                        smr.material = materials[1];
+                }
+                return;
+            }
             MeshRenderer[] mrs = pendingObj.GetComponentsInChildren<MeshRenderer>();
             foreach (MeshRenderer mr in mrs)
             {

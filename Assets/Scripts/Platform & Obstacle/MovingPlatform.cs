@@ -5,96 +5,80 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 {
     public class MovingPlatform : MonoBehaviour
     {
-        public enum MovementDirection
-        {
-            Horizontal,
-            Vertical
-        }
+        public enum MovementAxis{X,Y,Z}
 
-        public MovementDirection dir;
-        private Vector3 initialPosition;
+        public MovementAxis dir;
         [SerializeField] private float distance;
-        [SerializeField] private float speed;
+        [SerializeField] private float duration=3;
 
-        private void Start()
+        private Vector3 originalPosition, originalRight, originalUp;
+        private void Awake()
         {
-            initialPosition = transform.localPosition;
         }
-
-        private bool active=false;
 
         private void Update() 
         {
-            if(active)
-                MovePos();
         }
         
         private void OnEnable() 
         {
+            originalPosition = transform.position;
+            originalRight = transform.right;
+            originalUp = transform.up;
             GameManager.platformingPhaseBegin+=Activate;
 			GameManager.gamePaused+=Deactivate;
-			GameManager.gameUnpaused+=Reactivate;
+			GameManager.gameUnpaused+=Activate;
             GameManager.platformingPhaseFinished+=Reset;
         }
 
         private void OnDisable() 
         {
             GameManager.platformingPhaseBegin-=Activate;
+            GameManager.platformingPhaseFinished-=Reset;
 			GameManager.gamePaused-=Deactivate;
 			GameManager.gameUnpaused-=Reactivate;
-            GameManager.platformingPhaseFinished-=Reset;
-            //DOTween.Kill(transform, false);
+            DOTween.Kill(transform, false);
         }
 
         private void OnDestroy() 
         {
             GameManager.platformingPhaseBegin-=Activate;
             GameManager.platformingPhaseFinished-=Reset;
-            //DOTween.Kill(transform, false);
+			GameManager.gamePaused-=Deactivate;
+			GameManager.gameUnpaused-=Reactivate;
+            DOTween.Kill(transform, false);
         }
 
         private void Activate()
         {
-            active=true;
+            switch(dir)
+            {
+                case MovementAxis.Z:
+                    Debug.Log($"POS {originalPosition} + Z{originalRight*distance}");
+                    Debug.Log($"RESULTANT {originalPosition + (originalRight*distance)}");
+                    transform.DOMove(originalPosition + (originalRight*distance), duration)
+                        .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                    break;
+                case MovementAxis.Y:
+                Debug.Log($"POS {originalPosition} + Y{originalUp*distance}");
+                Debug.Log($"RESULTANT {originalPosition + (originalUp*distance)}");
+                    transform.DOMove(originalPosition + (originalUp*distance), duration)
+                        .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                    break;
+            }
         }
 
         private void Deactivate()
         {
-            active=false;
-            //DOTween.Pause(transform);
+            DOTween.Pause(transform);
         }
-		private void Reactivate()
-		{
-			active=true;
-		}
-        
+        private void Reactivate()
+        {
+            DOTween.Pause(transform);
+        }
         private void Reset()
         {
-            //DOTween.Rewind(transform);
-            //DOTween.Kill(transform, true);
-            active=false;
-            //transform.position = originalPosition;
-        }
-
-        private void MovePos()
-        {
-            // Calculate the movement direction based on the local rotation
-            Vector3 movementDirection = dir == MovementDirection.Horizontal 
-                ? transform.TransformDirection(Vector3.right) : transform.TransformDirection(Vector3.up);
-
-            // Calculate the normalized time using the custom easing function
-            float easedTime = CustomEaseInOutSine(Mathf.PingPong(Time.time * speed / distance, 1f));
-
-            // Calculate the target position based on the initial position and the movement direction
-            Vector3 targetPosition = initialPosition + movementDirection * easedTime * distance;
-
-            // Move the platform to the target position
-            transform.localPosition = targetPosition;
-        }
-
-        private float CustomEaseInOutSine(float t)
-        {
-            return -0.5f * (Mathf.Cos(Mathf.PI * t) - 1f);
+            DOTween.Rewind(transform);
         }
 
         private void OnCollisionEnter(Collision other)
