@@ -2,8 +2,10 @@ using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
 #endif
 
 namespace LevelUpStudio.ChaosBlitzSprint.Player{
@@ -22,23 +24,27 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 		private PlacementManager placementManager;
 		private PlayerController playerController;
 		public PlayerInputHandler playerInputHandler{get;private set;}
-		public CinemachineInputHandler cinemachineInputHanlder{get; private set;}
+		public CinemachineInputHandler cinemachineInputHandler{get; private set;}
+		//public CinemachineInputProvider cinemachineInputProvider;
 
 		[SerializeField] RectTransform playerPanel;
 		[SerializeField] TextMeshProUGUI playerText, scoreText, controlHelpText;
 
 		private void Awake() {
-			cinemachineInputHanlder = GetComponentInChildren<CinemachineInputHandler>();
+			cinemachineInputHandler = GetComponentInChildren<CinemachineInputHandler>();
+			//cinemachineInputProvider = GetComponentInChildren<CinemachineInputProvider>();
 			placementManager = GetComponentInChildren<PlacementManager>();
 			playerController = GetComponentInChildren<PlayerController>();
 			playerInputHandler = GetComponentInChildren<PlayerInputHandler>();
 			playerCamera = GetComponentInChildren<Camera>().gameObject;
+			
 		}
 
 		void Start()
 		{
 			placementManager?.SetReferenceTransform(buildCameraFollow.transform);
 			int playerIndex = playerInputHandler.playerConfig.playerIndex;
+			//freeLookCamera.GetComponent<CinemachineInputProvider>().PlayerIndex = playerIndex;
 			playerText.text = "Player "+(playerIndex+1);
 			
 			if(playerIndex==1 || playerIndex==3)
@@ -120,6 +126,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 					controlHelpText.text+= " [Jump] "+
 						playerInputHandler.GetActionControlName
 							(playerInputHandler.controls.Player.Jump);
+					controlHelpText.text+= " [Crouch] "+
+						playerInputHandler.GetActionControlName
+							(playerInputHandler.controls.Player.Crouch);
 					break;
 			}
 		}
@@ -150,9 +159,13 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 			placementManager.InstantiateNewPlacable();
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("BuildMode");
 			SetControlHelpText(PlayerStatus.Building);
-			cinemachineInputHanlder.horizontal 
+			cinemachineInputHandler.horizontal 
 				= playerInputHandler.playerConfig.input.actions.FindAction("Look");
+			//cinemachineInputProvider.XYAxis= buildLookReference;
+			//cinemachineInputProvider.ZAxis= buildLookReference;
 		}
+
+		[SerializeField]private InputActionReference playerLookReference,buildLookReference;
 
 		public void PlatformingMode(){
 			playerController.EnableMeshAndCollider();
@@ -169,8 +182,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("Player");
 			SetControlHelpText(PlayerStatus.Platforming);
-			cinemachineInputHanlder.horizontal 
+			cinemachineInputHandler.horizontal 
 				= playerInputHandler.playerConfig.input.actions.FindAction("Look");
+			//cinemachineInputProvider.XYAxis= playerLookReference;
+			//cinemachineInputProvider.ZAxis= playerLookReference;
 		}
 
 	}

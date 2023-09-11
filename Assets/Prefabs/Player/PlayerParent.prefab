@@ -344,6 +344,8 @@ MonoBehaviour:
   playerText: {fileID: 2268006373153870051}
   scoreText: {fileID: 6020797012261384963}
   controlHelpText: {fileID: 403940116940981687}
+  playerLookReference: {fileID: -3787169064211337688, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
+  buildLookReference: {fileID: -510726968687222660, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
 --- !u!1 &2260797133359107920
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +615,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3133561229939455309}
-  m_LocalRotation: {x: 0.2566679, y: 0.000000029001464, z: -0.000000007701757, w: 0.9664997}
+  m_LocalRotation: {x: 0.25666794, y: -0.0000000033791123, z: 8.973711e-10, w: 0.9664997}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1456,7 +1458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6783797785927842071}
   - component: {fileID: 2668849627854471380}
-  - component: {fileID: 5931192684052580557}
+  - component: {fileID: 8215967353364010455}
   m_Layer: 0
   m_Name: CM FreeLook
   m_TagString: Untagged
@@ -1586,7 +1588,7 @@ MonoBehaviour:
   - {fileID: 8445149561834086782}
   - {fileID: 3060081915568983293}
   - {fileID: 1362982849782334775}
---- !u!114 &5931192684052580557
+--- !u!114 &8215967353364010455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1599,23 +1601,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontal:
-    m_Name: 
+    m_Name: Horizontal
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: bcbfcfbd-5b25-431f-9dbc-728f4369cf64
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
   vertical:
-    m_Name: 
+    m_Name: Vertical
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 26422601-a75f-445c-8668-8da04016993e
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  inverted: 0
 --- !u!1 &8352379800080283532
 GameObject:
   m_ObjectHideFlags: 0

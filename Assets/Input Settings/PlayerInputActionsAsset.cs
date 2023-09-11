@@ -41,7 +41,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""type"": ""Value"",
                     ""id"": ""2690c379-f54d-45be-a724-414123833eb4"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""processors"": ""InvertVector2(invertX=false,invertY=false)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -76,6 +76,42 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""name"": ""Crouch"",
                     ""type"": ""Button"",
                     ""id"": ""95594191-eda9-4423-8b38-2246b33e6bb7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InvertX"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa498b6c-2137-4119-8298-9956b20a39f4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InvertY"",
+                    ""type"": ""Button"",
+                    ""id"": ""adf2d90b-7df9-4de0-9e4f-f5e16ac9dfa9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DecreaseCamSens"",
+                    ""type"": ""Button"",
+                    ""id"": ""1690b9b0-b7a2-4ae7-a4d1-2ae6443b3053"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseCamSens"",
+                    ""type"": ""Button"",
+                    ""id"": ""836af117-0639-4feb-8158-001e755839a4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -295,11 +331,99 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": """",
                     ""id"": ""b152c786-ac54-4629-b5e4-397fce9f1c6d"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4c04207-8f00-4fca-85e0-eab7ab040d0b"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""InvertX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""397ecefa-255a-4446-9deb-c6543595a29a"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InvertX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce96e1cd-c70a-4702-9ef2-f7b42b76aeca"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""InvertY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb2f37ec-126a-4e68-bd38-d533b6f512b7"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InvertY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a31a3c2e-1821-4b89-a5c6-fcfc1a6ab47c"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""IncreaseCamSens"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f48b1d53-e725-4ef5-9f84-8ba76b48d7e7"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""IncreaseCamSens"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1522bfa5-0d3b-4d61-acc5-26cc74cb0651"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""DecreaseCamSens"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97825e1a-b26a-4457-80f7-46819bc55fb0"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DecreaseCamSens"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -757,6 +881,42 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InvertX"",
+                    ""type"": ""Button"",
+                    ""id"": ""e8b885bc-4b4a-4762-ad5e-0448fe1eb118"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InvertY"",
+                    ""type"": ""Button"",
+                    ""id"": ""e879c069-543d-42d1-bcc7-0f7e909ff28d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DecreaseCamSens"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e0993a1-d479-4a7f-b05a-d791a0d08472"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseCamSens"",
+                    ""type"": ""Button"",
+                    ""id"": ""b462a8e9-54de-4998-b89d-6c2c55b00535"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1078,6 +1238,94 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edd0beb0-58b9-4cf4-83e9-acfe8784bb26"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""InvertX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a91a5220-e3ac-4188-835c-a07ec0c3ac92"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InvertX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6f8bdfe-a28e-4c46-a599-33495bfccaec"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""IncreaseCamSens"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b064ec7b-826c-42f4-a9da-ab4bd9f96cad"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""IncreaseCamSens"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3caa14b8-21fc-4188-ba6f-901f6f60e612"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""DecreaseCamSens"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da6382b3-ffdf-493a-b6c8-d95c00e11ae6"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""DecreaseCamSens"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44f5cd4b-063f-4512-83a4-c06a57861f0f"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""InvertY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""173fac1b-fd23-47b2-8269-774281cf1430"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""InvertY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1130,6 +1378,10 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
+        m_Player_InvertX = m_Player.FindAction("InvertX", throwIfNotFound: true);
+        m_Player_InvertY = m_Player.FindAction("InvertY", throwIfNotFound: true);
+        m_Player_DecreaseCamSens = m_Player.FindAction("DecreaseCamSens", throwIfNotFound: true);
+        m_Player_IncreaseCamSens = m_Player.FindAction("IncreaseCamSens", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1150,6 +1402,10 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_BuildMode_Rotate = m_BuildMode.FindAction("Rotate", throwIfNotFound: true);
         m_BuildMode_VerticalMotion = m_BuildMode.FindAction("VerticalMotion", throwIfNotFound: true);
         m_BuildMode_Pause = m_BuildMode.FindAction("Pause", throwIfNotFound: true);
+        m_BuildMode_InvertX = m_BuildMode.FindAction("InvertX", throwIfNotFound: true);
+        m_BuildMode_InvertY = m_BuildMode.FindAction("InvertY", throwIfNotFound: true);
+        m_BuildMode_DecreaseCamSens = m_BuildMode.FindAction("DecreaseCamSens", throwIfNotFound: true);
+        m_BuildMode_IncreaseCamSens = m_BuildMode.FindAction("IncreaseCamSens", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1215,6 +1471,10 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Crouch;
+    private readonly InputAction m_Player_InvertX;
+    private readonly InputAction m_Player_InvertY;
+    private readonly InputAction m_Player_DecreaseCamSens;
+    private readonly InputAction m_Player_IncreaseCamSens;
     public struct PlayerActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -1225,6 +1485,10 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
+        public InputAction @InvertX => m_Wrapper.m_Player_InvertX;
+        public InputAction @InvertY => m_Wrapper.m_Player_InvertY;
+        public InputAction @DecreaseCamSens => m_Wrapper.m_Player_DecreaseCamSens;
+        public InputAction @IncreaseCamSens => m_Wrapper.m_Player_IncreaseCamSens;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1252,6 +1516,18 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Crouch.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
                 @Crouch.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCrouch;
+                @InvertX.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvertX;
+                @InvertX.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvertX;
+                @InvertX.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvertX;
+                @InvertY.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvertY;
+                @InvertY.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvertY;
+                @InvertY.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInvertY;
+                @DecreaseCamSens.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDecreaseCamSens;
+                @DecreaseCamSens.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDecreaseCamSens;
+                @DecreaseCamSens.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDecreaseCamSens;
+                @IncreaseCamSens.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseCamSens;
+                @IncreaseCamSens.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseCamSens;
+                @IncreaseCamSens.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseCamSens;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1274,6 +1550,18 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Crouch.started += instance.OnCrouch;
                 @Crouch.performed += instance.OnCrouch;
                 @Crouch.canceled += instance.OnCrouch;
+                @InvertX.started += instance.OnInvertX;
+                @InvertX.performed += instance.OnInvertX;
+                @InvertX.canceled += instance.OnInvertX;
+                @InvertY.started += instance.OnInvertY;
+                @InvertY.performed += instance.OnInvertY;
+                @InvertY.canceled += instance.OnInvertY;
+                @DecreaseCamSens.started += instance.OnDecreaseCamSens;
+                @DecreaseCamSens.performed += instance.OnDecreaseCamSens;
+                @DecreaseCamSens.canceled += instance.OnDecreaseCamSens;
+                @IncreaseCamSens.started += instance.OnIncreaseCamSens;
+                @IncreaseCamSens.performed += instance.OnIncreaseCamSens;
+                @IncreaseCamSens.canceled += instance.OnIncreaseCamSens;
             }
         }
     }
@@ -1393,6 +1681,10 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_BuildMode_Rotate;
     private readonly InputAction m_BuildMode_VerticalMotion;
     private readonly InputAction m_BuildMode_Pause;
+    private readonly InputAction m_BuildMode_InvertX;
+    private readonly InputAction m_BuildMode_InvertY;
+    private readonly InputAction m_BuildMode_DecreaseCamSens;
+    private readonly InputAction m_BuildMode_IncreaseCamSens;
     public struct BuildModeActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -1403,6 +1695,10 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @Rotate => m_Wrapper.m_BuildMode_Rotate;
         public InputAction @VerticalMotion => m_Wrapper.m_BuildMode_VerticalMotion;
         public InputAction @Pause => m_Wrapper.m_BuildMode_Pause;
+        public InputAction @InvertX => m_Wrapper.m_BuildMode_InvertX;
+        public InputAction @InvertY => m_Wrapper.m_BuildMode_InvertY;
+        public InputAction @DecreaseCamSens => m_Wrapper.m_BuildMode_DecreaseCamSens;
+        public InputAction @IncreaseCamSens => m_Wrapper.m_BuildMode_IncreaseCamSens;
         public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1430,6 +1726,18 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Pause.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnPause;
+                @InvertX.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnInvertX;
+                @InvertX.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnInvertX;
+                @InvertX.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnInvertX;
+                @InvertY.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnInvertY;
+                @InvertY.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnInvertY;
+                @InvertY.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnInvertY;
+                @DecreaseCamSens.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnDecreaseCamSens;
+                @DecreaseCamSens.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnDecreaseCamSens;
+                @DecreaseCamSens.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnDecreaseCamSens;
+                @IncreaseCamSens.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnIncreaseCamSens;
+                @IncreaseCamSens.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnIncreaseCamSens;
+                @IncreaseCamSens.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnIncreaseCamSens;
             }
             m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
             if (instance != null)
@@ -1452,6 +1760,18 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @InvertX.started += instance.OnInvertX;
+                @InvertX.performed += instance.OnInvertX;
+                @InvertX.canceled += instance.OnInvertX;
+                @InvertY.started += instance.OnInvertY;
+                @InvertY.performed += instance.OnInvertY;
+                @InvertY.canceled += instance.OnInvertY;
+                @DecreaseCamSens.started += instance.OnDecreaseCamSens;
+                @DecreaseCamSens.performed += instance.OnDecreaseCamSens;
+                @DecreaseCamSens.canceled += instance.OnDecreaseCamSens;
+                @IncreaseCamSens.started += instance.OnIncreaseCamSens;
+                @IncreaseCamSens.performed += instance.OnIncreaseCamSens;
+                @IncreaseCamSens.canceled += instance.OnIncreaseCamSens;
             }
         }
     }
@@ -1482,6 +1802,10 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnJump(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
+        void OnInvertX(InputAction.CallbackContext context);
+        void OnInvertY(InputAction.CallbackContext context);
+        void OnDecreaseCamSens(InputAction.CallbackContext context);
+        void OnIncreaseCamSens(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1504,5 +1828,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnRotate(InputAction.CallbackContext context);
         void OnVerticalMotion(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnInvertX(InputAction.CallbackContext context);
+        void OnInvertY(InputAction.CallbackContext context);
+        void OnDecreaseCamSens(InputAction.CallbackContext context);
+        void OnIncreaseCamSens(InputAction.CallbackContext context);
     }
 }

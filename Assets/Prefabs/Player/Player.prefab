@@ -193,6 +193,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMesh: {fileID: 4085936656241940840}
   uiInputModule: {fileID: 0}
+  lookIA:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 83966d80-1973-4ce9-b25f-041c4f00068c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &6599120782886484389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +248,7 @@ MonoBehaviour:
   canvasRectTransform: {fileID: 0}
   cursorSpeed: 1000
   deltaValue: {x: 0, y: 0}
-  speedClamp: 30
+  speedClamp: 23
 --- !u!114 &5425673759445880586
 MonoBehaviour:
   m_ObjectHideFlags: 0

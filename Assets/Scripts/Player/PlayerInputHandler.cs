@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Processors;
 using UnityEngine.InputSystem.UI;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -46,13 +47,13 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             uiInputModule.gameObject.GetComponent<PlayerConfigurationReferenceHelper>()?
                 .SetPlayerConfigurationReference(config);
 
-            playerInstance.cinemachineInputHanlder.horizontal = config.input.actions.FindAction("Look");
-            Debug.Log(playerInstance.cinemachineInputHanlder.horizontal);
+            playerInstance.cinemachineInputHandler.horizontal = config.input.actions.FindAction("Look");
+            //playerInstance.cinemachineInputHandler.vertical = config.input.actions.FindAction("Look");
+            //Debug.Log(playerInstance.cinemachineInputHandler.horizontal);
         }   
 
         private void Input_onActionTriggered(CallbackContext obj)
         {
-
             if (obj.action.name == controls.Player.Jump.name)
             {
                 controller?.OnJump(obj);
@@ -67,6 +68,26 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 {
                     controller?.OnCrouch(obj);
                 }
+                if(obj.action.name == controls.Player.InvertX.name 
+                    ||obj.action.name == controls.BuildMode.InvertX.name)
+                {
+                    playerInstance.cinemachineInputHandler.InvertX();
+                }
+                if(obj.action.name == controls.Player.InvertY.name 
+                    ||obj.action.name == controls.BuildMode.InvertY.name)
+                {
+                    playerInstance.cinemachineInputHandler.InvertY();
+                }
+                if(obj.action.name == controls.Player.IncreaseCamSens.name 
+                    ||obj.action.name == controls.BuildMode.IncreaseCamSens.name)
+                {
+                    playerInstance.cinemachineInputHandler.IncreaseSensitivity();
+                }
+                if(obj.action.name == controls.Player.DecreaseCamSens.name 
+                    ||obj.action.name == controls.BuildMode.DecreaseCamSens.name)
+                {
+                    playerInstance.cinemachineInputHandler.DecreaseSensitivity();
+                }
             }
 
             if (obj.action.name == controls.UI.Navigate.name)
@@ -77,7 +98,17 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             {
                 virtualCursor?.OnClick(obj);
             }
+            
+            // controls.Player.Look.ApplyParameterOverride
+            //     ((InvertVector2Processor p) => p.invertX, false);
+            // int bindingIndex = lookIA.GetBindingIndex(group: playerConfig.input.currentControlScheme);
+            // controls.Player.Look.ApplyBindingOverride(new InputBinding
+            // {
+            //     groups = playerConfig.input.currentControlScheme,
+            //     overrideProcessors = "invert(x=false,y=false)"
+            // });
         }
+        [SerializeField]private InputAction lookIA;
 
         public string GetActionControlName(InputAction inputAction)
         {
