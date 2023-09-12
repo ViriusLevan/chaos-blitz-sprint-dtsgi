@@ -71,6 +71,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             => deltaValue = context.ReadValue<Vector2>();
         public void OnClick(InputAction.CallbackContext context) 
             => aButtonIsPressed = context.action.IsPressed();
+        
+        private Vector2 mousePosition;
+        public void OnMousePositionChange(InputAction.CallbackContext context)
+            =>  mousePosition = context.ReadValue<Vector2>();
 
         private void Update() {
             if(playerInputHandler.playerInstance.playerStatus!=PlayerInstance.PlayerStatus.Picking)
@@ -88,40 +92,47 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         private readonly float referenceHeight = 720;
         [SerializeField]private float speedClamp =10f;
 
+        public bool hasMouse = false;
         public void UpdateMotion(){
             if(virtualMouse == null || virtualMouse.enabled==false){
                 return;
             }
-    //Scaling cursor speed according to current screen width and height
-            float scaleX = Screen.width / referenceWidth;
-            float scaleY = Screen.height / referenceHeight;
-            //Debug.Log($"Scale X {scaleX} Y {scaleY} cspeed {cursorSpeed}");
-            float scaledSpeed = scaleX * scaleY * cursorSpeed;
-            //averaging value to reduce speed difference
-            scaledSpeed = (scaledSpeed + cursorSpeed) / 2;
-            //Debug.Log(scaledSpeed);
+            if(!hasMouse){
+        //Scaling cursor speed according to current screen width and height
+                float scaleX = Screen.width / referenceWidth;
+                float scaleY = Screen.height / referenceHeight;
+                //Debug.Log($"Scale X {scaleX} Y {scaleY} cspeed {cursorSpeed}");
+                float scaledSpeed = scaleX * scaleY * cursorSpeed;
+                //averaging value to reduce speed difference
+                scaledSpeed = (scaledSpeed + cursorSpeed) / 2;
+                //Debug.Log(scaledSpeed);
 
-            deltaValue *= scaledSpeed * Time.deltaTime;
-            deltaValue = new Vector2(Mathf.Clamp(deltaValue.x,-speedClamp,speedClamp)
-                ,Mathf.Clamp(deltaValue.y,-speedClamp,speedClamp));
+                deltaValue *= scaledSpeed * Time.deltaTime;
+                deltaValue = new Vector2(Mathf.Clamp(deltaValue.x,-speedClamp,speedClamp)
+                    ,Mathf.Clamp(deltaValue.y,-speedClamp,speedClamp));
 
-            Vector2 currentPosition = virtualMouse.position.ReadValue();
-            Vector2 newPosition = currentPosition + deltaValue;
+                Vector2 currentPosition = virtualMouse.position.ReadValue();
+                Vector2 newPosition = currentPosition + deltaValue;
 
-            newPosition.x =  Mathf.Clamp(newPosition.x, 0, Screen.width);
-            newPosition.y =  Mathf.Clamp(newPosition.y, 0, Screen.height);
+                newPosition.x =  Mathf.Clamp(newPosition.x, 0, Screen.width);
+                newPosition.y =  Mathf.Clamp(newPosition.y, 0, Screen.height);
 
-            InputState.Change(virtualMouse.position, newPosition);
-            InputState.Change(virtualMouse.delta, deltaValue);
+                InputState.Change(virtualMouse.position, newPosition);
+                InputState.Change(virtualMouse.delta, deltaValue);
 
+                AnchorCursor(newPosition);
+            }
+            else
+            {
+                InputState.Change(virtualMouse.position, mousePosition);
+                AnchorCursor(mousePosition);
+            }
             if(previousMouseState != aButtonIsPressed){
                 virtualMouse.CopyState<MouseState>(out var mouseState);
                 mouseState.WithButton(MouseButton.Left, aButtonIsPressed);
                 InputState.Change(virtualMouse, mouseState);
                 previousMouseState = aButtonIsPressed;
             }
-
-            AnchorCursor(newPosition);
         }
 
         public void ResetMousePosition(){

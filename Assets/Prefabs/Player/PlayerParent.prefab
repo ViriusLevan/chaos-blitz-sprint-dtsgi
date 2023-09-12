@@ -693,7 +693,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4631376950490334143}
-  m_LocalRotation: {x: 0.20071977, y: -0.000000018845816, z: 0.0000000038613104, w: 0.9796487}
+  m_LocalRotation: {x: 0.20071977, y: 0.000000018845807, z: -0.000000003861309, w: 0.9796487}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1526,8 +1526,8 @@ MonoBehaviour:
     Value: 0.5
     m_SpeedMode: 0
     m_MaxSpeed: 2
-    m_AccelTime: 0.2
-    m_DecelTime: 0.1
+    m_AccelTime: 0.05
+    m_DecelTime: 0.05
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
     m_InvertInput: 0
@@ -1542,16 +1542,16 @@ MonoBehaviour:
       m_LegacyVelocityFilterStrength: -1
   m_YAxisRecentering:
     m_enabled: 0
-    m_WaitTime: 1
-    m_RecenteringTime: 2
+    m_WaitTime: 0.05
+    m_RecenteringTime: 0.1
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
     m_MaxSpeed: 300
-    m_AccelTime: 0.1
-    m_DecelTime: 0.1
+    m_AccelTime: 0.05
+    m_DecelTime: 0.05
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
     m_InvertInput: 1
@@ -1618,7 +1618,11 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  inverted: 0
+  invertX: 0
+  invertY: 0
+  sensMultiplier: 1
+  minSens: 0.5
+  maxSens: 2
 --- !u!1 &8352379800080283532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,6 +1874,10 @@ PrefabInstance:
       propertyPath: powerUpImage
       value: 
       objectReference: {fileID: 1510109187513321226}
+    - target: {fileID: 6576660683052921608, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
+      propertyPath: lookIA.m_Name
+      value: Look IA
+      objectReference: {fileID: 0}
     - target: {fileID: 7121530935031970207, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
       propertyPath: m_Enabled
       value: 0

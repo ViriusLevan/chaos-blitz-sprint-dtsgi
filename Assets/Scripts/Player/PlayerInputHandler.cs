@@ -31,8 +31,12 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             Debug.Log("InputHandlerInstance"+(playerInstance==null));
             playerConfig = config;
             playerMesh.material = config.playerMaterial;
-            pManager.SetArrowMaterial(config.playerMaterial);
+            //pManager.SetArrowMaterial(config.playerMaterial);
             config.input.onActionTriggered += Input_onActionTriggered;
+            if(config.input.currentControlScheme.Contains("mouse",System.StringComparison.OrdinalIgnoreCase))
+            {
+                virtualCursor.hasMouse=true;
+            }
             
             virtualCursor?.SetPlayerInputHandler(this);
             
@@ -98,7 +102,13 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             {
                 virtualCursor?.OnClick(obj);
             }
-            
+            if(virtualCursor.hasMouse){
+                if (obj.action.name == controls.UI.VirtualMouseNavigate.name )
+                {
+                    virtualCursor?.OnMousePositionChange(obj);
+                }
+            }
+
             // controls.Player.Look.ApplyParameterOverride
             //     ((InvertVector2Processor p) => p.invertX, false);
             // int bindingIndex = lookIA.GetBindingIndex(group: playerConfig.input.currentControlScheme);

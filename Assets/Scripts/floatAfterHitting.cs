@@ -26,6 +26,9 @@ namespace LevelUpStudio.ChaosBlitzSprint
                 extraCollider.enabled=false;
                 transform.DOLocalMove(hitPosition + (hitUp*2), 1)
                     .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+                transform.DOLocalRotate(new Vector3(transform.rotation.x,360,transform.rotation.z)
+                    ,5,RotateMode.LocalAxisAdd)
+                    .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
             }
         }
 

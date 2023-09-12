@@ -500,6 +500,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "VirtualMouseNavigate",
+                    "type": "PassThrough",
+                    "id": "19db7d5e-114c-4625-b258-f5793f0af82c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -797,6 +806,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "affc35c9-26a5-47ef-8d4b-75fc8092a24d",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "VirtualMouseNavigate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

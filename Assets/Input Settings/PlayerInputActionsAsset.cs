@@ -522,6 +522,15 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""VirtualMouseNavigate"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""19db7d5e-114c-4625-b258-f5793f0af82c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -819,6 +828,17 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""TrackedDeviceOrientation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""affc35c9-26a5-47ef-8d4b-75fc8092a24d"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""VirtualMouseNavigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1394,6 +1414,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        m_UI_VirtualMouseNavigate = m_UI.FindAction("VirtualMouseNavigate", throwIfNotFound: true);
         // BuildMode
         m_BuildMode = asset.FindActionMap("BuildMode", throwIfNotFound: true);
         m_BuildMode_Look = m_BuildMode.FindAction("Look", throwIfNotFound: true);
@@ -1580,6 +1601,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_UI_RightClick;
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
+    private readonly InputAction m_UI_VirtualMouseNavigate;
     public struct UIActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -1594,6 +1616,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        public InputAction @VirtualMouseNavigate => m_Wrapper.m_UI_VirtualMouseNavigate;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1633,6 +1656,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @TrackedDeviceOrientation.started -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnTrackedDeviceOrientation;
+                @VirtualMouseNavigate.started -= m_Wrapper.m_UIActionsCallbackInterface.OnVirtualMouseNavigate;
+                @VirtualMouseNavigate.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnVirtualMouseNavigate;
+                @VirtualMouseNavigate.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnVirtualMouseNavigate;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1667,6 +1693,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
                 @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+                @VirtualMouseNavigate.started += instance.OnVirtualMouseNavigate;
+                @VirtualMouseNavigate.performed += instance.OnVirtualMouseNavigate;
+                @VirtualMouseNavigate.canceled += instance.OnVirtualMouseNavigate;
             }
         }
     }
@@ -1819,6 +1848,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+        void OnVirtualMouseNavigate(InputAction.CallbackContext context);
     }
     public interface IBuildModeActions
     {

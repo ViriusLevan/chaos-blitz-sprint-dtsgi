@@ -107,9 +107,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2.350684
+  m_Height: 2.6372228
   m_Direction: 1
-  m_Center: {x: 0, y: 0.1753418, z: 0}
+  m_Center: {x: 0, y: 0.10370731, z: 0}
 --- !u!54 &1538056887262966392
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ MonoBehaviour:
   playerMesh: {fileID: 4085936656241940840}
   uiInputModule: {fileID: 0}
   lookIA:
-    m_Name: 
+    m_Name: Look IA
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 83966d80-1973-4ce9-b25f-041c4f00068c
@@ -307,9 +307,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.6
-  m_Height: 2.2331498
+  m_Height: 2.3252513
   m_Direction: 1
-  m_Center: {x: 0, y: 0.1753418, z: 0}
+  m_Center: {x: 0, y: 0.12929094, z: 0}
 --- !u!1001 &2036809245738358747
 PrefabInstance:
   m_ObjectHideFlags: 0
