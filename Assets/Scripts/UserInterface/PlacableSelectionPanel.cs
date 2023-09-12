@@ -70,7 +70,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
                     - newButton.GetComponent<RectTransform>().rect.yMin;
 
                 if(yDivisor==-1 || xDivisor==-1){
-                    xDivisor = FindTightestDivisor(xPanelSize, xButtonSize*2);
+                    xDivisor = FindTightestDivisor(xPanelSize, xButtonSize*1.5f);
                     yDivisor = FindTightestDivisor(yPanelSize, yButtonSize);
                     //Debug.Log($"Divisor {xDivisor}-{yDivisor}");
                     Debug.Log($"Panel Size {xPanelSize}-{yPanelSize}");

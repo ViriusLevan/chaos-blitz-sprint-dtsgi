@@ -23,7 +23,7 @@ public class CinemachineInputHandler : MonoBehaviour, AxisState.IInputAxisProvid
                 float resultY =  Mathf.Clamp
                     (horizontal.ReadValue<Vector2>().y * sensMultiplier
                     ,-1,1);
-                if(invertX) resultY *=-1;
+                if(invertY) resultY *=-1;
                 return resultY;
             case 2: 
                 return Mathf.Clamp(vertical.ReadValue<float>(),-1,1);

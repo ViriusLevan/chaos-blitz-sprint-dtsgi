@@ -22,8 +22,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
                     .OrderByDescending(o=>o.scoreTotal).ToList();
             for (int i = 0; i < sortedPlayerConfigs.Count; i++)
             {
-                scoreboardText.text += $"PlayerIndex {sortedPlayerConfigs[i].playerIndex+1}"
-                    +$"Score {sortedPlayerConfigs[i].scoreTotal}\n";
+                scoreboardText.text += $"Player {sortedPlayerConfigs[i].playerIndex+1}"
+                    +$" {sortedPlayerConfigs[i].scoreTotal} pts\n";
                 Debug.Log("index "+i+" count"+sortedPlayerConfigs.Count);
                 playerModels[i].SetActive(true);
                 modelDiffs[i].GetComponent<SkinnedMeshRenderer>().material 

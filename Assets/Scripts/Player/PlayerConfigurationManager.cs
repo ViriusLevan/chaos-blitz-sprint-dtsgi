@@ -18,7 +18,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
         public static PlayerConfigurationManager Instance { get; private set; }
 
-        public void Reset(SceneLoader.SceneIndex sceneIndex)
+        public void VariableReset(SceneLoader.SceneIndex sceneIndex)
         {
             if(sceneIndex!= SceneLoader.SceneIndex.MainMenu)return;
             playerConfigs = new List<PlayerConfiguration>();
@@ -43,11 +43,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         private void Start() 
         {
             colorPlayerIndex = new Dictionary<string, int>();
-            SceneLoader.sceneLoaded+=Reset;
+            SceneLoader.sceneLoaded+=VariableReset;
         }
         void OnDestroy()
         {
-            SceneLoader.sceneLoaded-=Reset;
+            SceneLoader.sceneLoaded-=VariableReset;
             if(this==Instance)
             {
                 DisableSplitScreen();

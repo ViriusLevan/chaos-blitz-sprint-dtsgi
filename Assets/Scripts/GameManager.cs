@@ -194,7 +194,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
                         playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Picking);
                         break;
                     case GameStatus.BuildPhase:
-                        ghostWalls.SetActive(true);
+                        //ghostWalls.SetActive(true);
                         playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Building);
                         break;
                     case GameStatus.PlatformingPhase:

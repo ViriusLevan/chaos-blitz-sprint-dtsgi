@@ -1218,10 +1218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_ocean
       objectReference: {fileID: 0}
-    - target: {fileID: 7530303292363286313, guid: 87d914f06ccc9b947a7c60b10e59f993, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 7530303292363286315, guid: 87d914f06ccc9b947a7c60b10e59f993, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3604f011c76be314c89b70dd315dbe41, type: 2}
     - target: {fileID: 7530303292363286317, guid: 87d914f06ccc9b947a7c60b10e59f993, type: 3}
       propertyPath: m_RootOrder
       value: 1
