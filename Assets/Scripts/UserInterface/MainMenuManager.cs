@@ -7,7 +7,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
     public class MainMenuManager : MonoBehaviour
     {
 
-        [SerializeField]private GameObject menuPanel,roundSelectPanel, lobbyPanel, playerReadyMenu;
+        [SerializeField]private GameObject menuPanel,roundSelectPanel, lobbyPanel, playerReadyMenu, creditPanelMenu;
         [SerializeField]private Button menuFirst, roundSelectFirst, lobbyFirst;
 
         public static MainMenuManager Instance { get; private set; }
@@ -29,6 +29,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             menuPanel.SetActive(false);
             roundSelectPanel.SetActive(true);
             roundSelectFirst.Select();    
+        }
+        public void EnterCreditPanel()
+        {
+            menuPanel.SetActive(false);
+            creditPanelMenu.SetActive(true);
         }
         public void ExitRoundSelection()
         {
