@@ -116,6 +116,15 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivatePowerUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""2936bb01-62b2-4335-8071-fb322c43e8c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -424,6 +433,28 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""DecreaseCamSens"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a57fe27-5e9e-4084-a26c-b04c372d0537"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ActivatePowerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33238408-66eb-4397-a1da-fcd8319ca041"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""ActivatePowerUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1402,6 +1433,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_Player_InvertY = m_Player.FindAction("InvertY", throwIfNotFound: true);
         m_Player_DecreaseCamSens = m_Player.FindAction("DecreaseCamSens", throwIfNotFound: true);
         m_Player_IncreaseCamSens = m_Player.FindAction("IncreaseCamSens", throwIfNotFound: true);
+        m_Player_ActivatePowerUp = m_Player.FindAction("ActivatePowerUp", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1496,6 +1528,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_Player_InvertY;
     private readonly InputAction m_Player_DecreaseCamSens;
     private readonly InputAction m_Player_IncreaseCamSens;
+    private readonly InputAction m_Player_ActivatePowerUp;
     public struct PlayerActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -1510,6 +1543,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @InvertY => m_Wrapper.m_Player_InvertY;
         public InputAction @DecreaseCamSens => m_Wrapper.m_Player_DecreaseCamSens;
         public InputAction @IncreaseCamSens => m_Wrapper.m_Player_IncreaseCamSens;
+        public InputAction @ActivatePowerUp => m_Wrapper.m_Player_ActivatePowerUp;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1549,6 +1583,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @IncreaseCamSens.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseCamSens;
                 @IncreaseCamSens.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseCamSens;
                 @IncreaseCamSens.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseCamSens;
+                @ActivatePowerUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivatePowerUp;
+                @ActivatePowerUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivatePowerUp;
+                @ActivatePowerUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnActivatePowerUp;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1583,6 +1620,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @IncreaseCamSens.started += instance.OnIncreaseCamSens;
                 @IncreaseCamSens.performed += instance.OnIncreaseCamSens;
                 @IncreaseCamSens.canceled += instance.OnIncreaseCamSens;
+                @ActivatePowerUp.started += instance.OnActivatePowerUp;
+                @ActivatePowerUp.performed += instance.OnActivatePowerUp;
+                @ActivatePowerUp.canceled += instance.OnActivatePowerUp;
             }
         }
     }
@@ -1835,6 +1875,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnInvertY(InputAction.CallbackContext context);
         void OnDecreaseCamSens(InputAction.CallbackContext context);
         void OnIncreaseCamSens(InputAction.CallbackContext context);
+        void OnActivatePowerUp(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

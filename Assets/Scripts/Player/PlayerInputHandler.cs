@@ -72,6 +72,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 {
                     controller?.OnCrouch(obj);
                 }
+                if (obj.action.name == controls.Player.ActivatePowerUp.name)
+                {
+                    controller?.OnPowerUp(obj);
+                }
                 if(obj.action.name == controls.Player.InvertX.name 
                     ||obj.action.name == controls.BuildMode.InvertX.name)
                 {

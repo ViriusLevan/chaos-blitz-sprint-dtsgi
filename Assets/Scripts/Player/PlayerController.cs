@@ -65,13 +65,16 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			}
 		}
 
+		public void OnPowerUp(InputAction.CallbackContext context)
+		{
+			playerInteractor.ActivatePowerUp();
+		}
+
 		// Double Jump PowerUp
 		private int jumpsLeft = 0; // Number of jumps left, including double jumps
 		private int maxJumps = 2; // Maximum number of jumps allowed, including double jumps
 
-		public bool doubleJumpAvailable = false; // Whether the double jump power-up is available
-		public bool hasExtraLife;
-		public bool hasShield;
+
 
 		[SerializeField] private ParticleSystem runSmokeEffect;
 		
@@ -94,7 +97,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		{
 			// get the distance to ground
 			distToGround = GetComponent<Collider>().bounds.extents.y;
-			doubleJumpAvailable = false;
 			jumpsLeft = maxJumps;
 		}
 		private float groundedCounter=0, groundContactTime=0.2f;
@@ -142,7 +144,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					if(groundedCounter>=groundContactTime){
 						//Debug.Log("COUNTER RESET");
 						jumpsLeft = maxJumps;
-						if(!doubleJumpAvailable)jumpsLeft-=1;
+						if(!playerInteractor.doubleJumpAvailable)jumpsLeft-=1;
 						groundedCounter=0;
 					}
 					// Calculate how fast we should be moving
@@ -213,14 +215,14 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					// {
 					// 	rb.AddForce(moveDir * 0.15f, ForceMode.VelocityChange);
 					// }
-					if (doubleJumpAvailable && jumped)
+					if (playerInteractor.doubleJumpAvailable && jumped)
 					{
 						Debug.Log("Double jump triggered");
 						rb.velocity = new Vector3
 							(rb.velocity.x, CalculateJumpVerticalSpeed(), rb.velocity.z);
 						jumpsLeft -= 1;
-						doubleJumpAvailable = false; // Disable double jump after using it
-						playerInteractor.DeactivatePowerUp();
+						//Disable Double jump after using it
+						playerInteractor.DeactivatePowerUp(PlayerInteractor.PUDeactivation.DoubleJump);
 					}
 					// Double jump
 					// if (jumpsLeft > 0 && jumped)
@@ -362,11 +364,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 			//TODO use anim event instead
 			// Wait for the animation to end
+			playerInteractor.DeactivatePowerUp(PlayerInteractor.PUDeactivation.ALL);
 			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
-			playerInteractor.DeactivatePowerUp();
+			//playerInteractor.DeactivatePowerUp();
 			yield return new WaitWhile(() => playerAnimator
 				.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
-			
 			DisableMesh();
 		}
 

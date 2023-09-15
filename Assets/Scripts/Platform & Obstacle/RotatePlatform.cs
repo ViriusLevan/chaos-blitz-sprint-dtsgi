@@ -7,8 +7,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
     {
         [SerializeField] private GameObject rotatingObject;
         [SerializeField] private float rotationSpeed;
-
-        private Vector3 rotForward, rotRight, rotUp;
         private void Awake()
         {
         }
@@ -22,13 +20,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         void OnEnable()
         {
-            rotForward=rotatingObject.transform.forward;
-            rotRight=rotatingObject.transform.right;
-            rotUp=rotatingObject.transform.up;
             GameManager.platformingPhaseBegin+=Activate;
 			GameManager.gamePaused+=Deactivate;
 			GameManager.gamePaused+=Reactivate;
-            GameManager.platformingPhaseFinished+=Reset;
+            GameManager.platformingPhaseFinished+=Restart;
         }
 
         void OnDisable()
@@ -36,7 +31,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             GameManager.platformingPhaseBegin-=Activate;
 			GameManager.gamePaused-=Deactivate;
 			GameManager.gamePaused-=Reactivate;
-            GameManager.platformingPhaseFinished-=Reset;
+            GameManager.platformingPhaseFinished-=Restart;
             // DOTween.Kill(transform, false);
         }
 
@@ -47,24 +42,24 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
                     rotatingObject.transform
                         .DOLocalRotate(new Vector3
                             (360,rotatingObject.transform.rotation.y,rotatingObject.transform.rotation.z)
-                            ,5,RotateMode.LocalAxisAdd)
-                            .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+                            ,5,RotateMode.FastBeyond360)
+                            .SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
                     break;
                 
                 case RotationAxis.y:
                     rotatingObject.transform
                         .DOLocalRotate(new Vector3
                             (rotatingObject.transform.rotation.x,360,rotatingObject.transform.rotation.z)
-                            ,5,RotateMode.LocalAxisAdd)
-                            .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+                            ,5,RotateMode.FastBeyond360)
+                            .SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
                     break;
                 
                 case RotationAxis.z:
                     rotatingObject.transform
                         .DOLocalRotate(new Vector3
                             (rotatingObject.transform.rotation.x,rotatingObject.transform.rotation.y,360)
-                            ,5,RotateMode.LocalAxisAdd)
-                            .SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+                            ,5,RotateMode.FastBeyond360)
+                            .SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
                     break;
                 }
         }
@@ -78,13 +73,15 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             DOTween.Restart(rotatingObject.transform);
 		}
 
-        private void Reset()
+        private void Restart()
         {
             DOTween.Rewind(rotatingObject.transform);
         }
+
+        [SerializeField]private bool attachesToPlayer=true;
         private void OnCollisionEnter(Collision other)
         {
-            if (other.collider.gameObject.CompareTag("Player"))
+            if (attachesToPlayer && other.collider.gameObject.CompareTag("Player"))
             {
                 Debug.Log($"Player Collision Enter {other.gameObject.name}");
                 other.gameObject.transform.parent.SetParent(rotatingObject.transform);
@@ -94,7 +91,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void OnCollisionExit(Collision other)
         {
-            if (other.collider.gameObject.CompareTag("Player"))
+            if (attachesToPlayer && other.collider.gameObject.CompareTag("Player"))
             {
                 Debug.Log("Player Collision Exit");
                 other.gameObject.transform.parent.SetParent(null);

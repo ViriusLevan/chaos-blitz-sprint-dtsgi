@@ -71,7 +71,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             //Now destroy them
             foreach (GameObject child in allChildren)
             {
-                Destroy(child.gameObject);
+                Destroy(child);
             }
         }
 
@@ -79,6 +79,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
         {
             PlayerConfigurationManager.Instance.roundType = rType;
             EnterLobby();
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();        
         }
     }
 }

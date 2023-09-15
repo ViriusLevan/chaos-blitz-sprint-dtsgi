@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ActivatePowerUp",
+                    "type": "Button",
+                    "id": "2936bb01-62b2-4335-8071-fb322c43e8c1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -402,6 +411,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "DecreaseCamSens",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0a57fe27-5e9e-4084-a26c-b04c372d0537",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ActivatePowerUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33238408-66eb-4397-a1da-fcd8319ca041",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "ActivatePowerUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

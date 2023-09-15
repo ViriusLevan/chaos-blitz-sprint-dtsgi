@@ -129,6 +129,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 					controlHelpText.text+= " [Crouch] "+
 						playerInputHandler.GetActionControlName
 							(playerInputHandler.controls.Player.Crouch);
+					controlHelpText.text+= " [Powerup] "+
+						playerInputHandler.GetActionControlName
+							(playerInputHandler.controls.Player.ActivatePowerUp);
 					break;
 			}
 		}

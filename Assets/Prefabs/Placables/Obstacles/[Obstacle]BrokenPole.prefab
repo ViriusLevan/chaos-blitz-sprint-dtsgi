@@ -67,6 +67,7 @@ MonoBehaviour:
   rotatingObject: {fileID: 3242249576271139226}
   rotationSpeed: 40
   rotAxis: 1
+  attachesToPlayer: 0
 --- !u!65 &3656576638865771650
 BoxCollider:
   m_ObjectHideFlags: 0

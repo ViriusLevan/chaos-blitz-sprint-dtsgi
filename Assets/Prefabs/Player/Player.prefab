@@ -249,6 +249,7 @@ MonoBehaviour:
   cursorSpeed: 1000
   deltaValue: {x: 0, y: 0}
   speedClamp: 23
+  hasMouse: 0
 --- !u!114 &5425673759445880586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,6 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8a7c04dd031a9498ae2190aa247fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  axis: 1
 --- !u!1001 &8331601233403320359
 PrefabInstance:
   m_ObjectHideFlags: 0

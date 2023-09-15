@@ -531,6 +531,7 @@ MonoBehaviour:
   dir: 2
   distance: 5
   duration: 3
+  attachesToPlayer: 1
 --- !u!1 &136679984
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,6 +873,7 @@ MonoBehaviour:
   rotatingObject: {fileID: 458626039}
   rotationSpeed: 50
   rotAxis: 2
+  attachesToPlayer: 1
 --- !u!65 &184639285
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3292,6 +3294,7 @@ MonoBehaviour:
   dir: 2
   distance: 5
   duration: 3
+  attachesToPlayer: 1
 --- !u!1 &944223351
 GameObject:
   m_ObjectHideFlags: 0
@@ -3790,6 +3793,7 @@ MonoBehaviour:
   rotatingObject: {fileID: 1057098921}
   rotationSpeed: 90
   rotAxis: 1
+  attachesToPlayer: 1
 --- !u!65 &1057098924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7079,6 +7083,7 @@ MonoBehaviour:
   dir: 1
   distance: 5
   duration: 3
+  attachesToPlayer: 1
 --- !u!65 &1839759325
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7483,6 +7488,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1971637357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3706338275539458043, guid: e28daf09cc69da949b81e7f2a5897088, type: 3}
+  m_PrefabInstance: {fileID: 100401774}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1971637359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971637357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de8a7c04dd031a9498ae2190aa247fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: 2
+  timeToFullRotation: 8
+  isLocal: 1
 --- !u!1 &2026247304
 GameObject:
   m_ObjectHideFlags: 0
@@ -7714,7 +7739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091757565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.02, y: 5.9, z: 2.14}
+  m_LocalPosition: {x: 41.78, y: 5.9, z: 4.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
