@@ -426,7 +426,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": ""MouseScroll"",
                     ""id"": ""94025d1e-9e29-4869-9c2f-f2cbe66c01f5"",
-                    ""path"": ""1DAxis(minValue=-50,maxValue=50)"",
+                    ""path"": ""1DAxis(minValue=-0.5,maxValue=0.5)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -459,7 +459,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": ""GamepadTriggers"",
                     ""id"": ""bc775542-ab9f-4afe-9a5e-480d4965a781"",
-                    ""path"": ""1DAxis(minValue=-50,maxValue=50)"",
+                    ""path"": ""1DAxis(minValue=-25,maxValue=25)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -492,7 +492,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": ""MouseDeltaLR"",
                     ""id"": ""3e909f9d-9c76-4693-9ea0-bb68a61fc0d9"",
-                    ""path"": ""1DAxis(minValue=-50,maxValue=50)"",
+                    ""path"": ""1DAxis(minValue=-5,maxValue=5)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1487,7 +1487,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": ""MouseDeltaLR"",
                     ""id"": ""4b75075e-54af-4f51-97e3-dad30824c6f3"",
-                    ""path"": ""1DAxis(minValue=-50,maxValue=50)"",
+                    ""path"": ""1DAxis(minValue=-5,maxValue=5)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1553,7 +1553,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": ""MouseScroll"",
                     ""id"": ""6d295a86-79bd-469f-b0e1-f7d330aca57c"",
-                    ""path"": ""1DAxis(minValue=-50,maxValue=50)"",
+                    ""path"": ""1DAxis(minValue=-0.5,maxValue=0.5)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1586,7 +1586,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 {
                     ""name"": ""GamepadTriggers"",
                     ""id"": ""9abcf654-a49c-44c7-a7cc-bdd04169411c"",
-                    ""path"": ""1DAxis(minValue=-50,maxValue=50)"",
+                    ""path"": ""1DAxis(minValue=-25,maxValue=25)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

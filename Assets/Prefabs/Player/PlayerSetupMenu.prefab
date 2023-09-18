@@ -32,11 +32,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4455143332346716027}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50, y: -45}
+  m_AnchoredPosition: {x: 150.27, y: -45}
   m_SizeDelta: {x: -308, y: -132}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4455143331919247055
@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 5
-    m_WrapAround: 0
+    m_Mode: 1
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 4455143332736596068}
     m_SelectOnDown: {fileID: 4455143333062226902}
     m_SelectOnLeft: {fileID: 4455143332736596068}
@@ -126,7 +126,7 @@ MonoBehaviour:
         m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: e11e19a4478a88c42b432c18f488c7f3, type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: 83c2d9a2fca0f794dbada26e30aef4db, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -242,8 +242,8 @@ RectTransform:
   m_Children:
   - {fileID: 4455143333287316693}
   - {fileID: 4455143333184795725}
-  - {fileID: 4455143331919247052}
   - {fileID: 4455143332736596091}
+  - {fileID: 4455143331919247052}
   - {fileID: 4455143333062226901}
   m_Father: {fileID: 4455143332441947254}
   m_RootOrder: 3
@@ -392,14 +392,15 @@ MonoBehaviour:
   readyButton: {fileID: 0}
   colorButtons:
   - {fileID: 4455143333184795726}
-  - {fileID: 4455143331919247053}
   - {fileID: 4455143332736596068}
   - {fileID: 4455143333062226902}
-  matNames:
-  - COLOR_Red
-  - COLOR_Purple
-  - COLOR_Yellow
-  - COLOR_Green
+  - {fileID: 4455143331919247053}
+  mats:
+  - {fileID: 2100000, guid: e217b583e67a72048bc438be889d7d8f, type: 2}
+  - {fileID: 2100000, guid: 10eb2c4705ece9a4da724f1140aaa402, type: 2}
+  - {fileID: 2100000, guid: 93832cbc1217c0247acdf7316b7ea6a4, type: 2}
+  - {fileID: 2100000, guid: 83c2d9a2fca0f794dbada26e30aef4db, type: 2}
+  mes: {fileID: 4705695410953889637}
 --- !u!1 &4455143332736596090
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,11 +433,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4455143332346716027}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 50, y: -45}
+  m_AnchoredPosition: {x: -49.911, y: -45}
   m_SizeDelta: {x: -308, y: -132}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4455143332736596070
@@ -490,8 +491,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 5
-    m_WrapAround: 0
+    m_Mode: 1
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 4455143331919247053}
@@ -526,7 +527,7 @@ MonoBehaviour:
         m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 8d2c707a52fe08c48a4af52c6472d1e5, type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: 10eb2c4705ece9a4da724f1140aaa402, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -569,7 +570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 150, y: -45}
+  m_AnchoredPosition: {x: 50.178, y: -45}
   m_SizeDelta: {x: -308, y: -132}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4455143333062226896
@@ -623,8 +624,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 5
-    m_WrapAround: 0
+    m_Mode: 1
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 4455143333184795726}
     m_SelectOnDown: {fileID: 4455143331919247053}
     m_SelectOnLeft: {fileID: 4455143331919247053}
@@ -659,7 +660,7 @@ MonoBehaviour:
         m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 1638f034be2337f4f944c736e72ecd99, type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: 93832cbc1217c0247acdf7316b7ea6a4, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -756,8 +757,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 5
-    m_WrapAround: 0
+    m_Mode: 1
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 4455143332736596068}
     m_SelectOnDown: {fileID: 4455143333062226902}
     m_SelectOnLeft: {fileID: 4455143332736596068}
@@ -792,7 +793,7 @@ MonoBehaviour:
         m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2100000, guid: 40173aedadd4d6441a681dad601b728e, type: 2}
+          m_ObjectArgument: {fileID: 2100000, guid: e217b583e67a72048bc438be889d7d8f, type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Material, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

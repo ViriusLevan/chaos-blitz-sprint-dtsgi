@@ -2572,14 +2572,14 @@ MonoBehaviour:
   - {fileID: 1166718905}
   cursors:
   - {fileID: 21300000, guid: e0e4ed98f56eee4408678e155a274281, type: 3}
-  - {fileID: 21300000, guid: a0c8dd4d352b5034bb11c905cd18738e, type: 3}
   - {fileID: 21300000, guid: 43fcd76bb3e0c964b80bb0aea53efc49, type: 3}
   - {fileID: 21300000, guid: 1f5a3ac92b829624cb96a408dc7a85b7, type: 3}
+  - {fileID: 21300000, guid: a0c8dd4d352b5034bb11c905cd18738e, type: 3}
   panels:
   - {fileID: 21300000, guid: bc2564800b4a16840a48f1c63b2d8d4d, type: 3}
-  - {fileID: 21300000, guid: fde7a6d3f35a69446bd64a46c48f38d3, type: 3}
   - {fileID: 21300000, guid: 025ad69697fa1bf4c9a9714a7f381768, type: 3}
   - {fileID: 21300000, guid: 41ea94901d0952b45a6f52c8eee64c36, type: 3}
+  - {fileID: 21300000, guid: fde7a6d3f35a69446bd64a46c48f38d3, type: 3}
   buildCamSetPoint: {fileID: 1670773449}
   ghostWalls: {fileID: 915479037}
 --- !u!1 &1483985019

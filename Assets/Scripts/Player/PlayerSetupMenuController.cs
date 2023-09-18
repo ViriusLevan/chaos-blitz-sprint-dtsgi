@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using static UnityEngine.InputSystem.InputAction;
+using LevelUpStudio.ChaosBlitzSprint.UI;
+using UnityEngine.EventSystems;
 
 namespace LevelUpStudio.ChaosBlitzSprint.Player
 {
@@ -20,7 +22,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         [SerializeField] private Button[] colorButtons;
     
     //TODO I'm stupid i know, use Materials instead of magic
-        [SerializeField] private string[] matNames;
+        [SerializeField] private Material[] mats;
 
         private int playerIndex;
         private float ignoreInputTime = 0.5f;
@@ -42,11 +44,12 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             pi.onActionTriggered += Input_onActionTriggered;
             PlayerConfigurationManager.colorTaken += ColorTaken;
             PlayerConfigurationManager.colorReturned += ColorReturned;
-            foreach (string name in matNames)
+            foreach (Material mate in mats)
             {
-                if(PlayerConfigurationManager.Instance.IsColorTaken(name))
+                Debug.Log(mate.name);
+                if(PlayerConfigurationManager.Instance.IsColorTaken(mate.name))
                 {
-                   ColorTaken(name); 
+                   ColorTaken(mate.name); 
                 }
             }
         }
@@ -96,7 +99,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 CancelReady();
             }
             else{
-                UI.MainMenuManager.Instance.ExitLobby();
+                MainMenuManager.Instance.ExitLobby();
             }
         }
 
@@ -106,13 +109,13 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
             //TODO maybe use an SO to store material along with cursor index
             int cursorIndex=0;
-            if(mat.name.Contains("Red", System.StringComparison.OrdinalIgnoreCase)){
+            if(mat.name.Contains("P1", System.StringComparison.OrdinalIgnoreCase)){
                 cursorIndex=0;
-            } else if(mat.name.Contains("Purple", System.StringComparison.OrdinalIgnoreCase)){
+            } else if(mat.name.Contains("P2", System.StringComparison.OrdinalIgnoreCase)){
                 cursorIndex=1;
-            } else if(mat.name.Contains("Yellow", System.StringComparison.OrdinalIgnoreCase)){
+            } else if(mat.name.Contains("P3", System.StringComparison.OrdinalIgnoreCase)){
                 cursorIndex=2;
-            }else if(mat.name.Contains("Green", System.StringComparison.OrdinalIgnoreCase)){
+            }else if(mat.name.Contains("P4", System.StringComparison.OrdinalIgnoreCase)){
                 cursorIndex=3;
             }
             
@@ -124,9 +127,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             ReadyPlayer();
             menuPanel.SetActive(false);
             readyPanel.SetActive(true);
-            // readyButton.interactable = true;
-            // readyButton.Select();
-            
         }
 
         public void ColorTaken(string colorName){ToggleColorButton(colorName, false);}
@@ -135,30 +135,49 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         public void ToggleColorButton(string colorName, bool toggle)
         {
             int buttonIndex=0;
-            if(colorName.Contains("Red", System.StringComparison.OrdinalIgnoreCase)){
+            if(colorName.Contains("P1", System.StringComparison.OrdinalIgnoreCase)){
                 buttonIndex=0;
-            } else if(colorName.Contains("Purple", System.StringComparison.OrdinalIgnoreCase)){
+            } else if(colorName.Contains("P2", System.StringComparison.OrdinalIgnoreCase)){
                 buttonIndex=1;
-            } else if(colorName.Contains("Yellow", System.StringComparison.OrdinalIgnoreCase)){
+            } else if(colorName.Contains("P3", System.StringComparison.OrdinalIgnoreCase)){
                 buttonIndex=2;
-            }else if(colorName.Contains("Green", System.StringComparison.OrdinalIgnoreCase)){
+            }else if(colorName.Contains("P4", System.StringComparison.OrdinalIgnoreCase)){
                 buttonIndex=3;
             }
             colorButtons[buttonIndex].interactable=toggle;
         }
 
+        [SerializeField] private MultiplayerEventSystem mes;
         public void ReadyPlayer()
         {
             if (!inputEnabled) { return; }
 
             PlayerConfigurationManager.Instance.ReadyPlayer(playerIndex);
-            //readyButton.gameObject.SetActive(false);
+            mes.SetSelectedGameObject(MainMenuManager.Instance.GetStartGameButton());
         }
 
         public void CancelReady()
         {
             PlayerConfigurationManager.Instance.CancelReady(playerIndex);
             menuPanel.SetActive(true);
+            SelectLastAvailTakenButton();
+        }
+
+        public void SelectLastAvailTakenButton()
+        {
+            for (int i = 0; i < mats.Length; i++)
+            {
+                Debug.Log(mats[i].name);
+                if(!PlayerConfigurationManager.Instance.IsColorTaken(mats[i].name))
+                {
+                   mes.SetSelectedGameObject(colorButtons[i].gameObject);
+                   colorButtons[i].OnSelect(null);
+                }
+                else
+                {
+                   ColorTaken(mats[i].name); 
+                }
+            }
         }
 
     }

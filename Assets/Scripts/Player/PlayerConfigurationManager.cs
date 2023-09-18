@@ -21,7 +21,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         public void VariableReset(SceneLoader.SceneIndex sceneIndex)
         {
             if(sceneIndex!= SceneLoader.SceneIndex.MainMenu)return;
-            playerConfigs = new List<PlayerConfiguration>();
+            ClearPlayers();
             nSpawnedPlayers = 0;
         }
 
@@ -101,6 +101,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         public void ClearPlayers()
         {
             playerConfigs.Clear();
+            colorPlayerIndex.Clear();
 
     //Deletes the children of this transform, which are the PlayerConfiguration prefabs
             int i = 0;
@@ -144,7 +145,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         {
             Debug.Log($"Player {index} ready");
             playerConfigs[index].isReady = true;
-            BeginGame();
+            
+            //BeginGame();
         }
 
         public void CancelReady(int index)

@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 1284377029991217900}
   m_Layer: 0
   m_Name: PlayerParent
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 1999725787803703765}
   - component: {fileID: 4113558273865041152}
   - component: {fileID: 3433835815884362786}
+  - component: {fileID: 3712122547064289278}
   m_Layer: 0
   m_Name: CM vcam2
   m_TagString: Untagged
@@ -815,6 +816,36 @@ MonoBehaviour:
   sensMultiplier: 1
   minSens: 0.5
   maxSens: 2
+--- !u!114 &3712122547064289278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2655558240430490228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 99295
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 1
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1 &2751426290983446434
 GameObject:
   m_ObjectHideFlags: 0

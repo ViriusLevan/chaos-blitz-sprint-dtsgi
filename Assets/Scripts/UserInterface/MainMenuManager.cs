@@ -85,5 +85,13 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             PlayerConfigurationManager.Instance.roundType = rType;
             EnterLobby();
         }
+
+        [SerializeField]private GameObject startGameButton;
+        public GameObject GetStartGameButton(){return startGameButton;}
+
+        public void StartGame()
+        {
+            PlayerConfigurationManager.Instance?.BeginGame();
+        }
     }
 }
