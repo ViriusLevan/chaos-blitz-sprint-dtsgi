@@ -11,9 +11,9 @@ using UnityEditor;
 namespace LevelUpStudio.ChaosBlitzSprint.Player{
 	public class PlayerInstance : MonoBehaviour
 	{
-		public enum PlayerStatus {Awaiting, Picking, FinishedPicking
+		public enum PlayerStatus {AwaitingAnimation, Picking, FinishedPicking
 			, Building, FinishedBuilding, Platforming
-			, FinishedPlatforming, Dead};
+			, FinishedPlatforming, Dead, Paused};
 
 		[SerializeField]public CinemachineInputHandler cinemachineInputHandler{get; private set;}
 		[SerializeField]private CinemachineVirtualCamera virtualCamera;

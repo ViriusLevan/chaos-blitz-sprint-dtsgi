@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LevelUpStudio.ChaosBlitzSprint.Player;
+using TMPro;
 
 namespace LevelUpStudio.ChaosBlitzSprint
 {
     public class GameManager : MonoBehaviour
     {
         
-        public enum GameStatus {Animation, PickPhase, BuildPhase, PlatformingPhase,Paused};
+        public enum GameStatus {LapAnimation, PickPhase, BuildPhase, PlatformingPhase,Paused};
 
         [SerializeField] public GameStatus currentGameStatus;
         public GameStatus GetCurrentGameStatus(){return currentGameStatus;}
@@ -48,7 +49,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
             {
                 Instance = this;
             }
-            lapCounter=0;
+            lapCounter=1;
             lapWinnerIndex=-1;
             playerInstances = new Dictionary<int, PlayerInstance>();
             roundType = PlayerConfigurationManager.Instance.roundType;
@@ -56,9 +57,12 @@ namespace LevelUpStudio.ChaosBlitzSprint
         }
 
         [SerializeField] private GameObject ghostWalls;
+        [SerializeField] private Animator startAnimator;
+        [SerializeField] private TextMeshProUGUI lapText;
+        [SerializeField] private GameObject lapPanel;
         void Start()
         {
-            PhaseSwitch(GameStatus.PickPhase);
+            PhaseSwitch(GameStatus.LapAnimation);
         }
 
         public void AddPlayerInstance(PlayerInstance pi)
@@ -79,6 +83,11 @@ namespace LevelUpStudio.ChaosBlitzSprint
         public static event OnPhase pickPhaseFinished, buildPhaseFinished, platformingPhaseFinished
             , pickPhaseBegin, buildPhaseBegin, platformingPhaseBegin, gamePaused, gameUnpaused;
         
+        public void AnimationFinished()
+        {
+            lapPanel.SetActive(false);
+            PhaseSwitch(GameStatus.PickPhase);
+        }
 
         public void PlayerPicked(int pIndex, Placement.Placable placable = null)
         {
@@ -112,7 +121,8 @@ namespace LevelUpStudio.ChaosBlitzSprint
             List<int> finishedPlayers = new List<int>();
         //already dead
             if(playerInstances[pIndex].playerStatus==PlayerInstance.PlayerStatus.Dead
-                ||playerInstances[pIndex].playerStatus==PlayerInstance.PlayerStatus.Picking)return;
+                ||playerInstances[pIndex].playerStatus==PlayerInstance.PlayerStatus.Picking
+                ||playerInstances[pIndex].playerStatus==PlayerInstance.PlayerStatus.AwaitingAnimation)return;
             playerInstances[pIndex].SetPlayerStatus(PlayerInstance.PlayerStatus.Dead);
             Debug.Log($"Player {pIndex} has Died");
             SoundManager.Instance?.PlaySound(SoundEnum.PlayerDeath);
@@ -133,9 +143,11 @@ namespace LevelUpStudio.ChaosBlitzSprint
         private int lapWinnerIndex;
         public void PlayerFinished(int pIndex)
         {
-            SoundManager.Instance?.PlaySound(SoundEnum.PlayerFinish);
             List<int> finishedPlayers = new List<int>();
-
+            if(playerInstances[pIndex].playerStatus==PlayerInstance.PlayerStatus.FinishedPlatforming
+                ||playerInstances[pIndex].playerStatus==PlayerInstance.PlayerStatus.Picking
+                ||playerInstances[pIndex].playerStatus==PlayerInstance.PlayerStatus.AwaitingAnimation)return;
+            SoundManager.Instance?.PlaySound(SoundEnum.PlayerFinish);
             Debug.Log($"Player {pIndex} has Finished");
             playerInstances[pIndex].SetPlayerStatus(PlayerInstance.PlayerStatus.FinishedPlatforming);
             if(lapWinnerIndex == -1) 
@@ -151,7 +163,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
             }
             platformingPhaseFinished?.Invoke();
             HandleScoring(finishedPlayers);
-            PhaseSwitch(GameStatus.PickPhase);
+            PhaseSwitch(GameStatus.LapAnimation);
         }
 
 
@@ -168,7 +180,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
             }
             lapCounter+=1;
 
-            if(lapCounter>=roundType.GetLapAmount()){
+            if(lapCounter>roundType.GetLapAmount()){
                 roundFinished=true;
             }
         }
@@ -192,20 +204,33 @@ namespace LevelUpStudio.ChaosBlitzSprint
             foreach(KeyValuePair<int, PlayerInstance> entry in playerInstances)
             {
                 switch(targetPhase){
+                    case GameStatus.LapAnimation:
+                        playerInstances[entry.Key]
+                        .SetPlayerStatus(PlayerInstance.PlayerStatus.AwaitingAnimation);
+                        break;
                     case GameStatus.PickPhase:
-                        playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Picking);
+                        if(playerInstances[entry.Key].playerStatus
+                            !=PlayerInstance.PlayerStatus.FinishedPicking)
+                            playerInstances[entry.Key]
+                                .SetPlayerStatus(PlayerInstance.PlayerStatus.Picking);
                         break;
                     case GameStatus.BuildPhase:
                         //ghostWalls.SetActive(true);
-                        playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Building);
+                        if(playerInstances[entry.Key].playerStatus
+                            !=PlayerInstance.PlayerStatus.FinishedBuilding)
+                            playerInstances[entry.Key]
+                                .SetPlayerStatus(PlayerInstance.PlayerStatus.Building);
                         break;
                     case GameStatus.PlatformingPhase:
                         ghostWalls.SetActive(false);
-                        playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Platforming);
+                        if(playerInstances[entry.Key].playerStatus
+                            !=PlayerInstance.PlayerStatus.FinishedPlatforming)
+                            playerInstances[entry.Key]
+                                .SetPlayerStatus(PlayerInstance.PlayerStatus.Platforming);
                         break;
-                    case GameStatus.Animation:
                     case GameStatus.Paused:
-                        playerInstances[entry.Key].SetPlayerStatus(PlayerInstance.PlayerStatus.Awaiting);
+                        playerInstances[entry.Key]
+                            .SetPlayerStatus(PlayerInstance.PlayerStatus.Paused);
                         break;
                 }
             }
@@ -227,7 +252,10 @@ namespace LevelUpStudio.ChaosBlitzSprint
                 case GameStatus.PlatformingPhase:
                     platformingPhaseBegin?.Invoke();
                     break;
-                case GameStatus.Animation:
+                case GameStatus.LapAnimation:
+                    lapPanel.SetActive(true);
+                    lapText.text = "Lap "+lapCounter+"/"+roundType.GetLapAmount();
+                    startAnimator.SetTrigger("start");
                     break;
                 case GameStatus.Paused:
                     gamePaused.Invoke();
