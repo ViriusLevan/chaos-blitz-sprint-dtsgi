@@ -165,6 +165,7 @@ MonoBehaviour:
   rotatingObject: {fileID: 3907548114209736620}
   rotationSpeed: 50
   rotAxis: 2
+  attachesToPlayer: 1
 --- !u!1 &6423409700904327018
 GameObject:
   m_ObjectHideFlags: 0

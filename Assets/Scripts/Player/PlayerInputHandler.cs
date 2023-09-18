@@ -92,6 +92,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                     ||obj.action.name == controls.BuildMode.DecreaseCamSens.name)
                 {
                     playerInstance.cinemachineInputHandler.DecreaseSensitivity();
+                }                
+                if (obj.action.name == controls.Player.PowerUp.name)
+                {
+                    controller?.OnPowerUp(obj);
                 }
             }
             if  (obj.action.name == controls.Player.Zoom.name 

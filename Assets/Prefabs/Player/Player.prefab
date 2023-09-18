@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17b12df3e346330448f71aeada790379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  freeLookCam: {fileID: 0}
+  virtualCamera: {fileID: 0}
   selfCamera: {fileID: 0}
   buildCameraFollowTarget: {fileID: 0}
 --- !u!114 &2616644028935604166
@@ -169,10 +169,8 @@ MonoBehaviour:
   slipCapsule: {fileID: 3794520903516348960}
   slide: 0
   sticky: 0
-  doubleJumpAvailable: 0
-  hasExtraLife: 0
-  hasShield: 0
   runSmokeEffect: {fileID: 8331601233384572903}
+  cameraX: 0
   playerMeshes:
   - {fileID: 3099792070909323936}
   - {fileID: 8486749024722988584}
@@ -249,6 +247,7 @@ MonoBehaviour:
   cursorSpeed: 1000
   deltaValue: {x: 0, y: 0}
   speedClamp: 23
+  hasMouse: 0
 --- !u!114 &5425673759445880586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +261,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 2616644028935604166}
+  extraLife: 0
+  doubleJumpAvailable: 0
+  hasShield: 0
+  extraLifeIcon: {fileID: 0}
+  extraLifeText: {fileID: 0}
+  doubleJumpIndicator: {fileID: 0}
   shield: {fileID: 9138300808254285264}
   powerUpImage: {fileID: 0}
 --- !u!1 &7388661582635289501
@@ -789,7 +794,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3278766450519535179, guid: 8a314b5957abbe74089e24c689d02212, type: 3}
   m_PrefabInstance: {fileID: 6003650817121717147}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &525219966180831186
+--- !u!114 &1799636168564265057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -798,9 +803,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 9138300808254285264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de8a7c04dd031a9498ae2190aa247fab, type: 3}
+  m_Script: {fileID: 11500000, guid: c2259507c305bc244b818e743bb1e0b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  axis: 1
+  timeToFullRotation: 4
+  isLocal: 0
 --- !u!1001 &8331601233403320359
 PrefabInstance:
   m_ObjectHideFlags: 0

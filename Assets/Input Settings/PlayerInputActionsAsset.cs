@@ -125,6 +125,15 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PowerUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""51e7799e-91f3-4e18-a591-7694a6b44729"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -545,6 +554,28 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1acdee96-7009-44f0-b20d-3a899af2748f"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""PowerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""363c482e-86ff-4363-b3df-9be0a10b5713"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""PowerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1641,6 +1672,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_Player_IncreaseCamSens = m_Player.FindAction("IncreaseCamSens", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        m_Player_PowerUp = m_Player.FindAction("PowerUp", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1737,6 +1769,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_Player_IncreaseCamSens;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Zoom;
+    private readonly InputAction m_Player_PowerUp;
     public struct PlayerActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -1752,6 +1785,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @IncreaseCamSens => m_Wrapper.m_Player_IncreaseCamSens;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+        public InputAction @PowerUp => m_Wrapper.m_Player_PowerUp;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1794,6 +1828,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Zoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @PowerUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp;
+                @PowerUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp;
+                @PowerUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1831,6 +1868,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @PowerUp.started += instance.OnPowerUp;
+                @PowerUp.performed += instance.OnPowerUp;
+                @PowerUp.canceled += instance.OnPowerUp;
             }
         }
     }
@@ -2092,6 +2132,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnIncreaseCamSens(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnPowerUp(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
