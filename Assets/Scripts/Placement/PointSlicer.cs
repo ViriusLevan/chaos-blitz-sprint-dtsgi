@@ -1,8 +1,10 @@
 using UnityEngine;
 using EzySlice;
+using LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour;
+
 
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
 #endif
 
 namespace LevelUpStudio.ChaosBlitzSprint.Placement
@@ -73,7 +75,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Placement
             }
             if(targetPlatform!=null)
             {
-                toBeSliced.transform.SetParent(targetPlatform.transform);
+                if(targetPlatform.GetComponent<RotatePlatform>())
+                    toBeSliced.transform.SetParent(
+                        targetPlatform.GetComponent<RotatePlatform>().GetRotatingObject().transform);
+                else
+                    toBeSliced.transform.SetParent(targetPlatform.transform);
             }
             toBeSliced.name = originalName;
             toBeSliced.tag = originalTag;

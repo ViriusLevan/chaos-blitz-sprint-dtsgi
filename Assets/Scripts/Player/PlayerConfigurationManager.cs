@@ -69,6 +69,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         
         public void SetNSpawnedPlayers(int newVal)
         {
+            Debug.Log("nVal "+newVal);
             nSpawnedPlayers=newVal;
         }
 
@@ -179,6 +180,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 && playerConfigs.Count <= maxPlayers 
                 && playerConfigs.All(p => p.isReady == true))
             {
+                DisableJoining();
                 SceneLoader.Instance.LoadScene(SceneLoader.SceneIndex.Gameplay);
             }
             else

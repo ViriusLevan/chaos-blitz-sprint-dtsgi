@@ -110,10 +110,12 @@ namespace LevelUpStudio.ChaosBlitzSprint
         public void PlayerDied(int pIndex)
         {
             List<int> finishedPlayers = new List<int>();
-
+        //already dead
+            if(playerInstances[pIndex].playerStatus==PlayerInstance.PlayerStatus.Dead
+                ||playerInstances[pIndex].playerStatus==PlayerInstance.PlayerStatus.Picking)return;
+            playerInstances[pIndex].SetPlayerStatus(PlayerInstance.PlayerStatus.Dead);
             Debug.Log($"Player {pIndex} has Died");
             SoundManager.Instance?.PlaySound(SoundEnum.PlayerDeath);
-            playerInstances[pIndex].SetPlayerStatus(PlayerInstance.PlayerStatus.Dead);
             foreach(KeyValuePair<int, PlayerInstance> entry in playerInstances)
             {
                 if(entry.Value.playerStatus == PlayerInstance.PlayerStatus.FinishedPlatforming)

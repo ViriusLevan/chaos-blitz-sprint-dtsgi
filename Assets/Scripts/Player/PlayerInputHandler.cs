@@ -33,7 +33,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             playerMesh.material = config.playerMaterial;
             //pManager.SetArrowMaterial(config.playerMaterial);
             config.input.onActionTriggered += Input_onActionTriggered;
-            if(config.input.currentControlScheme.Contains("mouse",System.StringComparison.OrdinalIgnoreCase))
+            if(config.input.currentControlScheme
+                .Contains("mouse",System.StringComparison.OrdinalIgnoreCase))
             {
                 virtualCursor.hasMouse=true;
             }
@@ -52,7 +53,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 .SetPlayerConfigurationReference(config);
 
             playerInstance.cinemachineInputHandler.horizontal = config.input.actions.FindAction("Look");
-            //playerInstance.cinemachineInputHandler.vertical = config.input.actions.FindAction("Look");
+            playerInstance.cinemachineInputHandler.vertical = config.input.actions.FindAction("Zoom");
             //Debug.Log(playerInstance.cinemachineInputHandler.horizontal);
         }   
 
@@ -92,6 +93,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 {
                     playerInstance.cinemachineInputHandler.DecreaseSensitivity();
                 }
+            }
+            if  (obj.action.name == controls.Player.Zoom.name 
+                ||obj.action.name == controls.BuildMode.Zoom.name)
+            {
+                //playerInstance.ZoomCamera(obj);
             }
 
             if (obj.action.name == controls.UI.Navigate.name)

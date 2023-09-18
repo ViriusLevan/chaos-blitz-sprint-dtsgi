@@ -1469,7 +1469,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1427371416}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1332238085}
+        m_TargetAssemblyTypeName: LevelUpStudio.ChaosBlitzSprint.UI.MainMenuManager,
+          Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1477449576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,6 +1886,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1824713568}
   m_CullTransparentMesh: 1
+--- !u!1 &1847762292 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1512052677632684890, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
+  m_PrefabInstance: {fileID: 3340137292095045802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1847762293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847762292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1947723019 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1678768345210729969, guid: 6581584c597b3e149bc0dd12e1d55c6e, type: 3}
@@ -2503,6 +2555,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1512052677632684889, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1512052677632684893, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -2510,6 +2566,34 @@ PrefabInstance:
     - target: {fileID: 1512052677632684894, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512052677632684895, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.3440478
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512052677632684895, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8467845
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512052677632684895, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.510549
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512052677632684895, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97937423
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512052677632684895, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.030489327
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512052677632684895, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.19964464
+      objectReference: {fileID: 0}
+    - target: {fileID: 1512052677632684895, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0062152245
       objectReference: {fileID: 0}
     - target: {fileID: 3340137293339523097, guid: e5ea721cef4454a4b88b3e2e2f3cd58c, type: 3}
       propertyPath: m_RootOrder

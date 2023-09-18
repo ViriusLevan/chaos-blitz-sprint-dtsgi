@@ -54,6 +54,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             roundSelectFirst.Select();
         }
 
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
+
         public void ClearReadyPlayerMenu()
         {
             //Deletes the children of this transform, which are the PlayerConfiguration prefabs

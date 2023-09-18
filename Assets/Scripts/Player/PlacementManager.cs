@@ -98,7 +98,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                     else
                     {
                         InvalidPlacement();
-                        pos = cameraTransform.position + (cameraTransform.forward*20);
+                        pos = cameraTransform.position + (cameraTransform.forward*10);
                         arrowIndicator.SetActive(false);
                     }
                 }
@@ -239,7 +239,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             Destroy(pChecker);
             IndicatorMovement indicator = pendingObj.GetComponentInChildren<IndicatorMovement>();
             if(indicator!=null){
-                Debug.Log(indicator.gameObject.name);
                 Destroy(indicator.gameObject);
             }
 
@@ -268,8 +267,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
             pendingObj = null;
             arrowIndicator.SetActive(false);
-            GameManager.Instance.PlayerBuilt(playerInputHandler.playerConfig.playerIndex);
             Debug.Log($"Player {playerInputHandler.playerConfig.playerIndex} finished placing");
+            GameManager.Instance.PlayerBuilt(playerInputHandler.playerConfig.playerIndex);
         }
 
         private void SetLayerAllChildren(Transform root, int layer)

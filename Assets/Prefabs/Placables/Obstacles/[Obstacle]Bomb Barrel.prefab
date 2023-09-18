@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 403735fada4e9d74ca6453745c629f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownTime: 3
+  countdownTime: 1
   triggered: 0
 --- !u!1001 &2890071156980996147
 PrefabInstance:

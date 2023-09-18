@@ -30,6 +30,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
         public void PopulatePickPanel(){
             ShowPickPanel();
             int nOfPlayers = PlayerConfigurationManager.Instance.GetNSpawnedPlayers();
+            Debug.Log("nOfPlayers : "+nOfPlayers);
             
             RectTransform selectionPanelRT = selectionPanel.gameObject.GetComponent<RectTransform>();
             
@@ -158,10 +159,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
         public void HidePickPanel(){
             controlHelpPanel.SetActive(false);
             bgImage.color = new Color(0,0,0,0);
-            for(int i = 0; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).gameObject.SetActive(false);
-            }
             DestroySelections();
         }
 

@@ -79,6 +79,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		private PlayerInteractor playerInteractor;
 		private void Awake ()
 		{
+			// playerFollower =  Instantiate(new GameObject()).transform;
+			// playerFollower.name = "FOLLOWER";
 			speedNormal = maxSpeed;
 			speedCrouched = maxSpeed/2;
 			jumpNormal = jumpHeight;
@@ -110,27 +112,37 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				if (moveDir.x != 0 || moveDir.z != 0)
 				{
 					playerAnimator.SetBool("isMoving",true);
-					Vector3 targetDir = moveDir; //Direction of the character
-					targetDir.y = 0;
-
-					if (targetDir == Vector3.zero)
-					{
-						targetDir = transform.forward;
-					}
-
-					//Rotation of the character to where it moves
-					Quaternion destRotation = Quaternion.LookRotation(targetDir); 
-					//Rotate the character little by little
-					Quaternion targetRotation = Quaternion.Slerp
-						(transform.rotation, destRotation, Time.deltaTime * rotateSpeed); 
-					transform.rotation = targetRotation;
 					if(IsGrounded())
 						runSmokeEffect.Play();
+
+					// Vector3 targetDir = moveDir; //Direction of the character
+					// targetDir.y = 0;
+
+					// if (targetDir == Vector3.zero)
+					// {
+					// 	targetDir = transform.forward;
+					// }
+					// //Rotation of the character to where it moves
+					// Quaternion destRotation = Quaternion.LookRotation(targetDir); 
+					// //Rotate the character little by little
+					// Quaternion targetRotation = Quaternion.Slerp
+					// 	(transform.rotation, destRotation, Time.deltaTime * rotateSpeed); 
+					// transform.rotation = targetRotation;
 				}
 				else
 				{
 					runSmokeEffect.Stop();
 					playerAnimator.SetBool("isMoving",false);
+				}
+
+				if(cameraX !=0)
+				{
+        			Quaternion targetRotation 
+						= Quaternion.Euler(0, playerInputHandler
+							.playerInstance.playerCamera.transform.eulerAngles.y, 0);
+        			transform.rotation 
+						= Quaternion.Lerp(transform.rotation
+							, targetRotation, rotateSpeed * Time.deltaTime);
 				}
 
 				if (IsGrounded())
@@ -274,20 +286,26 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					,distToGround+0.2f
 					);
 		}
-
+		//public Transform playerFollower;
+		public float cameraX=0f;
 		private void Update()
 		{
 			if(playerInputHandler.playerInstance.playerStatus
 				!=PlayerInstance.PlayerStatus.Platforming)
 				return;
+			//playerFollower.position = gameObject.transform.position;
 			moveInput = playerInputHandler.playerConfig.input
 					.actions["Move"].ReadValue<Vector2>();
+			cameraX = playerInputHandler.playerConfig.input.actions["Look"].ReadValue<float>();
 			float h = moveInput.x;
 			float v = moveInput.y;
 
-			Vector3 v2 = v * playerInputHandler
-				.playerInstance.playerCamera.transform.forward; 
+			// Vector3 v2 = v * playerInputHandler
+			// 	.playerInstance.playerCamera.transform.forward; 
+			Vector3 v2 = v * transform.forward; 
 				//Vertical axis to which I want to move with respect to the camera
+			// Vector3 h2 = h * playerInputHandler
+			// 	.playerInstance.playerCamera.transform.right; 
 			Vector3 h2 = h * playerInputHandler
 				.playerInstance.playerCamera.transform.right; 
 				//Horizontal axis to which I want to move with respect to the camera
@@ -362,7 +380,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 			//TODO use anim event instead
 			// Wait for the animation to end
-			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
 			playerInteractor.DeactivatePowerUp();
 			yield return new WaitWhile(() => playerAnimator
 				.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
@@ -378,6 +395,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			slipCapsule.enabled=false;	
 			transform.parent.SetParent(null);
 			runSmokeEffect.Stop();
+			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
 		}
 
 		public void DisableMesh()
@@ -415,17 +433,20 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				yield return null;
 				
 				while(playerInputHandler.playerInstance.playerStatus 
-					!= PlayerInstance.PlayerStatus.Platforming){
-					yield return new WaitForSeconds(0.2f);
+					!= PlayerInstance.PlayerStatus.Platforming){					
+     				yield return new WaitUntil(() 
+						=> playerInputHandler.playerInstance.playerStatus 
+							== PlayerInstance.PlayerStatus.Platforming);
 				}
 
 				if (!slide) //Reduce the force if the ground isnt slide
 				{
-					pushForce = pushForce - Time.deltaTime * delta;
+					pushForce -= Time.deltaTime * delta;
 					pushForce = pushForce < 0 ? 0 : pushForce;
 					//Debug.Log(pushForce);
 				}
-				rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0)); //Add gravity
+				//Add gravity
+				rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0)); 
 			}
 			if (wasStunned)
 			{
@@ -437,5 +458,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				canMove = true;
 			}
 		}
+
 	}
 }

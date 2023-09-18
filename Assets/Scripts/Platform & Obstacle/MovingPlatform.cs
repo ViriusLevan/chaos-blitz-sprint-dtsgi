@@ -22,19 +22,16 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         
         private void OnEnable() 
         {
-            originalPosition = transform.position;
-            originalRight = transform.right;
-            originalUp = transform.up;
             GameManager.platformingPhaseBegin+=Activate;
 			GameManager.gamePaused+=Deactivate;
 			GameManager.gameUnpaused+=Activate;
-            GameManager.platformingPhaseFinished+=Reset;
+            GameManager.platformingPhaseFinished+=Restart;
         }
 
         private void OnDisable() 
         {
             GameManager.platformingPhaseBegin-=Activate;
-            GameManager.platformingPhaseFinished-=Reset;
+            GameManager.platformingPhaseFinished-=Restart;
 			GameManager.gamePaused-=Deactivate;
 			GameManager.gameUnpaused-=Reactivate;
             DOTween.Kill(transform, false);
@@ -43,7 +40,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         private void OnDestroy() 
         {
             GameManager.platformingPhaseBegin-=Activate;
-            GameManager.platformingPhaseFinished-=Reset;
+            GameManager.platformingPhaseFinished-=Restart;
 			GameManager.gamePaused-=Deactivate;
 			GameManager.gameUnpaused-=Reactivate;
             DOTween.Kill(transform, false);
@@ -51,6 +48,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void Activate()
         {
+            originalPosition = transform.position;
+            originalRight = transform.right;
+            originalUp = transform.up;
             switch(dir)
             {
                 case MovementAxis.Z:
@@ -76,14 +76,16 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         {
             DOTween.Pause(transform);
         }
-        private void Reset()
+        private void Restart()
         {
             DOTween.Rewind(transform);
         }
 
+
+        [SerializeField]private bool attachesToPlayer=true;
         private void OnCollisionEnter(Collision other)
         {
-            if (other.collider.gameObject.CompareTag("Player"))
+            if (attachesToPlayer && other.collider.gameObject.CompareTag("Player"))
             {
                 other.gameObject.transform.parent.SetParent(transform);
                 other.rigidbody.interpolation = RigidbodyInterpolation.None;
@@ -92,7 +94,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
 
         private void OnCollisionExit(Collision other)
         {
-            if (other.collider.gameObject.CompareTag("Player"))
+            if (attachesToPlayer 
+                && other.collider.gameObject.CompareTag("Player")
+                && other.collider.gameObject.transform.IsChildOf(transform))
             {
                 other.gameObject.transform.parent.SetParent(null);
                 other.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
