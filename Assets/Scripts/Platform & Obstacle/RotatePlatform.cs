@@ -7,7 +7,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
     {
         [SerializeField] private GameObject rotatingObject;
         public GameObject GetRotatingObject(){return rotatingObject;}
-        [SerializeField] private float rotationSpeed;
 
         private void Awake()
         {
@@ -84,7 +83,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
         {
             if (attachesToPlayer && other.collider.gameObject.CompareTag("Player"))
             {
-                Debug.Log($"Player Collision Enter {other.gameObject.name}");
+                //Debug.Log($"Player Collision Enter {other.gameObject.name}");
                 other.gameObject.transform.parent.SetParent(rotatingObject.transform);
                 other.rigidbody.interpolation = RigidbodyInterpolation.None;
             }
@@ -96,7 +95,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
                 && other.collider.gameObject.CompareTag("Player")
                 && other.collider.gameObject.transform.IsChildOf(transform))
             {
-                Debug.Log("Player Collision Exit");
+                //Debug.Log("Player Collision Exit");
                 other.gameObject.transform.parent.SetParent(null);
                 other.rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
             }

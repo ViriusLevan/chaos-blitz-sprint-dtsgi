@@ -163,14 +163,16 @@ MonoBehaviour:
   rotateSpeed: 25
   playerAnimator: {fileID: 1716225650661056147}
   colliderCenterCrouch: {x: 0, y: -0.06791264, z: 0}
-  colliderCenterNormal: {x: 0, y: 0.1753418, z: 0}
+  colliderCenterNormal: {x: 0, y: -0.05, z: 0}
   colliderHeightCrouch: 1.864175
-  colliderHeightNormal: 2.350684
+  colliderHeightNormal: 2.338643
   slipCapsule: {fileID: 3794520903516348960}
   slide: 0
   sticky: 0
   runSmokeEffect: {fileID: 8331601233384572903}
-  cameraX: 0
+  stepBoost: 15
+  stepHeightMinimum: 0.1
+  stepHeightMaximum: 0.3
   playerMeshes:
   - {fileID: 3099792070909323936}
   - {fileID: 8486749024722988584}

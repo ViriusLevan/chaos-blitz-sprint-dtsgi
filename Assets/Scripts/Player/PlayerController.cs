@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace LevelUpStudio.ChaosBlitzSprint.Player
@@ -123,22 +122,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				if (moveDir.x != 0 || moveDir.z != 0)
 				{
 					playerAnimator.SetBool("isMoving",true);
-					if(IsGrounded())
+					if(IsGrounded()){
 						runSmokeEffect.Play();
-
-					// Vector3 targetDir = moveDir; //Direction of the character
-					// targetDir.y = 0;
-
-					// if (targetDir == Vector3.zero)
-					// {
-					// 	targetDir = transform.forward;
-					// }
-					// //Rotation of the character to where it moves
-					// Quaternion destRotation = Quaternion.LookRotation(targetDir); 
-					// //Rotate the character little by little
-					// Quaternion targetRotation = Quaternion.Slerp
-					// 	(transform.rotation, destRotation, Time.deltaTime * rotateSpeed); 
-					// transform.rotation = targetRotation;
+					}
 				}
 				else
 				{
@@ -173,7 +159,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					Vector3 velocityChange = targetVelocity - velocity;
 					velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
 					velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-					velocityChange.y = 0;
+					velocityChange.y = IsStepEnough() ? stepBoost : 0;
 					
 					if (Mathf.Abs(rb.velocity.magnitude) < maxSpeed * 1.0f)
 					{
@@ -273,6 +259,34 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			}
 			// Apply gravity manually for more finetuned control
 			rb.AddForce(new Vector3(0, -gravity * GetComponent<Rigidbody>().mass, 0));
+		}
+		[SerializeField]private float stepBoost=15f;
+		[SerializeField]private float stepHeightMinimum=0.1f;
+		[SerializeField]private float stepHeightMaximum=0.3f;
+		private bool IsStepEnough()
+		{
+			if ((moveDir.x == 0 && moveDir.z == 0)||isCrouching)
+				return false;
+			Vector3 stepDirPoint 
+				= new Vector3(moveDir.x,0, moveDir.z).normalized * 0.3f;
+			stepDirPoint += transform.position;
+			RaycastHit hitLower;
+
+			if (Physics.Raycast(stepDirPoint
+				, transform.TransformDirection(-Vector3.up), out hitLower, distToGround))
+			{
+				Debug.DrawLine(stepDirPoint
+						, hitLower.point 
+						, Color.red, 3.0f);
+				float stepHeight = distToGround - hitLower.distance;
+				Debug.Log($"sh{stepHeight} = dt{distToGround} - ht{hitLower.distance}");
+				if (stepHeight <= stepHeightMaximum && stepHeight>stepHeightMinimum)
+				{
+					Debug.Log("Vertical Force TRIGGERED");
+					return true;
+				}
+			}
+			return false;
 		}
 		
 		private bool IsGrounded ()
