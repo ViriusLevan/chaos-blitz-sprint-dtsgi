@@ -371,7 +371,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			slipCapsule.enabled=true;
 		}
 
-		public IEnumerator TriggerDeathThenWaitToDisable(bool sink)
+		public void TriggerDeathThenWaitToDisable(bool sink)
 		{	
 			DisableMovementAndColliders();
 			if(sink)
@@ -382,10 +382,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			//TODO use anim event instead
 			// Wait for the animation to end
 			playerInteractor.DeactivatePowerUp(PlayerInteractor.PUDeactivation.ALL);
-			yield return new WaitWhile(() => playerAnimator
-				.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
-			
-			DisableMesh();
 		}
 
 		public void DisableMovementAndColliders()
@@ -396,13 +392,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			slipCapsule.enabled=false;	
 			transform.parent.SetParent(null);
 			runSmokeEffect.Stop();
-			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
 		}
 
 		public void DisableMesh()
 		{
-			//TODO - add more stuff, e.g. play animation or sfx
-			//this.gameObject.SetActive(false);
+			GameManager.Instance.PlayerDied(playerInputHandler.playerConfig.playerIndex);
 			playerAnimator.SetTrigger("reset");
 			foreach (SkinnedMeshRenderer smr in playerMeshes)
 			{

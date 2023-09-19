@@ -45,7 +45,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             {   
                 //TODO adjust this, both the RNG and the button placement
                 int index=0;
-                if(GameManager.Instance.GetLapCounter()<1)
+                if(GameManager.Instance.GetLapCounter()==1)
                 {
                     do{
                         index=Random.Range(0,placables.Length);
