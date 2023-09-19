@@ -793,11 +793,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a0e5c61ef607046b41d3c268e0ab06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontal:
-    m_Name: Horizontal
+  look:
+    m_Name: Look
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 03684317-599c-4ca7-82f4-1e77b596fc67
+    m_Id: cbf4930b-792d-45fd-b6de-5401c0bf5083
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -813,9 +813,9 @@ MonoBehaviour:
     m_Flags: 0
   minZoomDistance: 3
   maxZoomDistance: 8
-  sensMultiplier: 1
-  minSens: 0.5
-  maxSens: 2
+  sensMultiplier: 30
+  minSens: 10
+  maxSens: 50
 --- !u!114 &3712122547064289278
 MonoBehaviour:
   m_ObjectHideFlags: 0

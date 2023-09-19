@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using static UnityEngine.InputSystem.InputAction;
 
 public class CinemachineInputHandler : MonoBehaviour, AxisState.IInputAxisProvider
 {
-    public InputAction horizontal;
+    public InputAction look;
     public InputAction vertical;
 
     [SerializeField]public bool invertX {get;private set;}
@@ -13,33 +14,37 @@ public class CinemachineInputHandler : MonoBehaviour, AxisState.IInputAxisProvid
     void Awake()
     {
     }
-    [SerializeField] private float minZoomDistance = 3.0f;
-    [SerializeField] private float maxZoomDistance = 8.0f;
+
     public float GetAxisValue(int axis)
     {
         switch (axis)
         {
             case 0: 
-                float resultX = horizontal.ReadValue<float>() * sensMultiplier;
+                float resultX = look.ReadValue<Vector2>().x * sensMultiplier;
                 if(invertX) resultX *=-1;
-                //Debug.Log($"Result X = {resultX} from {horizontal.ReadValue<float>()}");
+                //Debug.Log($"Result X = {resultX} from {look.ReadValue<Vector2>().x}");
                 return resultX;
             case 1: 
-                float resultY =  vertical.ReadValue<float>() * sensMultiplier;
+                float resultY =  look.ReadValue<Vector2>().y * sensMultiplier;
                 if(invertY) resultY *=-1;
-                //Debug.Log($"Result Y = {resultY} from {vertical.ReadValue<float>()}");
-                CinemachineFramingTransposer cft = GetComponent<CinemachineVirtualCamera>().
-                    GetCinemachineComponent<CinemachineFramingTransposer>();
-                
-                cft.m_CameraDistance = 
-                    Mathf.Clamp(cft.m_CameraDistance + resultY,
-                            minZoomDistance, maxZoomDistance);
-
+                //Debug.Log($"Result Y = {resultY} from {look.ReadValue<Vector2>().y}");
                 return resultY;
             case 2: 
                 return Mathf.Clamp(vertical.ReadValue<float>(),-1,1);
         }
         return 0;
+    }
+    [SerializeField] private float minZoomDistance = 3.0f;
+    [SerializeField] private float maxZoomDistance = 8.0f;
+    public void Zoom(CallbackContext obj)
+    {
+        CinemachineFramingTransposer cft = 
+            GetComponent<CinemachineVirtualCamera>().
+                GetCinemachineComponent<CinemachineFramingTransposer>();
+                        
+        cft.m_CameraDistance = 
+            Mathf.Clamp(cft.m_CameraDistance + obj.ReadValue<float>(),
+                    minZoomDistance, maxZoomDistance);
     }
 
     public void InvertX()
@@ -53,7 +58,7 @@ public class CinemachineInputHandler : MonoBehaviour, AxisState.IInputAxisProvid
         Debug.Log("Invert Y = "+invertY.ToString());
     }
 
-    [SerializeField]public float sensMultiplier=1f, minSens=0.5f, maxSens=2f;
+    [SerializeField]public float sensMultiplier=30f, minSens=10f, maxSens=50f;
     private float sensInterval = 0.1f;
     public void IncreaseSensitivity()
     {
@@ -79,16 +84,4 @@ public class CinemachineInputHandler : MonoBehaviour, AxisState.IInputAxisProvid
             Debug.Log("Sens already minimum");
         }
     }
-
-    // public void ZoomCamera(float input)
-    // {
-    //     // actual zoom mechanic. taking account if the control is inverted
-    //     //, sensitivity, and min max distance
-    //     float inputValue = context.ReadValue<float>() * cinemachineInputHandler.sensMultiplier;
-    //     if(cinemachineInputHandler.invertY) inputValue *=-1;
-
-    //     cft.m_CameraDistance = 
-    //         Mathf.Clamp(cft.m_CameraDistance + inputValue,
-    //                 minZoomDistance, maxZoomDistance);
-    // }
 }

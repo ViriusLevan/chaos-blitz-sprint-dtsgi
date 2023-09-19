@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Processors;
 using UnityEngine.InputSystem.UI;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -52,8 +51,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             uiInputModule.gameObject.GetComponent<PlayerConfigurationReferenceHelper>()?
                 .SetPlayerConfigurationReference(config);
 
-            playerInstance.cinemachineInputHandler.horizontal = config.input.actions.FindAction("Look");
-            playerInstance.cinemachineInputHandler.vertical = config.input.actions.FindAction("Zoom");
+            playerInstance.cinemachineInputHandler.look = config.input.actions.FindAction("Look");
+            //playerInstance.cinemachineInputHandler.vertical = config.input.actions.FindAction("Zoom");
             //Debug.Log(playerInstance.cinemachineInputHandler.horizontal);
         }   
 
@@ -96,6 +95,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 if (obj.action.name == controls.Player.PowerUp.name)
                 {
                     controller?.OnPowerUp(obj);
+                }
+                if(obj.action.name == controls.Player.Zoom.name
+                    ||obj.action.name == controls.BuildMode.Zoom.name)
+                {
+                    playerInstance.cinemachineInputHandler.Zoom(obj);
                 }
             }
             if  (obj.action.name == controls.Player.Zoom.name 

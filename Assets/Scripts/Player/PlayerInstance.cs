@@ -149,10 +149,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 			placementManager.InstantiateNewPlacable();
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("BuildMode");
 			SetControlHelpText(PlayerStatus.Building);
-			cinemachineInputHandler.horizontal 
+			cinemachineInputHandler.look 
 				= playerInputHandler.playerConfig.input.actions.FindAction("Look");
-			cinemachineInputHandler.vertical 
-				= playerInputHandler.playerConfig.input.actions.FindAction("Zoom");
+			// cinemachineInputHandler.vertical 
+			// 	= playerInputHandler.playerConfig.input.actions.FindAction("Zoom");
 			//cinemachineInputProvider.XYAxis= buildLookReference;
 			//cinemachineInputProvider.ZAxis= buildLookReference;
 		}
@@ -167,10 +167,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("Player");
 			SetControlHelpText(PlayerStatus.Platforming);
-			cinemachineInputHandler.horizontal 
+			cinemachineInputHandler.look 
 				= playerInputHandler.playerConfig.input.actions.FindAction("Look");
-			cinemachineInputHandler.vertical 
-				= playerInputHandler.playerConfig.input.actions.FindAction("Zoom");
+			// cinemachineInputHandler.vertical 
+			// 	= playerInputHandler.playerConfig.input.actions.FindAction("Zoom");
 			// cinemachineInputHandler.horizontal 
 			// 	= playerInputHandler.playerConfig.input.actions.FindAction("Look");
 			//cinemachineInputProvider.XYAxis= playerLookReference;

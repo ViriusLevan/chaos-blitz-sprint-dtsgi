@@ -109,15 +109,6 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Look"",
-                    ""type"": ""Value"",
-                    ""id"": ""2690c379-f54d-45be-a724-414123833eb4"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Zoom"",
                     ""type"": ""Value"",
                     ""id"": ""812513bb-12d0-421d-afb3-915c496d25a4"",
@@ -134,6 +125,15 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""36624838-b6c0-481e-a840-90f21c058ac9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -490,72 +490,6 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""MouseDeltaLR"",
-                    ""id"": ""3e909f9d-9c76-4693-9ea0-bb68a61fc0d9"",
-                    ""path"": ""1DAxis(minValue=-5,maxValue=5)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""b4ae6299-3e59-4a4b-93df-191f0628d2e4"",
-                    ""path"": ""<Mouse>/delta/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""ff0ae4b0-b5ed-42be-94af-80e36e3e4147"",
-                    ""path"": ""<Mouse>/delta/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""RAnalogHori"",
-                    ""id"": ""b08582bf-49dc-4c28-ae1e-9dd88a809c59"",
-                    ""path"": ""1DAxis(minValue=-50,maxValue=50)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""089c05a3-c73d-43ee-959c-19dce61f49e1"",
-                    ""path"": ""<Gamepad>/rightStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""726d8019-3a26-4936-a55a-a70fd6796255"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""1acdee96-7009-44f0-b20d-3a899af2748f"",
                     ""path"": ""<Gamepad>/buttonEast"",
@@ -576,6 +510,116 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""action"": ""PowerUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""b9ff48fd-1a0a-4b43-9089-77f2b93a8dd6"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""ed3929e7-fc5c-499f-8255-e5cb15a399fa"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""d77075dc-f370-4b3a-9bdd-d37042f5ed25"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""3c72731d-e85a-444c-9f3c-71a07b2072fb"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""e7b0a18c-b67d-4837-9187-80c20760f385"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""id"": ""aa21045f-8833-4d5f-9c4c-f34c87c9ad53"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""a4f44fd8-28c8-4ff3-a079-ae46fbb39232"",
+                    ""path"": ""<Mouse>/delta/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""d9bb26f0-e890-4b77-bbcf-44ff056b6ded"",
+                    ""path"": ""<Mouse>/delta/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""33d4a3c7-8382-44ab-ab6a-bd0338587bd6"",
+                    ""path"": ""<Mouse>/delta/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""cce7b8c7-a826-4772-a9ad-fb4121ba6a90"",
+                    ""path"": ""<Mouse>/delta/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1080,19 +1124,19 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""Zoom"",
                     ""type"": ""Value"",
-                    ""id"": ""a62711fe-ea4f-437f-80b3-97bbb71abaf7"",
+                    ""id"": ""c19b5451-ca95-4d0c-ab52-0f1c69aedf7a"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Zoom"",
+                    ""name"": ""Look"",
                     ""type"": ""Value"",
-                    ""id"": ""c19b5451-ca95-4d0c-ab52-0f1c69aedf7a"",
-                    ""expectedControlType"": ""Axis"",
+                    ""id"": ""8c1e32e3-fd28-4875-830f-0a3f4c1ed9c3"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -1485,72 +1529,6 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""MouseDeltaLR"",
-                    ""id"": ""4b75075e-54af-4f51-97e3-dad30824c6f3"",
-                    ""path"": ""1DAxis(minValue=-5,maxValue=5)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""3372e48a-e6ae-4c42-92a0-aae488cb4aa4"",
-                    ""path"": ""<Mouse>/delta/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""a2d79cf6-12cd-44c7-b1d5-72869742e5fb"",
-                    ""path"": ""<Mouse>/delta/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""RAnalogHori"",
-                    ""id"": ""88ce4a70-1d2d-43e7-87b5-c3f34348503b"",
-                    ""path"": ""1DAxis(minValue=-50,maxValue=50)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""95114e4a-bef6-4da1-8f6b-e4ea6bd68673"",
-                    ""path"": ""<Gamepad>/rightStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""3e684154-fbf4-4726-90b1-53be8f6934e8"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""MouseScroll"",
                     ""id"": ""6d295a86-79bd-469f-b0e1-f7d330aca57c"",
                     ""path"": ""1DAxis(minValue=-0.5,maxValue=0.5)"",
@@ -1615,6 +1593,116 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""a533018f-819c-41ae-b93b-549ea188630d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""31de0ba1-6506-41b7-bd98-3772220c6fd9"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""e1e3c15e-6038-40b9-910c-79f43aa86f2a"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""da601235-cb85-403f-a779-62b5be2386a8"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""b20caf7a-78ea-4ce8-b391-3afe83c4ef0e"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""id"": ""5d35c168-33a0-435a-8851-de6c5fe20986"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""60e35fbb-4c07-4a4a-9d04-87a9d83e1f2a"",
+                    ""path"": ""<Mouse>/delta/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""fe1c1a36-66ea-4353-8c4c-88eec8294578"",
+                    ""path"": ""<Mouse>/delta/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""89e75377-7e9e-4131-8666-995aa3b0fc70"",
+                    ""path"": ""<Mouse>/delta/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""16c1f87c-6b9a-4762-8126-73cd460441e5"",
+                    ""path"": ""<Mouse>/delta/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -1670,9 +1758,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_Player_InvertY = m_Player.FindAction("InvertY", throwIfNotFound: true);
         m_Player_DecreaseCamSens = m_Player.FindAction("DecreaseCamSens", throwIfNotFound: true);
         m_Player_IncreaseCamSens = m_Player.FindAction("IncreaseCamSens", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_PowerUp = m_Player.FindAction("PowerUp", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1697,8 +1785,8 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         m_BuildMode_InvertY = m_BuildMode.FindAction("InvertY", throwIfNotFound: true);
         m_BuildMode_DecreaseCamSens = m_BuildMode.FindAction("DecreaseCamSens", throwIfNotFound: true);
         m_BuildMode_IncreaseCamSens = m_BuildMode.FindAction("IncreaseCamSens", throwIfNotFound: true);
-        m_BuildMode_Look = m_BuildMode.FindAction("Look", throwIfNotFound: true);
         m_BuildMode_Zoom = m_BuildMode.FindAction("Zoom", throwIfNotFound: true);
+        m_BuildMode_Look = m_BuildMode.FindAction("Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1767,9 +1855,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_Player_InvertY;
     private readonly InputAction m_Player_DecreaseCamSens;
     private readonly InputAction m_Player_IncreaseCamSens;
-    private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_PowerUp;
+    private readonly InputAction m_Player_Look;
     public struct PlayerActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -1783,9 +1871,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @InvertY => m_Wrapper.m_Player_InvertY;
         public InputAction @DecreaseCamSens => m_Wrapper.m_Player_DecreaseCamSens;
         public InputAction @IncreaseCamSens => m_Wrapper.m_Player_IncreaseCamSens;
-        public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @PowerUp => m_Wrapper.m_Player_PowerUp;
+        public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1822,15 +1910,15 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @IncreaseCamSens.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseCamSens;
                 @IncreaseCamSens.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseCamSens;
                 @IncreaseCamSens.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseCamSens;
-                @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Zoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @PowerUp.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp;
                 @PowerUp.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp;
                 @PowerUp.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPowerUp;
+                @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1862,15 +1950,15 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @IncreaseCamSens.started += instance.OnIncreaseCamSens;
                 @IncreaseCamSens.performed += instance.OnIncreaseCamSens;
                 @IncreaseCamSens.canceled += instance.OnIncreaseCamSens;
-                @Look.started += instance.OnLook;
-                @Look.performed += instance.OnLook;
-                @Look.canceled += instance.OnLook;
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
                 @PowerUp.started += instance.OnPowerUp;
                 @PowerUp.performed += instance.OnPowerUp;
                 @PowerUp.canceled += instance.OnPowerUp;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
             }
         }
     }
@@ -2001,8 +2089,8 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
     private readonly InputAction m_BuildMode_InvertY;
     private readonly InputAction m_BuildMode_DecreaseCamSens;
     private readonly InputAction m_BuildMode_IncreaseCamSens;
-    private readonly InputAction m_BuildMode_Look;
     private readonly InputAction m_BuildMode_Zoom;
+    private readonly InputAction m_BuildMode_Look;
     public struct BuildModeActions
     {
         private @PlayerInputActionsAsset m_Wrapper;
@@ -2016,8 +2104,8 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         public InputAction @InvertY => m_Wrapper.m_BuildMode_InvertY;
         public InputAction @DecreaseCamSens => m_Wrapper.m_BuildMode_DecreaseCamSens;
         public InputAction @IncreaseCamSens => m_Wrapper.m_BuildMode_IncreaseCamSens;
-        public InputAction @Look => m_Wrapper.m_BuildMode_Look;
         public InputAction @Zoom => m_Wrapper.m_BuildMode_Zoom;
+        public InputAction @Look => m_Wrapper.m_BuildMode_Look;
         public InputActionMap Get() { return m_Wrapper.m_BuildMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2054,12 +2142,12 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @IncreaseCamSens.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnIncreaseCamSens;
                 @IncreaseCamSens.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnIncreaseCamSens;
                 @IncreaseCamSens.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnIncreaseCamSens;
-                @Look.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
                 @Zoom.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnZoom;
+                @Look.started -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_BuildModeActionsCallbackInterface.OnLook;
             }
             m_Wrapper.m_BuildModeActionsCallbackInterface = instance;
             if (instance != null)
@@ -2091,12 +2179,12 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
                 @IncreaseCamSens.started += instance.OnIncreaseCamSens;
                 @IncreaseCamSens.performed += instance.OnIncreaseCamSens;
                 @IncreaseCamSens.canceled += instance.OnIncreaseCamSens;
-                @Look.started += instance.OnLook;
-                @Look.performed += instance.OnLook;
-                @Look.canceled += instance.OnLook;
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
             }
         }
     }
@@ -2130,9 +2218,9 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnInvertY(InputAction.CallbackContext context);
         void OnDecreaseCamSens(InputAction.CallbackContext context);
         void OnIncreaseCamSens(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnPowerUp(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -2159,7 +2247,7 @@ public partial class @PlayerInputActionsAsset : IInputActionCollection2, IDispos
         void OnInvertY(InputAction.CallbackContext context);
         void OnDecreaseCamSens(InputAction.CallbackContext context);
         void OnIncreaseCamSens(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }

@@ -297,7 +297,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			//playerFollower.position = gameObject.transform.position;
 			moveInput = playerInputHandler.playerConfig.input
 					.actions["Move"].ReadValue<Vector2>();
-			cameraX = playerInputHandler.playerConfig.input.actions["Look"].ReadValue<float>();
+			cameraX = playerInputHandler.playerConfig.input.actions["Look"].ReadValue<Vector2>().x;
 			float h = moveInput.x;
 			float v = moveInput.y;
 
