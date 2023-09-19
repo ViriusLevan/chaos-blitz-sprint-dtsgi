@@ -41,14 +41,13 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             canPlace=true;
             targetPlatform = pSlicer;
         }
-
         void Update()
         {
-
             if(playerInputHandler.playerInstance.playerStatus != PlayerInstance.PlayerStatus.Building
                 && playerInputHandler.playerInstance.playerStatus != PlayerInstance.PlayerStatus.FinishedBuilding)
                 return;
 
+            ReferenceTransformRotation();
             CameraMovement();
 
             if(pendingObj!=null)
@@ -58,6 +57,17 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
                 pendingObj.transform.position = pos;
                 UpdateMaterials();
             }
+        }
+
+        private void ReferenceTransformRotation()
+        {
+            Vector3 targetDir = playerInputHandler.playerInstance.playerCamera.transform.forward;
+            targetDir.y = 0;
+            Quaternion targetRotation 
+                = Quaternion.LookRotation(targetDir.normalized, Vector3.up);
+            referenceTransform.rotation 
+                = Quaternion.Slerp(referenceTransform.rotation
+                    , targetRotation, 100 * Time.deltaTime);
         }
         
         [SerializeField] private LayerMask platformLayer;
@@ -123,11 +133,12 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             moveInput = playerInputHandler.playerConfig.input.actions["Move"].ReadValue<Vector2>();
             float h = moveInput.x;
             float v = moveInput.y;
-            Vector3 v2 = v * playerInputHandler.playerInstance.playerCamera.transform.forward; //Vertical axis to which I want to move with respect to the camera
-            Vector3 h2 = h * playerInputHandler.playerInstance.playerCamera.transform.right; //Horizontal axis to which I want to move with respect to the camera
+            Vector3 v2 = v * referenceTransform.forward; //Vertical axis to which I want to move with respect to the camera
+            Vector3 h2 = h * referenceTransform.right; //Horizontal axis to which I want to move with respect to the camera
             moveDir = (v2 + h2).normalized; //Global position to which I want to move in magnitude 1
             moveDir.y=0;
-            playerInputHandler.playerInstance.buildCameraFollow.transform.position += moveDir * 10f * Time.deltaTime;
+            playerInputHandler.playerInstance.buildCameraFollow.transform.position 
+                += moveDir * 10f * Time.deltaTime;
         }
 
         private void VerticalMotion(){

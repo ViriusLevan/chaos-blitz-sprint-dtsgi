@@ -80,7 +80,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.PlaceableBehaviour
             DOTween.Rewind(rotatingObject.transform);
         }
         [SerializeField]private bool attachesToPlayer=true;
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionStay(Collision other)
         {
             if (attachesToPlayer && other.collider.gameObject.CompareTag("Player"))
             {

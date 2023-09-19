@@ -111,6 +111,15 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			}
 			if (canMove)
 			{
+				//Player Rotation
+				Vector3 targetDir = playerInputHandler.playerInstance.playerCamera.transform.forward;
+				targetDir.y = 0;
+				Quaternion targetRotation 
+					= Quaternion.LookRotation(targetDir.normalized, Vector3.up);
+				transform.rotation 
+					= Quaternion.Slerp(transform.rotation
+						, targetRotation, rotateSpeed * Time.deltaTime);
+
 				if (moveDir.x != 0 || moveDir.z != 0)
 				{
 					playerAnimator.SetBool("isMoving",true);
@@ -135,16 +144,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				{
 					runSmokeEffect.Stop();
 					playerAnimator.SetBool("isMoving",false);
-				}
-
-				if(cameraX !=0)
-				{
-        			Quaternion targetRotation 
-						= Quaternion.Euler(0, playerInputHandler
-							.playerInstance.playerCamera.transform.eulerAngles.y, 0);
-        			transform.rotation 
-						= Quaternion.Lerp(transform.rotation
-							, targetRotation, rotateSpeed * Time.deltaTime);
 				}
 
 				if (IsGrounded())
@@ -213,7 +212,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 						Vector3 targetVelocity = new Vector3
 							(moveDir.x * airVelocity, rb.velocity.y, moveDir.z * airVelocity);
 						Vector3 velocity = rb.velocity;
-						Vector3 velocityChange = (targetVelocity - velocity);
+						Vector3 velocityChange = targetVelocity - velocity;
 						velocityChange.x = Mathf.Clamp
 							(velocityChange.x, -maxVelocityChange, maxVelocityChange);
 						velocityChange.z = Mathf.Clamp
@@ -287,8 +286,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					,distToGround+0.2f
 					);
 		}
-		//public Transform playerFollower;
-		public float cameraX=0f;
 		private void Update()
 		{
 			if(playerInputHandler.playerInstance.playerStatus
@@ -297,7 +294,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			//playerFollower.position = gameObject.transform.position;
 			moveInput = playerInputHandler.playerConfig.input
 					.actions["Move"].ReadValue<Vector2>();
-			cameraX = playerInputHandler.playerConfig.input.actions["Look"].ReadValue<Vector2>().x;
 			float h = moveInput.x;
 			float v = moveInput.y;
 
@@ -355,8 +351,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			// for the character to reach at the apex.
 			return Mathf.Sqrt(2 * jumpHeight * gravity);
 		}
-
-		//[SerializeField]private MeshRenderer[]playerMeshes;
+		
 		[SerializeField]private SkinnedMeshRenderer[]playerMeshes;
 		public void EnableMeshAndCollider()
 		{
@@ -366,7 +361,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			{
 				smr.enabled=true;
 			}
-			//TODO check again : maybe final build uses another collider
 			GetComponent<CapsuleCollider>().enabled=true;
 			slipCapsule.enabled=true;
 		}
@@ -378,9 +372,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 				playerAnimator.SetTrigger("sink");
 			else
 				playerAnimator.SetTrigger("die");
-
-			//TODO use anim event instead
-			// Wait for the animation to end
 			playerInteractor.DeactivatePowerUp(PlayerInteractor.PUDeactivation.ALL);
 		}
 
