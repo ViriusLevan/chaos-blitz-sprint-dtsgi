@@ -7,7 +7,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
     {
         public enum RotationAxis{x,y,z}
         public RotationAxis axis;
-        public float timeToFullRotation=4f;
+        public float timeToFullRotation=10f;
         public bool isLocal=false;
 
         void Start()

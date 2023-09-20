@@ -38,6 +38,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		[SerializeField]private bool sticky = false;
 		private bool jumped;
 		private bool isCrouching;
+
 		public void OnJump(InputAction.CallbackContext context)
 		{ 
 			jumped = context.action.triggered;

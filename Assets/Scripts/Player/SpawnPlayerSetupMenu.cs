@@ -6,13 +6,15 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 {
     public class SpawnPlayerSetupMenu : MonoBehaviour
     {
+        [SerializeField] private GameObject playerReadyMenu;
         private GameObject rootMenu;
         public GameObject playerSetupMenuPrefab;
         public PlayerInput input;
 
         private void Awake()
         {
-            rootMenu = GameObject.Find("PlayerReadyMenu");
+            // pls dont use text based search
+            rootMenu = GameObject.FindGameObjectWithTag("PlayerReadyMenu");
             if(rootMenu != null)
             {
                 GameObject menu = Instantiate(playerSetupMenuPrefab, rootMenu.transform);

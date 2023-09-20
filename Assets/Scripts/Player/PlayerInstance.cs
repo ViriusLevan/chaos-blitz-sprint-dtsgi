@@ -99,6 +99,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 		public void SetPlacable(Placement.Placable pl) => placementManager.SetPlacable(pl);
 
 	//TODO maybe put this another class
+	/*
 		public void SetControlHelpText(PlayerStatus status)
 		{
 			controlHelpText.text = "";
@@ -129,12 +130,13 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 					break;
 			}
 		}
+	*/
 
 		public void PickingMode()
 		{
 			playerInputHandler.virtualCursor.SetCursorTransparency(255);
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("UI"); 
-			SetControlHelpText(PlayerStatus.Picking);
+			//SetControlHelpText(PlayerStatus.Picking);
 		}
 
 		public void BuildingMode()
@@ -148,7 +150,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 			placementManager.SetCameraTransform(playerCamera.transform);
 			placementManager.InstantiateNewPlacable();
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("BuildMode");
-			SetControlHelpText(PlayerStatus.Building);
+			//SetControlHelpText(PlayerStatus.Building);
 			cinemachineInputHandler.look 
 				= playerInputHandler.playerConfig.input.actions.FindAction("Look");
 			// cinemachineInputHandler.vertical 
@@ -166,7 +168,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 			virtualCamera.LookAt = playerController.gameObject.transform;
 
 			playerInputHandler.playerConfig.input.SwitchCurrentActionMap("Player");
-			SetControlHelpText(PlayerStatus.Platforming);
+			//SetControlHelpText(PlayerStatus.Platforming);
 			cinemachineInputHandler.look 
 				= playerInputHandler.playerConfig.input.actions.FindAction("Look");
 			// cinemachineInputHandler.vertical 

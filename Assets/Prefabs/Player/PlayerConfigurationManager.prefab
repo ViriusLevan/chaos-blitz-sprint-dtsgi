@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60dec7e2f07b5b44afe892720304dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPlayers: 2
+  minPlayers: 1
   maxPlayers: 4
-  pim: {fileID: 0}
+  pim: {fileID: 3604301613997555120}
+  roundType: {fileID: 0}
 --- !u!114 &3604301613997555120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
-  m_AllowJoining: 1
+  m_AllowJoining: 0
   m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
