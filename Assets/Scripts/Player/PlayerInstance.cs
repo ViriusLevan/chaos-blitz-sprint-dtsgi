@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using DG.Tweening;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -37,20 +39,34 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 			virtualCamera.transform.SetParent(null);
 		}
 
+
+		[SerializeField]private Camera uiCamera;
+		[SerializeField]private RectTransform powerUpParent;
 		void Start()
 		{
 			placementManager?.SetReferenceTransform(buildCameraFollow.transform);
 			int playerIndex = playerInputHandler.playerConfig.playerIndex;
 			playerText.text = "Player "+(playerIndex+1);
+			scoreText.text = 0+"/"+GameManager.Instance?.GetRoundType().GetPointRequirement();
 			
 			if(playerIndex==1 || playerIndex==3)
 			{
 				Debug.Log("PlayerIndex="+playerIndex);
-				Vector2 currentPos = playerPanel.anchoredPosition;
 				playerPanel.anchorMin = new Vector2(1, 1);
 				playerPanel.anchorMax = new Vector2(1, 1);
-				currentPos.x *= -1;
-				playerPanel.anchoredPosition=currentPos;
+				playerPanel.anchoredPosition = new Vector3(-400,-65,0);
+				powerUpParent.anchorMin = new Vector2(1, 0);
+				powerUpParent.anchorMax = new Vector2(1, 0);
+				powerUpParent.anchoredPosition = new Vector3(-400,50,0);
+			}
+
+			if(playerIndex==0)
+			{
+				uiCamera.rect = new Rect(0f,0,1,1);
+			}
+			if(playerIndex==1)
+			{
+				uiCamera.rect = new Rect(0.5f,0,1,1);
 			}
 
 			playerPanel.GetComponent<Image>().sprite = 
@@ -93,7 +109,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 		}
 		public void AddPlayerScore(int addition) {
 			playerScore+=addition;
-			scoreText.text = playerScore+" pts";
+			scoreText.text = playerScore+"/"+GameManager.Instance?.GetRoundType().GetPointRequirement();
 		}
 		
 		public void SetPlacable(Placement.Placable pl) => placementManager.SetPlacable(pl);
