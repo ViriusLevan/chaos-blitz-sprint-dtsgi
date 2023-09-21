@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 90f69c2c51b45ed4a949e84ff6609c7b, type: 3}
+  notifExtraLife: {fileID: 8893255428603577302, guid: 6dded4af5064aab4bbb0cb41c8705077, type: 3}
+  posNotif: {fileID: 1924593882052897566, guid: 481cff3d5875af8449365edfe3410562, type: 3}
 --- !u!65 &2583157910228432507
 BoxCollider:
   m_ObjectHideFlags: 0

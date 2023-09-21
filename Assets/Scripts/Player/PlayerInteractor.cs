@@ -11,8 +11,12 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		[SerializeField]private float extraLife=0;
 		public bool doubleJumpAvailable=false, hasShield=false;
 
+        private void Update()
+        {
+			//Debug.Log(inventory.slots.Length);
+        }
 
-		[SerializeField]private GameObject extraLifeIcon;
+        [SerializeField]private GameObject extraLifeIcon;
 		[SerializeField]private TextMeshProUGUI extraLifeText;
 		public void IncreaseExtraLife(){
 			Debug.Log("Extra Life Increased");
@@ -24,7 +28,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			Debug.Log("Extra Life Decreased");
 			extraLife-=1;
 			if(extraLife<1)
-				extraLifeIcon.SetActive(false);
+			extraLifeIcon.SetActive(false);
 		}
 
 		public void ActivatePowerUp()
@@ -41,7 +45,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		{
 			DeactivateSprite();
 			doubleJumpAvailable = true;
-			doubleJumpIndicator.SetActive(true);
+			notifPU[0].SetActive(true);
+			//doubleJumpIndicator.SetActive(true);
 		}
 
 		[SerializeField] private GameObject shield;
@@ -50,6 +55,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			DeactivateSprite();
 			hasShield = true;
 			shield.SetActive(true);
+			notifPU[1].SetActive(true);
 			// this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
 		}
 
@@ -68,17 +74,21 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			{
 				case PUDeactivation.DoubleJump:
 					doubleJumpAvailable = false;
-					doubleJumpIndicator.SetActive(false);
-				break;
+					notifPU[0].SetActive(false);
+					//doubleJumpIndicator.SetActive(false);
+
+					break;
 				case PUDeactivation.Shield:
 					hasShield = false;
+					notifPU[1].SetActive(false);
 					shield.SetActive(false);
-				break;
+					
+					break;
 				case PUDeactivation.ALL:
 					doubleJumpAvailable = false;
 					hasShield = false;
-					shield.SetActive(false);
-				break;
+					shield.SetActive(false);					
+					break;
 			}
 		}
 
@@ -132,30 +142,59 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			}
 		}
 		[SerializeField]private IPowerUp currentPowerup;
+		public GameObject[] notifPU;
+		public GameObject[] itemButton;
 		private void OnTriggerEnter(Collider other) 
 		{
-			switch(other.gameObject.tag)
-			{
-				case "PowerUp":
-					Debug.Log("Player touched a PowerUp");
-					bool isExtraLife = other.gameObject.GetComponent<ExtraLifePowerUp>();
-					if(currentPowerup==null || isExtraLife)
+			IPowerUp tempPowerUp = other.gameObject.GetComponent<IPowerUp>();
+			//for (int i = 0; i < inventory.slots.Length; i++)
+			//{
+			//	if (inventory.isFull[i] == false)
+			//	{
+			////		// ITEM BISA DITAMBAHKAN
+			//		inventory.isFull[i] = true;
+					switch (other.gameObject.tag)
 					{
-						IPowerUp tempPowerUp = other.gameObject.GetComponent<IPowerUp>();
-						if(!isExtraLife)
-						{
-							powerUpImage.sprite = tempPowerUp.GetSprite(); 
-							powerUpImage.color  = Color.white;
-							currentPowerup = tempPowerUp;
-						}
-						else
-						{
-							tempPowerUp.PowerUp(this);
-						}
+						case "PU_DJ":
+							Debug.Log("Double Jump");
 
-						Destroy(other.gameObject);
-					}
-					break; 
+                            powerUpImage.sprite = tempPowerUp.GetSprite();
+                            powerUpImage.color = Color.white;
+                            currentPowerup = tempPowerUp;
+                            Destroy(other.gameObject);
+							break;
+						case "PU_SH":
+							Debug.Log("Shield");
+
+                            //Instantiate(itemButton[1], inventory.slots[i].transform, false);
+                            powerUpImage.sprite = tempPowerUp.GetSprite();
+                            powerUpImage.color = Color.white;
+                            currentPowerup = tempPowerUp;
+                            Destroy(other.gameObject);
+							break;
+							//case "PowerUp":
+							//Debug.Log("Player touched a PowerUp");
+							//bool isExtraLife = other.gameObject.GetComponent<ExtraLifePowerUp>();
+							//if(currentPowerup==null || isExtraLife)
+							//{
+							//	IPowerUp tempPowerUp = other.gameObject.GetComponent<IPowerUp>();
+							//	if(!isExtraLife)
+							//	{
+							//		powerUpImage.sprite = tempPowerUp.GetSprite(); 
+							//		powerUpImage.color  = Color.white;
+							//		currentPowerup = tempPowerUp;
+							//	}
+							//	else
+							//	{
+							//		tempPowerUp.PowerUp(this);
+							//		Destroy(other.gameObject);
+							//	}
+
+							//	Destroy(other.gameObject);
+							//}
+							//break; 
+					//}
+				//}
 			}	
 		}
 

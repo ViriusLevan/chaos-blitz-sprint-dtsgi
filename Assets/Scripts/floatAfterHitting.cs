@@ -18,6 +18,11 @@ namespace LevelUpStudio.ChaosBlitzSprint
         private Vector3 hitPosition,hitUp;
         private void OnCollisionEnter(Collision other) 
         {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Kena");
+            }
+
             if(!active){
                 active=true;
                 rb.isKinematic=true;

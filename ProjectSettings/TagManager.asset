@@ -16,6 +16,9 @@ TagManager:
   - BolaTest
   - Sticky
   - PlayerReadyMenu
+  - PU_DJ
+  - PU_SH
+  - PU_EL
   layers:
   - Default
   - TransparentFX
