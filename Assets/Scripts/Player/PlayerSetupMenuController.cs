@@ -18,7 +18,6 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         [SerializeField] private TextMeshProUGUI titleText;
         [SerializeField] private GameObject readyPanel;
         [SerializeField] private GameObject menuPanel;
-        [SerializeField] private Button readyButton;
         [SerializeField] private Button[] colorButtons;
     
     //TODO I'm stupid i know, use Materials instead of magic
@@ -160,6 +159,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
         {
             PlayerConfigurationManager.Instance.CancelReady(playerIndex);
             menuPanel.SetActive(true);
+            readyPanel.SetActive(false);
             SelectLastAvailTakenButton();
         }
 

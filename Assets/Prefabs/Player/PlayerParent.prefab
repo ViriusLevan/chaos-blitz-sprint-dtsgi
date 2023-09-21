@@ -546,6 +546,8 @@ MonoBehaviour:
   playerText: {fileID: 2268006373153870051}
   scoreText: {fileID: 6020797012261384963}
   controlHelpText: {fileID: 0}
+  uiCamera: {fileID: 6340603269795869822}
+  powerUpParent: {fileID: 4310059013706128894}
   playerLookReference: {fileID: -3787169064211337688, guid: cc7d01a206204374aa1bdd6c20b9c6e9, type: 3}
   buildLookReference: {fileID: -6906640861558949552, guid: 2d43df14a1fb5ff4a9a500f62195075a, type: 3}
 --- !u!1 &2655558240430490228
@@ -1823,8 +1825,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2616644028935604186, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
+      propertyPath: m_Height
+      value: 2.3386426
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616644028935604186, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
       propertyPath: m_Center.y
-      value: -0.2
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2616644028935604187, guid: 5c9f9f0b566ae37469446109d3c3d8c5, type: 3}
       propertyPath: m_Name
