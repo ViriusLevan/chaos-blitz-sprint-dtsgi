@@ -12,7 +12,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
         [SerializeField]private GameObject[]playerModels, modelDiffs;
         [SerializeField]private Animator[] modelAnimators;
 
-        // Start is called before the first frame update
+        private void Awake()
+        {
+            Cursor.visible = true;
+        }
         void Start()
         {
             //if(PlayerConfigurationManager.Instance==null)return;
@@ -42,6 +45,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             PlayerConfigurationManager.Instance.DisableSplitScreen();
             PlayerConfigurationManager.Instance.ClearPlayers();
             SceneLoader.Instance?.LoadScene(SceneLoader.SceneIndex.MainMenu);
+            Cursor.visible = true;
         }
     }
 }

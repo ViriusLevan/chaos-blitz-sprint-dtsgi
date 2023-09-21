@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 8474416825961500367}
   m_Layer: 0
   m_Name: '[PowerUp]Double Jump'
-  m_TagString: PU_DJ
+  m_TagString: PU_DoubleJump
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

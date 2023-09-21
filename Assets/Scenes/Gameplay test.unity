@@ -967,6 +967,7 @@ MonoBehaviour:
   powerUps:
   - {fileID: 8474416826063512802, guid: c5a689f1cad94094c9d1c02e91dbe2d6, type: 3}
   - {fileID: 525844240778220792, guid: 97baac3df69d754458db3c96aef46b16, type: 3}
+  - {fileID: 2583157910228432504, guid: 9f5d1ad3bff41274e88a6ff5ffb67ecf, type: 3}
   xDivisor: 5
   zDivisor: 5
   spawnPoints:
@@ -3588,7 +3589,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714170989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.2, y: 8, z: 10.9}
+  m_LocalPosition: {x: -4.5, y: 8, z: -36.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

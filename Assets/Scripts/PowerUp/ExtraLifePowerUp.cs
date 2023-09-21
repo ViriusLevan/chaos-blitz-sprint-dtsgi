@@ -9,10 +9,10 @@ namespace LevelUpStudio.ChaosBlitzSprint.PowerUp
         public GameObject posNotif;
         public Sprite GetSprite()
         {
-            GameObject instantiateRef;
-            instantiateRef = Instantiate(notifExtraLife);
-            Canvas canvas = posNotif.GetComponent<Canvas>();
-            instantiateRef.transform.SetParent(canvas.transform, false);
+            //GameObject instantiateRef;
+            //instantiateRef = Instantiate(notifExtraLife);
+            //Canvas canvas = posNotif.GetComponent<Canvas>();
+            //instantiateRef.transform.SetParent(canvas.transform, false);
             //instantiateRef.transform.parent = posNotif.transform;
             //instantiateRef.transform.localPosition = Vector3.zero;
             notifExtraLife.SetActive(true);

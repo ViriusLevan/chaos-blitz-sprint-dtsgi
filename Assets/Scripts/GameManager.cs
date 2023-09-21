@@ -137,7 +137,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
             }
             platformingPhaseFinished?.Invoke();
             HandleScoring(finishedPlayers);
-            PhaseSwitch(GameStatus.PickPhase);
+            PhaseSwitch(GameStatus.LapAnimation);
         }
 
         private int lapWinnerIndex;
