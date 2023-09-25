@@ -47,17 +47,17 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 			placementManager?.SetReferenceTransform(buildCameraFollow.transform);
 			int playerIndex = playerInputHandler.playerConfig.playerIndex;
 			playerText.text = "Player "+(playerIndex+1);
-			scoreText.text = 0+"/"+GameManager.Instance?.GetRoundType().GetPointRequirement();
+			scoreText.text = 0 + " / " + GameManager.Instance?.GetRoundType().GetPointRequirement();
 			
 			if(playerIndex==1 || playerIndex==3)
 			{
 				Debug.Log("PlayerIndex="+playerIndex);
 				playerPanel.anchorMin = new Vector2(1, 1);
 				playerPanel.anchorMax = new Vector2(1, 1);
-				playerPanel.anchoredPosition = new Vector3(-400,-65,0);
+				playerPanel.anchoredPosition = new Vector3(-400,-75,0);
 				powerUpParent.anchorMin = new Vector2(1, 0);
 				powerUpParent.anchorMax = new Vector2(1, 0);
-				powerUpParent.anchoredPosition = new Vector3(-400,50,0);
+				powerUpParent.anchoredPosition = new Vector3(-400,0,0);
 			}
 
 			if(playerIndex==0)
@@ -66,7 +66,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 			}
 			if(playerIndex==1)
 			{
-				uiCamera.rect = new Rect(0.5f,0,1,1);
+				uiCamera.rect = new Rect(0f,0,1,1);
 			}
 
 			playerPanel.GetComponent<Image>().sprite = 
@@ -109,7 +109,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player{
 		}
 		public void AddPlayerScore(int addition) {
 			playerScore+=addition;
-			scoreText.text = playerScore+"/"+GameManager.Instance?.GetRoundType().GetPointRequirement();
+			scoreText.text = playerScore + " / " + GameManager.Instance?.GetRoundType().GetPointRequirement();
 		}
 		
 		public void SetPlacable(Placement.Placable pl) => placementManager.SetPlacable(pl);

@@ -254,7 +254,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
                     break;
                 case GameStatus.LapAnimation:
                     lapPanel.SetActive(true);
-                    lapText.text = "Lap "+lapCounter+"/"+roundType.GetLapAmount();
+                    lapText.text = "Round "+ lapCounter + " of " + roundType.GetLapAmount();
                     startAnimator.SetTrigger("start");
                     break;
                 case GameStatus.Paused:
