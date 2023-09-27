@@ -23,15 +23,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Post-process
+  - 
   - Water
   - UI
   - P1Cam
   - P2Cam
   - P3Cam
   - P4Cam
-  - 
-  - 
+  - Post-process
+  - Ignore Post-process
   - 
   - 
   - 
