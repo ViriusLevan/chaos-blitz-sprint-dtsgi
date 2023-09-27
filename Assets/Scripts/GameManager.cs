@@ -32,7 +32,9 @@ namespace LevelUpStudio.ChaosBlitzSprint
 
         //TODO split to another class
         public enum CursorColors{Red=0,Purple=1, Yellow=2, Green=3};
-        public Sprite[] GetCursors(){return cursors;}
+        public Sprite[] GetCursors(){
+            
+            return cursors;}
         public Sprite[] GetPanels(){return panels;}
         //
         public Transform[] GetPlayerSpawnPoints(){return playerSpawnPoints;}
@@ -62,7 +64,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
         [SerializeField] private GameObject lapPanel;
         void Start()
         {
-            PhaseSwitch(GameStatus.LapAnimation);
+          //  PhaseSwitch(GameStatus.LapAnimation);
         }
 
         public void AddPlayerInstance(PlayerInstance pi)
@@ -86,7 +88,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
         public void AnimationFinished()
         {
             lapPanel.SetActive(false);
-            PhaseSwitch(GameStatus.PickPhase);
+            PhaseSwitch(GameStatus.PickPhase);           
         }
 
         public void PlayerPicked(int pIndex, Placement.Placable placable = null)
@@ -100,7 +102,8 @@ namespace LevelUpStudio.ChaosBlitzSprint
                 }
             }
             pickPhaseFinished?.Invoke();
-            PhaseSwitch(GameStatus.BuildPhase);
+           // PhaseSwitch(GameStatus.PickPhase);//
+            PhaseSwitch(GameStatus.BuildPhase);           
         }
 
         public void PlayerBuilt(int pIndex)
@@ -112,7 +115,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
                     return;
                 }
             }
-            buildPhaseFinished?.Invoke();
+            buildPhaseFinished?.Invoke();            
             PhaseSwitch(GameStatus.PlatformingPhase);
         }
 
@@ -187,7 +190,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
 
 
 
-        private void PhaseSwitch(GameStatus targetPhase)
+        public void PhaseSwitch(GameStatus targetPhase)
         {
             if(roundFinished){
                 //Move score data to their respective PlayerConfiguration in P..C..Manager
@@ -213,7 +216,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
                             !=PlayerInstance.PlayerStatus.FinishedPicking)
                             playerInstances[entry.Key]
                                 .SetPlayerStatus(PlayerInstance.PlayerStatus.Picking);
-                        break;
+                        break;                    
                     case GameStatus.BuildPhase:
                         //ghostWalls.SetActive(true);
                         if(playerInstances[entry.Key].playerStatus

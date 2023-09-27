@@ -54,12 +54,14 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		}
 
 		[SerializeField] private GameObject shield;
+		bool isShieldActive;
 		public void ActivateShield()
 		{
 			DeactivateSprite();
 			hasShield = true;
 			shield.SetActive(true);
 			notifPU[1].SetActive(true);
+			hasShield = true;
 			// this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
 		}
 
@@ -113,6 +115,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 					else if (hasShield)
 					{
 						DeactivatePowerUp(PUDeactivation.Shield);
+						hasShield = false;
+						other.gameObject.SetActive(false);
 					}
 					else
 					{
@@ -120,6 +124,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 						playerController.TriggerDeathThenWaitToDisable(false);
 						//playerController.DisableMeshAndCollider();
 					}
+					
 					break;
 				case "DeadZone":
 					Debug.Log("Player touched a DeadZone");

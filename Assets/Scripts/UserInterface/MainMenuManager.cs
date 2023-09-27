@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using LevelUpStudio.ChaosBlitzSprint.Player;
+using UnityEngine.EventSystems;
 
 namespace LevelUpStudio.ChaosBlitzSprint.UI
 {
@@ -35,6 +36,8 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             roundSelectPanel.SetActive(false);
             menuPanel.SetActive(true);
             menuFirst.Select();
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstButtonMain);
         }
 
         public void EnterLobby()
@@ -42,6 +45,34 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             PlayerConfigurationManager.Instance.EnableJoining();
             roundSelectPanel.SetActive(false);
             lobbyPanel.SetActive(true);
+        }
+
+        public GameObject PanelOption, firstButtonOpt, firstButtonMain;
+        public void EnterOptionMenu()
+        {
+            PanelOption.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstButtonOpt);
+        }
+        public void ExitOptionMenu()
+        {
+            PanelOption.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstButtonMain);
+        }
+
+        public GameObject PanelCredit, firstButtonCredit;
+        public void EnterCreditMenu()
+        {
+            PanelCredit.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstButtonCredit);
+        }
+        public void ExitCreditMenu()
+        {
+            PanelCredit.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstButtonMain);
         }
 
         public void ExitLobby()
@@ -92,6 +123,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
         public void StartGame()
         {
             PlayerConfigurationManager.Instance?.BeginGame();
+            //GameManager.Instance?.PhaseSwitch(GameManager.GameStatus.PickPhase);
         }
     }
 }

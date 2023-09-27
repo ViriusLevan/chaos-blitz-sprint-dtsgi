@@ -6,7 +6,8 @@ namespace LevelUpStudio.ChaosBlitzSprint
 {
     public class CenterPosition : MonoBehaviour
     {
-        private RectTransform cursorRectTransform;
+        public RectTransform cursorRectTransform;
+        public Vector2 area;
 
         private void Start()
         {
@@ -14,7 +15,7 @@ namespace LevelUpStudio.ChaosBlitzSprint
             cursorRectTransform = GetComponent<RectTransform>();
 
             // Setel posisi cursor ke (0, 0, 0)
-            cursorRectTransform.anchoredPosition = Vector3.zero;
+            cursorRectTransform.anchoredPosition = area;
         }
     }
 }

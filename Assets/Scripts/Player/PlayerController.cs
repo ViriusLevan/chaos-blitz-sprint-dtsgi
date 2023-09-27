@@ -40,9 +40,11 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		private bool isCrouching;
 
 		public void OnJump(InputAction.CallbackContext context)
-		{ 
+		{
+			
 			jumped = context.action.triggered;
 			if(jumpsLeft<=0) jumped=false;
+			
 		}
 		public void OnCrouch(InputAction.CallbackContext context)
 		{
@@ -196,7 +198,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 
 					// Jump
 					if (jumped && jumpsLeft>0)
-					{
+					{						
 						rb.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
 						jumpsLeft -= 1;
 						jumped = false;
@@ -346,7 +348,20 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 		}
 
 		float CalculateJumpVerticalSpeed () {
-			playerAnimator.SetTrigger("jumpStarted");
+            if (jumped && isCrouching)
+            {
+				isCrouching = !isCrouching;
+				playerAnimator.SetBool("isCrouching", isCrouching);
+				capsuleCollider.center = colliderCenterNormal;
+				capsuleCollider.height = colliderHeightNormal;
+				slipCapsule.center = colliderCenterNormal;
+				slipCapsule.height = colliderHeightNormal * 0.95f;
+				maxSpeed = speedNormal;
+			}
+            else
+            {
+				playerAnimator.SetTrigger("jumpStarted");
+			}			
 			PlayJumpFX();
 			// From the jump height and gravity we deduce the upwards speed 
 			// for the character to reach at the apex.
