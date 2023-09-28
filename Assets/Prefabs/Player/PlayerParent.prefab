@@ -686,7 +686,7 @@ MonoBehaviour:
   virtualCamera: {fileID: 0}
   defaultCameraBuildZoom: 10
   defaultCameraPlayZoom: 8
-  cameraZoomModifier: 5
+  cameraZoomModifier: 20
   minZoomPlayDistance: 3
   maxZoomPlayDistance: 8
   minZoomBuildDistance: 8
