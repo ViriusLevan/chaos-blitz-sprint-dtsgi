@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using TMPro;
 using LevelUpStudio.ChaosBlitzSprint.Player;
+using UnityEngine.EventSystems;
 
 namespace LevelUpStudio.ChaosBlitzSprint.UI
 {
@@ -11,10 +12,13 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
         [SerializeField]private TextMeshProUGUI scoreboardText;
         [SerializeField]private GameObject[]playerModels, modelDiffs;
         [SerializeField]private Animator[] modelAnimators;
+        public GameObject firstButtonWin;
 
         private void Awake()
         {
             Cursor.visible = true;
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstButtonWin);
         }
         void Start()
         {

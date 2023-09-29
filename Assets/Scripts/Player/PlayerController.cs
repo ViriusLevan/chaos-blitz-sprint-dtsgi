@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
@@ -45,6 +46,33 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			jumped = context.action.triggered;
 			if(jumpsLeft<=0) jumped=false;
 			
+		}
+		public GameObject PausePanel, firsButtonPause;
+		public InputSystemUIInputModule inputModule;
+		public void OpenPausePanel(InputAction.CallbackContext context)
+        {
+			var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
+			Time.timeScale = 0f;
+			DisableMovementAndColliders();
+				//playerInputHandler.input.uiInputModule = inputModule;
+			
+			PausePanel.SetActive(true);
+			EventSystem.current.SetSelectedGameObject(null);
+			EventSystem.current.SetSelectedGameObject(firsButtonPause);
+		}
+		public void ClosePausePanel()
+		{
+			Time.timeScale = 1f;
+			EnableMeshAndCollider();
+			PausePanel.SetActive(false);
+		}
+		public void ExitToMainMenu()
+        {
+			PlayerConfigurationManager.Instance.DisableJoining();
+			PlayerConfigurationManager.Instance.DisableSplitScreen();
+			PlayerConfigurationManager.Instance.ClearPlayers();
+			SceneLoader.Instance?.LoadScene(SceneLoader.SceneIndex.MainMenu);
+			Cursor.visible = true;
 		}
 		public void OnCrouch(InputAction.CallbackContext context)
 		{
@@ -103,6 +131,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
 			// get the distance to ground
 			distToGround = GetComponent<Collider>().bounds.extents.y;
 			jumpsLeft = maxJumps;
+			//PausePanel = GameObject.FindGameObjectWithTag("Pause");
 		}
 		private float groundedCounter=0, groundContactTime=0.2f;
 

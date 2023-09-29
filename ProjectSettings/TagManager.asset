@@ -19,6 +19,7 @@ TagManager:
   - PU_DoubleJump
   - PU_ExtraLife
   - PU_Shield
+  - Pause
   layers:
   - Default
   - TransparentFX

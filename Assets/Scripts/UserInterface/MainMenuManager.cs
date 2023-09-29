@@ -9,7 +9,7 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
     {
 
         [SerializeField]private GameObject menuPanel,roundSelectPanel, lobbyPanel, playerReadyMenu;
-        [SerializeField]private Button menuFirst, roundSelectFirst, lobbyFirst;
+        [SerializeField]private Button menuFirst, roundSelectFirst, lobbyFirst ;
 
         public static MainMenuManager Instance { get; private set; }
         private void Awake()
@@ -40,14 +40,25 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             EventSystem.current.SetSelectedGameObject(firstButtonMain);
         }
 
+
         public void EnterLobby()
         {
             PlayerConfigurationManager.Instance.EnableJoining();
             roundSelectPanel.SetActive(false);
             lobbyPanel.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(lobbyFirstButton);
         }
 
-        public GameObject PanelOption, firstButtonOpt, firstButtonMain;
+        public void ExitLobbyMenu()
+        {
+            lobbyPanel.SetActive(false);
+            roundSelectPanel.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            roundSelectFirst.Select();
+        }
+
+        public GameObject PanelOption, firstButtonOpt, firstButtonMain, lobbyFirstButton;
         public void EnterOptionMenu()
         {
             PanelOption.SetActive(true);
@@ -84,7 +95,19 @@ namespace LevelUpStudio.ChaosBlitzSprint.UI
             roundSelectPanel.SetActive(true);
             roundSelectFirst.Select();
         }
-
+        public GameObject exitPanel, firstButtonExit;
+        public void openExitPane()
+        {
+            exitPanel.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstButtonExit);
+        }
+        public void closeExitPanel()
+        {
+            exitPanel.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(firstButtonMain);
+        }
         public void ExitGame()
         {
             Application.Quit();

@@ -135,8 +135,9 @@ namespace LevelUpStudio.ChaosBlitzSprint.Player
             }
         }
 
-        public void ResetMousePosition(){
-            Vector2 newPosition = new Vector2(0,0);
+        public void ResetMousePosition()
+        {
+            Vector2 newPosition = new Vector2(0, 0);
             InputState.Change(virtualMouse.position, newPosition);
             AnchorCursor(newPosition);
         }

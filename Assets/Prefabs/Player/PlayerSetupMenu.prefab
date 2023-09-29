@@ -339,7 +339,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4799558775650084765}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4455143332441947249}
+        m_TargetAssemblyTypeName: LevelUpStudio.ChaosBlitzSprint.Player.PlayerSetupMenuController,
+          Assembly-CSharp
+        m_MethodName: CancelButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2642577717668053391
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +785,6 @@ MonoBehaviour:
   titleText: {fileID: 8593211576496571681}
   readyPanel: {fileID: 4455143332271473684}
   menuPanel: {fileID: 4455143332346716026}
-  readyButton: {fileID: 0}
   colorButtons:
   - {fileID: 4455143333184795726}
   - {fileID: 4455143332736596068}

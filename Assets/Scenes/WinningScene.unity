@@ -810,6 +810,7 @@ MonoBehaviour:
   - {fileID: 330505509}
   - {fileID: 946718240}
   - {fileID: 1186537759}
+  firstButtonWin: {fileID: 1292818}
 --- !u!4 &515852153
 Transform:
   m_ObjectHideFlags: 0
@@ -1490,10 +1491,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1451616093}
+    m_SelectOnDown: {fileID: 1451616093}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 2
