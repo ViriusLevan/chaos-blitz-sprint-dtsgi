@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695ff6480ce82d145b6a073482263ca6, type: 3}
+  m_Name: '[Placable-Hazard]Slippery'
+  m_EditorClassIdentifier: 
+  placableName: Slippery
+  prefab: {fileID: 7931094665041278263, guid: 09b0f5e8507f0f045b0f9ca308d997df, type: 3}
+  crossSectionMaterial: {fileID: 2100000, guid: a0593bf2c89e1bd46ba3a7eea4d7ec19, type: 2}
+  type: 2
+  sprite: {fileID: 21300000, guid: 79f7fa8f7e570ba49ba0abf0ccf164b2, type: 3}
